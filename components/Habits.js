@@ -9,7 +9,7 @@ import { View } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 export default function Habits() {
-  const { getHabitsStorage, setHabitsStorage } = useAsyncStorage('@storage_key');
+  const { habitsStorage, setHabitsStorage } = useAsyncStorage('@storage_key');
   const [habits, setHabits] = useState(['No habits'])
   const [completions, setCompletions] = useState([])
   const [checkMark, setCheckMark] = useState(false)
@@ -19,32 +19,19 @@ export default function Habits() {
     console.log(habitname)
   }
 
-  const readHabitsFromStorage = async () => {
-    const habits = await getHabitsStorage();
-
-      setHabits(habits);
-
-  };
-
-  const writeHabitsToStorage = async newValue => {
-    await setHabitsStorage(newValue);
-    setHabits(newValue);
-  };
-
-  useEffect(() => {
-    readHabitsFromStorage();
-  }, []);
-
   // GET STORED HABITS AND ADD TO STATE
   useEffect(() => {
     const getStore = async () => {
       try {
         let habit =  await AsyncStorage.getItem('habits')
+        console.log(habit)
         if (habit){
           setHabits(JSON.parse(habit))
         }
+        if (habit){console.log("Hmmm....")}
       } catch(e) {
         console.log(e)
+        console.log("Hmmm....")
       }
     }
     getStore()
