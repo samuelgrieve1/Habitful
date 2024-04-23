@@ -1,12 +1,11 @@
 import { Text, Pressable } from 'react-native';
 import Container from './Container';
 import Styles from './Styles';
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from 'react';
 import Checkbox from 'expo-checkbox';
 import ListHabits from './ListHabits';
 import { View } from 'react-native';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 export default function Habits() {
   const { habitsStorage, setHabitsStorage } = useAsyncStorage('@storage_key');
@@ -18,6 +17,8 @@ export default function Habits() {
   const addCompletedHabit = (habitname) => {
     console.log(habitname)
   }
+
+  
 
   // GET STORED HABITS AND ADD TO STATE
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function Habits() {
           <View style={Styles.habit} key={index}>
             <Pressable style={Styles.habit_pressable} onPress={addCompletedHabit(habit.name)}>
               <Checkbox style={Styles.checkbox} value={checkMark} onValueChange={setCheckMark} />
-              <Text style={Styles.habit_name}>{habit}</Text>
+              <Text style={Styles.habit_name}>{habit.name}</Text>
             </Pressable>
           </View>
         )
