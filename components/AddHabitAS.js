@@ -1,10 +1,12 @@
 import React , {useEffect, useState} from 'react';
 import { StyleSheet, Text, View , Button, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
-import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function AddHabit() {
+  const [habits, setHabits] = useState([])
   const [habitName, setHabitName] = useState('')
+  const [habitFrequency, setHabitFrequency] = useState([])
   const [activeSun, setActiveSun] = useState(false)
   const [activeMon, setActiveMon] = useState(false)
   const [activeTue, setActiveTue] = useState(false)
@@ -14,21 +16,51 @@ export default function AddHabit() {
   const [activeSat, setActiveSat] = useState(false)
 
   const addHabitBtn = async () => {
+    setHabits([...habits, {
+      'name': habitName,
+      'frequency': [{
+        'Sun': activeSun,
+        'Mon': activeMon,
+        'Tue': activeTue,
+        'Wed': activeWed,
+        'Thu': activeThu,
+        'Fri': activeFri,
+        'Sat': activeSat
+      }]
+    }])
+  }
+
+  const addToStoreBtn = async () => {
     try {
-      const docRef = await addDoc(collection(db, "habits"), {
-        name: habitName,
-        sun: activeSun,
-        mon: activeMon,
-        tue: activeTue,
-        wed: activeWed,
-        thu: activeThu,
-        fri: activeFri,
-        sat: activeSat,
-        completed: []
-      })
-      console.log("Document written with ID: ", docRef.id)
-    } catch (e) {
-      console.error("Error adding document: ", e)
+      const jsonValue = JSON.stringify(habits)
+      await AsyncStorage.setItem('habits', jsonValue)
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const getState = () => {
+    console.log(habits)
+  }
+
+  const getStore = async () => {
+    try {
+      let habit =  await AsyncStorage.getItem('habits')
+      console.log(JSON.parse(habit))
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const clearState = () => {
+    setHabits([])
+  }
+
+  const clearStore = async () => {
+    try {
+      await AsyncStorage.clear()
+    } catch(e) {
+      console.log(e)
     }
   }
 
@@ -55,8 +87,32 @@ export default function AddHabit() {
       </View> */}
       <View style={styles.button} >
         <Button
-          title={"Add to Store"}
+          title={"Add to State"}
           onPress={addHabitBtn}
+        />
+        <Button
+          title={"Add to Store"}
+          onPress={addToStoreBtn}
+        />
+      </View>
+      <View style={styles.button} >
+        <Button
+          title={"Get State"}
+          onPress={getState}
+        />
+        <Button
+          title={"Get Store"}
+          onPress={getStore}
+        />
+      </View>
+      <View style={styles.button} >
+        <Button
+          title={"Clear State"}
+          onPress={clearState}
+        />
+        <Button
+          title={"Clear Store"}
+          onPress={clearStore}
         />
       </View>
   </View>
