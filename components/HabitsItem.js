@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Text, Pressable, View } from 'react-native';
 import Styles from './Styles';
 import Checkbox from 'expo-checkbox';
-import { app, db, doc,collection, updateDoc, addDoc, arrayUnion } from '../firebase/index';
+import { app, db, doc,collection, getDocs, updateDoc, addDoc, arrayUnion } from '../firebase/index';
 
 export default function HabitsItem({habitId, habitName}) {
   //const [habits, setHabits] = useState([])
@@ -10,16 +10,34 @@ export default function HabitsItem({habitId, habitName}) {
 
     // ADD COMPLETED HABIT TO STATE
     const addCompletedHabit = async(habitId) => {
-      try {
-        const currentHabit = doc(db, "Habits", habitId)
-        await updateDoc(currentHabit, {
-          completed: arrayUnion("poop")
-        })
-        console.log("Habit marked as completed successfully!");
-      } catch (error) {
-        console.error("Error adding completed habit:", error);
-      }
+      
+      
+      // console.log(habitId)
+      await updateDoc(doc(db, "Habits", (habitId)), {
+        completed: arrayUnion("hello")           
+      })
+
+      
+      // const querySnapshot = await getDocs(collection(db, "Habits"), habitId);
+      // console.log(querySnapshot)
+      // querySnapshot.forEach((doc) => {
+      //   // doc.data() is never undefined for query doc snapshots
+      //   console.log(doc.id, " => ", doc.data());
+      // });
+
+      
+      // try {
+      //   const currentHabit = doc(db, "Habits", habitId)
+      //   await updateDoc(currentHabit, {
+      //     completed: arrayUnion("poop")
+      //   })
+      //   console.log("Habit marked as completed successfully!");
+      // } catch (error) {
+      //   console.error("Error adding completed habit:", error);
+      // }
     }
+
+    
 
   // const addCompletedHabit = async (habitId) => {
   //   try {
