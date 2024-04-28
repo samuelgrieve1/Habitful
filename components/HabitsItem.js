@@ -1,62 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, Pressable, View } from 'react-native';
 import Styles from './Styles';
 import Checkbox from 'expo-checkbox';
-import { app, db, doc,collection, getDocs, updateDoc, addDoc, arrayUnion } from '../firebase/index';
+import { db, doc, updateDoc, arrayUnion, arrayRemove } from '../firebase/index';
+import { deleteField } from 'firebase/firestore';
 
-export default function HabitsItem({habitId, habitName}) {
+export default function HabitsItem({habitId, habitName, date}) {
   //const [habits, setHabits] = useState([])
   const [checkMark, setCheckMark] = useState(false)
 
-    // ADD COMPLETED HABIT TO STATE
-    const addCompletedHabit = async(habitId) => {
-      
-      
-      // console.log(habitId)
-      await updateDoc(doc(db, "Habits", (habitId)), {
-        completed: arrayUnion("hello")           
+  // ADD COMPLETED HABIT TO STATE
+  const addCompletedHabit = async(habitId) => {
+    if(!checkMark){
+      await updateDoc(doc(db, "habits", (habitId)), {
+        completed: arrayUnion(date)           
       })
-
-      
-      // const querySnapshot = await getDocs(collection(db, "Habits"), habitId);
-      // console.log(querySnapshot)
-      // querySnapshot.forEach((doc) => {
-      //   // doc.data() is never undefined for query doc snapshots
-      //   console.log(doc.id, " => ", doc.data());
-      // });
-
-      
-      // try {
-      //   const currentHabit = doc(db, "Habits", habitId)
-      //   await updateDoc(currentHabit, {
-      //     completed: arrayUnion("poop")
-      //   })
-      //   console.log("Habit marked as completed successfully!");
-      // } catch (error) {
-      //   console.error("Error adding completed habit:", error);
-      // }
+    } else {
+      await updateDoc(doc(db, "habits", (habitId)), {
+        completed: arrayRemove(date)         
+      })
     }
+  }
 
-    
-
-  // const addCompletedHabit = async (habitId) => {
-  //   try {
-  //     const docRef = await addDoc(collection(db, "habits"), {
-  //       name: habitName,
-  //       sun: activeSun,
-  //       mon: activeMon,
-  //       tue: activeTue,
-  //       wed: activeWed,
-  //       thu: activeThu,
-  //       fri: activeFri,
-  //       sat: activeSat,
-  //       completed: []
-  //     })
-  //     console.log("Document written with ID: ", docRef.id)
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e)
-  //   }
-  // }
+  // useEffect(() => {
+  //   const date = new Date()
+  // },[])
   
   return (
     <View style={Styles.habit}>

@@ -1,4 +1,4 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator, createStackNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import Habits from './Habits';
 import Progress from './Progress';
@@ -8,6 +8,16 @@ import AddHabit from './AddHabit';
 import Styles from './Styles';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator()
+const AddHabitStack = () => {
+   
+    return (
+      <Stack.Navigator initialRouteName="AddHabit">
+         <Stack.Screen name="AddHabit" component={AddHabit} />
+         // Any additional screens located inside the stack of the tab Home
+      </Stack.Navigator>
+    )
+}
 
 export default function BottomTabNav() {
   return (
@@ -32,7 +42,7 @@ export default function BottomTabNav() {
       />
       <Tab.Screen
         name="Add Habit"
-        component={AddHabit}
+        component={AddHabitStack}
         options={{
           headerShown: false,
           tabBarIcon: () => (<Entypo name="plus" size={24} color="black" />)
