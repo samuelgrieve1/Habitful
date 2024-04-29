@@ -5,7 +5,7 @@ import Checkbox from 'expo-checkbox';
 import { db, doc, updateDoc, arrayUnion, arrayRemove } from '../firebase/index';
 import { deleteField } from 'firebase/firestore';
 
-export default function HabitsItem({habitId, habitName, date}) {
+export default function HabitsItem({habitId, habitName, currentDate}) {
   //const [habits, setHabits] = useState([])
   const [checkMark, setCheckMark] = useState(false)
 
@@ -13,11 +13,11 @@ export default function HabitsItem({habitId, habitName, date}) {
   const addCompletedHabit = async(habitId) => {
     if(!checkMark){
       await updateDoc(doc(db, "habits", (habitId)), {
-        completed: arrayUnion(date)           
+        completed: arrayUnion(currentDate)           
       })
     } else {
       await updateDoc(doc(db, "habits", (habitId)), {
-        completed: arrayRemove(date)         
+        completed: arrayRemove(currentDate)         
       })
     }
   }

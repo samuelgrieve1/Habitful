@@ -8,16 +8,16 @@ import AddHabit from './AddHabit';
 import Styles from './Styles';
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator()
-const AddHabitStack = () => {
+// const Stack = createStackNavigator()
+// const AddHabitStack = () => {
    
-    return (
-      <Stack.Navigator initialRouteName="AddHabit">
-         <Stack.Screen name="AddHabit" component={AddHabit} />
-         // Any additional screens located inside the stack of the tab Home
-      </Stack.Navigator>
-    )
-}
+//     return (
+//       <Stack.Navigator initialRouteName="AddHabit">
+//          <Stack.Screen name="AddHabit" component={AddHabit} />
+//          // Any additional screens located inside the stack of the tab Home
+//       </Stack.Navigator>
+//     )
+// }
 
 export default function BottomTabNav() {
   return (
@@ -42,7 +42,7 @@ export default function BottomTabNav() {
       />
       <Tab.Screen
         name="Add Habit"
-        component={AddHabitStack}
+        component={AddHabit}
         options={{
           headerShown: false,
           tabBarIcon: () => (<Entypo name="plus" size={24} color="black" />)

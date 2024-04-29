@@ -7,7 +7,7 @@ import HabitsItem from './HabitsItem';
 
 export default function Habits() {
   const [habits, setHabits] = useState([])
-  const [date, setDate] = useState()
+  const [currentDate, setCurrentDate] = useState()
 
   // GET HABITS FROM DB AND ADD TO STATE
   const getHabits = async () => {
@@ -20,24 +20,16 @@ export default function Habits() {
     )
   }
 
-  // ADD COMPLETED HABIT TO STATE
-  // const addCompletedHabit = async() => {
-  //   console.log(habitId)
-  //   // await updateDoc(doc(db, "Habits", habit.id),{
-  //   //   completed: arrayUnion("poop")
-  //   // })
-  // }
-
   useEffect (() => {
     getHabits()
-    setDate(new Date().toDateString())
+    setCurrentDate(new Date().toDateString())
   }, [])
 
   return (
     <Container pageTitle='H'>
       <View style={Styles.habits_day}>
         <Text style={Styles.habits_day_title}>Today</Text>
-        <Text style={Styles.habits_day_title_sub}>{date}</Text>
+        <Text style={Styles.habits_day_title_sub}>{currentDate}</Text>
       </View>
       {habits.map(function(habit) {
         return(
@@ -45,7 +37,7 @@ export default function Habits() {
           key={habit.id}
           habitId={habit.id}
           habitName={habit.name}
-          date={date}
+          currentDate={currentDate}
         />)
       })}  
       <Pressable style={Styles.add_habit_btn}>
