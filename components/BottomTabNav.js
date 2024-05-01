@@ -1,23 +1,12 @@
-import { createBottomTabNavigator, createStackNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Feather } from '@expo/vector-icons';
 import Habits from './Habits';
 import Progress from './Progress';
 import HabitHistory from './HabitHistory';
 import AppSettings from './AppSettings';
-import AddHabit from './AddHabit';
 import Styles from './Styles';
 
 const Tab = createBottomTabNavigator();
-// const Stack = createStackNavigator()
-// const AddHabitStack = () => {
-   
-//     return (
-//       <Stack.Navigator initialRouteName="AddHabit">
-//          <Stack.Screen name="AddHabit" component={AddHabit} />
-//          // Any additional screens located inside the stack of the tab Home
-//       </Stack.Navigator>
-//     )
-// }
 
 export default function BottomTabNav() {
   return (
@@ -28,7 +17,7 @@ export default function BottomTabNav() {
         options={{
           tabBarActiveTintColor: '#0066ff',
           headerShown: false,
-          tabBarIcon: (tintcolor) => (<Entypo name="list" size={24} color={tintcolor.color} />),
+          tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
         }}
       />
       <Tab.Screen
@@ -37,15 +26,7 @@ export default function BottomTabNav() {
         options={{
           tabBarActiveTintColor: '#0066ff',
           headerShown: false,
-          tabBarIcon: (tintcolor) => (<Entypo name="bar-graph" size={24} color={tintcolor.color} />)
-        }}
-      />
-      <Tab.Screen
-        name="Add Habit"
-        component={AddHabit}
-        options={{
-          headerShown: false,
-          tabBarIcon: () => (<Entypo name="plus" size={24} color="black" />)
+          tabBarIcon: (tintcolor) => (<Feather name="bar-chart" size={24} color={tintcolor.color} />)
         }}
       />
       <Tab.Screen
@@ -54,16 +35,16 @@ export default function BottomTabNav() {
         options={{
           tabBarActiveTintColor: '#0066ff',
           headerShown: false,
-          tabBarIcon: (tintcolor) => (<Entypo name="time-slot" size={24} color={tintcolor.color} />)
+          tabBarIcon: (tintcolor) => (<Feather name="clock" size={24} color={tintcolor.color} />)
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name="Profile"
         component={AppSettings}
         options={{
           tabBarActiveTintColor: '#0066ff',
           headerShown: false,
-          tabBarIcon: (tintcolor) => (<Entypo name="user" size={24} color={tintcolor.color} />)
+          tabBarIcon: (tintcolor) => (<Feather name="user" size={24} color={tintcolor.color} />)
         }}
       />
     </Tab.Navigator>

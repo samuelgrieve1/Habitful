@@ -3,7 +3,7 @@ import { StyleSheet, Text, View , Button, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
 
-export default function AddHabit() {
+export default function AddHabit({navigation}) {
   const [habitName, setHabitName] = useState('')
   const [activeSun, setActiveSun] = useState(false)
   const [activeMon, setActiveMon] = useState(false)
@@ -36,16 +36,16 @@ export default function AddHabit() {
     <View style={styles.container}>
       {/* <Text style={styles.text}>{habits}</Text> */}
       <View style={styles.button} >
-        <TextInput onChangeText={(text) => setHabitName(text)} style={styles.input}/>
+        <Text>Name</Text><TextInput onChangeText={(text) => setHabitName(text)} style={styles.input}/>
       </View>
       <View>
-        <Checkbox style={styles.checkbox} value={activeSun} onValueChange={setActiveSun} />
-        <Checkbox style={styles.checkbox} value={activeMon} onValueChange={setActiveMon} />
-        <Checkbox style={styles.checkbox} value={activeTue} onValueChange={setActiveTue} />
-        <Checkbox style={styles.checkbox} value={activeWed} onValueChange={setActiveWed} />
-        <Checkbox style={styles.checkbox} value={activeThu} onValueChange={setActiveThu} />
-        <Checkbox style={styles.checkbox} value={activeFri} onValueChange={setActiveFri} />
-        <Checkbox style={styles.checkbox} value={activeSat} onValueChange={setActiveSat} />
+        <Text>Sun</Text><Checkbox style={styles.checkbox} value={activeSun} onValueChange={setActiveSun} />
+        <Text>Mon</Text><Checkbox style={styles.checkbox} value={activeMon} onValueChange={setActiveMon} />
+        <Text>Tue</Text><Checkbox style={styles.checkbox} value={activeTue} onValueChange={setActiveTue} />
+        <Text>Wed</Text><Checkbox style={styles.checkbox} value={activeWed} onValueChange={setActiveWed} />
+        <Text>Thu</Text><Checkbox style={styles.checkbox} value={activeThu} onValueChange={setActiveThu} />
+        <Text>Fri</Text><Checkbox style={styles.checkbox} value={activeFri} onValueChange={setActiveFri} />
+        <Text>Sat</Text><Checkbox style={styles.checkbox} value={activeSat} onValueChange={setActiveSat} />
       </View>
       {/* <View style={styles.button} >
         <Button
@@ -55,9 +55,10 @@ export default function AddHabit() {
       </View> */}
       <View style={styles.button} >
         <Button
-          title={"Add to Store"}
-          onPress={addHabitBtn}
+          title={"Save"}
+          onPress={() => {addHabitBtn(); navigation.goBack()}}
         />
+        <Button onPress={() => navigation.goBack()} title="Cancel" />
       </View>
   </View>
   );

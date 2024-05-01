@@ -31,6 +31,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
   },
+  habit_completed: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    paddingBottom: 10,
+    borderBottomColor: '#ddd',
+    borderBottomWidth: 1,
+  },
   habits_day: {
     marginBottom: 30,
   },
@@ -49,6 +56,12 @@ const styles = StyleSheet.create({
   habit_name: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  habit_name_completed: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textDecorationLine: 'line-through',
+    color: 'green',
   },
   // add_habit_btn: {
   //   marginTop: 40,
@@ -71,7 +84,7 @@ const styles = StyleSheet.create({
   //   color: 'white',
   // },
   add_habit_btn: {
-    marginTop: 40,
+    marginTop: 0,
     width: '50%',
     marginLeft: '25%',
     marginRight: '25%',
