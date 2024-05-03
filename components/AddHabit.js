@@ -2,6 +2,7 @@ import React , {useEffect, useState} from 'react';
 import { StyleSheet, Text, View , Button, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
+import Styles from './Styles';
 
 export default function AddHabit({navigation}) {
   const [habitName, setHabitName] = useState('')
@@ -54,6 +55,9 @@ export default function AddHabit({navigation}) {
         />
       </View> */}
       <View style={styles.button} >
+        <Pressable style={Styles.add_habit_btn} onPress={() => navigation.navigate('AddHabit')}>
+          <Text style={Styles.add_habit_txt}>Save</Text>
+        </Pressable>
         <Button
           title={"Save"}
           onPress={() => {addHabitBtn(); navigation.goBack()}}

@@ -2,21 +2,20 @@ import { useState } from 'react';
 import { Text, Pressable, View } from 'react-native';
 import Styles from './Styles';
 import Checkbox from 'expo-checkbox';
-import { db, doc, updateDoc, arrayUnion, arrayRemove } from '../firebase/index';
 
-export default function HabitsItem({habitId, habitName, currentDate, isCompleted, addCompletedHabit}) {
-  //const [habits, setHabits] = useState([])
-  //const [checkMark, setCheckMark] = useState(isCompleted)
-  //const [habitNameStyle, setHabitNameStyle] = useState(Styles.habit_name)
-
-
+export default function HabitsItem({habitId, habitName, isCompleted, addCompletedHabit}) {
+  const [isCompletedLocal, setIsCompletedLocal] = useState(isCompleted)
+  const checkUncheck = () => {
+    setIsCompletedLocal(prev => !prev)
+    addCompletedHabit(habitId, isCompleted)
+  }
   
   return (
     <View style={Styles.habit}>
-      <Pressable style={Styles.habit_pressable} onPress={() => addCompletedHabit(habitId)}>
-        <Checkbox style={Styles.checkbox} value={isCompleted ? true : false} />
-        <Text style={isCompleted ? Styles.habit_name_completed : Styles.habit_name}>{habitName}</Text>
-      </Pressable>
+      {/* <Pressable style={Styles.checkbox_pressable} onPress={() => checkUncheck()}> */}
+        <Checkbox style={Styles.checkbox} color={isCompletedLocal ? '#009900' : undefined} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+      {/* </Pressable> */}
+      <Text style={isCompletedLocal ? Styles.habit_name_completed : Styles.habit_name}>{habitName}</Text>
     </View>
   )
 }

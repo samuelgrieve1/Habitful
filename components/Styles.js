@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+const green = '#009900'
+
 const styles = StyleSheet.create({
+  safe_area_view: {
+    flex: 1,
+  },
   wrapper: {
     flex: 1,
     backgroundColor: 'white',
@@ -18,7 +23,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: '100%',
   },
+  checkbox_pressable: {
+  },
   checkbox: {
+    width: 20,
+    height: 20,
     borderWidth: 1,
     borderColor: '#ccc',
     marginRight: 10,
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
   },
-  habit_pressable: {
+  habit_item: {
     width: '100%',
     flexDirection: 'row',
   },
@@ -60,8 +69,7 @@ const styles = StyleSheet.create({
   habit_name_completed: {
     fontSize: 18,
     fontWeight: 'bold',
-    textDecorationLine: 'line-through',
-    color: 'green',
+    color: green,
   },
   // add_habit_btn: {
   //   marginTop: 40,
