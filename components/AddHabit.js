@@ -1,5 +1,5 @@
 import React , {useEffect, useState} from 'react';
-import { StyleSheet, Text, View , Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View , Button, TextInput, Pressable } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
 import Styles from './Styles';
