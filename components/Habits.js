@@ -1,6 +1,6 @@
 import { Text, Pressable, View, ScrollView, Button, Modal, StyleSheet } from 'react-native';
 import Container from './Container';
-import Styles from './Styles';
+import { Styles } from './Styles';
 import { useState, useEffect } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove } from '../firebase/index';
 import { useNavigation } from '@react-navigation/native';
@@ -52,7 +52,7 @@ export default function Habits() {
 
   return (
     <ScrollView>
-      <Container pageTitle='H'>
+      <Container pageTitle='Habits'>
         <View style={Styles.habits_day}>
           <Text style={Styles.habits_day_title}>Today</Text>
           <Text style={Styles.habits_day_title_sub}>{currentDate}</Text>
@@ -85,11 +85,10 @@ export default function Habits() {
         }
         <View style={styles.centeredView}>
           <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
               setModalVisible(!modalVisible);
             }}>
             <View style={styles.centeredView}>
@@ -101,10 +100,10 @@ export default function Habits() {
               </View>
             </View>
           </Modal>
-          <Pressable style={Styles.add_habit_btn} onPress={() => setModalVisible(true)}>
-            <Text style={Styles.add_habit_txt}>Add H</Text>
-          </Pressable>
         </View>
+        <Pressable style={Styles.btn_add} onPress={() => setModalVisible(true)}>
+          <Text style={Styles.txt_add}>Add Habit</Text>
+        </Pressable>
       </Container>
     </ScrollView>
   )
@@ -115,7 +114,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    marginTop: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   modalView: {
     margin: 20,
@@ -131,25 +131,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
   },
 });

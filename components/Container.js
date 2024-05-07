@@ -5,7 +5,7 @@ import {
   Pressable
 } from 'react-native';
 import { Link } from 'expo-router';
-import Styles from './Styles';
+import { Styles } from './Styles';
 
 const Container = props => {
   return (

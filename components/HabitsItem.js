@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Text, Pressable, View } from 'react-native';
-import Styles from './Styles';
+import { Styles } from './Styles';
 import Checkbox from 'expo-checkbox';
 
 export default function HabitsItem({habitId, habitName, isCompleted, addCompletedHabit}) {

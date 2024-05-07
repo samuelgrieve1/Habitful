@@ -2,7 +2,8 @@ import React , {useEffect, useState} from 'react';
 import { StyleSheet, Text, View , Button, TextInput, Pressable } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
-import Styles from './Styles';
+import { Feather } from '@expo/vector-icons';
+import { Styles } from './Styles';
 
 export default function AddHabit({getHabits, closeModal}) {
   const [habitName, setHabitName] = useState('')
@@ -13,6 +14,7 @@ export default function AddHabit({getHabits, closeModal}) {
   const [activeThu, setActiveThu] = useState(false)
   const [activeFri, setActiveFri] = useState(false)
   const [activeSat, setActiveSat] = useState(false)
+  const [selectAllToggle, setSelectAllToggle] = useState(true)
 
   const addHabitBtn = async () => {
     try {
@@ -34,70 +36,63 @@ export default function AddHabit({getHabits, closeModal}) {
     }
   }
 
+  const selectAllDays = async () => {
+    setActiveSun(selectAllToggle)
+    setActiveMon(selectAllToggle)
+    setActiveTue(selectAllToggle)
+    setActiveWed(selectAllToggle)
+    setActiveThu(selectAllToggle)
+    setActiveFri(selectAllToggle)
+    setActiveSat(selectAllToggle)
+    setSelectAllToggle(prev => !prev)
+  }
+
   return (
-    <View style={styles.container}>
-      {/* <Text style={styles.text}>{habits}</Text> */}
-      <View>
-        <Text>Name</Text><TextInput onChangeText={(text) => setHabitName(text)} style={styles.input}/>
-      </View>
-      <View>
-        <Text>Frequency</Text>
-      </View>
-      <View style={styles.checkbox_row}>
-        <Checkbox style={styles.checkbox} value={activeSun} onValueChange={setActiveSun} /><Text style={styles.day_name}>Sun</Text>
-        {/* <Checkbox style={styles.checkbox} value={activeMon} onValueChange={setActiveMon} /><Text>Mon</Text>
-        <Checkbox style={styles.checkbox} value={activeTue} onValueChange={setActiveTue} /><Text>Tue</Text>
-        <Checkbox style={styles.checkbox} value={activeWed} onValueChange={setActiveWed} /><Text>Wed</Text>
-        <Checkbox style={styles.checkbox} value={activeThu} onValueChange={setActiveThu} /><Text>Thu</Text>
-        <Checkbox style={styles.checkbox} value={activeFri} onValueChange={setActiveFri} /><Text>Fri</Text>
-        <Checkbox style={styles.checkbox} value={activeSat} onValueChange={setActiveSat} /><Text>Sat</Text> */}
-      </View>
-      <View>
-        <Pressable style={Styles.add_habit_btn} onPress={() => {addHabitBtn(); closeModal()}}>
-          <Text style={Styles.add_habit_txt}>Save</Text>
-        </Pressable>
-        <Pressable style={Styles.add_habit_btn} onPress={() => closeModal()}>
-          <Text style={Styles.add_habit_txt}>Cancel</Text>
+    <View>
+      <Text style={Styles.page_title_add_habit}>Add Habit</Text>
+
+      <Text style={Styles.input_label}>Name</Text>
+      <TextInput onChangeText={(text) => setHabitName(text)} style={Styles.input}/>
+
+      <View style={Styles.form_label_row}>
+        <Text style={Styles.form_input_label_frequency}>Frequency</Text>
+        <Pressable title='Select All' style={Styles.form_btn_select_all} onPress={() => selectAllDays()}>
+          <Text style={Styles.form_txt_select_all}>Select All</Text>
         </Pressable>
       </View>
-  </View>
+
+      <View style={Styles.checkbox_row}>
+        <Checkbox style={Styles.checkbox} value={activeSun} onValueChange={setActiveSun} /><Text>Sunday</Text>
+      </View>
+      <View style={Styles.checkbox_row}>
+        <Checkbox style={Styles.checkbox} value={activeMon} onValueChange={setActiveMon} /><Text>Monday</Text>
+      </View>
+      <View style={Styles.checkbox_row}>
+        <Checkbox style={Styles.checkbox} value={activeTue} onValueChange={setActiveTue} /><Text>Tuesday</Text>
+      </View>
+      <View style={Styles.checkbox_row}>
+        <Checkbox style={Styles.checkbox} value={activeWed} onValueChange={setActiveWed} /><Text>Wednesday</Text>
+      </View>
+      <View style={Styles.checkbox_row}>
+        <Checkbox style={Styles.checkbox} value={activeThu} onValueChange={setActiveThu} /><Text>Thursday</Text>
+      </View>
+      <View style={Styles.checkbox_row}>
+        <Checkbox style={Styles.checkbox} value={activeFri} onValueChange={setActiveFri} /><Text>Friday</Text>
+      </View>
+      <View style={Styles.checkbox_row}>
+        <Checkbox style={Styles.checkbox} value={activeSat} onValueChange={setActiveSat} /><Text>Saturday</Text>
+      </View>
+      <View style={Styles.btns_save_cancel}>
+        <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>
+          <Text style={Styles.txt_save}>Save</Text>
+        </Pressable>
+        <Pressable title='Cancel' style={Styles.btn_cancel} onPress={() => closeModal()}>
+          <Text style={Styles.txt_cancel}>Cancel</Text>
+        </Pressable>
+      </View>
+      <Pressable title='Close' style={Styles.close_modal_x} onPress={() => closeModal()}>
+        <Feather name="x" size={24} color="black" />
+      </Pressable>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text : {
-    fontSize : 40,
-    marginBottom : 30,
-  },
-  input : {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: '#000',
-    width: '100%',
-    height: 30,
-  },
-  checkbox_row: {
-    flex: 1
-  },
-  day_name: {
-    flexDirection: 'row',
-    width: 120,
-    height: 20,
-  },
-  checkbox: {
-    flexDirection: 'row',
-    borderCurve: 'circular',
-    width: 20,
-    height: 20,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginRight: 10,
-    backgroundColor: '#fff'
-  },
-});
