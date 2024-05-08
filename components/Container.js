@@ -11,12 +11,10 @@ const Container = props => {
   return (
     <SafeAreaView style={Styles.wrapper}>
       <View style={Styles.top_bar}>
-        <Text style={Styles.page_title}>{props.pageTitle}</Text>
-        {/* <Link href="/other" asChild>
-          <Pressable>
-            <Text>Home</Text>
-          </Pressable>
-        </Link> */}
+        <View style={Styles.top_bar_left}>
+        </View>
+        <View style={Styles.top_bar_middle}><Text style={Styles.page_title}>{props.pageTitle}</Text></View>
+        <View style={Styles.top_bar_right}></View>
       </View>
       <View style={Styles.container}>
         {props.children}

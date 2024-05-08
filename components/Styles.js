@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native';
 
 const green = '#009900'
-const gray = '#dddddd'
+const gray = '#eee'
 const blue = '#0066ff'
 const red ='red'
-const white = '#ffffff'
+const white = '#fff'
 
 const btn_bg_color_add = white
 const btn_bg_color_save = blue
@@ -39,11 +39,30 @@ const Styles = StyleSheet.create({
   top_bar: {
     flexDirection: 'row',
     marginTop: 30,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderColor: '#eee',
+  },
+  top_bar_left: {
+    width: '20%',
+    backgroundColor: 'yellow',
+  },
+  top_bar_middle: {
+    width: '60%',
+  },
+  top_bar_right: {
+    width: '20%',
+    backgroundColor: 'red'
   },
   page_title: {
-    fontSize: 36,
+    fontSize: 18,
     textAlign: 'center',
     width: '100%',
+  },
+  bottom_nav: {
+    borderTopWidth: 5,
+    borderTopColor: '#000',
+    backgroundColor: 'red',
   },
   page_title_add_habit: {
     fontSize: 24,
@@ -61,14 +80,14 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
     paddingBottom: 10,
-    borderBottomColor: '#ddd',
+    borderBottomColor: '#eee',
     borderBottomWidth: 1,
   },
   habit_completed: {
     flexDirection: 'row',
     marginBottom: 10,
     paddingBottom: 10,
-    borderBottomColor: '#ddd',
+    borderBottomColor: '#eee',
     borderBottomWidth: 1,
   },
   habits_day: {
