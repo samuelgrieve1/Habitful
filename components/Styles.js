@@ -74,7 +74,8 @@ const Styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginRight: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    borderRadius: 5,
   },
   habit: {
     flexDirection: 'row',
@@ -206,7 +207,17 @@ const Styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-  }
+  },
+  one_hundred_percent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 30,
+  },
+  one_hundred_percent_txt: {
+    fontSize: 24,
+    color: 'green',
+  },
 });
 
 export {Styles, MyTheme}

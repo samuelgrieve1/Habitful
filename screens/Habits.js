@@ -1,11 +1,11 @@
 import { Text, Pressable, View, ScrollView, Button, Modal, StyleSheet } from 'react-native';
-import Container from './Container';
-import { Styles } from './Styles';
+import Container from '../components/Container';
+import { Styles } from '../components/Styles';
 import { useState, useEffect } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove } from '../firebase/index';
 import { useNavigation } from '@react-navigation/native';
-import HabitsItem from './HabitsItem';
-import AddHabit from './AddHabit';
+import HabitsItem from '../components/HabitsItem';
+import AddHabit from '../components/AddHabit';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
@@ -45,6 +45,9 @@ export default function Habits() {
     getHabits()
   }
 
+  // 100% Completion Hurray
+  // const oneHundredPercent = 
+
   useEffect (() => {
     getHabits()
     setCurrentDate(new Date().toDateString())
@@ -56,6 +59,9 @@ export default function Habits() {
         <View style={Styles.habits_day}>
           <Text style={Styles.habits_day_title}>Today</Text>
           <Text style={Styles.habits_day_title_sub}>{currentDate}</Text>
+        </View>
+        <View style={Styles.one_hundred_percent}>
+          <Text style={Styles.one_hundred_percent_txt}>100%! There Ya Go Bud!</Text>
         </View>
         {habits != null &&
           habits.map(function(habit) {

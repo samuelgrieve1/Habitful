@@ -1,15 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import Habits from './Habits';
-import Progress from './Progress';
-import HabitHistory from './HabitHistory';
-import AppSettings from './AppSettings';
-import { Styles } from './Styles';
+
+import Habits from '../screens/Habits';
+import Progress from '../screens/Progress';
+import History from '../screens/History';
+import Settings from '../screens/Settings';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabNav() {
+export default function BottomTabNavigator() {
   return (
     <Tab.Navigator
       initialRouteName="Habits"
@@ -41,7 +40,7 @@ export default function BottomTabNav() {
       />
       <Tab.Screen
         name="History"
-        component={HabitHistory}
+        component={History}
         options={{
           tabBarActiveTintColor: '#0066ff',
           headerShown: false,
@@ -50,7 +49,7 @@ export default function BottomTabNav() {
       />
       <Tab.Screen
         name="Profile"
-        component={AppSettings}
+        component={Settings}
         options={{
           tabBarActiveTintColor: '#0066ff',
           headerShown: false,
