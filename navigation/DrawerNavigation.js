@@ -11,10 +11,10 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {
   return(
     <Drawer.Navigator>
-      <Drawer.Screen name="Habits" component={BottomTabNavigator} />
-      {/* <Drawer.Screen name="Progress" component={Progress} />
+      {/* <Drawer.Screen name="Habits" component={BottomTabNavigator} /> */}
+      <Drawer.Screen name="Progress" component={Progress} />
       <Drawer.Screen name="History" component={History} />
-      <Drawer.Screen name="Settings" component={Settings} /> */}
+      <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   )
 }

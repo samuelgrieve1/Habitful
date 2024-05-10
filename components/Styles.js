@@ -2,16 +2,21 @@ import { StyleSheet } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native';
 
 const green = '#009900'
-const gray = '#eee'
+const gray = '#ddd'
+const gray_dark = '#ddd'
 const blue = '#0066ff'
 const red ='red'
 const white = '#fff'
+
+const primary = blue
+const background = '#fff'
 
 const btn_bg_color_add = white
 const btn_bg_color_save = blue
 const btn_bg_color_cancel = white
 
 const btn_txt_color_add = blue
+const btn_txt_color_edit = gray_dark
 const btn_txt_color_save = white
 const btn_txt_color_cancel = red
 
@@ -19,8 +24,8 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#fff',
-    background: '#fff',
+    primary: primary,
+    background: background,
   },
 };
 
@@ -35,6 +40,26 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
+  },
+  screen_wrapper: {
+    paddingLeft: 20,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  dark_mode_txt: {
+    width: '50%',
+  },
+  dark_mode_switch: {
+    width: '50%',
+    alignItems: 'flex-end'
+  },
+  header_left: {
+    marginLeft: 20,
+  },
+  header_right: {
+    marginRight: 10,
   },
   top_bar: {
     flexDirection: 'row',
@@ -71,10 +96,11 @@ const Styles = StyleSheet.create({
   },
   checkbox: {
     borderCurve: 'circular',
-    width: 20,
-    height: 20,
+    width: 26,
+    height: 26,
     marginRight: 10,
-    backgroundColor: '#fff',
+    backgroundColor: gray,
+    borderColor: gray,
     borderRadius: 5,
   },
   habit: {
@@ -95,7 +121,7 @@ const Styles = StyleSheet.create({
     marginBottom: 30,
   },
   habits_day_title: {
-    fontSize: 24,
+    fontSize: 36,
     textAlign: 'center',
   },
   habits_day_title_sub: {
@@ -129,6 +155,13 @@ const Styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: btn_txt_color_add,
+  },
+  txt_edit: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: btn_txt_color_edit,
   },
   txt_save: {
     fontSize: 16,

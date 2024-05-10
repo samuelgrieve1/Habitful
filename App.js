@@ -5,13 +5,8 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { Styles, MyTheme } from './components/Styles';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
-import DrawerNavigator from './navigation/DrawerNavigation';
-import StackNavigator from './navigation/StackNavigator';
-
-
-//const RootStack = createStackNavigator();
-
-
+// import DrawerNavigator from './navigation/DrawerNavigation';
+// import StackNavigator from './navigation/StackNavigator';
 
 export default function App() {
   return (
