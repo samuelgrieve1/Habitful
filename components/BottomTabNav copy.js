@@ -4,7 +4,7 @@ import Habits from './Habits';
 import Progress from './Progress';
 import HabitHistory from './HabitHistory';
 import AppSettings from './AppSettings';
-import Styles from './Styles';
+import Styles from './styles';
 
 const Tab = createBottomTabNavigator();
 // const Stack = createStackNavigator()

@@ -1,10 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Switch, View, Text } from 'react-native';
-import { Styles } from '../Styles';
+import { Styles, LightMode, DarkMode } from '../styles/Styles';
+import { ThemeContext } from '../Contexts';
 
 export default function DarkModeToggle() {
-  const [darkMode, setDarkMode] = useState(true);
-  const toggleDarkMode = () => setDarkMode((previousState) => !previousState);
+  const { theme, setTheme } = useContext(ThemeContext)
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = async () => {
+    setDarkMode(prev => !prev)
+    setTheme(darkMode ? LightMode : DarkMode)
+    console.log(theme)
+    console.log(Styles)
+  }
   
   return (
     <View style={Styles.row}>

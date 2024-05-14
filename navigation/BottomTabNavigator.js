@@ -1,7 +1,7 @@
 import { Image, Button, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
-import { Styles } from '../components/Styles';
+import { Styles } from '../components/styles/Styles';
 
 import Habits from '../screens/Habits';
 import Progress from '../screens/Progress';
@@ -29,8 +29,8 @@ export default function BottomTabNavigator() {
         tabBarStyle: {
           borderTopWidth: 1,
           borderTopColor: '#eee',
-          backgroundColor: 'fff',
         },
+        headerTitleAlign: 'center'
       }}
     >
       <Tab.Screen

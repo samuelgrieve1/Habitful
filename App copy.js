@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Styles, MyTheme } from './components/Styles';
+import { Styles, MyTheme } from './components/styles';
 import BottomTabNav from './components/BottomTabNav';
 import AddHabit from './components/AddHabit';
 

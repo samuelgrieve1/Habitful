@@ -1,7 +1,7 @@
 import {
   View
 } from 'react-native';
-import { Styles } from './Styles';
+import { Styles } from './styles/Styles';
 
 const ScreenWrapper = (props) => {
   return (

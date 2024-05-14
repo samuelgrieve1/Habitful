@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { DefaultTheme } from '@react-navigation/native';
 
 const green = '#009900'
 const gray = '#ddd'
@@ -20,13 +19,34 @@ const btn_txt_color_edit = gray_dark
 const btn_txt_color_save = white
 const btn_txt_color_cancel = red
 
-const MyTheme = {
-  ...DefaultTheme,
+const DarkMode = {
+  dark: true,
   colors: {
-    ...DefaultTheme.colors,
-    primary: primary,
-    background: background,
+    primary: 'white',
+    background: 'black',
+    card: 'black',
+    text: 'white',
+    border: 'gray',
+    notification: 'rgb(255, 69, 58)',
   },
+  test1: {
+    color: 'pink'
+  }
+};
+
+const LightMode = {
+  dark: false,
+  colors: {
+    primary: 'rgb(255, 45, 85)',
+    background: 'white',
+    card: 'rgb(255, 255, 255)',
+    text: 'black',
+    border: 'rgb(199, 199, 204)',
+    notification: 'rgb(255, 69, 58)',
+  },
+  test1: {
+    color: 'pink'
+  }
 };
 
 const Styles = StyleSheet.create({
@@ -35,7 +55,7 @@ const Styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
   container: {
     flex: 1,
@@ -70,24 +90,17 @@ const Styles = StyleSheet.create({
   },
   top_bar_left: {
     width: '20%',
-    backgroundColor: 'yellow',
   },
   top_bar_middle: {
     width: '60%',
   },
   top_bar_right: {
     width: '20%',
-    backgroundColor: 'red'
   },
   page_title: {
     fontSize: 18,
     textAlign: 'center',
     width: '100%',
-  },
-  bottom_nav: {
-    borderTopWidth: 5,
-    borderTopColor: '#000',
-    backgroundColor: 'red',
   },
   page_title_add_habit: {
     fontSize: 24,
@@ -253,4 +266,4 @@ const Styles = StyleSheet.create({
   },
 });
 
-export {Styles, MyTheme}
+export {Styles, DarkMode, LightMode}

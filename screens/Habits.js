@@ -1,10 +1,8 @@
-import { Text, Pressable, View, ScrollView, Button, Modal, StyleSheet } from 'react-native';
+import { Text, Pressable, View, ScrollView, Modal, StyleSheet } from 'react-native';
 import Container from '../components/Container';
-import { Styles } from '../components/Styles';
-import { Feather } from '@expo/vector-icons';
+import { Styles } from '../components/styles/Styles';
 import { useState, useEffect } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove } from '../firebase/index';
-import { useNavigation } from '@react-navigation/native';
 import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 

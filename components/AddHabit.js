@@ -3,7 +3,7 @@ import { StyleSheet, Text, View , Button, TextInput, Pressable } from 'react-nat
 import Checkbox from 'expo-checkbox';
 import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
 import { Feather } from '@expo/vector-icons';
-import { Styles } from './Styles';
+import { Styles } from './styles/Styles';
 
 export default function AddHabit({getHabits, closeModal}) {
   const [habitName, setHabitName] = useState('')
