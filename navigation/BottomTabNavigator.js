@@ -15,8 +15,8 @@ const Tab = createBottomTabNavigator();
 function LogoTitle() {
   return (
     <Image
-      style={{ width: 24, height: 24 }}
-      source={require('../assets/logo_blue.png')}
+      style={{ width: 36, height: 36 }}
+      source={require('../assets/ninja2.png')}
     />
   );
 }
@@ -40,7 +40,7 @@ export default function BottomTabNavigator() {
           tabBarActiveTintColor: '#0066ff',
           headerShown: true,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
-          // headerTitle: (props) => <LogoTitle {...props} />,
+          //headerTitle: (props) => <LogoTitle {...props} />,
           headerLeft: () => (
             <View style={Styles.header_left}>
               <Button

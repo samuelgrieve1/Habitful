@@ -5,7 +5,7 @@ import Checkbox from 'expo-checkbox';
 import { ThemeContext } from './Contexts';
 
 export default function HabitsItem({habitId, habitName, isCompleted, addCompletedHabit}) {
-  const {Styles} = useContext(ThemeContext)
+  //const {Styles} = useContext(ThemeContext)
   const [isCompletedLocal, setIsCompletedLocal] = useState(isCompleted)
   const checkUncheck = () => {
     setIsCompletedLocal(prev => !prev)
@@ -18,7 +18,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
         <Checkbox style={Styles.checkbox} color={isCompletedLocal ? '#009900' : undefined} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
       {/* </Pressable> */}
       <Text style={isCompletedLocal ? Styles.habit_name_completed : Styles.habit_name}>{habitName}</Text>
-      <Text style={theme.test1}>{habitName}</Text>
+      <Text style={Styles.test1}>{habitName}</Text>
     </View>
   )
 }
