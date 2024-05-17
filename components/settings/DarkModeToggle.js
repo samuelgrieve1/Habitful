@@ -9,13 +9,14 @@ export default function DarkModeToggle() {
   const toggleDarkMode = async () => {
     setDarkMode(prev => !prev)
     setTheme(darkMode ? LightMode : DarkMode)
-    console.log(theme)
-    console.log(Styles)
+    //console.log(theme.colors)
+    // console.log(Styles)
+    //console.log(theme == LightMode)
   }
   
   return (
     <View style={Styles.row}>
-      <View style={Styles.dark_mode_txt}>
+      <View style={theme == LightMode ? Styles.dark_mode_txt_lm : Styles.dark_mode_txt_dm}>
         <Text>Dark Mode</Text>
       </View>
       <View style={Styles.dark_mode_switch}>

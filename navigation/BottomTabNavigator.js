@@ -52,7 +52,7 @@ export default function BottomTabNavigator() {
           ),
           headerRight: () => (
             <View style={Styles.header_right}>
-              <Feather style={Styles.header_right} name="plus" size={24} color={Styles.blue} />
+              <Feather name="plus" size={24} color={Styles.blue} />
             </View>
           ),
         }}

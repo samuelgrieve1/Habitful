@@ -1,11 +1,13 @@
-import React , {useEffect, useState} from 'react';
-import { StyleSheet, Text, View , Button, TextInput, Pressable } from 'react-native';
+import React , {useEffect, useState, useContext} from 'react';
+import { StyleSheet, Text, View , Button, TextInput, Pressable, useColorScheme } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
 import { Feather } from '@expo/vector-icons';
-import { Styles } from './styles/Styles';
+import { Styles, LightMode } from './styles/Styles';
+import { ThemeContext } from './Contexts';
 
 export default function AddHabit({getHabits, closeModal}) {
+  const { theme } = useContext(ThemeContext)
   const [habitName, setHabitName] = useState('')
   const [activeSun, setActiveSun] = useState(false)
   const [activeMon, setActiveMon] = useState(false)
@@ -62,25 +64,25 @@ export default function AddHabit({getHabits, closeModal}) {
       </View>
 
       <View style={Styles.checkbox_row}>
-        <Checkbox style={Styles.checkbox} value={activeSun} onValueChange={setActiveSun} /><Text>Sunday</Text>
+        <Checkbox style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSun} onValueChange={setActiveSun} /><Text>Sunday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox style={Styles.checkbox} value={activeMon} onValueChange={setActiveMon} /><Text>Monday</Text>
+        <Checkbox style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeMon} onValueChange={setActiveMon} /><Text>Monday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox style={Styles.checkbox} value={activeTue} onValueChange={setActiveTue} /><Text>Tuesday</Text>
+        <Checkbox style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeTue} onValueChange={setActiveTue} /><Text>Tuesday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox style={Styles.checkbox} value={activeWed} onValueChange={setActiveWed} /><Text>Wednesday</Text>
+        <Checkbox style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeWed} onValueChange={setActiveWed} /><Text>Wednesday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox style={Styles.checkbox} value={activeThu} onValueChange={setActiveThu} /><Text>Thursday</Text>
+        <Checkbox style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeThu} onValueChange={setActiveThu} /><Text>Thursday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox style={Styles.checkbox} value={activeFri} onValueChange={setActiveFri} /><Text>Friday</Text>
+        <Checkbox style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeFri} onValueChange={setActiveFri} /><Text>Friday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox style={Styles.checkbox} value={activeSat} onValueChange={setActiveSat} /><Text>Saturday</Text>
+        <Checkbox style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSat} onValueChange={setActiveSat} /><Text>Saturday</Text>
       </View>
       <View style={Styles.btns_save_cancel}>
         <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>

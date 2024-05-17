@@ -82,7 +82,7 @@ export default function Habits() {
             }
           })
         }
-        <View style={styles.centeredView}>
+        <View style={Styles.centeredView}>
           <Modal
             animationType="fade"
             transparent={true}
@@ -90,8 +90,8 @@ export default function Habits() {
             onRequestClose={() => {
               setModalVisible(!modalVisible);
             }}>
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
+            <View style={Styles.centeredView}>
+              <View style={Styles.modalView}>
                 <AddHabit
                   getHabits={getHabits}
                   closeModal={closeModal}
@@ -103,35 +103,10 @@ export default function Habits() {
         <Pressable style={Styles.btn_add} onPress={() => setModalVisible(true)}>
           <Text style={Styles.txt_add}>Add Habit</Text>
         </Pressable>
-        <Pressable style={Styles.btn_add} onPress={() => setModalVisible(true)}>
+        {/* <Pressable style={Styles.btn_edit} onPress={() => setModalVisible(true)}>
           <Text style={Styles.txt_edit}>Edit Habits</Text>
-        </Pressable>
+        </Pressable> */}
       </Container>
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-});
