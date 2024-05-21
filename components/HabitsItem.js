@@ -5,8 +5,7 @@ import Checkbox from 'expo-checkbox';
 import { ThemeContext } from './Contexts';
 
 export default function HabitsItem({habitId, habitName, isCompleted, addCompletedHabit}) {
-  const { theme } = useContext(ThemeContext)
-  //const styles = (theme == 'LightMode' ? StylesLightMode : StylesDarkMode)
+  const {theme} = useContext(ThemeContext)
   const [isCompletedLocal, setIsCompletedLocal] = useState(isCompleted)
   const checkUncheck = () => {
     setIsCompletedLocal(prev => !prev)
@@ -16,13 +15,19 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
   return (
     <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
       {/* <Pressable style={Styles.checkbox_pressable} onPress={() => checkUncheck()}> */}
-        <Checkbox style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} color={isCompletedLocal ? Styles.blue : 'undefined'} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+        
       {/* </Pressable> */}
       {theme == LightMode
         ?
+        <>
+        <Checkbox style={isCompletedLocal ? Styles.checkbox_checked_lm : Styles.checkbox_unchecked_lm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
         <Text style={isCompletedLocal ? Styles.habit_name_completed_lm : Styles.habit_name_lm}>{habitName}</Text>
+        </>
         :
-        <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text> 
+        <>
+        <Checkbox style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+        <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
+        </>
       }
     </View>
   )

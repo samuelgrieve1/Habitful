@@ -28,7 +28,7 @@ export default function BottomTabNavigator() {
       screenOptions={{
         tabBarStyle: {
           borderTopWidth: 1,
-          borderTopColor: '#eee',
+          borderTopColor: Styles.red,
         },
         headerTitleAlign: 'center'
       }}

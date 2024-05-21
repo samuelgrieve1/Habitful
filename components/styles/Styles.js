@@ -137,7 +137,7 @@ const Styles = StyleSheet.create({
   // AddHabit.js
   // HabitsItem.js
   //////////////////////////////
-  checkbox_lm: {
+  checkbox_unchecked_lm: {
     borderCurve: 'circular',
     width: 26,
     height: 26,
@@ -146,13 +146,31 @@ const Styles = StyleSheet.create({
     borderColor: gray,
     borderRadius: 5,
   },
-  checkbox_dm: {
+  checkbox_checked_lm: {
     borderCurve: 'circular',
     width: 26,
     height: 26,
     marginRight: 10,
-    backgroundColor: darkgray,
-    borderColor: darkgray,
+    backgroundColor: gray,
+    borderColor: gray,
+    borderRadius: 5,
+  },
+  checkbox_unchecked_dm: {
+    borderCurve: 'circular',
+    width: 26,
+    height: 26,
+    marginRight: 10,
+    backgroundColor: darkergray,
+    borderColor: darkergray,
+    borderRadius: 5,
+  },
+  checkbox_checked_dm: {
+    borderCurve: 'circular',
+    width: 26,
+    height: 26,
+    marginRight: 10,
+    backgroundColor: blue,
+    borderColor: blue,
     borderRadius: 5,
   },
 
