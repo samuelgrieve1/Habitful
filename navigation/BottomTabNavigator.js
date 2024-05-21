@@ -1,7 +1,9 @@
+import { useContext } from 'react';
 import { Image, Button, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
-import { Styles } from '../components/styles/Styles';
+import { Styles, LightMode } from '../components/styles/Styles';
+import { ThemeContext } from '../components/Contexts';
 
 import Habits from '../screens/Habits';
 import Progress from '../screens/Progress';
@@ -22,13 +24,19 @@ function LogoTitle() {
 }
 
 export default function BottomTabNavigator() {
+  const {theme} = useContext(ThemeContext)
+
   return (
     <Tab.Navigator
       initialRouteName="Habits"
       screenOptions={{
         tabBarStyle: {
           borderTopWidth: 1,
-          borderTopColor: Styles.red,
+          borderTopColor: theme == LightMode ? '#eee' : '#333',
+        },
+        headerStyle : {
+          borderBottomWidth: 1,
+          borderBottomColor: theme == LightMode ? '#eee' : '#333',
         },
         headerTitleAlign: 'center'
       }}
@@ -47,12 +55,13 @@ export default function BottomTabNavigator() {
                 onPress={() => alert('This is a button!')}
                 title="Edit"
                 color={Styles.blue}
+                style={Styles.btn_edit_habits}
               />
             </View>
           ),
           headerRight: () => (
             <View style={Styles.header_right}>
-              <Feather name="plus" size={24} color={Styles.blue} />
+              <Feather name="plus" size={24} color={theme == LightMode ? '#0066ff' : '#fff'} />
             </View>
           ),
         }}

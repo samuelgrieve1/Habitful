@@ -67,6 +67,9 @@ const Styles = StyleSheet.create({
   header_right: {
     marginRight: 20,
   },
+  btn_edit_habits: {
+    backgroundColor: white,
+  },
 
   //////////////////////////////
   // Habits.js
@@ -188,7 +191,7 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
     paddingBottom: 10,
-    borderBottomColor: darkgray,
+    borderBottomColor: darkergray,
     borderBottomWidth: 1,
   },
   habit_name_lm: {
