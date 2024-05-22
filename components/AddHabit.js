@@ -51,7 +51,7 @@ export default function AddHabit({getHabits, closeModal}) {
 
   return (
     <View>
-      <Text style={Styles.page_title_add_habit}>Add Habit</Text>
+      <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>Add Habit</Text>
 
       <Text style={Styles.input_label}>Name</Text>
       <TextInput onChangeText={(text) => setHabitName(text)} style={Styles.input}/>

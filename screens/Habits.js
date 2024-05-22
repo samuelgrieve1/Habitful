@@ -1,15 +1,17 @@
 import { Text, Pressable, View, ScrollView, Modal, StyleSheet } from 'react-native';
 import Container from '../components/Container';
-import { Styles } from '../components/styles/Styles';
-import { useState, useEffect } from 'react';
+import { Styles, LightMode } from '../components/styles/Styles';
+import { useState, useEffect, useContext } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove } from '../firebase/index';
 import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
+import { ThemeContext } from '../components/Contexts';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
   const [currentDate, setCurrentDate] = useState()
   const [modalVisible, setModalVisible] = useState(false);
+  const {theme} = useContext(ThemeContext)
 
   // Close modal from child component
   const closeModal = () => {
@@ -91,7 +93,7 @@ export default function Habits() {
               setModalVisible(!modalVisible);
             }}>
             <View style={Styles.centeredView}>
-              <View style={Styles.modalView}>
+              <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
                 <AddHabit
                   getHabits={getHabits}
                   closeModal={closeModal}

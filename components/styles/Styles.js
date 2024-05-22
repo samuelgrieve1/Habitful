@@ -92,9 +92,24 @@ const Styles = StyleSheet.create({
     marginTop: 0,
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
-  modalView: {
+  modalView_lm: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: white,
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalView_dm: {
+    margin: 20,
+    backgroundColor: black,
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
@@ -140,6 +155,24 @@ const Styles = StyleSheet.create({
   // AddHabit.js
   // HabitsItem.js
   //////////////////////////////
+  checkbox_lm: {
+    borderCurve: 'circular',
+    width: 26,
+    height: 26,
+    marginRight: 10,
+    backgroundColor: gray,
+    borderColor: gray,
+    borderRadius: 5,
+  },
+  checkbox_dm: {
+    borderCurve: 'circular',
+    width: 26,
+    height: 26,
+    marginRight: 10,
+    backgroundColor: darkergray,
+    borderColor: darkergray,
+    borderRadius: 5,
+  },
   checkbox_unchecked_lm: {
     borderCurve: 'circular',
     width: 26,

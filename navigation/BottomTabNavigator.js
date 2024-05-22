@@ -38,7 +38,10 @@ export default function BottomTabNavigator() {
           borderBottomWidth: 1,
           borderBottomColor: theme == LightMode ? '#eee' : '#333',
         },
-        headerTitleAlign: 'center'
+        headerTitleAlign: 'center',
+        tabBarLabelStyle: {
+          color: theme == LightMode ? '#333' : '#eee',
+        },
       }}
     >
       <Tab.Screen
