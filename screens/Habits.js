@@ -52,11 +52,11 @@ export default function Habits() {
   }, [])
 
   return (
-    <ScrollView>
-      <Container pageTitle='Habits'>
-        <View style={Styles.habits_day}>
-          <Text style={Styles.habits_day_title}>Today</Text>
-          <Text style={Styles.habits_day_title_sub}>{currentDate}</Text>
+    <ScrollView style={{paddingVertical: 20, paddingHorizontal: 20}}>
+      {/* <Container> */}
+        <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+          <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
+          <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
         </View>
         {habits != null &&
           habits.map(function(habit) {
@@ -84,6 +84,11 @@ export default function Habits() {
             }
           })
         }
+        {habits == null &&
+          <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+            Add a habit to get started
+          </Text>
+        }
         <View style={Styles.centeredView}>
           <Modal
             animationType="fade"
@@ -108,7 +113,7 @@ export default function Habits() {
         {/* <Pressable style={Styles.btn_edit} onPress={() => setModalVisible(true)}>
           <Text style={Styles.txt_edit}>Edit Habits</Text>
         </Pressable> */}
-      </Container>
+      {/* </Container> */}
     </ScrollView>
   )
 }

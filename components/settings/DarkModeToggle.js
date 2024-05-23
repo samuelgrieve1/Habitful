@@ -48,10 +48,10 @@ export default function DarkModeToggle() {
   
   return (
     <View style={Styles.row}>
-      <View style={theme == LightMode ? Styles.dark_mode_txt_lm : Styles.dark_mode_txt_dm}>
-        <Text>Dark Mode</Text>
+      <View style={Styles.dark_mode_txt_box}>
+        <Text style={theme == LightMode ? Styles.dark_mode_txt_lm : Styles.dark_mode_txt_dm}>Dark Mode</Text>
       </View>
-      <View style={Styles.dark_mode_switch}>
+      <View style={Styles.dark_mode_switch_box}>
         <Switch onValueChange={toggleDarkMode} value={darkMode} />
       </View>
     </View>

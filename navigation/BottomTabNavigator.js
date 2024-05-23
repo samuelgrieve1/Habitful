@@ -32,23 +32,23 @@ export default function BottomTabNavigator() {
       screenOptions={{
         tabBarStyle: {
           borderTopWidth: 1,
-          borderTopColor: theme == LightMode ? '#eee' : '#333',
+          borderTopColor: theme == LightMode ? '#eee' : '#111',
         },
         headerStyle : {
           borderBottomWidth: 1,
-          borderBottomColor: theme == LightMode ? '#eee' : '#333',
+          borderBottomColor: theme == LightMode ? '#eee' : '#111',
         },
         headerTitleAlign: 'center',
-        tabBarLabelStyle: {
-          color: theme == LightMode ? '#333' : '#eee',
-        },
+        // tabBarLabelStyle: {
+        //   color: theme == LightMode ? '#333' : '#eee',
+        // },
       }}
     >
       <Tab.Screen
         name="Habits"
         component={Habits}
         options={{
-          tabBarActiveTintColor: '#0066ff',
+          tabBarActiveTintColor: '#256bc3',
           headerShown: true,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
           //headerTitle: (props) => <LogoTitle {...props} />,
@@ -64,7 +64,7 @@ export default function BottomTabNavigator() {
           ),
           headerRight: () => (
             <View style={Styles.header_right}>
-              <Feather name="plus" size={24} color={theme == LightMode ? '#0066ff' : '#fff'} />
+              <Feather name="plus" size={24} color={'#256bc3'} />
             </View>
           ),
         }}
@@ -73,7 +73,7 @@ export default function BottomTabNavigator() {
         name="Progress"
         component={Progress}
         options={{
-          tabBarActiveTintColor: '#0066ff',
+          tabBarActiveTintColor: '#256bc3',
           headerShown: true,
           tabBarIcon: (tintcolor) => (<Feather name="bar-chart" size={24} color={tintcolor.color} />)
         }}
@@ -82,7 +82,7 @@ export default function BottomTabNavigator() {
         name="History"
         component={History}
         options={{
-          tabBarActiveTintColor: '#0066ff',
+          tabBarActiveTintColor: '#256bc3',
           headerShown: true,
           tabBarIcon: (tintcolor) => (<Feather name="clock" size={24} color={tintcolor.color} />)
         }}
@@ -91,7 +91,7 @@ export default function BottomTabNavigator() {
         name="Settings"
         component={Settings}
         options={{
-          tabBarActiveTintColor: '#0066ff',
+          tabBarActiveTintColor: '#256bc3',
           headerShown: true,
           tabBarIcon: (tintcolor) => (<Feather name="settings" size={24} color={tintcolor.color} />)
         }}

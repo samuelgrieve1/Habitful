@@ -7,10 +7,12 @@ const lightgray = '#eee'
 const gray = '#ddd'
 const darkgray = '#666'
 const darkergray = '#333'
-const blue = '#0066ff'
+const evendarkergray = '#111'
+const blue = '#256bc3'
 const black = '#000'
 const white = '#fff'
-const red = '#ff0000'
+const red = '#da4836'
+const green = 'green'
 
 //////////////////////////////
 // Navigation Theme
@@ -22,7 +24,6 @@ const DarkMode = {
     background: black,
     card: black,
     text: white,
-    border: gray,
     notification: blue,
   },
 };
@@ -55,7 +56,7 @@ const Styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 30,
+    padding: 0,
   },
 
   //////////////////////////////
@@ -74,23 +75,50 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // Habits.js
   //////////////////////////////
-  habits_day: {
-    marginBottom: 30,
+  no_habits_text_lm: {
+    color: black,
+    textAlign: 'center',
+    fontSize: 36,
   },
-  habits_day_title: {
+  no_habits_text_dm: {
+    color: white,
+    textAlign: 'center',
+    fontSize: 36,
+  },
+  habits_day_lm: {
+    marginBottom: 30,
+    color: black,
+  },
+  habits_day_dm: {
+    marginBottom: 30,
+    color: white,
+  },
+  habits_day_title_lm: {
     fontSize: 36,
     textAlign: 'center',
+    color: black,
   },
-  habits_day_title_sub: {
-    fontSize: 12,
+  habits_day_title_dm: {
+    fontSize: 36,
     textAlign: 'center',
+    color: white,
+  },
+  habits_day_title_sub_lm: {
+    fontSize: 10,
+    textAlign: 'center',
+    color: black,
+  },
+  habits_day_title_sub_dm: {
+    fontSize: 10,
+    textAlign: 'center',
+    color: white,
   },
   centeredView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.8)',
   },
   modalView_lm: {
     margin: 20,
@@ -113,13 +141,13 @@ const Styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
+    shadowOpacity: 0.20,
+    shadowRadius: 25,
     elevation: 5,
   },
   btn_add: {
@@ -160,7 +188,6 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 10,
-    backgroundColor: gray,
     borderColor: gray,
     borderRadius: 5,
   },
@@ -169,7 +196,6 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 10,
-    backgroundColor: darkergray,
     borderColor: darkergray,
     borderRadius: 5,
   },
@@ -178,7 +204,6 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 10,
-    backgroundColor: gray,
     borderColor: gray,
     borderRadius: 5,
   },
@@ -187,7 +212,7 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 10,
-    backgroundColor: gray,
+    backgroundColor: green,
     borderColor: gray,
     borderRadius: 5,
   },
@@ -196,7 +221,6 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 10,
-    backgroundColor: darkergray,
     borderColor: darkergray,
     borderRadius: 5,
   },
@@ -205,7 +229,7 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 10,
-    backgroundColor: blue,
+    backgroundColor: green,
     borderColor: blue,
     borderRadius: 5,
   },
@@ -224,7 +248,7 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
     paddingBottom: 10,
-    borderBottomColor: darkergray,
+    borderBottomColor: evendarkergray,
     borderBottomWidth: 1,
   },
   habit_name_lm: {
@@ -245,7 +269,7 @@ const Styles = StyleSheet.create({
   habit_name_completed_dm: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: darkgray,
+    color: darkergray,
     textDecorationLine: 'line-through',
   },
   habit_name: {
@@ -262,21 +286,43 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // AddHabit.js
   //////////////////////////////
-  page_title_add_habit: {
+  page_title_add_habit_lm: {
     fontSize: 24,
+    color: black,
   },
-  input_label: {
+  page_title_add_habit_dm: {
+    fontSize: 24,
+    color: white,
+  },
+  input_label_lm: {
     marginTop: 15,
     marginBottom: 15,
     fontWeight: 'bold',
+    color: black,
   },
-  input: {
+  input_label_dm: {
+    marginTop: 15,
+    marginBottom: 15,
+    fontWeight: 'bold',
+    color: white,
+  },
+  input_lm: {
     borderWidth: 1,
     borderColor: black,
     borderRadius: 5,
     height: 30,
     paddingLeft: 8,
     paddingRight: 8,
+    color: black,
+  },
+  input_dm: {
+    borderWidth: 1,
+    borderColor: darkgray,
+    borderRadius: 5,
+    height: 30,
+    paddingLeft: 8,
+    paddingRight: 8,
+    color: white,
   },
   form_label_row: {
     flexDirection: 'row',
@@ -284,9 +330,21 @@ const Styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
   },
-  form_input_label_frequency: {
+  form_label_lm: {
+    color: black,
+  },
+  form_label_dm: {
+    color: white,
+  },
+  form_input_label_frequency_lm: {
     fontWeight: 'bold',
     marginRight: 15,
+    color: black,
+  },
+  form_input_label_frequency_dm: {
+    fontWeight: 'bold',
+    marginRight: 15,
+    color: white,
   },
   form_txt_select_all: {
     color: blue,
@@ -294,6 +352,7 @@ const Styles = StyleSheet.create({
   checkbox_row: {
     flexDirection: 'row',
     marginBottom: 20,
+    color: white,
   },
   btns_save_cancel: {
     flexDirection: 'row',
@@ -324,13 +383,12 @@ const Styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 5,
     elevation: 3,
-    backgroundColor: white,
     shadowOpacity: 0,
   },
   txt_cancel: {
     fontSize: 16,
     lineHeight: 21,
-    fontWeight: 'bold',
+    fontWeight: 'regular',
     letterSpacing: 0.25,
     color: red,
   },
@@ -341,19 +399,41 @@ const Styles = StyleSheet.create({
   },
 
   //////////////////////////////
+  // Settings.js
+  //////////////////////////////
+  setting_lm: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    paddingBottom: 10,
+    borderBottomColor: lightgray,
+    borderBottomWidth: 1,
+  },
+  setting_dm: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    paddingBottom: 10,
+    borderBottomColor: evendarkergray,
+    borderBottomWidth: 1,
+  },
+
+  //////////////////////////////
   // DarkModeToggle.js
   //////////////////////////////
   row: {
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
-  dark_mode_txt_lm: {
+  dark_mode_txt_box: {
     width: '50%',
+    color: black,
+  },
+  dark_mode_txt_lm: {
+    color: black,
   },
   dark_mode_txt_dm: {
-    width: '50%',
+    color: white,
   },
-  dark_mode_switch: {
+  dark_mode_switch_box: {
     width: '50%',
     alignItems: 'flex-end'
   },
