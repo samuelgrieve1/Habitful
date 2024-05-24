@@ -12,6 +12,7 @@ export default function Habits() {
   const [currentDate, setCurrentDate] = useState()
   const [modalVisible, setModalVisible] = useState(false);
   const {theme} = useContext(ThemeContext)
+  const totalCompletedHabits = 0
 
   // Close modal from child component
   const closeModal = () => {
@@ -53,7 +54,6 @@ export default function Habits() {
 
   return (
     <ScrollView style={{paddingVertical: 20, paddingHorizontal: 20}}>
-      {/* <Container> */}
         <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
           <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
           <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
@@ -69,7 +69,10 @@ export default function Habits() {
                   currentDate={currentDate}
                   isCompleted={true}
                   addCompletedHabit={addCompletedHabit}
-                />)
+                />
+              )
+              totalCompletedHabits = totalCompletedHabits + 1
+              console.log(totalCompletedHabits)
             } else {
               return(
                 <HabitsItem
@@ -113,7 +116,6 @@ export default function Habits() {
         {/* <Pressable style={Styles.btn_edit} onPress={() => setModalVisible(true)}>
           <Text style={Styles.txt_edit}>Edit Habits</Text>
         </Pressable> */}
-      {/* </Container> */}
     </ScrollView>
   )
 }

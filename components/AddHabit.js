@@ -64,25 +64,25 @@ export default function AddHabit({getHabits, closeModal}) {
       </View>
 
       <View style={Styles.checkbox_row}>
-        <Checkbox color={activeSun ? '#256bc3' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSun} onValueChange={setActiveSun} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Sunday</Text>
+        <Checkbox color={activeSun ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSun} onValueChange={setActiveSun} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Sunday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox color={activeMon ? '#256bc3' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeMon} onValueChange={setActiveMon} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Monday</Text>
+        <Checkbox color={activeMon ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeMon} onValueChange={setActiveMon} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Monday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox color={activeTue ? '#256bc3' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeTue} onValueChange={setActiveTue} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Tuesday</Text>
+        <Checkbox color={activeTue ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeTue} onValueChange={setActiveTue} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Tuesday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox color={activeWed ? '#256bc3' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeWed} onValueChange={setActiveWed} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Wednesday</Text>
+        <Checkbox color={activeWed ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeWed} onValueChange={setActiveWed} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Wednesday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox color={activeThu ? '#256bc3' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeThu} onValueChange={setActiveThu} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Thursday</Text>
+        <Checkbox color={activeThu ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeThu} onValueChange={setActiveThu} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Thursday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox color={activeFri ? '#256bc3' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeFri} onValueChange={setActiveFri} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Friday</Text>
+        <Checkbox color={activeFri ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeFri} onValueChange={setActiveFri} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Friday</Text>
       </View>
       <View style={Styles.checkbox_row}>
-        <Checkbox color={activeSat ? '#256bc3' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSat} onValueChange={setActiveSat} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Saturday</Text>
+        <Checkbox color={activeSat ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSat} onValueChange={setActiveSat} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Saturday</Text>
       </View>
       <View style={Styles.btns_save_cancel}>
         <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>

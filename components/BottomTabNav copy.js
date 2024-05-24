@@ -25,7 +25,7 @@ export default function BottomTabNav() {
         name="Habits"
         component={Habits}
         options={{
-          tabBarActiveTintColor: '#256bc3',
+          tabBarActiveTintColor: '#4185e7',
           headerShown: false,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
         }}
@@ -34,7 +34,7 @@ export default function BottomTabNav() {
         name="Progress"
         component={Progress}
         options={{
-          tabBarActiveTintColor: '#256bc3',
+          tabBarActiveTintColor: '#4185e7',
           headerShown: false,
           tabBarIcon: (tintcolor) => (<Feather name="bar-chart" size={24} color={tintcolor.color} />)
         }}
@@ -43,7 +43,7 @@ export default function BottomTabNav() {
         name="History"
         component={HabitHistory}
         options={{
-          tabBarActiveTintColor: '#256bc3',
+          tabBarActiveTintColor: '#4185e7',
           headerShown: false,
           tabBarIcon: (tintcolor) => (<Feather name="clock" size={24} color={tintcolor.color} />)
         }}
@@ -52,7 +52,7 @@ export default function BottomTabNav() {
         name="Profile"
         component={AppSettings}
         options={{
-          tabBarActiveTintColor: '#256bc3',
+          tabBarActiveTintColor: '#4185e7',
           headerShown: false,
           tabBarIcon: (tintcolor) => (<Feather name="user" size={24} color={tintcolor.color} />)
         }}

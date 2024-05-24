@@ -8,7 +8,7 @@ const gray = '#ddd'
 const darkgray = '#666'
 const darkergray = '#333'
 const evendarkergray = '#111'
-const blue = '#256bc3'
+const blue = '#4185e7'
 const black = '#000'
 const white = '#fff'
 const red = '#da4836'
@@ -160,7 +160,7 @@ const Styles = StyleSheet.create({
   txt_add: {
     fontSize: 16,
     lineHeight: 21,
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     letterSpacing: 0.25,
     color: blue,
   },

@@ -20,12 +20,12 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
       {theme == LightMode
         ?
         <>
-        <Checkbox color={isCompletedLocal ? '#50ba5b' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_lm : Styles.checkbox_unchecked_lm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+        <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_lm : Styles.checkbox_unchecked_lm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
         <Text style={isCompletedLocal ? Styles.habit_name_completed_lm : Styles.habit_name_lm}>{habitName}</Text>
         </>
         :
         <>
-        <Checkbox color={isCompletedLocal ? '#50ba5b' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+        <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
         <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
         </>
       }
