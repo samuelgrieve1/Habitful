@@ -1,8 +1,11 @@
 import { useState, useContext } from 'react';
-import { Text, Pressable, View } from 'react-native';
+import { Text, Pressable, View, Animated } from 'react-native';
 import { Styles, LightMode, DarkMode, StylesLightMode, StylesDarkMode } from './styles/Styles';
 import Checkbox from 'expo-checkbox';
 import { ThemeContext } from './Contexts';
+import { RectButton, PanGestureHandler, LongPressGestureHandler } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 export default function HabitsItem({habitId, habitName, isCompleted, addCompletedHabit}) {
   const {theme} = useContext(ThemeContext)
@@ -11,12 +14,22 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
     setIsCompletedLocal(prev => !prev)
     addCompletedHabit(habitId, isCompleted)
   }
+
+  renderRightActions = () => {
+    return (
+      <View style={Styles.deleteBox}>
+        <Text style={Styles.deleteBoxTxt}>Delete</Text>
+      </View>
+    );
+  };
   
   return (
+    <GestureHandlerRootView>
+    <Swipeable renderRightActions={renderRightActions}>
     <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
       {/* <Pressable style={Styles.checkbox_pressable} onPress={() => checkUncheck()}> */}
-        
       {/* </Pressable> */}
+      
       {theme == LightMode
         ?
         <>
@@ -29,6 +42,9 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
         <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
         </>
       }
+      
     </View>
+    </Swipeable>
+    </GestureHandlerRootView>
   )
 }
