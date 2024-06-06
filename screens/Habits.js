@@ -2,7 +2,7 @@ import { Text, Pressable, View, ScrollView, Modal, StyleSheet } from 'react-nati
 import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
-import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove } from '../firebase/index';
+import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc } from '../firebase/index';
 import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import { ThemeContext } from '../components/Contexts';
@@ -30,6 +30,8 @@ export default function Habits() {
           id: doc.id
         }))
       )
+    } else {
+      setHabits(null)
     }
   }
 
@@ -46,6 +48,15 @@ export default function Habits() {
     }
     getHabits()
   }
+
+  // DELETE Habit
+  const deleteHabit = async(habitId) => {
+    await deleteDoc(doc(db, "habits", (habitId)))
+    getHabits()
+  }
+
+  // EDIT Habit
+  const editHabit = () => {}
 
   useEffect (() => {
     getHabits()
@@ -69,6 +80,7 @@ export default function Habits() {
                   currentDate={currentDate}
                   isCompleted={true}
                   addCompletedHabit={addCompletedHabit}
+                  deleteHabit={deleteHabit}
                 />
               )
               totalCompletedHabits = totalCompletedHabits + 1
@@ -82,6 +94,7 @@ export default function Habits() {
                   currentDate={currentDate}
                   isCompleted={false}
                   addCompletedHabit={addCompletedHabit}
+                  deleteHabit={deleteHabit}
                 />
               )
             }

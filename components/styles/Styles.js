@@ -237,51 +237,55 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // HabitsItem.js
   //////////////////////////////
+  habit_box: {
+    height: 40,
+  },
+  habit_separator_lm: {
+    flexDirection: 'row',
+    height: 1,
+    backgroundColor: lightgray,
+  },
+  habit_separator_dm: {
+    flexDirection: 'row',
+    height: 1,
+    backgroundColor: evendarkergray,
+  },
   habit_lm: {
     flexDirection: 'row',
-    marginBottom: 0,
-    paddingBottom: 0,
-    borderBottomColor: lightgray,
-    borderBottomWidth: 1,
     height: 40,
   },
   habit_dm: {
     flexDirection: 'row',
-    marginBottom: 10,
-    paddingBottom: 10,
-    borderBottomColor: evendarkergray,
-    borderBottomWidth: 1,
+    height: 40,
+  },
+  habit_checkbox_box: {
+    marginTop: 7,
   },
   habit_name_lm: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: black,
+    lineHeight: 40,
   },
   habit_name_completed_lm: {
     fontSize: 18,
     fontWeight: 'bold',
     color: gray,
     textDecorationLine: 'line-through',
+    lineHeight: 40,
   },
   habit_name_dm: {
     fontSize: 18,
     fontWeight: 'bold',
     color: white,
+    lineHeight: 40,
   },
   habit_name_completed_dm: {
     fontSize: 18,
     fontWeight: 'bold',
     color: darkergray,
     textDecorationLine: 'line-through',
-  },
-  habit_name: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  habit_name_completed: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: gray,
-    textDecorationLine: 'line-through',
+    lineHeight: 40,
   },
   deleteBox: {
     height: 40,

@@ -1,11 +1,13 @@
-import { ScrollView } from "react-native"
+import { ScrollView, View } from "react-native"
 import DarkModeToggle from "../components/settings/DarkModeToggle"
-import Container from "../components/Container"
+import { Styles } from "../components/styles/Styles"
 
 export default function Settings() {
   return (
     <ScrollView style={{paddingVertical: 20, paddingHorizontal: 20}}>
-      <DarkModeToggle />
+      <View style={Styles.setting}>
+        <DarkModeToggle />
+      </View>
     </ScrollView>
   )
 }
