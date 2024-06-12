@@ -75,6 +75,26 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // Habits.js
   //////////////////////////////
+  one_hundred_percent_box_lm: {
+    backgroundColor: green,
+    padding: 10,
+    borderRadius: 3,
+    marginBottom: 10,
+  },
+  one_hundred_percent_box_dm: {
+    backgroundColor: green,
+    padding: 10,
+    borderRadius: 3,
+    marginBottom: 10,
+  },
+  one_hundred_percent_txt_lm: {
+    color: white,
+    textAlign: 'center',
+  },
+  one_hundred_percent_txt_dm: {
+    color: white,
+    textAlign: 'center',
+  },
   no_habits_text_lm: {
     color: black,
     textAlign: 'center',

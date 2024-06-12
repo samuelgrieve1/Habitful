@@ -12,11 +12,23 @@ export default function Habits() {
   const [currentDate, setCurrentDate] = useState()
   const [modalVisible, setModalVisible] = useState(false);
   const {theme} = useContext(ThemeContext)
-  const totalCompletedHabits = 0
+  const [totalCompletedHabits, setTotalCompletedHabits] = useState(null)
+  const [oneHundredPercent, setOneHundredPercent] = useState(null)
 
   // Close modal from child component
   const closeModal = () => {
     setModalVisible(!modalVisible)
+  }
+
+  // Set initial number of completed habits
+  if (habits && totalCompletedHabits == null) {
+    let total = 0
+    habits.forEach(e => {
+      if(e.completed.includes(currentDate)){
+        total += 1
+      }
+    });
+    setTotalCompletedHabits(total)
   }
 
   // GET HABITS FROM DB AND ADD TO STATE
@@ -33,6 +45,7 @@ export default function Habits() {
     } else {
       setHabits(null)
     }
+    //console.log(totalCompletedHabits == null)
   }
 
   // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
@@ -41,10 +54,12 @@ export default function Habits() {
       await updateDoc(doc(db, "habits", (habitId)), {
         completed: arrayUnion(currentDate)           
       })
+      setTotalCompletedHabits(totalCompletedHabits + 1)
     } else {
       await updateDoc(doc(db, "habits", (habitId)), {
         completed: arrayRemove(currentDate)         
       })
+      setTotalCompletedHabits(totalCompletedHabits - 1)
     }
     getHabits()
   }
@@ -63,12 +78,27 @@ export default function Habits() {
     setCurrentDate(new Date().toDateString())
   }, [])
 
+  // Check if all habits are completed for the day
+  // Then show completion badge
+  useEffect (() => {
+    if (habits && totalCompletedHabits == habits.length){
+      setOneHundredPercent(true)
+    } else {
+      setOneHundredPercent(false)
+    }
+  }, [totalCompletedHabits])
+
   return (
     <ScrollView style={{paddingVertical: 20, paddingHorizontal: 20}}>
         <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
           <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
           <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
         </View>
+        {oneHundredPercent &&
+          <View style={theme == LightMode ? Styles.one_hundred_percent_box_lm : Styles.one_hundred_percent_box_dm}>
+            <Text style={theme == LightMode ? Styles.one_hundred_percent_txt_lm : Styles.one_hundred_percent_txt_dm}>You've completed all habits!</Text>
+          </View>
+        }
         {habits != null &&
           habits.map(function(habit) {
             if(habit.completed.includes(currentDate)){
@@ -83,8 +113,6 @@ export default function Habits() {
                   deleteHabit={deleteHabit}
                 />
               )
-              totalCompletedHabits = totalCompletedHabits + 1
-              console.log(totalCompletedHabits)
             } else {
               return(
                 <HabitsItem
