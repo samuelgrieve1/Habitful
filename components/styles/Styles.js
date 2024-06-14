@@ -12,7 +12,7 @@ const blue = '#4185e7'
 const black = '#000'
 const white = '#fff'
 const red = '#da4836'
-const green = 'green'
+const green = '#4a8b47'
 
 //////////////////////////////
 // Navigation Theme
@@ -90,10 +90,12 @@ const Styles = StyleSheet.create({
   one_hundred_percent_txt_lm: {
     color: white,
     textAlign: 'center',
+    fontSize: 18,
   },
   one_hundred_percent_txt_dm: {
     color: white,
     textAlign: 'center',
+    fontSize: 18,
   },
   no_habits_text_lm: {
     color: black,

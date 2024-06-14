@@ -6,6 +6,7 @@ import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, delet
 import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import { ThemeContext } from '../components/Contexts';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
@@ -96,7 +97,7 @@ export default function Habits() {
         </View>
         {oneHundredPercent &&
           <View style={theme == LightMode ? Styles.one_hundred_percent_box_lm : Styles.one_hundred_percent_box_dm}>
-            <Text style={theme == LightMode ? Styles.one_hundred_percent_txt_lm : Styles.one_hundred_percent_txt_dm}>You've completed all habits!</Text>
+            <Text style={theme == LightMode ? Styles.one_hundred_percent_txt_lm : Styles.one_hundred_percent_txt_dm}>DAAAYUM! 100% completion today!</Text>
           </View>
         }
         {habits != null &&
