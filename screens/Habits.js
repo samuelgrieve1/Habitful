@@ -84,8 +84,12 @@ export default function Habits() {
   useEffect (() => {
     if (habits && totalCompletedHabits == habits.length){
       setOneHundredPercent(true)
+      console.log(true)
+      console.log(totalCompletedHabits)
     } else {
       setOneHundredPercent(false)
+      console.log(false)
+      console.log(totalCompletedHabits)
     }
   }, [totalCompletedHabits])
 

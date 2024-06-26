@@ -12,7 +12,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
   const [isCompletedLocal, setIsCompletedLocal] = useState(isCompleted)
   const checkUncheck = () => {
     setIsCompletedLocal(prev => !prev)
-    addCompletedHabit(habitId, isCompleted)
+    addCompletedHabit(habitId, isCompletedLocal)
   }
 
   renderRightActions = () => {
