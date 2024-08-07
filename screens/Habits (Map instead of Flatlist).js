@@ -7,7 +7,6 @@ import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import { ThemeContext } from '../components/Contexts';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FlatList } from 'react-native';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
@@ -16,12 +15,6 @@ export default function Habits() {
   const {theme} = useContext(ThemeContext)
   const [totalCompletedHabits, setTotalCompletedHabits] = useState(null)
   const [oneHundredPercent, setOneHundredPercent] = useState(null)
-  const poop = [
-    {
-      name: "poo1",
-      id: 1
-    }
-  ]
 
   // Close modal from child component
   const closeModal = () => {
@@ -50,17 +43,10 @@ export default function Habits() {
           id: doc.id
         }))
       )
-      // console.log(`State ${habits}`)
     } else {
       setHabits(null)
     }
-  }
-
-  // WAS HABIT COMPLETED TODAY?
-  const checkedOrUnchecked = (habit) => {
-    return(
-      habit.completed.includes(currentDate) ? true : false
-    )
+    //console.log(totalCompletedHabits == null)
   }
 
   // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
@@ -118,57 +104,34 @@ export default function Habits() {
             <Text style={theme == LightMode ? Styles.one_hundred_percent_txt_lm : Styles.one_hundred_percent_txt_dm}>DAAAYUM! 100% completion today!</Text>
           </View>
         }
-
         {habits != null &&
-
-          <FlatList
-            data={habits}
-            renderItem={({item}) => {
-              console.log(checkedOrUnchecked(item))
+          habits.map(function(habit) {
+            if(habit.completed.includes(currentDate)){
               return(
-              <HabitsItem
-                key={item.id}
-                habitId={item.id}
-                habitName={item.name}
-                currentDate={currentDate}
-                //isCompleted={false}
-                isCompleted={checkedOrUnchecked(item)}
-                addCompletedHabit={addCompletedHabit}
-                deleteHabit={deleteHabit}
-              />
+                <HabitsItem
+                  key={habit.id}
+                  habitId={habit.id}
+                  habitName={habit.name}
+                  currentDate={currentDate}
+                  isCompleted={true}
+                  addCompletedHabit={addCompletedHabit}
+                  deleteHabit={deleteHabit}
+                />
               )
-            }}
-            keyExtractor={item => item.id}
-          />
-
-          // habits.map(function(habit) {
-          //   if(habit.completed.includes(currentDate)){
-          //     return(
-          //       <HabitsItem
-          //         key={habit.id}
-          //         habitId={habit.id}
-          //         habitName={habit.name}
-          //         currentDate={currentDate}
-          //         isCompleted={true}
-          //         addCompletedHabit={addCompletedHabit}
-          //         deleteHabit={deleteHabit}
-          //       />
-          //     )
-          //   } else {
-          //     return(
-          //       <HabitsItem
-          //         key={habit.id}
-          //         habitId={habit.id}
-          //         habitName={habit.name}
-          //         currentDate={currentDate}
-          //         isCompleted={false}
-          //         addCompletedHabit={addCompletedHabit}
-          //         deleteHabit={deleteHabit}
-          //       />
-          //     )
-          //   }
-          // })
-
+            } else {
+              return(
+                <HabitsItem
+                  key={habit.id}
+                  habitId={habit.id}
+                  habitName={habit.name}
+                  currentDate={currentDate}
+                  isCompleted={false}
+                  addCompletedHabit={addCompletedHabit}
+                  deleteHabit={deleteHabit}
+                />
+              )
+            }
+          })
         }
         {habits == null &&
           <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
