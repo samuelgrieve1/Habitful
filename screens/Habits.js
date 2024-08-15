@@ -7,7 +7,8 @@ import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import { ThemeContext } from '../components/Contexts';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
+import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
@@ -16,12 +17,6 @@ export default function Habits() {
   const {theme} = useContext(ThemeContext)
   const [totalCompletedHabits, setTotalCompletedHabits] = useState(null)
   const [oneHundredPercent, setOneHundredPercent] = useState(null)
-  const poop = [
-    {
-      name: "poo1",
-      id: 1
-    }
-  ]
 
   // Close modal from child component
   const closeModal = () => {
@@ -107,8 +102,37 @@ export default function Habits() {
     }
   }, [totalCompletedHabits])
 
+  function renderItem(info) {
+    const {item, onDragStart, onDragEnd, isActive} = info;
+
+    return (
+      <TouchableOpacity
+        key={item}
+        onPressIn={onDragStart}
+        onPressOut={onDragEnd}>
+        <HabitsItem
+          key={item.id}
+          habitId={item.id}
+          habitName={item.name}
+          currentDate={currentDate}
+          isCompleted={checkedOrUnchecked(item)}
+          addCompletedHabit={addCompletedHabit}
+          deleteHabit={deleteHabit}
+        />
+      </TouchableOpacity>
+    );
+  }
+
+  async function onReordered(fromIndex, toIndex) {
+    const copy = [...habits]; // Don't modify react data in-place
+    const removed = copy.splice(fromIndex, 1);
+
+    copy.splice(toIndex, 0, removed[0]); // Now insert at the new pos
+    setHabits(copy);
+  }
+
   return (
-    <ScrollView style={{paddingVertical: 20, paddingHorizontal: 20}}>
+    <View style={{paddingVertical: 20, paddingHorizontal: 20}}>
         <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
           <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
           <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
@@ -120,61 +144,41 @@ export default function Habits() {
         }
 
         {habits != null &&
+          <DragList
+            data={habits}
+            onReordered={onReordered}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        }
 
+        {/* {habits != null &&
           <FlatList
             data={habits}
             renderItem={({item}) => {
               console.log(checkedOrUnchecked(item))
               return(
-              <HabitsItem
-                key={item.id}
-                habitId={item.id}
-                habitName={item.name}
-                currentDate={currentDate}
-                //isCompleted={false}
-                isCompleted={checkedOrUnchecked(item)}
-                addCompletedHabit={addCompletedHabit}
-                deleteHabit={deleteHabit}
-              />
+                <HabitsItem
+                  key={item.id}
+                  habitId={item.id}
+                  habitName={item.name}
+                  currentDate={currentDate}
+                  isCompleted={checkedOrUnchecked(item)}
+                  addCompletedHabit={addCompletedHabit}
+                  deleteHabit={deleteHabit}
+                />
               )
             }}
             keyExtractor={item => item.id}
           />
+        } */}
 
-          // habits.map(function(habit) {
-          //   if(habit.completed.includes(currentDate)){
-          //     return(
-          //       <HabitsItem
-          //         key={habit.id}
-          //         habitId={habit.id}
-          //         habitName={habit.name}
-          //         currentDate={currentDate}
-          //         isCompleted={true}
-          //         addCompletedHabit={addCompletedHabit}
-          //         deleteHabit={deleteHabit}
-          //       />
-          //     )
-          //   } else {
-          //     return(
-          //       <HabitsItem
-          //         key={habit.id}
-          //         habitId={habit.id}
-          //         habitName={habit.name}
-          //         currentDate={currentDate}
-          //         isCompleted={false}
-          //         addCompletedHabit={addCompletedHabit}
-          //         deleteHabit={deleteHabit}
-          //       />
-          //     )
-          //   }
-          // })
-
-        }
         {habits == null &&
           <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
             Add a habit to get started
           </Text>
         }
+
         <View style={Styles.centeredView}>
           <Modal
             animationType="fade"
@@ -199,6 +203,6 @@ export default function Habits() {
         {/* <Pressable style={Styles.btn_edit} onPress={() => setModalVisible(true)}>
           <Text style={Styles.txt_edit}>Edit Habits</Text>
         </Pressable> */}
-    </ScrollView>
+    </View>
   )
 }
