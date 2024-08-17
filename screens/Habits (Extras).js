@@ -15,10 +15,23 @@ export default function Habits() {
   const [currentDate, setCurrentDate] = useState()
   const [modalVisible, setModalVisible] = useState(false);
   const {theme} = useContext(ThemeContext)
+  const [totalCompletedHabits, setTotalCompletedHabits] = useState(null)
+  const [oneHundredPercent, setOneHundredPercent] = useState(null)
 
   // Close modal from child component
   const closeModal = () => {
     setModalVisible(!modalVisible)
+  }
+
+  // Set initial number of completed habits
+  if (habits && totalCompletedHabits == null) {
+    let total = 0
+    habits.forEach(e => {
+      if(e.completed.includes(currentDate)){
+        total += 1
+      }
+    });
+    setTotalCompletedHabits(total)
   }
 
   // GET HABITS FROM DB AND ADD TO STATE
@@ -75,17 +88,75 @@ export default function Habits() {
     setCurrentDate(new Date().toDateString())
   }, [])
 
+  // Check if all habits are completed for the day
+  // Then show completion badge
+  useEffect (() => {
+    if (habits && totalCompletedHabits == habits.length){
+      setOneHundredPercent(true)
+      console.log(true)
+      console.log(totalCompletedHabits)
+    } else {
+      setOneHundredPercent(false)
+      console.log(false)
+      console.log(totalCompletedHabits)
+    }
+  }, [totalCompletedHabits])
+
+  function renderItem(info) {
+    const {item, onDragStart, onDragEnd, isActive} = info;
+
+    return (
+      <TouchableOpacity
+        key={item}
+        onPressIn={onDragStart}
+        onPressOut={onDragEnd}>
+        <HabitsItem
+          key={item.id}
+          habitId={item.id}
+          habitName={item.name}
+          currentDate={currentDate}
+          isCompleted={checkedOrUnchecked(item)}
+          addCompletedHabit={addCompletedHabit}
+          deleteHabit={deleteHabit}
+        />
+      </TouchableOpacity>
+    );
+  }
+
+  async function onReordered(fromIndex, toIndex) {
+    const copy = [...habits]; // Don't modify react data in-place
+    const removed = copy.splice(fromIndex, 1);
+
+    copy.splice(toIndex, 0, removed[0]); // Now insert at the new pos
+    setHabits(copy);
+  }
+
   return (
     <View style={{paddingVertical: 20, paddingHorizontal: 20}}>
         <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
           <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
           <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
         </View>
+        {oneHundredPercent &&
+          <View style={theme == LightMode ? Styles.one_hundred_percent_box_lm : Styles.one_hundred_percent_box_dm}>
+            <Text style={theme == LightMode ? Styles.one_hundred_percent_txt_lm : Styles.one_hundred_percent_txt_dm}>DAAAYUM! 100% completion today!</Text>
+          </View>
+        }
 
         {habits != null &&
+          <DragList
+            data={habits}
+            onReordered={onReordered}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        }
+
+        {/* {habits != null &&
           <FlatList
             data={habits}
             renderItem={({item}) => {
+              console.log(checkedOrUnchecked(item))
               return(
                 <HabitsItem
                   key={item.id}
@@ -100,7 +171,7 @@ export default function Habits() {
             }}
             keyExtractor={item => item.id}
           />
-        }
+        } */}
 
         {habits == null &&
           <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
@@ -129,6 +200,9 @@ export default function Habits() {
         <Pressable style={Styles.btn_add} onPress={() => setModalVisible(true)}>
           <Text style={Styles.txt_add}>Add Habit</Text>
         </Pressable>
+        {/* <Pressable style={Styles.btn_edit} onPress={() => setModalVisible(true)}>
+          <Text style={Styles.txt_edit}>Edit Habits</Text>
+        </Pressable> */}
     </View>
   )
 }
