@@ -32,7 +32,6 @@ export default function Habits() {
           id: doc.id
         }))
       )
-      // console.log(`State ${habits}`)
     } else {
       setHabits(null)
     }
@@ -51,12 +50,10 @@ export default function Habits() {
       await updateDoc(doc(db, "habits", (habitId)), {
         completed: arrayUnion(currentDate)           
       })
-      setTotalCompletedHabits(totalCompletedHabits + 1)
     } else {
       await updateDoc(doc(db, "habits", (habitId)), {
         completed: arrayRemove(currentDate)         
       })
-      setTotalCompletedHabits(totalCompletedHabits - 1)
     }
     getHabits()
   }

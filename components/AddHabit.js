@@ -18,6 +18,12 @@ export default function AddHabit({getHabits, closeModal}) {
   const [activeSat, setActiveSat] = useState(false)
   const [selectAllToggle, setSelectAllToggle] = useState(true)
 
+  const dateAsInteger = () => {
+    let newDate = new Date()
+    let newDateInteger = Date.parse(newDate)
+    return newDateInteger
+  }
+
   const addHabitBtn = async () => {
     try {
       const docRef = await addDoc(collection(db, "habits"), {
@@ -29,7 +35,8 @@ export default function AddHabit({getHabits, closeModal}) {
         thu: activeThu,
         fri: activeFri,
         sat: activeSat,
-        completed: []
+        completed: [],
+        date_added: dateAsInteger()
       })
       console.log("Document written with ID: ", docRef.id)
       getHabits()
