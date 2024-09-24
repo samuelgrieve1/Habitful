@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc } from '../firebase/index';
 import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
+import EditHabit from '../components/EditHabit';
 import { ThemeContext } from '../components/Contexts';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
@@ -13,12 +14,17 @@ import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 export default function Habits() {
   const [habits, setHabits] = useState(null)
   const [currentDate, setCurrentDate] = useState()
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibleAdd, setModalVisibleAdd] = useState(false);
+  const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
+  const [selectedHabitId, setSelectedHabitId] = useState(null)
   const {theme} = useContext(ThemeContext)
 
   // Close modal from child component
-  const closeModal = () => {
-    setModalVisible(!modalVisible)
+  const closeModalAdd = () => {
+    setModalVisibleAdd(!modalVisibleAdd)
+  }
+  const closeModalEdit = () => {
+    setModalVisibleEdit(!modalVisibleEdit)
   }
 
   // GET HABITS FROM DB AND ADD TO STATE
@@ -59,13 +65,10 @@ export default function Habits() {
   }
 
   // DELETE Habit
-  const deleteHabit = async(habitId) => {
-    await deleteDoc(doc(db, "habits", (habitId)))
+  const deleteHabit = async() => {
+    await deleteDoc(doc(db, "habits", (selectedHabitId)))
     getHabits()
   }
-
-  // EDIT Habit
-  const editHabit = () => {}
 
   useEffect (() => {
     getHabits()
@@ -92,6 +95,8 @@ export default function Habits() {
                   isCompleted={checkedOrUnchecked(item)}
                   addCompletedHabit={addCompletedHabit}
                   deleteHabit={deleteHabit}
+                  setSelectedHabitId={setSelectedHabitId}
+                  setModalVisibleEdit={setModalVisibleEdit}
                 />
               )
             }}
@@ -99,31 +104,58 @@ export default function Habits() {
           />
         }
 
+        {/* PLACEHOLDER TEXT IF NO HABITS */}
         {habits == null &&
           <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
             Add a habit to get started
           </Text>
         }
 
+        {/* ADD HABIT FORM */}
         <View style={Styles.centeredView}>
           <Modal
             animationType="fade"
             transparent={true}
-            visible={modalVisible}
+            visible={modalVisibleAdd}
             onRequestClose={() => {
-              setModalVisible(!modalVisible);
+              setModalVisibleAdd(!modalVisibleAdd);
             }}>
             <View style={Styles.centeredView}>
               <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
                 <AddHabit
                   getHabits={getHabits}
-                  closeModal={closeModal}
+                  closeModal={closeModalAdd}
                 />
               </View>
             </View>
           </Modal>
         </View>
-        <Pressable style={Styles.btn_add} onPress={() => setModalVisible(true)}>
+
+        {/* EDIT HABIT FORM */}
+        <View style={Styles.centeredView}>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modalVisibleEdit}
+            onRequestClose={() => {
+              setModalVisibleEdit(!modalVisibleEdit);
+            }}>
+            <View style={Styles.centeredView}>
+              <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
+                <EditHabit
+                  selectedHabitId={selectedHabitId}
+                  getHabits={getHabits}
+                  closeModal={closeModalEdit}
+                  habits={habits}
+                  deleteHabit={deleteHabit}
+                />
+              </View>
+            </View>
+          </Modal>
+        </View>
+        
+        {/* ADD HABIT BTN */}
+        <Pressable style={Styles.btn_add} onPress={() => setModalVisibleAdd(true)}>
           <Text style={Styles.txt_add}>Add Habit</Text>
         </Pressable>
     </View>

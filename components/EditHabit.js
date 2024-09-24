@@ -1,12 +1,12 @@
 import React , {useEffect, useState, useContext} from 'react';
 import { StyleSheet, Text, View , Button, TextInput, Pressable, useColorScheme } from 'react-native';
 import Checkbox from 'expo-checkbox';
-import { app, db, getFirestore, collection, setDoc } from '../firebase/index';
+import { app, db, getFirestore, collection, doc, setDoc, updateDoc, deleteDoc } from '../firebase/index';
 import { Feather } from '@expo/vector-icons';
 import { Styles, LightMode } from './styles/Styles';
 import { ThemeContext } from './Contexts';
 
-export default function editHabit({getHabits, closeModal}) {
+export default function EditHabit({getHabits, closeModal, selectedHabitId, habits, deleteHabit}) {
   const { theme } = useContext(ThemeContext)
   const [habitName, setHabitName] = useState('')
   const [activeSun, setActiveSun] = useState(false)
@@ -17,6 +17,7 @@ export default function editHabit({getHabits, closeModal}) {
   const [activeFri, setActiveFri] = useState(false)
   const [activeSat, setActiveSat] = useState(false)
   const [selectAllToggle, setSelectAllToggle] = useState(true)
+  const [selectedHabit, setSelectedHabit] = useState(habits.find(habit => habit.id === selectedHabitId))
 
   const dateAsInteger = () => {
     let newDate = new Date()
@@ -24,9 +25,10 @@ export default function editHabit({getHabits, closeModal}) {
     return newDateInteger
   }
 
-  const editHabitBtn = async () => {
+  const saveHabitBtn = async () => {
+    const docRef = doc(db, "habits", selectedHabitId)
     try {
-      const docRef = await setDoc(collection(db, "habits", ), {
+      await updateDoc(docRef, {
         name: habitName,
         sun: activeSun,
         mon: activeMon,
@@ -56,12 +58,23 @@ export default function editHabit({getHabits, closeModal}) {
     setSelectAllToggle(prev => !prev)
   }
 
+  useEffect(() => {
+    setHabitName(selectedHabit.name)
+    setActiveSun(selectedHabit.sun)
+    setActiveMon(selectedHabit.mon)
+    setActiveTue(selectedHabit.tue)
+    setActiveWed(selectedHabit.wed)
+    setActiveThu(selectedHabit.thu)
+    setActiveFri(selectedHabit.fri)
+    setActiveSat(selectedHabit.sat)
+  }, [])
+
   return (
     <View>
-      <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>Add Habit</Text>
+      <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>Edit Habit</Text>
 
       <Text style={theme == LightMode ? Styles.input_label_lm : Styles.input_label_dm}>Name</Text>
-      <TextInput onChangeText={(text) => setHabitName(text)} style={theme == LightMode ? Styles.input_lm : Styles.input_dm}/>
+      <TextInput defaultValue={habitName} onChangeText={(text) => setHabitName(text)} style={theme == LightMode ? Styles.input_lm : Styles.input_dm}/>
 
       <View style={Styles.form_label_row}>
         <Text style={theme == LightMode ? Styles.form_input_label_frequency_lm : Styles.form_input_label_frequency_dm}>Frequency</Text>
@@ -92,11 +105,18 @@ export default function editHabit({getHabits, closeModal}) {
         <Checkbox color={activeSat ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSat} onValueChange={setActiveSat} /><Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Saturday</Text>
       </View>
       <View style={Styles.btns_save_cancel}>
-        <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>
-          <Text style={Styles.txt_save}>Save</Text>
+        <Pressable  style={Styles.btn_save} onPress={() => {saveHabitBtn(); closeModal()}}>
+          <Text style={Styles.txt_save}>Update Habit</Text>
         </Pressable>
+      </View>
+      <View style={Styles.btns_save_cancel}>
         <Pressable title='Cancel' style={Styles.btn_cancel} onPress={() => closeModal()}>
-          <Text style={Styles.txt_cancel}>Cancel</Text>
+          <Text style={theme == LightMode ? Styles.txt_cancel_lm : Styles.txt_cancel_dm}>Cancel</Text>
+        </Pressable>
+      </View>
+      <View style={Styles.btns_save_cancel}>
+        <Pressable  style={Styles.btn_delete} onPress={() => {deleteHabit(); closeModal()}}>
+          <Text style={Styles.txt_delete}>Delete</Text>
         </Pressable>
       </View>
       <Pressable title='Close' style={Styles.close_modal_x} onPress={() => closeModal()}>

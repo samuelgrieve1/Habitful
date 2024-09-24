@@ -93,10 +93,12 @@ export default function AddHabit({getHabits, closeModal}) {
       </View>
       <View style={Styles.btns_save_cancel}>
         <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>
-          <Text style={Styles.txt_save}>Save</Text>
+          <Text style={Styles.txt_save}>Add Habit</Text>
         </Pressable>
+      </View>
+      <View style={Styles.btns_save_cancel}>
         <Pressable title='Cancel' style={Styles.btn_cancel} onPress={() => closeModal()}>
-          <Text style={Styles.txt_cancel}>Cancel</Text>
+          <Text style={theme == LightMode ? Styles.txt_cancel_lm : Styles.txt_cancel_dm}>Cancel</Text>
         </Pressable>
       </View>
       <Pressable title='Close' style={Styles.close_modal_x} onPress={() => closeModal()}>

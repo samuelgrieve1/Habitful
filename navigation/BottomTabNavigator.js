@@ -49,25 +49,23 @@ export default function BottomTabNavigator() {
         name="Habits"
         component={Habits}
         options={{
-          // tabBarActiveTintColor: '#4185e7',
           headerShown: true,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
-          //headerTitle: (props) => <LogoTitle {...props} />,
-          headerLeft: () => (
-            <View style={Styles.header_left}>
-              <Button
-                onPress={() => alert('This is a button!')}
-                title="Edit"
-                color={'#4185e7'}
-                style={Styles.btn_edit_habits}
-              />
-            </View>
-          ),
-          headerRight: () => (
-            <View style={Styles.header_right}>
-              <Feather name="plus" size={24} color={'#4185e7'} />
-            </View>
-          ),
+          // headerLeft: () => (
+          //   <View style={Styles.header_left}>
+          //     <Button
+          //       onPress={() => alert('This is a button!')}
+          //       title="Edit"
+          //       color={'#4185e7'}
+          //       style={Styles.btn_edit_habits}
+          //     />
+          //   </View>
+          // ),
+          // headerRight: () => (
+          //   <View style={Styles.header_right}>
+          //     <Feather name="plus" size={24} color={'#4185e7'} />
+          //   </View>
+          // ),
         }}
       />
       <Tab.Screen

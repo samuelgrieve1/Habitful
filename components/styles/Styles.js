@@ -12,6 +12,7 @@ const blue = '#4185e7'
 const black = '#000'
 const white = '#fff'
 const red = '#da4836'
+const lightred = '#FFD6D7'
 const green = '#4a8b47'
 
 //////////////////////////////
@@ -210,6 +211,7 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 10,
+    backgroundColor: gray,
     borderColor: gray,
     borderRadius: 5,
   },
@@ -218,6 +220,7 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 20,
+    backgroundColor: darkergray,
     borderColor: darkergray,
     borderRadius: 5,
   },
@@ -226,6 +229,7 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 20,
+    backgroundColor: gray,
     borderColor: gray,
     borderRadius: 5,
   },
@@ -243,6 +247,7 @@ const Styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginRight: 20,
+    backgroundColor: darkergray,
     borderColor: darkergray,
     borderRadius: 5,
   },
@@ -322,7 +327,7 @@ const Styles = StyleSheet.create({
   },
 
   //////////////////////////////
-  // AddHabit.js
+  // AddHabit.js // EditHabit.js
   //////////////////////////////
   page_title_add_habit_lm: {
     fontSize: 24,
@@ -352,6 +357,7 @@ const Styles = StyleSheet.create({
     paddingLeft: 8,
     paddingRight: 8,
     color: black,
+    marginBottom: 20,
   },
   input_dm: {
     borderWidth: 1,
@@ -361,6 +367,7 @@ const Styles = StyleSheet.create({
     paddingLeft: 8,
     paddingRight: 8,
     color: white,
+    marginBottom: 20,
   },
   form_label_row: {
     flexDirection: 'row',
@@ -395,9 +402,10 @@ const Styles = StyleSheet.create({
   btns_save_cancel: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 20,
   },
   btn_save: {
-    width: '50%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
@@ -414,16 +422,40 @@ const Styles = StyleSheet.create({
     color: white,
   },
   btn_cancel: {
-    width: '50%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
     paddingHorizontal: 32,
     borderRadius: 5,
     elevation: 3,
-    shadowOpacity: 0,
+    backgroundColor: lightgray,
   },
-  txt_cancel: {
+  txt_cancel_lm: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'regular',
+    letterSpacing: 0.25,
+    color: darkergray,
+  },
+  txt_cancel_dm: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'regular',
+    letterSpacing: 0.25,
+    color: darkergray,
+  },
+  btn_delete: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 32,
+    borderRadius: 5,
+    elevation: 3,
+    backgroundColor: lightred,
+  },
+  txt_delete: {
     fontSize: 16,
     lineHeight: 21,
     fontWeight: 'regular',
