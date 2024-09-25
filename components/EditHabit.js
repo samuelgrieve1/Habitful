@@ -17,7 +17,7 @@ export default function EditHabit({getHabits, closeModal, selectedHabitId, habit
   const [activeFri, setActiveFri] = useState(false)
   const [activeSat, setActiveSat] = useState(false)
   const [selectAllToggle, setSelectAllToggle] = useState(true)
-  const [selectedHabit, setSelectedHabit] = useState(habits.find(habit => habit.id === selectedHabitId))
+  const [selectedHabit, setSelectedHabit] = useState(habits != null ? habits.find(habit => habit.id === selectedHabitId) : null)
 
   const dateAsInteger = () => {
     let newDate = new Date()
@@ -116,7 +116,7 @@ export default function EditHabit({getHabits, closeModal, selectedHabitId, habit
       </View>
       <View style={Styles.btns_save_cancel}>
         <Pressable  style={Styles.btn_delete} onPress={() => {deleteHabit(); closeModal()}}>
-          <Text style={Styles.txt_delete}>Delete</Text>
+          <Text style={Styles.txt_delete}><Feather name="trash-2" size={16} color={Styles.red} /> Delete Habit</Text>
         </Pressable>
       </View>
       <Pressable title='Close' style={Styles.close_modal_x} onPress={() => closeModal()}>

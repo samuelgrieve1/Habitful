@@ -7,7 +7,7 @@ import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import EditHabit from '../components/EditHabit';
 import { ThemeContext } from '../components/Contexts';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
 import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 
@@ -84,6 +84,7 @@ export default function Habits() {
 
         {habits != null &&
           <FlatList
+            style={Styles.habitsContainer}
             data={habits}
             renderItem={({item}) => {
               return(
@@ -155,8 +156,9 @@ export default function Habits() {
         </View>
         
         {/* ADD HABIT BTN */}
+        {/* <Feather name="plus" size={18} color={theme == LightMode ? '#000' : '#fff'} /> */}
         <Pressable style={Styles.btn_add} onPress={() => setModalVisibleAdd(true)}>
-          <Text style={Styles.txt_add}>Add Habit</Text>
+          <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#000' : '#fff'} /> Add Habit</Text>
         </Pressable>
     </View>
   )

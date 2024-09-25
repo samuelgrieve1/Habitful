@@ -51,21 +51,16 @@ export default function BottomTabNavigator() {
         options={{
           headerShown: true,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
-          // headerLeft: () => (
-          //   <View style={Styles.header_left}>
-          //     <Button
-          //       onPress={() => alert('This is a button!')}
-          //       title="Edit"
-          //       color={'#4185e7'}
-          //       style={Styles.btn_edit_habits}
-          //     />
-          //   </View>
-          // ),
-          // headerRight: () => (
-          //   <View style={Styles.header_right}>
-          //     <Feather name="plus" size={24} color={'#4185e7'} />
-          //   </View>
-          // ),
+          headerLeft: () => (
+            <View style={Styles.header_left}>
+              <Feather name="menu" size={24} color={theme == LightMode ? '#000' : '#fff'} />
+            </View>
+          ),
+          headerRight: () => (
+            <View style={Styles.header_right}>
+              <Feather name="plus" size={24} color={theme == LightMode ? '#000' : '#fff'} />
+            </View>
+          ),
         }}
       />
       <Tab.Screen

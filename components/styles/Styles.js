@@ -11,8 +11,8 @@ const evendarkergray = '#111'
 const blue = '#4185e7'
 const black = '#000'
 const white = '#fff'
-const red = '#da4836'
-const lightred = '#FFD6D7'
+const red = '#ff1919'
+const lightred = '#ffcccc'
 const green = '#4a8b47'
 
 //////////////////////////////
@@ -76,6 +76,8 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // Habits.js
   //////////////////////////////
+  habitsContainer: {
+  },
   one_hundred_percent_box_lm: {
     backgroundColor: green,
     padding: 10,
@@ -101,12 +103,12 @@ const Styles = StyleSheet.create({
   no_habits_text_lm: {
     color: black,
     textAlign: 'center',
-    fontSize: 36,
+    fontSize: 24,
   },
   no_habits_text_dm: {
     color: white,
     textAlign: 'center',
-    fontSize: 36,
+    fontSize: 24,
   },
   habits_day_lm: {
     marginBottom: 30,
@@ -174,18 +176,23 @@ const Styles = StyleSheet.create({
     elevation: 5,
   },
   btn_add: {
-    // width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 15,
-    // backgroundColor: blue,
+    marginTop: 30,
   },
-  txt_add: {
+  txt_add_lm: {
     fontSize: 16,
-    lineHeight: 21,
+    lineHeight: 24,
     fontWeight: 'normal',
     letterSpacing: 0.25,
-    color: blue,
+    color: black,
+  },
+  txt_add_dm: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: 'normal',
+    letterSpacing: 0.25,
+    color: white,
   },
   // btn_edit: {
   //   width: '100%',
@@ -327,7 +334,8 @@ const Styles = StyleSheet.create({
   },
 
   //////////////////////////////
-  // AddHabit.js // EditHabit.js
+  // AddHabit.js
+  // EditHabit.js
   //////////////////////////////
   page_title_add_habit_lm: {
     fontSize: 24,
@@ -453,7 +461,7 @@ const Styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 5,
     elevation: 3,
-    backgroundColor: lightred,
+    // backgroundColor: lightred,
   },
   txt_delete: {
     fontSize: 16,
