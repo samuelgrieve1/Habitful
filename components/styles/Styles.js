@@ -5,8 +5,10 @@ import { StyleSheet } from 'react-native';
 //////////////////////////////
 const lightgray = '#eee'
 const gray = '#ddd'
+const gray9 = '#999'
 const darkgray = '#666'
 const darkergray = '#333'
+const gray2 = '#222'
 const evendarkergray = '#111'
 const blue = '#4185e7'
 const black = '#000'
@@ -175,24 +177,49 @@ const Styles = StyleSheet.create({
     shadowRadius: 25,
     elevation: 5,
   },
-  btn_add: {
+  btn_add_lm: {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
+    borderWidth: 1,
+    borderColor: white,
+    borderCurve: 'circular',
+    borderRadius: 5,
+    backgroundColor: white,
+  },
+  btn_add_dm: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    // borderWidth: 1,
+    // borderColor: gray2,
+    // borderCurve: 'circular',
+    // borderRadius: 5,
+    // backgroundColor: black,
   },
   txt_add_lm: {
     fontSize: 16,
     lineHeight: 24,
     fontWeight: 'normal',
     letterSpacing: 0.25,
-    color: black,
+    color: gray9,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: lightgray,
+    borderCurve: 'circular',
+    borderRadius: 5,
   },
   txt_add_dm: {
     fontSize: 16,
     lineHeight: 24,
-    fontWeight: 'normal',
+    fontWeight: 'bold',
     letterSpacing: 0.25,
-    color: white,
+    color: darkgray,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: darkergray,
+    borderCurve: 'circular',
+    borderRadius: 5,
   },
   // btn_edit: {
   //   width: '100%',
@@ -208,6 +235,10 @@ const Styles = StyleSheet.create({
   //   letterSpacing: 0.25,
   //   color: blue,
   // },
+  modal: {
+    width: '100%',
+    marginLeft: 0,
+  },
 
   //////////////////////////////
   // AddHabit.js
@@ -226,7 +257,7 @@ const Styles = StyleSheet.create({
     borderCurve: 'circular',
     width: 26,
     height: 26,
-    marginRight: 20,
+    marginRight: 10,
     backgroundColor: darkergray,
     borderColor: darkergray,
     borderRadius: 5,
@@ -235,7 +266,7 @@ const Styles = StyleSheet.create({
     borderCurve: 'circular',
     width: 26,
     height: 26,
-    marginRight: 20,
+    marginRight: 10,
     backgroundColor: gray,
     borderColor: gray,
     borderRadius: 5,
@@ -244,7 +275,7 @@ const Styles = StyleSheet.create({
     borderCurve: 'circular',
     width: 26,
     height: 26,
-    marginRight: 20,
+    marginRight: 10,
     backgroundColor: green,
     borderColor: gray,
     borderRadius: 5,
@@ -253,7 +284,7 @@ const Styles = StyleSheet.create({
     borderCurve: 'circular',
     width: 26,
     height: 26,
-    marginRight: 20,
+    marginRight: 10,
     backgroundColor: darkergray,
     borderColor: darkergray,
     borderRadius: 5,
@@ -262,7 +293,7 @@ const Styles = StyleSheet.create({
     borderCurve: 'circular',
     width: 26,
     height: 26,
-    marginRight: 20,
+    marginRight: 10,
     backgroundColor: green,
     borderColor: blue,
     borderRadius: 5,
@@ -272,7 +303,7 @@ const Styles = StyleSheet.create({
   // HabitsItem.js
   //////////////////////////////
   habit_box: {
-    height: 40,
+    flex: 1,
   },
   habit_separator_lm: {
     flexDirection: 'row',
@@ -282,44 +313,50 @@ const Styles = StyleSheet.create({
   habit_separator_dm: {
     flexDirection: 'row',
     height: 1,
-    backgroundColor: evendarkergray,
+    backgroundColor: gray2,
   },
   habit_lm: {
     flexDirection: 'row',
-    height: 40,
   },
   habit_dm: {
     flexDirection: 'row',
-    height: 40,
   },
   habit_checkbox_box: {
     marginTop: 7,
+    width: 40,
+  },
+  habit_name_box: {
+    flex: 1,
   },
   habit_name_lm: {
     fontSize: 18,
     fontWeight: 'bold',
     color: black,
-    lineHeight: 40,
+    marginTop: 10,
+    marginBottom: 10,
   },
   habit_name_completed_lm: {
     fontSize: 18,
     fontWeight: 'bold',
     color: gray,
     textDecorationLine: 'line-through',
-    lineHeight: 40,
+    marginTop: 10,
+    marginBottom: 10,
   },
   habit_name_dm: {
     fontSize: 18,
     fontWeight: 'bold',
     color: white,
-    lineHeight: 40,
+    marginTop: 10,
+    marginBottom: 10,
   },
   habit_name_completed_dm: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: darkergray,
+    color: darkgray,
     textDecorationLine: 'line-through',
-    lineHeight: 40,
+    marginTop: 10,
+    marginBottom: 10,
   },
   deleteBox: {
     height: 40,
@@ -361,7 +398,7 @@ const Styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: black,
     borderRadius: 5,
-    height: 30,
+    height: 40,
     paddingLeft: 8,
     paddingRight: 8,
     color: black,
@@ -371,7 +408,7 @@ const Styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: darkgray,
     borderRadius: 5,
-    height: 30,
+    height: 40,
     paddingLeft: 8,
     paddingRight: 8,
     color: white,

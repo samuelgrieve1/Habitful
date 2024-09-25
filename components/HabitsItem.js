@@ -45,18 +45,22 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
               <View style={Styles.habit_checkbox_box}>
                 <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_lm : Styles.checkbox_unchecked_lm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
               </View>
-              <Pressable  onPress={getHabitToEdit}>
-                <Text style={isCompletedLocal ? Styles.habit_name_completed_lm : Styles.habit_name_lm}>{habitName}</Text>
-              </Pressable>
+              <View style={Styles.habit_name_box}>
+                <Pressable  onPress={getHabitToEdit}>
+                  <Text style={isCompletedLocal ? Styles.habit_name_completed_lm : Styles.habit_name_lm}>{habitName}</Text>
+                </Pressable>
+              </View>
             </>
             :
             <>
               <View style={Styles.habit_checkbox_box}>
                 <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
               </View>
-              <Pressable  onPress={getHabitToEdit}>
-                <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
-              </Pressable>
+              <View style={Styles.habit_name_box}>
+                <Pressable  onPress={getHabitToEdit}>
+                  <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
+                </Pressable>
+              </View>
             </>
             }
             

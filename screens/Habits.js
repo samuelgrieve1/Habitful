@@ -1,4 +1,4 @@
-import { Text, Pressable, View, ScrollView, Modal, StyleSheet } from 'react-native';
+import { Text, Pressable, View, ScrollView, StyleSheet } from 'react-native';
 import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
@@ -10,6 +10,7 @@ import { ThemeContext } from '../components/Contexts';
 import { Feather } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
 import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
+import Modal from 'react-native-modal';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
@@ -70,96 +71,101 @@ export default function Habits() {
     getHabits()
   }
 
+  // ADD HABIT BTN
+  const addHabitBtn = () => {
+    return(
+    <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+      <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#999' : '#666'} /> Add Habit</Text>
+    </Pressable>
+    )
+  }
+
   useEffect (() => {
     getHabits()
     setCurrentDate(new Date().toDateString())
   }, [])
 
   return (
-    <View style={{paddingVertical: 20, paddingHorizontal: 20}}>
-        <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-          <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
-          <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
-        </View>
+    <>
+      <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
+          <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+            <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
+            <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
+          </View>
 
-        {habits != null &&
-          <FlatList
-            style={Styles.habitsContainer}
-            data={habits}
-            renderItem={({item}) => {
-              return(
-                <HabitsItem
-                  key={item.id}
-                  habitId={item.id}
-                  habitName={item.name}
-                  currentDate={currentDate}
-                  isCompleted={checkedOrUnchecked(item)}
-                  addCompletedHabit={addCompletedHabit}
-                  deleteHabit={deleteHabit}
-                  setSelectedHabitId={setSelectedHabitId}
-                  setModalVisibleEdit={setModalVisibleEdit}
-                />
-              )
-            }}
-            keyExtractor={item => item.id}
-          />
-        }
+          {habits != null &&
+            <FlatList
+              style={Styles.habitsContainer}
+              data={habits}
+              renderItem={({item}) => {
+                return(
+                  <HabitsItem
+                    key={item.id}
+                    habitId={item.id}
+                    habitName={item.name}
+                    currentDate={currentDate}
+                    isCompleted={checkedOrUnchecked(item)}
+                    addCompletedHabit={addCompletedHabit}
+                    deleteHabit={deleteHabit}
+                    setSelectedHabitId={setSelectedHabitId}
+                    setModalVisibleEdit={setModalVisibleEdit}
+                  />
+                )
+              }}
+              keyExtractor={item => item.id}
+              ListFooterComponent={addHabitBtn}
+            />
+          }
 
-        {/* PLACEHOLDER TEXT IF NO HABITS */}
-        {habits == null &&
-          <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
-            Add a habit to get started
-          </Text>
-        }
-
-        {/* ADD HABIT FORM */}
-        <View style={Styles.centeredView}>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={modalVisibleAdd}
-            onRequestClose={() => {
-              setModalVisibleAdd(!modalVisibleAdd);
-            }}>
-            <View style={Styles.centeredView}>
-              <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
-                <AddHabit
-                  getHabits={getHabits}
-                  closeModal={closeModalAdd}
-                />
-              </View>
+          {/* PLACEHOLDER TEXT IF NO HABITS */}
+          {habits == null &&
+            <View>
+              <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+                Add a habit to get started
+              </Text>
+              <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+                <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#999' : '#666'} /> Add Habit</Text>
+              </Pressable>
             </View>
-          </Modal>
-        </View>
+          }
+      </View>
 
-        {/* EDIT HABIT FORM */}
-        <View style={Styles.centeredView}>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={modalVisibleEdit}
-            onRequestClose={() => {
-              setModalVisibleEdit(!modalVisibleEdit);
-            }}>
-            <View style={Styles.centeredView}>
-              <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
-                <EditHabit
-                  selectedHabitId={selectedHabitId}
-                  getHabits={getHabits}
-                  closeModal={closeModalEdit}
-                  habits={habits}
-                  deleteHabit={deleteHabit}
-                />
-              </View>
-            </View>
-          </Modal>
+      {/* ADD HABIT FORM */}
+      <Modal
+        style={Styles.modal}
+        propagateSwipe={true}
+        isVisible={modalVisibleAdd}
+        onBackdropPress={() => setModalVisibleAdd(false)}
+      >
+        <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
+          <ScrollView>
+            <AddHabit
+              getHabits={getHabits}
+              closeModal={closeModalAdd}
+            />
+          </ScrollView>
         </View>
-        
-        {/* ADD HABIT BTN */}
-        {/* <Feather name="plus" size={18} color={theme == LightMode ? '#000' : '#fff'} /> */}
-        <Pressable style={Styles.btn_add} onPress={() => setModalVisibleAdd(true)}>
-          <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#000' : '#fff'} /> Add Habit</Text>
-        </Pressable>
-    </View>
+      </Modal>
+
+      {/* EDIT HABIT FORM */}
+      <Modal
+        style={Styles.modal}
+        propagateSwipe={true}
+        isVisible={modalVisibleEdit}
+        onBackdropPress={() => setModalVisibleEdit(false)}
+      >
+        <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
+          <ScrollView>
+            <EditHabit
+              selectedHabitId={selectedHabitId}
+              getHabits={getHabits}
+              closeModal={closeModalEdit}
+              habits={habits}
+              deleteHabit={deleteHabit}
+            />
+          </ScrollView>
+        </View>
+      </Modal>
+    </>
   )
 }
