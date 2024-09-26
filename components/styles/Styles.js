@@ -202,7 +202,7 @@ const Styles = StyleSheet.create({
     lineHeight: 24,
     fontWeight: 'normal',
     letterSpacing: 0.25,
-    color: gray9,
+    color: darkgray,
     padding: 10,
     borderWidth: 1,
     borderColor: lightgray,
@@ -212,12 +212,12 @@ const Styles = StyleSheet.create({
   txt_add_dm: {
     fontSize: 16,
     lineHeight: 24,
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     letterSpacing: 0.25,
     color: darkgray,
     padding: 10,
     borderWidth: 1,
-    borderColor: darkergray,
+    borderColor: evendarkergray,
     borderCurve: 'circular',
     borderRadius: 5,
   },
@@ -313,7 +313,7 @@ const Styles = StyleSheet.create({
   habit_separator_dm: {
     flexDirection: 'row',
     height: 1,
-    backgroundColor: gray2,
+    backgroundColor: evendarkergray,
   },
   habit_lm: {
     flexDirection: 'row',
