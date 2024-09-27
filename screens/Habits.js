@@ -75,7 +75,7 @@ export default function Habits() {
   const addHabitBtn = () => {
     return(
     <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-      <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#999' : '#666'} /> Add Habit</Text>
+      <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#757575' : '#757575'} /> Add Habit</Text>
     </Pressable>
     )
   }
@@ -89,7 +89,7 @@ export default function Habits() {
     <>
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
           <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-            <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
+            <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Mon</Text>
             <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
           </View>
 
@@ -123,8 +123,8 @@ export default function Habits() {
               <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
                 Add a habit to get started
               </Text>
-              <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-                <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#999' : '#666'} /> Add Habit</Text>
+              <Pressable style={theme == LightMode ? Styles.btn_add_blue_lm : Styles.btn_add_blue_dm} onPress={() => setModalVisibleAdd(true)}>
+                <Text style={theme == LightMode ? Styles.txt_add_blue_lm : Styles.txt_add_blue_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#4185e7' : '#4185e7'} /> Add Habit</Text>
               </Pressable>
             </View>
           }

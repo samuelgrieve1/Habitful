@@ -51,11 +51,11 @@ export default function BottomTabNavigator() {
         options={{
           headerShown: true,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
-          headerLeft: () => (
-            <View style={Styles.header_left}>
-              <Feather name="menu" size={24} color={theme == LightMode ? '#757575' : '#757575'} />
-            </View>
-          ),
+          // headerLeft: () => (
+          //   <View style={Styles.header_left}>
+          //     <Feather name="menu" size={24} color={theme == LightMode ? '#757575' : '#757575'} />
+          //   </View>
+          // ),
           headerRight: () => (
             <View style={Styles.header_right}>
               <Feather name="plus" size={24} color={theme == LightMode ? '#757575' : '#757575'} />

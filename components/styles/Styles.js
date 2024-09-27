@@ -1,19 +1,22 @@
 import { StyleSheet } from 'react-native';
 
+import { Dimensions } from 'react-native';
+const { height: screenHeight } = Dimensions.get('window');
+
 //////////////////////////////
 // Theme Colors
 //////////////////////////////
 const lightgray = '#eee'
 const gray = '#ddd'
 const gray9 = '#999'
-const darkgray = '#666'
+const darkgray = '#757575'
 const darkergray = '#333'
 const gray2 = '#222'
 const evendarkergray = '#111'
 const blue = '#4185e7'
 const black = '#000'
 const white = '#fff'
-const red = '#ff1919'
+const red = '#E23F44'
 const lightred = '#ffcccc'
 const green = '#4a8b47'
 
@@ -148,54 +151,32 @@ const Styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.8)',
   },
   modalView_lm: {
-    margin: 20,
+    height: screenHeight - 50,
+    marginTop: 50,
     backgroundColor: white,
-    borderRadius: 20,
-    padding: 35,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 20,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
   },
   modalView_dm: {
-    margin: 20,
+    height: screenHeight - 50,
+    marginTop: 50,
     backgroundColor: black,
-    borderRadius: 20,
-    padding: 35,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 20,
     alignItems: 'center',
-    shadowColor: '#fff',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.20,
-    shadowRadius: 25,
-    elevation: 5,
   },
   btn_add_lm: {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
-    borderWidth: 1,
-    borderColor: white,
-    borderCurve: 'circular',
-    borderRadius: 5,
-    backgroundColor: white,
   },
   btn_add_dm: {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
-    // borderWidth: 1,
-    // borderColor: gray2,
-    // borderCurve: 'circular',
-    // borderRadius: 5,
-    // backgroundColor: black,
   },
   txt_add_lm: {
     fontSize: 16,
@@ -215,6 +196,40 @@ const Styles = StyleSheet.create({
     fontWeight: 'normal',
     letterSpacing: 0.25,
     color: darkgray,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: evendarkergray,
+    borderCurve: 'circular',
+    borderRadius: 5,
+  },
+  btn_add_blue_lm: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+  },
+  btn_add_blue_dm: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+  },
+  txt_add_blue_lm: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: 'normal',
+    letterSpacing: 0.25,
+    color: blue,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: lightgray,
+    borderCurve: 'circular',
+    borderRadius: 5,
+  },
+  txt_add_blue_dm: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: 'normal',
+    letterSpacing: 0.25,
+    color: blue,
     padding: 10,
     borderWidth: 1,
     borderColor: evendarkergray,
@@ -375,11 +390,11 @@ const Styles = StyleSheet.create({
   // EditHabit.js
   //////////////////////////////
   page_title_add_habit_lm: {
-    fontSize: 24,
+    fontSize: 36,
     color: black,
   },
   page_title_add_habit_dm: {
-    fontSize: 24,
+    fontSize: 36,
     color: white,
   },
   input_label_lm: {
@@ -387,12 +402,14 @@ const Styles = StyleSheet.create({
     marginBottom: 15,
     fontWeight: 'bold',
     color: black,
+    fontSize: 16,
   },
   input_label_dm: {
     marginTop: 15,
     marginBottom: 15,
     fontWeight: 'bold',
     color: white,
+    fontSize: 16,
   },
   input_lm: {
     borderWidth: 1,
@@ -422,22 +439,26 @@ const Styles = StyleSheet.create({
   },
   form_label_lm: {
     color: black,
+    lineHeight: 26,
   },
   form_label_dm: {
     color: white,
+    lineHeight: 26,
   },
   form_input_label_frequency_lm: {
     fontWeight: 'bold',
-    marginRight: 15,
     color: black,
+    fontSize: 16,
   },
   form_input_label_frequency_dm: {
     fontWeight: 'bold',
-    marginRight: 15,
     color: white,
+    fontSize: 16,
   },
   form_txt_select_all: {
     color: blue,
+    marginLeft: 10,
+    fontSize: 16,
   },
   checkbox_row: {
     flexDirection: 'row',
@@ -456,7 +477,7 @@ const Styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 32,
     borderRadius: 5,
-    elevation: 3,
+    // elevation: 3,
     backgroundColor: blue,
   },
   txt_save: {
@@ -473,7 +494,7 @@ const Styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 32,
     borderRadius: 5,
-    elevation: 3,
+    // elevation: 3,
     backgroundColor: lightgray,
   },
   txt_cancel_lm: {
@@ -496,8 +517,8 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 8,
     paddingHorizontal: 32,
-    borderRadius: 5,
-    elevation: 3,
+    // borderRadius: 5,
+    // elevation: 3,
     // backgroundColor: lightred,
   },
   txt_delete: {
