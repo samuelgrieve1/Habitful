@@ -52,10 +52,13 @@ export default function Habits() {
   }
 
   // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
-  const addCompletedHabit = async(habitId, isCompleted) => {
+  const addCompletedHabit = async(habitId, isCompleted, currentDate) => {
     if(!isCompleted){
       await updateDoc(doc(db, "habits", (habitId)), {
         completed: arrayUnion(currentDate)           
+      })
+      await updateDoc(doc(db, "completions", (currentDate)), {
+        currentDate: arrayUnion("poop")
       })
     } else {
       await updateDoc(doc(db, "habits", (habitId)), {
