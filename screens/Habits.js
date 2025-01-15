@@ -14,7 +14,7 @@ import Modal from 'react-native-modal';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
-  const [currentDate, setCurrentDate] = useState()
+  const [currentDate, setCurrentDate] = useState(null)
   const [modalVisibleAdd, setModalVisibleAdd] = useState(false);
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   const [selectedHabitId, setSelectedHabitId] = useState(null)
@@ -52,14 +52,14 @@ export default function Habits() {
   }
 
   // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
-  const addCompletedHabit = async(habitId, isCompleted, currentDate) => {
-    if(!isCompleted){
+  const addCompletedHabit = async(habitId, isCompleted) => {
+    if(!isCompleted){ 
       await updateDoc(doc(db, "habits", (habitId)), {
-        completed: arrayUnion(currentDate)           
+        completed: arrayUnion(currentDate)       
       })
-      await updateDoc(doc(db, "completions", (currentDate)), {
-        currentDate: arrayUnion("poop")
-      })
+      // await updateDoc(doc(db, "completions", (currentDate)), {
+      //   currentDate: arrayUnion(currentDate)
+      // })
     } else {
       await updateDoc(doc(db, "habits", (habitId)), {
         completed: arrayRemove(currentDate)         
