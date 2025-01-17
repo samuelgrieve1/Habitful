@@ -2,7 +2,7 @@ import { Text, Pressable, View, ScrollView, StyleSheet } from 'react-native';
 import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
-import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc } from '../firebase/index';
+import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, setDoc, addDoc, listCollections } from '../firebase/index';
 import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import EditHabit from '../components/EditHabit';
@@ -11,9 +11,11 @@ import { Feather } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
 import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 import Modal from 'react-native-modal';
+import { getDoc } from 'firebase/firestore';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
+  const [completions, setCompletions] = useState(null)
   const [currentDate, setCurrentDate] = useState(null)
   const [modalVisibleAdd, setModalVisibleAdd] = useState(false);
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
@@ -31,6 +33,7 @@ export default function Habits() {
   // GET HABITS FROM DB AND ADD TO STATE
   const getHabits = async () => {
     const querySnapshot = await getDocs(collection(db, "habits"))
+    console.log("Habits:", querySnapshot)
     // Check if any habits exist before updating state
     if(querySnapshot.docs.length > 0){
       setHabits(
@@ -44,25 +47,47 @@ export default function Habits() {
     }
   }
 
+  // GET COMPLETIONS FROM DB AND ADD TO STATE
+  const getCompletions = async () => {
+    const docRef = await getDoc(doc(db, 'completions', 'dates'))
+    const collections = await listCollections(docRef);
+    console.log("Completions:", collections)
+    // Check if any completions exist before updating state
+    if(querySnapshot.length > 0){
+      console.log("dates exists!")
+      setCompletions(
+        querySnapshot.collection.map((item)=>({
+          ...item.data(),
+          id: item.id
+        }))
+      )
+    } else {
+      console.log("cannot get dates")
+      setCompletions(null)
+    }
+  }
+
   // WAS HABIT COMPLETED TODAY?
   const checkedOrUnchecked = (habit) => {
     return(
       habit.completed.includes(currentDate) ? true : false
     )
   }
+  // const checkedOrUnchecked = (habit) => {
+  //   return(
+  //     habit.completed.includes(currentDate) ? true : false
+  //   )
+  // }
 
   // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
-  const addCompletedHabit = async(habitId, isCompleted) => {
+  const addCompletedHabit = async (habitId, habitName, isCompleted) => {
     if(!isCompleted){ 
-      // await updateDoc(doc(db, "habits", (habitId)), {
-      //   completed: arrayUnion(currentDate)       
-      // })
-      await updateDoc(doc(db, "completions", (currentDate)), {
-        currentDate: arrayUnion(currentDate)
+      await updateDoc(doc(db, "completions", "dates"), {
+        [currentDate]: arrayUnion(habitName)       
       })
     } else {
-      await updateDoc(doc(db, "habits", (habitId)), {
-        completed: arrayRemove(currentDate)         
+      await updateDoc(doc(db, "completions", "dates"), {
+        [currentDate]: arrayRemove(habitName)         
       })
     }
     getHabits()
@@ -85,6 +110,8 @@ export default function Habits() {
 
   useEffect (() => {
     getHabits()
+    getCompletions()
+    console.log(completions)
     setCurrentDate(new Date().toDateString())
   }, [])
 
@@ -92,7 +119,7 @@ export default function Habits() {
     <>
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
           <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-            <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Mon</Text>
+            <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
             <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
           </View>
 
