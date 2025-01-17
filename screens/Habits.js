@@ -2,7 +2,7 @@ import { Text, Pressable, View, ScrollView, StyleSheet } from 'react-native';
 import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
-import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
+import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
 import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import EditHabit from '../components/EditHabit';
@@ -11,7 +11,7 @@ import { Feather } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
 import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 import Modal from 'react-native-modal';
-import { getDoc } from 'firebase/firestore';
+// import { getDoc } from 'firebase/firestore';
 
 export default function Habits() {
   const [habits, setHabits] = useState(null)
