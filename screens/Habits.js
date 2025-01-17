@@ -2,7 +2,7 @@ import { Text, Pressable, View, ScrollView, StyleSheet } from 'react-native';
 import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
-import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, setDoc, addDoc, listCollections } from '../firebase/index';
+import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
 import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import EditHabit from '../components/EditHabit';
@@ -32,12 +32,11 @@ export default function Habits() {
 
   // GET HABITS FROM DB AND ADD TO STATE
   const getHabits = async () => {
-    const querySnapshot = await getDocs(collection(db, "habits"))
-    console.log("Habits:", querySnapshot)
+    const habitsSnapshot = await getDocs(collection(db, "habits"))
     // Check if any habits exist before updating state
-    if(querySnapshot.docs.length > 0){
+    if(habitsSnapshot.docs.length > 0){
       setHabits(
-        querySnapshot.docs.map((doc)=>({
+        habitsSnapshot.docs.map((doc)=>({
           ...doc.data(),
           id: doc.id
         }))
@@ -49,35 +48,25 @@ export default function Habits() {
 
   // GET COMPLETIONS FROM DB AND ADD TO STATE
   const getCompletions = async () => {
-    const docRef = await getDoc(doc(db, 'completions', 'dates'))
-    const collections = await listCollections(docRef);
-    console.log("Completions:", collections)
-    // Check if any completions exist before updating state
-    if(querySnapshot.length > 0){
-      console.log("dates exists!")
-      setCompletions(
-        querySnapshot.collection.map((item)=>({
-          ...item.data(),
-          id: item.id
-        }))
-      )
-    } else {
-      console.log("cannot get dates")
-      setCompletions(null)
-    }
+    const docRef = doc(db, "completions", "dates");
+    const completionsSnapshot = await getDoc(docRef);
+    setCompletions(completions => ({
+      ...completions,
+      ...completionsSnapshot.data()
+    }))
   }
 
   // WAS HABIT COMPLETED TODAY?
-  const checkedOrUnchecked = (habit) => {
-    return(
-      habit.completed.includes(currentDate) ? true : false
-    )
-  }
   // const checkedOrUnchecked = (habit) => {
   //   return(
   //     habit.completed.includes(currentDate) ? true : false
   //   )
   // }
+  const checkedOrUnchecked = (habit) => {
+    if(completions != null){
+      return completions[currentDate].includes(habit.name)
+    } 
+  }
 
   // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
   const addCompletedHabit = async (habitId, habitName, isCompleted) => {
@@ -109,10 +98,9 @@ export default function Habits() {
   }
 
   useEffect (() => {
-    getHabits()
-    getCompletions()
-    console.log(completions)
     setCurrentDate(new Date().toDateString())
+    getCompletions()
+    getHabits()
   }, [])
 
   return (
