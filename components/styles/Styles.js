@@ -254,6 +254,12 @@ const Styles = StyleSheet.create({
     width: '100%',
     marginLeft: 0,
   },
+  menuIconLm: {
+    color: black,
+  },
+  menuIconDm: {
+    color: white,
+  },
 
   //////////////////////////////
   // AddHabit.js
@@ -572,6 +578,67 @@ const Styles = StyleSheet.create({
   dark_mode_switch_box: {
     width: '50%',
     alignItems: 'flex-end'
+  },
+
+  //////////////////////////////
+  // History.js
+  //////////////////////////////
+  historyContainer: {
+    paddingTop: 20,
+  },
+  dateBoxLm: {
+    // flex: 1,
+    padding: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: gray,
+  },
+  dateBoxDm: {
+    // flex: 1,
+    padding: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: darkergray,
+  },
+  dateTitleLm: {
+    color: 'black',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  habitNameLm: {
+    color: 'black',
+  },
+  dateTitleDm: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  habitNameDm: {
+    color: 'white',
+  },
+  editHistoryIconLm: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    color: black,
+  },
+  editHistoryIconDm: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    color: white,
+  },
+  filterHistoryIconLm: {
+    color: black,
+  },
+  filterHistoryIconDm: {
+    color: white,
   },
 });
 

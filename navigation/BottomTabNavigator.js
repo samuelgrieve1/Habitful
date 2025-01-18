@@ -58,7 +58,7 @@ export default function BottomTabNavigator() {
           // ),
           headerRight: () => (
             <View style={Styles.header_right}>
-              <Feather name="plus" size={24} color={theme == LightMode ? '#757575' : '#757575'} />
+              <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
             </View>
           ),
         }}
@@ -78,6 +78,11 @@ export default function BottomTabNavigator() {
         options={{
           // tabBarActiveTintColor: '#4185e7',
           headerShown: true,
+          headerRight: () => (
+            <View style={Styles.header_right}>
+              <Feather name="filter" size={24} style={theme == LightMode ? Styles.filterHistoryIconLm : Styles.filterHistoryIconDm} />
+            </View>
+          ),
           tabBarIcon: (tintcolor) => (<Feather name="clock" size={24} color={tintcolor.color} />)
         }}
       />

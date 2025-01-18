@@ -1,6 +1,10 @@
-import { View, Button } from 'react-native';
-import { useState, useEffect } from 'react';
+import { View, Text, Button, ScrollView } from 'react-native';
+import { useState, useEffect, useContext } from 'react';
 import { db, doc, getDoc } from '../firebase/index';
+import { StyleSheet } from 'react-native';
+import { Styles, LightMode } from '../components/styles/Styles';
+import { ThemeContext } from '../components/Contexts';
+import { Feather } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import HistoryList from './history/HistoryList';
 import HistoryCalendar from './history/HistoryCalendar';
@@ -13,6 +17,7 @@ import HistoryCalendar from './history/HistoryCalendar';
 // });
 
 export default function History() {
+  const {theme} = useContext(ThemeContext)
   const [completions, setCompletions] = useState(null)
 
   // GET COMPLETIONS FROM DB AND ADD TO STATE
@@ -39,7 +44,7 @@ export default function History() {
   }, [])
 
   return (
-    <div>
+    <ScrollView style={Styles.historyContainer}>
 
     <View style={{flexDirection:"row", width:"100%"}}>
       <View style={{width:"50%"}}>
@@ -56,16 +61,17 @@ export default function History() {
       </View>
     </View>
 
-    <div>
-      {completions && Object.keys(completions).map(key => (
-        <div key={key}>
-          <div>{key}</div>
-        {completions[key].map((value, i) => (
-          <div key={i}>{value}</div>
+    <View>
+      {completions && Object.keys(completions).sort().map(key => (
+        <View key={key} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
+          <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} />
+          <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{key}</Text>
+        {completions[key].sort().map((value, i) => (
+          <Text style={theme == LightMode ? Styles.habitNameLm : Styles.habitNameDm} key={i}>{value}</Text>
         ))}
-        </div>
+        </View>
       ))}
-    </div>
+    </View>
 
     {/* <div>
       {Object.keys(data).map(key => (
@@ -80,6 +86,6 @@ export default function History() {
       ))}
     </div> */}
 
-    </div>
+    </ScrollView>
   )
 }

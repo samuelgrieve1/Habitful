@@ -111,10 +111,11 @@ export default function Habits() {
             <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
           </View>
 
+          {console.log(habits)}
           {habits != null &&
             <FlatList
               style={Styles.habitsContainer}
-              data={habits}
+              data={habits.sort((a, b) => a.name.localeCompare(b.name))}
               renderItem={({item}) => {
                 return(
                   <HabitsItem
