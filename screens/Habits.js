@@ -64,8 +64,11 @@ export default function Habits() {
   // }
   const checkedOrUnchecked = (habit) => {
     if(completions != null){
-      return completions[currentDate].includes(habit.name)
-    } 
+      if(completions[currentDate]){
+        return completions[currentDate].includes(habit.name)
+      }
+      return false
+    }
   }
 
   // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
