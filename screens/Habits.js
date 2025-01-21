@@ -111,7 +111,6 @@ export default function Habits() {
             <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
           </View>
 
-          {console.log(habits)}
           {habits != null &&
             <FlatList
               style={Styles.habitsContainer}

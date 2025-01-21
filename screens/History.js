@@ -8,6 +8,7 @@ import { Feather } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import HistoryList from './history/HistoryList';
 import HistoryCalendar from './history/HistoryCalendar';
+import { parse, compareAsc } from 'date-fns';
 
 // const Stack = createStackNavigator({
 //   screens: {
@@ -18,7 +19,7 @@ import HistoryCalendar from './history/HistoryCalendar';
 
 export default function History() {
   const {theme} = useContext(ThemeContext)
-  const [completions, setCompletions] = useState(null)
+  const [completions, setCompletions] = useState([])
 
   // GET COMPLETIONS FROM DB AND ADD TO STATE
   const getCompletions = async () => {
@@ -29,18 +30,33 @@ export default function History() {
       ...completionsSnapshot.data()
     }))
   }
+  
+  // SORT COMPLETIONS BY DATE
+  const entriesArray = Object.entries(completions);
 
-  // if (completions) {   
-  //   Object.keys(completions).map((key) => (
-  //     console.log(key),
-  //     completions[key].map((value) => (
-  //       console.log(value)
-  //     ))
-  //   ))
-  // }
+  // ASCENDING
+  const sortedArrayAsc = entriesArray.sort((a, b) => {
+    const dateA = new Date(a[0]);
+    const dateB = new Date(b[0]);
+    if (dateA.getTime() < dateB.getTime()) return -1;
+    if (dateA.getTime() > dateB.getTime()) return 1;
+    return 0;
+  });
+  const sortedStateAsc = Object.fromEntries(sortedArrayAsc);
+  
+  // DESCENDING
+  const sortedArrayDes = entriesArray.sort((a, b) => {
+    const dateA = new Date(a[0]);
+    const dateB = new Date(b[0]);
+    if (dateA.getTime() < dateB.getTime()) return 1;
+    if (dateA.getTime() > dateB.getTime()) return -1;
+    return 0;
+  });
+  const sortedStateDes = Object.fromEntries(sortedArrayDes);
 
   useEffect (() => {
     getCompletions()
+    setCompletions(sortedStateAsc)
   }, [])
 
   return (
@@ -62,11 +78,11 @@ export default function History() {
     </View>
 
     <View>
-      {completions && Object.keys(completions).sort().map(key => (
+      {completions && Object.keys(completions).map(key => (
         <View key={key} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
           <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} />
           <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{key}</Text>
-        {completions[key].sort().map((value, i) => (
+        {completions[key].map((value, i) => (
           <Text style={theme == LightMode ? Styles.habitNameLm : Styles.habitNameDm} key={i}>{value}</Text>
         ))}
         </View>
