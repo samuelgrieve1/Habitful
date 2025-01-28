@@ -640,6 +640,9 @@ const Styles = StyleSheet.create({
   filterHistoryIconDm: {
     color: white,
   },
+  historyListBtnLm: {
+    backgroundColor: gray,
+  },
 });
 
 export {Styles, DarkMode, LightMode}

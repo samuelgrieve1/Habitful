@@ -1,4 +1,4 @@
-import { Text, Pressable, View, ScrollView, StyleSheet } from 'react-native';
+import { Text, Pressable, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
@@ -107,48 +107,48 @@ export default function Habits() {
   }, [])
 
   return (
-    <>
+    <>  
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
-          <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-            <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
-            <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
+        <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+          <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
+          <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
+        </View>
+
+        {habits != null &&
+          <FlatList
+            style={Styles.habitsContainer}
+            data={habits.sort((a, b) => a.name.localeCompare(b.name))}
+            renderItem={({item}) => {
+              return(
+                <HabitsItem
+                  key={item.id}
+                  habitId={item.id}
+                  habitName={item.name}
+                  currentDate={currentDate}
+                  isCompleted={checkedOrUnchecked(item)}
+                  addCompletedHabit={addCompletedHabit}
+                  deleteHabit={deleteHabit}
+                  setSelectedHabitId={setSelectedHabitId}
+                  setModalVisibleEdit={setModalVisibleEdit}
+                />
+              )
+            }}
+            keyExtractor={item => item.id}
+            ListFooterComponent={addHabitBtn}
+          />
+        }
+
+        {/* PLACEHOLDER TEXT IF NO HABITS */}
+        {habits == null &&
+          <View>
+            <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+              Add a habit to get started
+            </Text>
+            <Pressable style={theme == LightMode ? Styles.btn_add_blue_lm : Styles.btn_add_blue_dm} onPress={() => setModalVisibleAdd(true)}>
+              <Text style={theme == LightMode ? Styles.txt_add_blue_lm : Styles.txt_add_blue_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#4185e7' : '#4185e7'} /> Add Habit</Text>
+            </Pressable>
           </View>
-
-          {habits != null &&
-            <FlatList
-              style={Styles.habitsContainer}
-              data={habits.sort((a, b) => a.name.localeCompare(b.name))}
-              renderItem={({item}) => {
-                return(
-                  <HabitsItem
-                    key={item.id}
-                    habitId={item.id}
-                    habitName={item.name}
-                    currentDate={currentDate}
-                    isCompleted={checkedOrUnchecked(item)}
-                    addCompletedHabit={addCompletedHabit}
-                    deleteHabit={deleteHabit}
-                    setSelectedHabitId={setSelectedHabitId}
-                    setModalVisibleEdit={setModalVisibleEdit}
-                  />
-                )
-              }}
-              keyExtractor={item => item.id}
-              ListFooterComponent={addHabitBtn}
-            />
-          }
-
-          {/* PLACEHOLDER TEXT IF NO HABITS */}
-          {habits == null &&
-            <View>
-              <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
-                Add a habit to get started
-              </Text>
-              <Pressable style={theme == LightMode ? Styles.btn_add_blue_lm : Styles.btn_add_blue_dm} onPress={() => setModalVisibleAdd(true)}>
-                <Text style={theme == LightMode ? Styles.txt_add_blue_lm : Styles.txt_add_blue_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#4185e7' : '#4185e7'} /> Add Habit</Text>
-              </Pressable>
-            </View>
-          }
+        }
       </View>
 
       {/* ADD HABIT FORM */}

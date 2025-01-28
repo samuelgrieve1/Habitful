@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HistoryList from './history/HistoryList';
 import HistoryCalendar from './history/HistoryCalendar';
 import { parse, compareAsc } from 'date-fns';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 // const Stack = createStackNavigator({
 //   screens: {
@@ -69,12 +70,14 @@ export default function History() {
     <View style={{flexDirection:"row", width:"100%"}}>
       <View style={{width:"50%"}}>
         <Button
+          style={theme == LightMode ? Styles.historyListBtnLm : Styles.historyListBtnDm}
           title="List"
           onPress={() => Alert.alert('Left button pressed')}
         />
       </View>
       <View style={{width:"50%"}}>
         <Button
+          style={theme == LightMode ? Styles.historyCalendarBtnLm : Styles.historyCalendarBtnDm}
           title="Calendar"
           onPress={() => Alert.alert('Right button pressed')}
         />
@@ -82,6 +85,11 @@ export default function History() {
     </View>
 
     <View>
+      <Calendar
+        onDayPress={day => {
+          console.log('selected day', day);
+        }}
+      />
       {completionsSorted && Object.keys(completionsSorted).map(key => (
         <View key={key} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
           <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} />
