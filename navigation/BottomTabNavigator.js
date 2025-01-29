@@ -80,7 +80,12 @@ export default function BottomTabNavigator() {
           headerShown: true,
           headerRight: () => (
             <View style={Styles.header_right}>
-              <Feather name="filter" size={24} style={theme == LightMode ? Styles.filterHistoryIconLm : Styles.filterHistoryIconDm} />
+              {/* <Feather name="filter" size={24} style={theme == LightMode ? Styles.filterHistoryIconLm : Styles.filterHistoryIconDm} /> */}
+              <Button
+                style={theme == LightMode ? Styles.historyCalendarBtnLm : Styles.historyCalendarBtnDm}
+                title="Calendar"
+                onPress={() => Alert.alert('Right button pressed')}
+              />
             </View>
           ),
           tabBarIcon: (tintcolor) => (<Feather name="clock" size={24} color={tintcolor.color} />)

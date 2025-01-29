@@ -1,5 +1,5 @@
-import { View, Text, Button, ScrollView } from 'react-native';
-import { useState, useEffect, useContext } from 'react';
+import { View, Text, Button, ScrollView, RefreshControl } from 'react-native';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { db, doc, getDoc } from '../firebase/index';
 import { StyleSheet } from 'react-native';
 import { Styles, LightMode } from '../components/styles/Styles';
@@ -19,9 +19,19 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 // });
 
 export default function History() {
+  const [refreshing, setRefreshing] = useState(false);
   const {theme} = useContext(ThemeContext)
   const [completions, setCompletions] = useState([])
   const [completionsSorted, setCompletionsSorted] = useState([])
+
+  // RELOAD COMPLETIONS
+  const onRefresh = useCallback(() => {
+    getCompletions()
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
 
   // GET COMPLETIONS FROM DB AND ADD TO STATE
   const getCompletions = async () => {
@@ -61,7 +71,7 @@ export default function History() {
   }, [])
 
   useEffect (() => {
-    setCompletionsSorted(sortedStateAsc)
+    setCompletionsSorted(sortedStateDes)
   }, [completions])
 
   const calendarThemeLm = {
@@ -95,7 +105,20 @@ export default function History() {
   }
 
   return (
-    <ScrollView style={Styles.historyContainer}>
+    <>
+    <CalendarList
+      pastScrollRange={50}
+      futureScrollRange={0}
+      key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
+      theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
+      onDayPress={day => {
+        console.log('selected day', day);
+      }}
+    />
+    <ScrollView
+      style={Styles.historyContainer}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+    >
 
     {/* <View style={{flexDirection:"row", width:"100%"}}>
       <View style={{width:"50%"}}>
@@ -115,13 +138,6 @@ export default function History() {
     </View> */}
 
     <View>
-      <Calendar
-        key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
-        theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
-        onDayPress={day => {
-          console.log('selected day', day);
-        }}
-      />
       {completionsSorted && Object.keys(completionsSorted).map(key => (
         <View key={key} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
           <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} />
@@ -147,5 +163,6 @@ export default function History() {
     </div> */}
 
     </ScrollView>
+    </>
   )
 }
