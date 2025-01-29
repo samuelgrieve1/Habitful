@@ -643,6 +643,41 @@ const Styles = StyleSheet.create({
   historyListBtnLm: {
     backgroundColor: gray,
   },
+  historyCalendarLm: {
+    backgroundColor: blue,
+  },
+  historyCalendarDm: {
+    backgroundColor: white,
+    color: 'pink',
+  },
+  calendarLm: {
+    agendaKnobColor: '#000',
+    calendarBackground: '#fff',
+    todayTextColor: '#4185e7',
+    indicatorColor: '#4185e7',
+    dayTextColor: '#000',
+    //selectedDayTextColor: 'pink',
+    //selectedDayBackgroundColor: 'pink',
+    monthTextColor: '#000',
+    arrowColor: '#000',
+    textSectionTitleColor: '#757575',
+    textDisabledColor: '#757575',
+    textInactiveColor: 'pink',
+  },
+  calendarDm: {
+    agendaKnobColor: '#fff',
+    calendarBackground: '#000',
+    todayTextColor: '#4185e7',
+    indicatorColor: '#4185e7',
+    dayTextColor: '#fff',
+    //selectedDayTextColor: 'pink',
+    //selectedDayBackgroundColor: 'pink',
+    monthTextColor: '#fff',
+    arrowColor: '#fff',
+    textSectionTitleColor: '#757575',
+    textDisabledColor: '#757575',
+    textInactiveColor: 'pink',
+  },
 });
 
 export {Styles, DarkMode, LightMode}

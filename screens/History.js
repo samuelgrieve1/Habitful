@@ -64,10 +64,40 @@ export default function History() {
     setCompletionsSorted(sortedStateAsc)
   }, [completions])
 
+  const calendarThemeLm = {
+    agendaKnobColor: '#000',
+    calendarBackground: '#fff',
+    todayTextColor: '#4185e7',
+    indicatorColor: '#4185e7',
+    dayTextColor: '#000',
+    //selectedDayTextColor: 'pink',
+    //selectedDayBackgroundColor: 'pink',
+    monthTextColor: '#000',
+    arrowColor: '#000',
+    textSectionTitleColor: '#757575',
+    textDisabledColor: '#757575',
+    textInactiveColor: 'pink',
+  }
+
+  const calendarThemeDm = {
+    agendaKnobColor: '#fff',
+    calendarBackground: '#000',
+    todayTextColor: '#4185e7',
+    indicatorColor: '#4185e7',
+    dayTextColor: '#fff',
+    //selectedDayTextColor: 'pink',
+    //selectedDayBackgroundColor: 'pink',
+    monthTextColor: '#fff',
+    arrowColor: '#fff',
+    textSectionTitleColor: '#757575',
+    textDisabledColor: '#757575',
+    textInactiveColor: 'pink',
+  }
+
   return (
     <ScrollView style={Styles.historyContainer}>
 
-    <View style={{flexDirection:"row", width:"100%"}}>
+    {/* <View style={{flexDirection:"row", width:"100%"}}>
       <View style={{width:"50%"}}>
         <Button
           style={theme == LightMode ? Styles.historyListBtnLm : Styles.historyListBtnDm}
@@ -82,10 +112,12 @@ export default function History() {
           onPress={() => Alert.alert('Right button pressed')}
         />
       </View>
-    </View>
+    </View> */}
 
     <View>
       <Calendar
+        key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
+        theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
         onDayPress={day => {
           console.log('selected day', day);
         }}
