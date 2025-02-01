@@ -585,6 +585,15 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   historyContainer: {
     paddingTop: 20,
+    paddingBottom: 27,
+  },
+  listViewContainer: {
+    marginTop: 0,
+    marginBottom: 40,
+  },
+  calendarViewContainer: {
+    marginTop: 0,
+    marginBottom: 0,
   },
   dateBoxLm: {
     // flex: 1,
@@ -622,16 +631,26 @@ const Styles = StyleSheet.create({
   habitNameDm: {
     color: 'white',
   },
-  editHistoryIconLm: {
+  editHistoryIconContainerLm: {
     position: 'absolute',
     top: 20,
     right: 20,
+    width: 18,
+    height: 18,
+    zIndex: 1,
+  },
+  editHistoryIconContainerDm: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    width: 18,
+    height: 18,
+    zIndex: 1,
+  },
+  editHistoryIconLm: {
     color: black,
   },
   editHistoryIconDm: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
     color: white,
   },
   filterHistoryIconLm: {
@@ -640,8 +659,25 @@ const Styles = StyleSheet.create({
   filterHistoryIconDm: {
     color: white,
   },
-  historyListBtnLm: {
-    backgroundColor: gray,
+  historyViewBtnContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  historyViewBtnLm: {
+    width: '50%',
+  },
+  historyViewBtnDm: {
+    width: '50%',
+  },
+  historyViewBtnSelectedLm: {
+    borderRadius: 10,
+    backgroundColor: lightgray,
+  },
+  historyViewBtnSelectedDm: {
+    borderRadius: 10,
+    backgroundColor: evendarkergray,
   },
   historyCalendarLm: {
     backgroundColor: blue,

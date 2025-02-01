@@ -1,8 +1,7 @@
-import { View, Text, Button, ScrollView, RefreshControl } from 'react-native';
+import { View, Text, Button, ScrollView, RefreshControl, Pressable } from 'react-native';
 import { useState, useEffect, useContext, useCallback } from 'react';
-import { db, doc, getDoc } from '../firebase/index';
 import { StyleSheet } from 'react-native';
-import { Styles, LightMode } from '../components/styles/Styles';
+import { Styles, LightMode, DarkMode } from '../components/styles/Styles';
 import { ThemeContext } from '../components/Contexts';
 import { Feather } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,6 +9,10 @@ import HistoryList from './history/HistoryList';
 import HistoryCalendar from './history/HistoryCalendar';
 import { parse, compareAsc } from 'date-fns';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import { format } from 'date-fns';
+import EditHistory from '../components/EditHistory';
+import Modal from 'react-native-modal';
+import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
 
 // const Stack = createStackNavigator({
 //   screens: {
@@ -23,6 +26,31 @@ export default function History() {
   const {theme} = useContext(ThemeContext)
   const [completions, setCompletions] = useState([])
   const [completionsSorted, setCompletionsSorted] = useState([])
+  const [historyView, setHistoryView] = useState('listview')
+  const [modalVisibleEditHistory, setModalVisibleEditHistory] = useState(false);
+  const [habits, setHabits] = useState(null)
+
+  // GET HABITS FROM DB AND ADD TO STATE
+  const getHabits = async () => {
+    const habitsSnapshot = await getDocs(collection(db, "habits"))
+    // Check if any habits exist before updating state
+    if(habitsSnapshot.docs.length > 0){
+      setHabits(
+        habitsSnapshot.docs.map((doc)=>({
+          ...doc.data(),
+          id: doc.id
+        }))
+      )
+    } else {
+      setHabits(null)
+    }
+  }
+
+  // CLOSE MODAL FROM CHILD COMPONENT
+  const closeModalEditHistory = () => {
+    setModalVisibleEditHistory(!modalVisibleEditHistory)
+    console.log('ppp')
+  }
 
   // RELOAD COMPLETIONS
   const onRefresh = useCallback(() => {
@@ -68,6 +96,7 @@ export default function History() {
 
   useEffect (() => {
     getCompletions()
+    getHabits()
   }, [])
 
   useEffect (() => {
@@ -104,65 +133,104 @@ export default function History() {
     textInactiveColor: 'pink',
   }
 
+  let markedDay = {}
+
+  if(completionsSorted){
+    Object.keys(completionsSorted).map(date => {
+      markedDay[format(date, 'yyyy-MM-dd')] = {
+        selected: true,
+        marked: true,
+        selectedColor: '#4185e7',
+      };
+    })
+  }
+
+
+  // [day]: { selected: true, marked: true, selectedColor: "blue" }
+
   return (
     <>
-    <CalendarList
-      pastScrollRange={50}
-      futureScrollRange={0}
-      key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
-      theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
-      onDayPress={day => {
-        console.log('selected day', day);
-      }}
-    />
-    <ScrollView
-      style={Styles.historyContainer}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-    >
-
-    {/* <View style={{flexDirection:"row", width:"100%"}}>
-      <View style={{width:"50%"}}>
-        <Button
-          style={theme == LightMode ? Styles.historyListBtnLm : Styles.historyListBtnDm}
-          title="List"
-          onPress={() => Alert.alert('Left button pressed')}
-        />
-      </View>
-      <View style={{width:"50%"}}>
-        <Button
-          style={theme == LightMode ? Styles.historyCalendarBtnLm : Styles.historyCalendarBtnDm}
-          title="Calendar"
-          onPress={() => Alert.alert('Right button pressed')}
-        />
-      </View>
-    </View> */}
-
-    <View>
-      {completionsSorted && Object.keys(completionsSorted).map(key => (
-        <View key={key} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
-          <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} />
-          <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{key}</Text>
-        {completionsSorted[key].map((value, i) => (
-          <Text style={theme == LightMode ? Styles.habitNameLm : Styles.habitNameDm} key={i}>{value}</Text>
-        ))}
+      {/* TABS */}
+      <View style={Styles.historyViewBtnContainer}>
+        <View style={theme == LightMode ? Styles.historyViewBtnLm : Styles.historyViewBtnDm}>
+          <View style={theme == LightMode && historyView == 'listview' && Styles.historyViewBtnSelectedLm || theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm}>
+          <Button
+            color={theme == LightMode ? '#000' : '#fff'}
+            title="List"
+            onPress={() => setHistoryView('listview')}
+          />
+          </View>
         </View>
-      ))}
-    </View>
+        <View style={theme == LightMode ? Styles.historyViewBtnLm : Styles.historyViewBtnDm}>
+        <View style={theme == LightMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedLm || theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm}>
+          <Button
+            color={theme == LightMode ? '#000' : '#fff'}
+            title="Calendar"
+            onPress={() => setHistoryView('calendarview')}
+          />
+        </View>
+        </View>
+      </View>
 
-    {/* <div>
-      {Object.keys(data).map(key => (
-        <div key={key}>
-          <h3>{key}</h3>
-          <ul>
-            {Array.isArray(data[key]) && data[key].map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div> */}
+      {/* VIEWS */}
+      <View style={Styles.historyContainer}>
 
-    </ScrollView>
+        {/* LIST VIEW */}     
+        <ScrollView
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        >
+          {historyView == 'listview' &&
+            <View style={Styles.listViewContainer}>
+              {completionsSorted && Object.keys(completionsSorted).map((date, i) => (
+                <View key={i} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
+                  <Pressable onPress={() => setModalVisibleEditHistory(true)} style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm}>
+                    <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} />
+                  </Pressable>
+                  <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{format(date, 'EEEE, MMM dd, yyyy')}</Text>
+                {completionsSorted[date].map((habit, i) => (
+                  <Text style={theme == LightMode ? Styles.habitNameLm : Styles.habitNameDm} key={i}>{habit}</Text>
+                ))}
+                </View>
+              ))}
+            </View>
+          }
+        </ScrollView>
+
+        {/* CALENDAR VIEW */}
+        {historyView == 'calendarview' &&
+          <View style={Styles.calendarViewContainer}>
+            <CalendarList
+              pastScrollRange={2}
+              futureScrollRange={0}
+              key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
+              theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
+              onDayPress={day => {
+                console.log(format(day['dateString'], 'MMMM'));
+              }}
+              markedDates={markedDay}
+            />
+          </View>
+        }
+      </View>
+
+      {/* EDIT HISTORY FORM */}
+      <Modal
+        style={Styles.modal}
+        propagateSwipe={true}
+        isVisible={modalVisibleEditHistory}
+        onBackdropPress={() => setModalVisibleEditHistory(false)}
+      >
+        <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
+          <ScrollView>
+            <EditHistory
+              habits={habits}
+              completions={completions}
+              getCompletions={getCompletions}
+              closeModal={closeModalEditHistory}
+            />
+          </ScrollView>
+        </View>
+      </Modal>
     </>
   )
 }
