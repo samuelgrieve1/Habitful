@@ -9,10 +9,11 @@ import HistoryList from './history/HistoryList';
 import HistoryCalendar from './history/HistoryCalendar';
 import { parse, compareAsc } from 'date-fns';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import EditHistory from '../components/EditHistory';
 import Modal from 'react-native-modal';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
+import EditHabit from '../components/EditHabit';
 
 // const Stack = createStackNavigator({
 //   screens: {
@@ -28,7 +29,11 @@ export default function History() {
   const [completionsSorted, setCompletionsSorted] = useState([])
   const [historyView, setHistoryView] = useState('listview')
   const [modalVisibleEditHistory, setModalVisibleEditHistory] = useState(false);
+  const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   const [habits, setHabits] = useState(null)
+  const [currentDate, setCurrentDate] = useState(null)
+  const [selectedHabitId, setSelectedHabitId] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
 
   // GET HABITS FROM DB AND ADD TO STATE
   const getHabits = async () => {
@@ -44,6 +49,31 @@ export default function History() {
     } else {
       setHabits(null)
     }
+  }
+
+  // WAS HABIT COMPLETED TODAY?
+  const checkedOrUnchecked = (habit) => {
+    if(completions != null){
+      if(completions[selectedDate]){
+        return completions[selectedDate].includes(habit.name)
+      }
+      return false
+    }
+  }
+
+  // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
+  const addCompletedHabit = async (habitId, habitName, isCompleted) => {
+    if(!isCompleted){ 
+      await updateDoc(doc(db, "completions", "dates"), {
+        [selectedDate]: arrayUnion(habitName)       
+      })
+    } else {
+      await updateDoc(doc(db, "completions", "dates"), {
+        [selectedDate]: arrayRemove(habitName)         
+      })
+    }
+    getHabits()
+    getCompletions()
   }
 
   // CLOSE MODAL FROM CHILD COMPONENT
@@ -95,6 +125,7 @@ export default function History() {
   const sortedStateDes = Object.fromEntries(sortedArrayDes);
 
   useEffect (() => {
+    setCurrentDate(new Date().toDateString())
     getCompletions()
     getHabits()
   }, [])
@@ -183,7 +214,7 @@ export default function History() {
             <View style={Styles.listViewContainer}>
               {completionsSorted && Object.keys(completionsSorted).map((date, i) => (
                 <View key={i} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
-                  <Pressable onPress={() => setModalVisibleEditHistory(true)} style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm}>
+                  <Pressable onPress={() => {setModalVisibleEditHistory(true); setSelectedDate(date);}} style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm}>
                     <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} />
                   </Pressable>
                   <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{format(date, 'EEEE, MMM dd, yyyy')}</Text>
@@ -205,7 +236,7 @@ export default function History() {
               key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
               theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
               onDayPress={day => {
-                console.log(format(day['dateString'], 'MMMM'));
+                setModalVisibleEditHistory(true); setSelectedDate(format(parseISO(day['dateString']), 'EEE MMM dd yyyy'));
               }}
               markedDates={markedDay}
             />
@@ -221,14 +252,16 @@ export default function History() {
         onBackdropPress={() => setModalVisibleEditHistory(false)}
       >
         <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
-          <ScrollView>
-            <EditHistory
-              habits={habits}
-              completions={completions}
-              getCompletions={getCompletions}
-              closeModal={closeModalEditHistory}
-            />
-          </ScrollView>
+          <EditHistory
+            habits={habits}
+            completions={completions}
+            getCompletions={getCompletions}
+            addCompletedHabit={addCompletedHabit}
+            closeModal={closeModalEditHistory}
+            checkedOrUnchecked={checkedOrUnchecked}
+            setSelectedHabitId={setSelectedHabitId}
+            selectedDate={selectedDate}
+          />
         </View>
       </Modal>
     </>
