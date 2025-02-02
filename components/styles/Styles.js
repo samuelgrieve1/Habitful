@@ -686,6 +686,14 @@ const Styles = StyleSheet.create({
     backgroundColor: white,
     color: 'pink',
   },
+  page_date_edit_day_lm: {
+    fontSize: 18,
+    color: black,
+  },
+  page_date_edit_day_dm: {
+    fontSize: 18,
+    color: white,
+  },
   calendarLm: {
     agendaKnobColor: '#000',
     calendarBackground: '#fff',

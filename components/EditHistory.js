@@ -11,11 +11,14 @@ export default function EditHistory({completions, getCompletions, closeModal, ha
   const { theme } = useContext(ThemeContext)
 
   return (
-    <View>
-      <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>Edit Day</Text>
-      <Pressable title='Close' style={{position: 'absolute', top: 0, right: 0,}} onPress={() => closeModal()}>
-        <Feather name="x" size={24} color={theme == LightMode ? 'black' : 'white'} />
-      </Pressable>
+    <View style={{flexDirection: 'row'}}>
+      <View style={{width: '100%'}}>
+        <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>Edit Day</Text>
+        <Text style={theme == LightMode ? Styles.page_date_edit_day_lm : Styles.page_date_edit_day_dm}>Monday, Jan 27, 2025</Text>
+        <Pressable title='Close' style={{position: 'absolute', top: 0, right: 0,}} onPress={() => closeModal()}>
+          <Feather name="x" size={24} color={theme == LightMode ? 'black' : 'white'} />
+        </Pressable>
+      </View>
     </View>
   );
 }
