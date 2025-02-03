@@ -1,4 +1,4 @@
-import { View, Text, Button, ScrollView, RefreshControl, Pressable } from 'react-native';
+import { View, Text, Button, ScrollView, Pressable } from 'react-native';
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import { Styles, LightMode, DarkMode } from '../components/styles/Styles';
@@ -14,6 +14,7 @@ import EditHistory from '../components/EditHistory';
 import Modal from 'react-native-modal';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
 import EditHabit from '../components/EditHabit';
+import Collapsible from 'react-native-collapsible';
 
 // const Stack = createStackNavigator({
 //   screens: {
@@ -206,7 +207,17 @@ export default function History() {
       {/* VIEWS */}
       <View style={Styles.historyContainer}>
 
-        {/* LIST VIEW */}     
+        {/* LIST VIEW */}
+        <HistoryList
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          historyView={historyView}
+          completionsSorted={completionsSorted}
+          setModalVisibleEditHistory={setModalVisibleEditHistory}
+          setSelectedDate={setSelectedDate}
+        />
+        
+        {/*
         <ScrollView
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
@@ -215,17 +226,20 @@ export default function History() {
               {completionsSorted && Object.keys(completionsSorted).map((date, i) => (
                 <View key={i} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
                   <Pressable onPress={() => {setModalVisibleEditHistory(true); setSelectedDate(date);}} style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm}>
-                    <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} />
+                    {/* <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} /> */}
+                    {/* <Text style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm}>Edit</Text>
                   </Pressable>
                   <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{format(date, 'EEEE, MMM dd, yyyy')}</Text>
-                {completionsSorted[date].map((habit, i) => (
-                  <Text style={theme == LightMode ? Styles.habitNameLm : Styles.habitNameDm} key={i}>{habit}</Text>
-                ))}
+                  <Collapsible collapsed={true}>
+                  {completionsSorted[date].map((habit, i) => (
+                    <Text style={theme == LightMode ? Styles.historyHabitNameLm : Styles.historyHabitNameDm} key={i}><Feather name="check" size={14} color="green" /> {habit}</Text>
+                  ))}
+                  </Collapsible>
                 </View>
               ))}
             </View>
           }
-        </ScrollView>
+        </ScrollView> */}
 
         {/* CALENDAR VIEW */}
         {historyView == 'calendarview' &&

@@ -7,6 +7,7 @@ const { height: screenHeight } = Dimensions.get('window');
 // Theme Colors
 //////////////////////////////
 const lightgray = '#eee'
+const lightergray= '#f5f5f5'
 const gray = '#ddd'
 const gray9 = '#999'
 const darkgray = '#757575'
@@ -596,62 +597,85 @@ const Styles = StyleSheet.create({
     marginBottom: 0,
   },
   dateBoxLm: {
-    // flex: 1,
-    padding: 20,
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: gray,
+    borderTopWidth: 1,
+    borderColor: lightgray,
   },
   dateBoxDm: {
-    // flex: 1,
-    padding: 20,
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 10,
-    borderRadius: 10,
-    borderWidth: 1,
+    borderTopWidth: 1,
     borderColor: darkergray,
+  },
+  dateBoxHeader: {
+    paddingTop: 15,
+    paddingBottom: 5,
+  },
+  historyCompletionsBox: {
+    padding: 10,
+    marginBottom: 20,
   },
   dateTitleLm: {
     color: 'black',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-  },
-  habitNameLm: {
-    color: 'black',
+    marginBottom: 10,
   },
   dateTitleDm: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
-  habitNameDm: {
+  historyHabitNameLm: {
+    color: 'black',
+    fontSize: 16,
+  },
+  historyHabitNameDm: {
     color: 'white',
+    fontSize: 16,
+  },
+  downHistoryIconLm: {
+    color: black,
+    position: 'absolute',
+    top: 15,
+    right: 0,
+    width: 18,
+    height: 18,
+    zIndex: 1,
+  },
+  downHistoryIconDm: {
+    color: white,
+    position: 'absolute',
+    top: 15,
+    right: 0,
+    width: 18,
+    height: 18,
+    zIndex: 1,
   },
   editHistoryIconContainerLm: {
     position: 'absolute',
-    top: 20,
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 15,
+    position: 'absolute',
+    top: 0,
     right: 20,
-    width: 18,
-    height: 18,
-    zIndex: 1,
   },
   editHistoryIconContainerDm: {
+    fontSize: 18,
+    marginTop: 0,
+    marginBottom: 15,
     position: 'absolute',
-    top: 20,
+    top: 10,
     right: 20,
-    width: 18,
-    height: 18,
-    zIndex: 1,
   },
   editHistoryIconLm: {
-    color: black,
+    color: blue,
   },
   editHistoryIconDm: {
-    color: white,
+    color: blue,
   },
   filterHistoryIconLm: {
     color: black,
@@ -673,11 +697,11 @@ const Styles = StyleSheet.create({
   },
   historyViewBtnSelectedLm: {
     borderRadius: 10,
-    backgroundColor: lightgray,
+    backgroundColor: lightergray,
   },
   historyViewBtnSelectedDm: {
     borderRadius: 10,
-    backgroundColor: evendarkergray,
+    backgroundColor: darkergray,
   },
   historyCalendarLm: {
     backgroundColor: blue,
