@@ -655,13 +655,11 @@ const Styles = StyleSheet.create({
     zIndex: 1,
   },
   editHistoryIconContainerLm: {
-    position: 'absolute',
     fontSize: 18,
     marginTop: 10,
-    marginBottom: 15,
-    position: 'absolute',
-    top: 0,
-    right: 20,
+    backgroundColor: lightergray,
+    width: 100,
+    padding: 10,
   },
   editHistoryIconContainerDm: {
     fontSize: 18,
