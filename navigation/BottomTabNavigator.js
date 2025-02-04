@@ -39,6 +39,12 @@ export default function BottomTabNavigator() {
           borderBottomColor: theme == LightMode ? '#eee' : '#111',
         },
         headerTitleAlign: 'center',
+        headerTitleStyle: {
+          fontSize: 30,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+        },
         // tabBarLabelStyle: {
         //   color: theme == LightMode ? '#333' : '#eee',
         // },

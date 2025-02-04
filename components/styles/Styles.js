@@ -606,14 +606,14 @@ const Styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     borderTopWidth: 1,
-    borderColor: darkergray,
+    borderColor: evendarkergray,
   },
   dateBoxHeader: {
     paddingTop: 15,
     paddingBottom: 5,
   },
   historyCompletionsBox: {
-    padding: 10,
+    paddingTop: 10,
     marginBottom: 20,
   },
   dateTitleLm: {
@@ -631,10 +631,12 @@ const Styles = StyleSheet.create({
   historyHabitNameLm: {
     color: 'black',
     fontSize: 16,
+    lineHeight: 32,
   },
   historyHabitNameDm: {
     color: 'white',
     fontSize: 16,
+    lineHeight: 32,
   },
   downHistoryIconLm: {
     color: black,
@@ -655,14 +657,14 @@ const Styles = StyleSheet.create({
     zIndex: 1,
   },
   editHistoryIconContainerLm: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 10,
     backgroundColor: lightergray,
     width: 100,
     padding: 10,
   },
   editHistoryIconContainerDm: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 0,
     marginBottom: 15,
     position: 'absolute',
@@ -699,7 +701,7 @@ const Styles = StyleSheet.create({
   },
   historyViewBtnSelectedDm: {
     borderRadius: 10,
-    backgroundColor: darkergray,
+    backgroundColor: evendarkergray,
   },
   historyCalendarLm: {
     backgroundColor: blue,

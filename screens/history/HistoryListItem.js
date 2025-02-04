@@ -19,16 +19,18 @@ export default function HistoryListItem({date, i, completionsSorted, setModalVis
       <Pressable style={Styles.dateBoxHeader} onPress={() => {showHide()}}>
       {/* <Pressable onPress={() => {setModalVisibleEditHistory(true); setSelectedDate(date);}} style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm}> */}
         <Feather name={isCollapsed == true ? 'chevron-down' : 'chevron-up'} size={18} color='white' style={theme == LightMode ? Styles.downHistoryIconLm : Styles.downHistoryIconDm} />
-        <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{format(date, 'EEEE, MMM dd, yyyy')}</Text>
+        <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{format(date, 'MMM dd, yyyy (EEEE)')}</Text>
       </Pressable>
       <Collapsible collapsed={isCollapsed}>
         <View style={Styles.historyCompletionsBox}>
         {completionsSorted[date].map((habit, i) => (
-          <Text style={theme == LightMode ? Styles.historyHabitNameLm : Styles.historyHabitNameDm} key={i}><Feather name="check" size={14} color="green" /> {habit}</Text>
+          <Text style={theme == LightMode ? Styles.historyHabitNameLm : Styles.historyHabitNameDm} key={i}>
+            <Feather name="check" size={16} color="#4a8b47" /> {habit}
+          </Text>
         ))}
-        <Pressable style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm} onPress={() => {setModalVisibleEditHistory(true); setSelectedDate(date);}}>
+        {/* <Pressable style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm} onPress={() => {setModalVisibleEditHistory(true); setSelectedDate(date);}}>
           <Text style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm}>Edit</Text>
-        </Pressable>
+        </Pressable> */}
         </View>
       </Collapsible>
     </View>
