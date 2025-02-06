@@ -30,17 +30,19 @@ export default function BottomTabNavigator() {
     <Tab.Navigator
       initialRouteName="Habits"
       screenOptions={{
-        tabBarStyle: {
-          borderTopWidth: 1,
-          borderTopColor: theme == LightMode ? '#eee' : '#111',
-        },
+        headerShadowVisible: false,
         headerStyle : {
-          borderBottomWidth: 1,
-          borderBottomColor: theme == LightMode ? '#eee' : '#111',
+          borderBottomWidth: 0,
+          borderBottomColor: '#fff',
+          //borderBottomColor: theme == LightMode ? '#eee' : '#111',
         },
         headerTitleAlign: 'center',
         headerTitleStyle: {
           fontSize: 30,
+        },
+        tabBarStyle: {
+          borderTopWidth: 1,
+          borderTopColor: theme == LightMode ? '#eee' : '#111',
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -56,6 +58,7 @@ export default function BottomTabNavigator() {
         component={Habits}
         options={{
           headerShown: true,
+          //headerShadowVisible: false,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
           // headerLeft: () => (
           //   <View style={Styles.header_left}>

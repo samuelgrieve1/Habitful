@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import HistoryList from './history/HistoryList';
 import HistoryCalendar from './history/HistoryCalendar';
-import { parse, compareAsc } from 'date-fns';
+import { parse, compareAsc, formatDistance, differenceInCalendarMonths } from 'date-fns';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { format, parseISO } from 'date-fns';
 import EditHistory from '../components/EditHistory';
@@ -28,6 +28,7 @@ export default function History() {
   const {theme} = useContext(ThemeContext)
   const [completions, setCompletions] = useState([])
   const [completionsSorted, setCompletionsSorted] = useState([])
+  const [earliestMonth, setEarliestMonth] = useState(0)
   const [historyView, setHistoryView] = useState('listview')
   const [modalVisibleEditHistory, setModalVisibleEditHistory] = useState(false);
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
@@ -125,6 +126,14 @@ export default function History() {
   });
   const sortedStateDes = Object.fromEntries(sortedArrayDes);
 
+  // CALCULATE DIFFERENCE IN MONTHS BETWEEN EARLIEST MONTH COMPLETED AND NOW
+  const earliestMonthCompleted = () => {
+    const keys = Object.keys(sortedStateAsc)
+    const firstDate = keys[0]
+    const lastDate = keys[keys.length - 1]
+    setEarliestMonth(differenceInCalendarMonths(lastDate, firstDate))
+  }
+
   useEffect (() => {
     setCurrentDate(new Date().toDateString())
     getCompletions()
@@ -133,6 +142,8 @@ export default function History() {
 
   useEffect (() => {
     setCompletionsSorted(sortedStateDes)
+    earliestMonthCompleted()
+    //setEarliestMonth()
   }, [completions])
 
   const calendarThemeLm = {
@@ -247,7 +258,7 @@ export default function History() {
           <View style={Styles.calendarViewContainer}>
             <CalendarList
               //disabledByDefault={true}
-              pastScrollRange={2}
+              pastScrollRange={earliestMonth}
               futureScrollRange={0}
               key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
               theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
