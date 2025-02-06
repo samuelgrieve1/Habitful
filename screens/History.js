@@ -215,6 +215,7 @@ export default function History() {
           completionsSorted={completionsSorted}
           setModalVisibleEditHistory={setModalVisibleEditHistory}
           setSelectedDate={setSelectedDate}
+          markingType={'multi-dot'}
         />
         
         {/*
@@ -245,6 +246,7 @@ export default function History() {
         {historyView == 'calendarview' &&
           <View style={Styles.calendarViewContainer}>
             <CalendarList
+              //disabledByDefault={true}
               pastScrollRange={2}
               futureScrollRange={0}
               key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
@@ -253,6 +255,7 @@ export default function History() {
                 setModalVisibleEditHistory(true); setSelectedDate(format(parseISO(day['dateString']), 'EEE MMM dd yyyy'));
               }}
               markedDates={markedDay}
+              maxDate={currentDate}
             />
           </View>
         }

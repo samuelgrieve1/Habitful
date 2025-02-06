@@ -657,25 +657,25 @@ const Styles = StyleSheet.create({
     zIndex: 1,
   },
   editHistoryIconContainerLm: {
-    fontSize: 16,
     marginTop: 10,
     backgroundColor: lightergray,
     width: 100,
     padding: 10,
   },
   editHistoryIconContainerDm: {
-    fontSize: 16,
     marginTop: 0,
     marginBottom: 15,
     position: 'absolute',
-    top: 10,
-    right: 20,
+    top: 15,
+    right: 5,
   },
   editHistoryIconLm: {
     color: blue,
+    fontSize: 16,
   },
   editHistoryIconDm: {
     color: blue,
+    fontSize: 16,
   },
   filterHistoryIconLm: {
     color: black,
@@ -694,6 +694,7 @@ const Styles = StyleSheet.create({
   },
   historyViewBtnDm: {
     width: '50%',
+    color: darkgray,
   },
   historyViewBtnSelectedLm: {
     borderRadius: 10,
