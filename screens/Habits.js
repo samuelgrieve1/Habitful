@@ -11,6 +11,7 @@ import { Feather } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
 import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 import Modal from 'react-native-modal';
+import {Calendar, CalendarList, Agenda, WeekCalendar, CalendarProvider} from 'react-native-calendars';
 // import { getDoc } from 'firebase/firestore';
 
 export default function Habits() {
@@ -101,6 +102,33 @@ export default function Habits() {
     )
   }
 
+  const weekCalendarThemeLm = {
+    agendaKnobColor: '#000',
+    calendarBackground: '#fff',
+    todayTextColor: '#4185e7',
+    indicatorColor: '#4185e7',
+    dayTextColor: '#000',
+    monthTextColor: '#000',
+    arrowColor: '#000',
+    textSectionTitleColor: '#757575',
+    textDisabledColor: '#757575',
+    textInactiveColor: 'pink',
+  }
+
+  const weekCalendarThemeDm = {
+    //textDayFontSize: 40,
+    agendaKnobColor: '#fff',
+    calendarBackground: '#000',
+    todayTextColor: '#4185e7',
+    indicatorColor: '#4185e7',
+    dayTextColor: '#fff',
+    monthTextColor: '#fff',
+    arrowColor: '#fff',
+    textSectionTitleColor: '#757575',
+    textDisabledColor: '#757575',
+    textInactiveColor: 'pink',
+  }
+
   useEffect (() => {
     setCurrentDate(new Date().toDateString())
     getCompletions()
@@ -110,10 +138,31 @@ export default function Habits() {
   return (
     <>  
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
-        <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+        {/* <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
           <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
           <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
-        </View>
+        </View> */}
+
+        <CalendarProvider
+          style={{backgroundColor:'red'}}
+          key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
+          date="2022-01-07"
+        >
+          <WeekCalendar
+            
+            theme={theme == LightMode ? weekCalendarThemeLm : weekCalendarThemeDm}
+            hideDayNames firstDay={1}
+              //pastScrollRange={earliestMonth}
+              //futureScrollRange={0}
+              // key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
+              
+              //onDayPress={day => {
+              //   setModalVisiblerEditHistory(true); setSelectedDate(format(parseISO(day['dateString']), 'EEE MMM dd yyyy'));
+              // }}
+              //markedDates={markedDay}
+              //maxDate={format(endOfYesterday(), 'EEE MMM dd yyyy')}
+          />
+        </CalendarProvider>
 
         {habits != null &&
           <FlatList

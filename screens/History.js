@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import HistoryList from './history/HistoryList';
 import HistoryCalendar from './history/HistoryCalendar';
-import { parse, compareAsc, formatDistance, differenceInCalendarMonths } from 'date-fns';
+import { parse, compareAsc, formatDistance, differenceInCalendarMonths, endOfYesterday } from 'date-fns';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { format, parseISO } from 'date-fns';
 import EditHistory from '../components/EditHistory';
@@ -266,7 +266,7 @@ export default function History() {
                 setModalVisibleEditHistory(true); setSelectedDate(format(parseISO(day['dateString']), 'EEE MMM dd yyyy'));
               }}
               markedDates={markedDay}
-              maxDate={currentDate}
+              maxDate={format(endOfYesterday(), 'EEE MMM dd yyyy')}
             />
           </View>
         }

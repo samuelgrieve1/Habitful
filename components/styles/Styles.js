@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { Dimensions } from 'react-native';
+import { WeekCalendar } from 'react-native-calendars';
 const { height: screenHeight } = Dimensions.get('window');
 
 //////////////////////////////
@@ -260,6 +261,12 @@ const Styles = StyleSheet.create({
   },
   menuIconDm: {
     color: white,
+  },
+  weekCalendarLm: {
+    backgroundColor: white,
+  },
+  weekCalendarDm: {
+    backgroundColor: black,
   },
 
   //////////////////////////////
