@@ -30,17 +30,18 @@ export default function BottomTabNavigator() {
     <Tab.Navigator
       initialRouteName="Habits"
       screenOptions={{
-        headerShadowVisible: false,
+        headerShadowVisible: true,
         headerStyle : {
-          borderBottomWidth: 0,
-          borderBottomColor: '#fff',
-          //borderBottomColor: theme == LightMode ? '#eee' : '#111',
+          height: 70,
+          borderBottomWidth: 1,
+          borderBottomColor: theme == LightMode ? '#eee' : '#111',
         },
         headerTitleAlign: 'center',
         headerTitleStyle: {
           fontSize: 36,
         },
         tabBarStyle: {
+          height: 60,
           borderTopWidth: 1,
           borderTopColor: theme == LightMode ? '#eee' : '#111',
         },
@@ -54,6 +55,25 @@ export default function BottomTabNavigator() {
 
       }}
     >
+      <Tab.Screen
+        name="Today"
+        component={Habits}
+        options={{
+          headerShown: true,
+          //headerShadowVisible: false,
+          tabBarIcon: (tintcolor) => (<Feather name="home" size={24} color={tintcolor.color} />),
+          // headerLeft: () => (
+          //   <View style={Styles.header_left}>
+          //     <Feather name="menu" size={24} color={theme == LightMode ? '#757575' : '#757575'} />
+          //   </View>
+          // ),
+          headerRight: () => (
+            <View style={Styles.header_right}>
+              <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+            </View>
+          ),
+        }}
+      />
       <Tab.Screen
         name="Habits"
         component={Habits}

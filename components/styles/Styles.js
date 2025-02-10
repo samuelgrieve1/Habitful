@@ -110,12 +110,12 @@ const Styles = StyleSheet.create({
   no_habits_text_lm: {
     color: black,
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 36,
   },
   no_habits_text_dm: {
     color: white,
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 36,
   },
   habits_day_lm: {
     marginBottom: 30,

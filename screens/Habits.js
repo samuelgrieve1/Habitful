@@ -139,21 +139,24 @@ export default function Habits() {
   return (
     <>  
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
-        <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-          {/* <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
-          <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text> */}
-          
-          {/* <Text style={{color: 'white', fontSize:28, textAlign:'center', marginTop:20,}}>{format(currentDate, 'EEEE')}</Text>
-          <Text style={{color: 'white', fontSize:14, textAlign:'center', }}>{format(currentDate, 'MMMM dd')}</Text> */}
+      
+        {habits != null &&
+          <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+            {/* <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
+            <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text> */}
+            
+            <Text style={{color: 'white', fontSize:24, textAlign:'center', }}>{format(currentDate, 'EEEE')}</Text>
+            <Text style={{color: 'white', fontSize:14, textAlign:'center', }}>{format(currentDate, 'MMMM dd')}</Text>
 
-          {/* <Text style={{color: 'white', fontSize:28, textAlign:'center', marginTop:20,}}>Saturday</Text>
-          <Text style={{color: 'white', fontSize:14, textAlign:'center', }}>February 08</Text> */}
+            {/* <Text style={{color: 'white', fontSize:28, textAlign:'center', marginTop:20,}}>Saturday</Text>
+            <Text style={{color: 'white', fontSize:14, textAlign:'center', }}>February 08</Text> */}
 
-          <Image
-            source={require('../assets/dayz.jpg')}
-            style={{width:'100%', height:40, marginTop:20,}}
-          />
-        </View>
+            {/* <Image
+              source={require('../assets/dayz.jpg')}
+              style={{width:'100%', height:40, marginTop:20,}}
+            /> */}
+          </View>
+        }
 
         {/* <CalendarProvider
           //style={{backgroundColor:'red'}}
@@ -204,7 +207,10 @@ export default function Habits() {
         {habits == null &&
           <View>
             <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
-              Add a habit to get started
+              Add a habit
+            </Text>
+            <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+              to get started
             </Text>
             <Pressable style={theme == LightMode ? Styles.btn_add_blue_lm : Styles.btn_add_blue_dm} onPress={() => setModalVisibleAdd(true)}>
               <Text style={theme == LightMode ? Styles.txt_add_blue_lm : Styles.txt_add_blue_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#4185e7' : '#4185e7'} /> Add Habit</Text>
