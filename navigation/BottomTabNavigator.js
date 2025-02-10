@@ -47,6 +47,7 @@ export default function BottomTabNavigator() {
         tabBarLabelStyle: {
           fontSize: 12,
         },
+        //tabBarActiveBackgroundColor: '#111',
         // tabBarLabelStyle: {
         //   color: theme == LightMode ? '#333' : '#eee',
         // },
