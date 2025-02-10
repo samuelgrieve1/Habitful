@@ -38,7 +38,7 @@ export default function BottomTabNavigator() {
         },
         headerTitleAlign: 'center',
         headerTitleStyle: {
-          fontSize: 0,
+          fontSize: 36,
         },
         tabBarStyle: {
           borderTopWidth: 1,

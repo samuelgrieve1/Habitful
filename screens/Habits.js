@@ -138,13 +138,13 @@ export default function Habits() {
   return (
     <>  
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
-        {/* <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+        <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
           <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
           <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
-        </View> */}
+        </View>
 
-        <CalendarProvider
-          style={{backgroundColor:'red'}}
+        {/* <CalendarProvider
+          //style={{backgroundColor:'red'}}
           key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
           date="2022-01-07"
         >
@@ -162,7 +162,7 @@ export default function Habits() {
               //markedDates={markedDay}
               //maxDate={format(endOfYesterday(), 'EEE MMM dd yyyy')}
           />
-        </CalendarProvider>
+        </CalendarProvider> */}
 
         {habits != null &&
           <FlatList

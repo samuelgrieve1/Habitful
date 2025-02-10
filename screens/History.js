@@ -195,24 +195,59 @@ export default function History() {
     <>
       {/* TABS */}
       <View style={Styles.historyViewBtnContainer}>
+
+        <Pressable
+          onPress={() => setHistoryView('listview')}
+          style={
+            theme == LightMode && historyView == 'listview' && Styles.historyViewBtnSelectedLm  ||
+            theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm  ||
+            Styles.historyViewBtn}>
+          <Text
+            style={
+              theme == LightMode && historyView == 'listview' && Styles.historyViewBtnTxtSelectedLm ||
+              theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnTxtSelectedDm ||
+              theme == LightMode && Styles.historyViewBtnTxtLm ||
+              theme == DarkMode && Styles.historyViewBtnTxtDm}>
+              List
+          </Text>
+        </Pressable>
+
+        <Pressable
+          onPress={() => setHistoryView('calendarview')}
+          style={
+            theme == LightMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedLm  ||
+            theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm  ||
+            Styles.historyViewBtn}>
+          <Text
+            style={
+              theme == LightMode && historyView == 'calendarview' && Styles.historyViewBtnTxtSelectedLm ||
+              theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnTxtSelectedDm ||
+              theme == LightMode && Styles.historyViewBtnTxtLm ||
+              theme == DarkMode && Styles.historyViewBtnTxtDm}>
+              Calendar
+          </Text>
+        </Pressable>
+        
+        {/* <View style={theme == LightMode ? Styles.historyViewBtnLm : Styles.historyViewBtnDm}>
+        <Pressable
+          onPress={() => setHistoryView('listview')}
+          style={
+            theme == LightMode && historyView == 'listview' && Styles.historyViewBtnSelectedLm ||
+            theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm}>
+          <Text style={theme == LightMode ? Styles.historyViewBtnTxtLm : Styles.historyViewBtnTxtDm}>List</Text>
+        </Pressable>
+        </View>
+
         <View style={theme == LightMode ? Styles.historyViewBtnLm : Styles.historyViewBtnDm}>
-          <View style={theme == LightMode && historyView == 'listview' && Styles.historyViewBtnSelectedLm || theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm}>
-          <Button
-            color={theme == LightMode ? '#000' : '#fff'}
-            title="List"
-            onPress={() => setHistoryView('listview')}
-          />
-          </View>
-        </View>
-        <View style={theme == LightMode ? Styles.historyViewBtnLm : Styles.historyViewBtnDm}>
-        <View style={theme == LightMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedLm || theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm}>
-          <Button
-            color={theme == LightMode ? '#000' : '#fff'}
-            title="Calendar"
-            onPress={() => setHistoryView('calendarview')}
-          />
-        </View>
-        </View>
+        <Pressable
+          onPress={() => setHistoryView('calendarview')}
+          style={
+            theme == LightMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedLm ||
+            theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm}>
+          <Text style={theme == LightMode ? Styles.historyViewBtnTxtLm : Styles.historyViewBtnTxtDm}>Calendar</Text>
+        </Pressable>
+        </View> */}
+
       </View>
 
       {/* VIEWS */}
