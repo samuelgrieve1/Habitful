@@ -54,7 +54,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
             :
             <>
               <View style={Styles.habit_checkbox_box}>
-                <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+                <Checkbox color={isCompletedLocal ? '#000' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
               </View>
               <View style={Styles.habit_name_box}>
                 <Pressable  onPress={getHabitToEdit}>

@@ -139,23 +139,16 @@ export default function Habits() {
   return (
     <>  
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
-      
+        
+        
         {habits != null &&
           <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-            {/* <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
-            <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text> */}
-            
-            <Text style={{color: 'white', fontSize:24, textAlign:'center', }}>{format(currentDate, 'EEEE')}</Text>
-            <Text style={{color: 'white', fontSize:14, textAlign:'center', }}>{format(currentDate, 'MMMM dd')}</Text>
-
-            {/* <Text style={{color: 'white', fontSize:28, textAlign:'center', marginTop:20,}}>Saturday</Text>
-            <Text style={{color: 'white', fontSize:14, textAlign:'center', }}>February 08</Text> */}
-
-            {/* <Image
-              source={require('../assets/dayz.jpg')}
-              style={{width:'100%', height:40, marginTop:20,}}
-            /> */}
+            <Text style={theme == LightMode ? Styles.habits_day_title_sin_lm : Styles.habits_day_title_sin_dm}>{format(currentDate, 'EEE MMM dd')}</Text>
           </View>
+          // <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+          //   <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>{format(currentDate, 'EEEE')}</Text>
+          //   <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{format(currentDate, 'MMMM dd')}</Text>
+          // </View>
         }
 
         {/* <CalendarProvider
