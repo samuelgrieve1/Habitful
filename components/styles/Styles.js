@@ -20,7 +20,7 @@ const black = '#000'
 const white = '#fff'
 const red = '#E23F44'
 const lightred = '#ffcccc'
-const green = '#4a8b47'
+const green = '#419947'
 
 //////////////////////////////
 // Navigation Theme
@@ -204,12 +204,14 @@ const Styles = StyleSheet.create({
     color: white,
   },
   habits_day_title_sin_lm: {
-    fontSize: 14,
+    fontSize: 18,
+    fontWeight: '600',
     textAlign: 'center',
     color: black,
   },
   habits_day_title_sin_dm: {
-    fontSize: 14,
+    fontSize: 18,
+    fontWeight: '600',
     textAlign: 'center',
     color: white,
   },

@@ -50,6 +50,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
                   <Text style={isCompletedLocal ? Styles.habit_name_completed_lm : Styles.habit_name_lm}>{habitName}</Text>
                 </Pressable>
               </View>
+              
             </>
             :
             <>
@@ -61,6 +62,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
                   <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
                 </Pressable>
               </View>
+              
             </>
             }
             

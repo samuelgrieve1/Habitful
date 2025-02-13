@@ -145,8 +145,8 @@ export default function Today() {
             Today
           </Text>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
-            {format(currentDate, 'EEEE, MMMM dd')}
-            {/* Complete Your Habits */}
+            {/* {format(currentDate, 'EEEE, MMMM dd')} */}
+            Track Your Habits
           </Text>
           {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterDateLm : Styles.pageHeaderCenterDateDm}>
             <Feather name="calendar" size={16} color="white" /> {format(currentDate, 'EEEE, MMMM dd')}
@@ -156,15 +156,15 @@ export default function Today() {
       </View>
 
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>  
-        {/* {habits != null &&
+        {habits != null &&
           <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-            <Text style={theme == LightMode ? Styles.habits_day_title_sin_lm : Styles.habits_day_title_sin_dm}>{format(currentDate, 'MMM dd')}</Text>
+            <Text style={theme == LightMode ? Styles.habits_day_title_sin_lm : Styles.habits_day_title_sin_dm}>{format(currentDate, 'MMMM dd')}</Text>
           </View>
           // <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
           //   <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>{format(currentDate, 'EEEE')}</Text>
           //   <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{format(currentDate, 'MMMM dd')}</Text>
           // </View>
-        } */}
+        }
 
         {/* <CalendarProvider
           //style={{backgroundColor:'red'}}
