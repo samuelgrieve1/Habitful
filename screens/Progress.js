@@ -1,8 +1,26 @@
-import { Text } from 'react-native';
+import { ScrollView, View, Text } from "react-native"
+import { useContext } from 'react';
+import { Styles, LightMode, DarkMode } from "../components/styles/Styles"
+import { ThemeContext } from '../components/Contexts';
 
 export default function Progress() {
+  const {theme} = useContext(ThemeContext)
+
   return (
     <>
+      <View style={Styles.pageHeaderContainer}>
+        <View style={Styles.pageHeaderLeft}></View>
+        <View style={Styles.pageHeaderCenter}>
+          <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
+            Progress
+          </Text>
+          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+            Measure Your Success
+          </Text>
+        </View>
+        <View style={Styles.pageHeaderRight}></View>
+      </View>
+
       <Text>All Habits</Text>
       <Text>Total Completions (All Time)(Have a circular chart with all habits inside it and beneath it: All Habit, HAbit 1, Habit 2, Etc all color coated)</Text>
       <Text>Total Completions (This Month)</Text>

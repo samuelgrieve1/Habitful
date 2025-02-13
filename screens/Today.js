@@ -3,7 +3,7 @@ import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
-import ManageHabitsItem from '../components/ManageHabitsItem';
+import HabitsItem from '../components/HabitsItem';
 import AddHabit from '../components/AddHabit';
 import EditHabit from '../components/EditHabit';
 import { ThemeContext } from '../components/Contexts';
@@ -15,8 +15,9 @@ import {Calendar, CalendarList, Agenda, WeekCalendar, CalendarProvider} from 're
 import { format } from 'date-fns';
 // import { getDoc } from 'firebase/firestore';
 
-export default function Habits() {
+export default function Today() {
   const [habits, setHabits] = useState(null)
+  const [completions, setCompletions] = useState(null)
   const [currentDate, setCurrentDate] = useState(null)
   const [modalVisibleAdd, setModalVisibleAdd] = useState(false);
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
@@ -45,6 +46,46 @@ export default function Habits() {
     } else {
       setHabits(null)
     }
+  }
+
+  // GET COMPLETIONS FROM DB AND ADD TO STATE
+  const getCompletions = async () => {
+    const docRef = doc(db, "completions", "dates");
+    const completionsSnapshot = await getDoc(docRef);
+    setCompletions(completions => ({
+      ...completions,
+      ...completionsSnapshot.data()
+    }))
+  }
+
+  // WAS HABIT COMPLETED TODAY?
+  // const checkedOrUnchecked = (habit) => {
+  //   return(
+  //     habit.completed.includes(currentDate) ? true : false
+  //   )
+  // }
+  const checkedOrUnchecked = (habit) => {
+    if(completions != null){
+      if(completions[currentDate]){
+        return completions[currentDate].includes(habit.name)
+      }
+      return false
+    }
+  }
+
+  // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
+  const addCompletedHabit = async (habitId, habitName, isCompleted) => {
+    if(!isCompleted){ 
+      await updateDoc(doc(db, "completions", "dates"), {
+        [currentDate]: arrayUnion(habitName)       
+      })
+    } else {
+      await updateDoc(doc(db, "completions", "dates"), {
+        [currentDate]: arrayRemove(habitName)         
+      })
+    }
+    getHabits()
+    getCompletions()
   }
 
   // DELETE Habit
@@ -91,51 +132,88 @@ export default function Habits() {
 
   useEffect (() => {
     setCurrentDate(new Date().toDateString())
+    getCompletions()
     getHabits()
   }, [])
 
   return (
-    <>  
+    <>
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
-            Habits
+            Today
           </Text>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
-            Manage Your Habits
+            {format(currentDate, 'EEEE, MMMM dd')}
+            {/* Complete Your Habits */}
           </Text>
+          {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterDateLm : Styles.pageHeaderCenterDateDm}>
+            <Feather name="calendar" size={16} color="white" /> {format(currentDate, 'EEEE, MMMM dd')}
+          </Text> */}
         </View>
-        <View style={Styles.pageHeaderRight}>
-          <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
-        </View>
+        <View style={Styles.pageHeaderRight}></View>
       </View>
 
-      <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
+      <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>  
+        {/* {habits != null &&
+          <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+            <Text style={theme == LightMode ? Styles.habits_day_title_sin_lm : Styles.habits_day_title_sin_dm}>{format(currentDate, 'MMM dd')}</Text>
+          </View>
+          // <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
+          //   <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>{format(currentDate, 'EEEE')}</Text>
+          //   <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{format(currentDate, 'MMMM dd')}</Text>
+          // </View>
+        } */}
+
+        {/* <CalendarProvider
+          //style={{backgroundColor:'red'}}
+          key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
+          date="2022-01-07"
+        >
+          <WeekCalendar
+            
+            theme={theme == LightMode ? weekCalendarThemeLm : weekCalendarThemeDm}
+            hideDayNames firstDay={1}
+              //pastScrollRange={earliestMonth}
+              //futureScrollRange={0}
+              // key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
+              
+              //onDayPress={day => {
+              //   setModalVisiblerEditHistory(true); setSelectedDate(format(parseISO(day['dateString']), 'EEE MMM dd yyyy'));
+              // }}
+              //markedDates={markedDay}
+              //maxDate={format(endOfYesterday(), 'EEE MMM dd yyyy')}
+          />
+        </CalendarProvider> */}
+
         {habits != null &&
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={({item}) => {
               return(
-                <ManageHabitsItem
+                <HabitsItem
                   key={item.id}
                   habitId={item.id}
                   habitName={item.name}
                   currentDate={currentDate}
+                  isCompleted={checkedOrUnchecked(item)}
+                  addCompletedHabit={addCompletedHabit}
+                  deleteHabit={deleteHabit}
                   setSelectedHabitId={setSelectedHabitId}
                   setModalVisibleEdit={setModalVisibleEdit}
                 />
               )
             }}
             keyExtractor={item => item.id}
-            ListFooterComponent={addHabitBtn}
+            //ListFooterComponent={addHabitBtn}
           />
         }
 
         {/* PLACEHOLDER TEXT IF NO HABITS */}
         {habits == null &&
-          <View>
+          <View style={theme == LightMode ? Styles.no_habits_container_lm : Styles.no_habits_container_dm}>
             <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
               Add a habit
             </Text>

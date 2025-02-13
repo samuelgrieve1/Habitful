@@ -193,6 +193,19 @@ export default function History() {
 
   return (
     <>
+      <View style={Styles.pageHeaderContainer}>
+        <View style={Styles.pageHeaderLeft}></View>
+        <View style={Styles.pageHeaderCenter}>
+          <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
+            History
+          </Text>
+          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+            Review and Make Changes
+          </Text>
+        </View>
+        <View style={Styles.pageHeaderRight}></View>
+      </View>
+
       {/* TABS */}
       <View style={Styles.historyViewBtnContainer}>
 
@@ -261,7 +274,7 @@ export default function History() {
           completionsSorted={completionsSorted}
           setModalVisibleEditHistory={setModalVisibleEditHistory}
           setSelectedDate={setSelectedDate}
-          markingType={'multi-dot'}
+          // markingType={'multi-dot'}
         />
         
         {/*

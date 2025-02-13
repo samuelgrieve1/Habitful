@@ -28,8 +28,8 @@ export default function HistoryListItem({date, i, completionsSorted, setModalVis
             <Feather name="check" size={16} color="#4a8b47" /> {habit}
           </Text>
         ))}
-        <Pressable style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm} onPress={() => {setModalVisibleEditHistory(true); setSelectedDate(date);}}>
-          <Text style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm}>Edit</Text>
+        <Pressable style={theme == LightMode ? Styles.editHistoryBtnContainerLm : Styles.editHistoryBtnContainerDm} onPress={() => {setModalVisibleEditHistory(true); setSelectedDate(date);}}>
+          <Text style={theme == LightMode ? Styles.editHistoryBtnLm : Styles.editHistoryBtnDm}>Edit</Text>
         </Pressable>
         </View>
       </Collapsible>

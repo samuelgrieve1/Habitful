@@ -5,6 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { ThemeContext } from '../components/Contexts';
 
+import Today from '../screens/Today';
 import Habits from '../screens/Habits';
 import Progress from '../screens/Progress';
 import History from '../screens/History';
@@ -28,18 +29,18 @@ export default function BottomTabNavigator() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Habits"
+      initialRouteName="Today"
       screenOptions={{
-        headerShadowVisible: true,
-        headerStyle : {
-          height: 70,
-          borderBottomWidth: 1,
-          borderBottomColor: theme == LightMode ? '#eee' : '#111',
-        },
-        headerTitleAlign: 'center',
-        headerTitleStyle: {
-          fontSize: 36,
-        },
+        // headerShadowVisible: true,
+        // headerStyle : {
+        //   height: 70,
+        //   borderBottomWidth: 1,
+        //   borderBottomColor: theme == LightMode ? '#eee' : '#111',
+        // },
+        // headerTitleAlign: 'center',
+        // headerTitleStyle: {
+        //   fontSize: 36,
+        // },
         tabBarStyle: {
           height: 60,
           borderTopWidth: 1,
@@ -57,28 +58,29 @@ export default function BottomTabNavigator() {
     >
       <Tab.Screen
         name="Today"
-        component={Habits}
+        component={Today}
         options={{
-          headerShown: true,
+          headerShown: false,
           //headerShadowVisible: false,
-          tabBarIcon: (tintcolor) => (<Feather name="home" size={24} color={tintcolor.color} />),
+          tabBarIcon: (tintcolor) => (<Feather name="check" size={24} color={tintcolor.color} />),
           // headerLeft: () => (
-          //   <View style={Styles.header_left}>
-          //     <Feather name="menu" size={24} color={theme == LightMode ? '#757575' : '#757575'} />
+          //   <View style={Styles.header_right}>
+          //     <Feather name="arrow-left" size={24} style={theme == LightMode ? Styles.headerIconLeftLm : Styles.headerIconLeftDm} />
           //   </View>
           // ),
-          headerRight: () => (
-            <View style={Styles.header_right}>
-              <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
-            </View>
-          ),
+          // headerRight: () => (
+          //   <View style={Styles.header_right}>
+          //     <Feather name="arrow-right" size={24} style={theme == LightMode ? Styles.headerIconRightLm : Styles.headerIconRightDm} />
+          //     {/* <Feather name="arrow-right" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} /> */}
+          //   </View>
+          // ),
         }}
       />
       <Tab.Screen
         name="Habits"
         component={Habits}
         options={{
-          headerShown: true,
+          headerShown: false,
           //headerShadowVisible: false,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
           // headerLeft: () => (
@@ -98,7 +100,7 @@ export default function BottomTabNavigator() {
         component={Progress}
         options={{
           // tabBarActiveTintColor: '#4185e7',
-          headerShown: true,
+          headerShown: false,
           tabBarIcon: (tintcolor) => (<Feather name="bar-chart" size={24} color={tintcolor.color} />)
         }}
       />
@@ -107,7 +109,7 @@ export default function BottomTabNavigator() {
         component={History}
         options={{
           // tabBarActiveTintColor: '#4185e7',
-          headerShown: true,
+          headerShown: false,
           // headerRight: () => (
           //   <View style={Styles.header_right}>
           //     {/* <Feather name="filter" size={24} style={theme == LightMode ? Styles.filterHistoryIconLm : Styles.filterHistoryIconDm} /> */}
@@ -126,7 +128,7 @@ export default function BottomTabNavigator() {
         component={Settings}
         options={{
           // tabBarActiveTintColor: '#4185e7',
-          headerShown: true,
+          headerShown: false,
           tabBarIcon: (tintcolor) => (<Feather name="settings" size={24} color={tintcolor.color} />)
         }}
       />

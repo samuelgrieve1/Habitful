@@ -49,6 +49,68 @@ const LightMode = {
 
 const Styles = StyleSheet.create({
   //////////////////////////////
+  // General
+  //////////////////////////////
+  pageHeaderContainer: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    // paddingBottom: 20,
+    // borderBottomWidth: 1,
+    // borderBottomColor: darkergray,
+  },
+  pageHeaderLeft: {
+    width: 50,
+  },
+  pageHeaderCenter: {
+    flex: 1,
+  },
+  pageHeaderCenterTitleLm: {
+    fontSize: 36,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: black,
+  },
+  pageHeaderCenterTitleDm: {
+    fontSize: 36,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: white,
+  },
+  pageHeaderCenterSubTitleLm: {
+    fontSize: 14,
+    fontWeight: '300',
+    textAlign: 'center',
+    color: darkgray,
+    marginTop: 5,
+  },
+  pageHeaderCenterSubTitleDm: {
+    fontSize: 14,
+    fontWeight: '300',
+    textAlign: 'center',
+    color: gray9,
+    marginTop: 5,
+  },
+  pageHeaderCenterDateLm: {
+    fontSize: 14,
+    fontWeight: '300',
+    textAlign: 'center',
+    color: white,
+    marginTop: 5,
+  },
+  pageHeaderCenterDateDm: {
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: white,
+    marginTop: 35,
+  },
+  pageHeaderRight: {
+    width: 50,
+    paddingTop: 20,
+    paddingRight: 20,
+  },
+
+  //////////////////////////////
   // App.js
   //////////////////////////////
   safe_area_view: {
@@ -79,6 +141,14 @@ const Styles = StyleSheet.create({
   btn_edit_habits: {
     backgroundColor: white,
   },
+  headerIconLeftDm: {
+    color: white,
+    marginLeft: 40,
+  },
+  headerIconRightDm: {
+    color: white,
+    marginRight: 20,
+  },
 
   //////////////////////////////
   // Habits.js
@@ -107,6 +177,14 @@ const Styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
+  no_habits_container_lm: {
+    justifyContent: 'center',
+    height: '100%',
+  },
+  no_habits_container_dm: {
+    justifyContent: 'center',
+    height: '100%',
+  },
   no_habits_text_lm: {
     color: black,
     textAlign: 'center',
@@ -126,12 +204,12 @@ const Styles = StyleSheet.create({
     color: white,
   },
   habits_day_title_sin_lm: {
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'center',
     color: black,
   },
   habits_day_title_sin_dm: {
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'center',
     color: white,
   },
@@ -367,6 +445,13 @@ const Styles = StyleSheet.create({
   habit_name_box: {
     flex: 1,
   },
+  habit_name_box_icon: {
+    width: 24,
+    paddingTop: 8,
+  },
+  habit_name_box_text: {
+    flex: 1,
+  },
   habit_name_lm: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -377,7 +462,7 @@ const Styles = StyleSheet.create({
   habit_name_completed_lm: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: gray,
+    color: darkgray,
     //textDecorationLine: 'line-through',
     marginTop: 10,
     marginBottom: 10,
@@ -392,7 +477,7 @@ const Styles = StyleSheet.create({
   habit_name_completed_dm: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: green,
+    color: darkgray,
     //textDecorationLine: 'line-through',
     marginTop: 10,
     marginBottom: 10,
@@ -630,7 +715,6 @@ const Styles = StyleSheet.create({
     paddingBottom: 5,
   },
   historyCompletionsBox: {
-    paddingTop: 10,
     marginBottom: 20,
   },
   dateTitleLm: {
@@ -673,26 +757,39 @@ const Styles = StyleSheet.create({
     height: 18,
     zIndex: 1,
   },
-  editHistoryIconContainerLm: {
-    marginTop: 10,
-    backgroundColor: lightergray,
-    width: 100,
-    padding: 10,
-  },
-  editHistoryIconContainerDm: {
-    marginTop: 0,
-    marginBottom: 15,
+  editHistoryBtnContainerLm: {
     position: 'absolute',
-    top: 15,
+    top: 5,
     right: 5,
+    width: 60,
+    height: 24,
+    borderRadius: 10,
+    backgroundColor: lightergray,
   },
-  editHistoryIconLm: {
-    color: blue,
-    fontSize: 16,
+  editHistoryBtnContainerDm: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    width: 60,
+    height: 24,
+    borderRadius: 10,
+    backgroundColor: evendarkergray,
   },
-  editHistoryIconDm: {
+  editHistoryBtnLm: {
     color: blue,
-    fontSize: 16,
+    fontSize: 14,
+    lineHeight: 24,
+    textAlign: 'center',
+    width: 60,
+    height: 24,
+  },
+  editHistoryBtnDm: {
+    color: blue,
+    fontSize: 14,
+    lineHeight: 24,
+    textAlign: 'center',
+    width: 60,
+    height: 24,
   },
   filterHistoryIconLm: {
     color: black,
