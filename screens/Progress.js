@@ -7,7 +7,7 @@ export default function Progress() {
   const {theme} = useContext(ThemeContext)
 
   return (
-    <>
+    <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
@@ -30,6 +30,6 @@ export default function Progress() {
       <Text>Longest Streak</Text>
       <Text></Text>
       <Text></Text>
-    </>
+    </View>
   )
 }

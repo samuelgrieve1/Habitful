@@ -192,7 +192,7 @@ export default function History() {
   // [day]: { selected: true, marked: true, selectedColor: "blue" }
 
   return (
-    <>
+    <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
@@ -340,6 +340,6 @@ export default function History() {
           />
         </View>
       </Modal>
-    </>
+    </View>
   )
 }

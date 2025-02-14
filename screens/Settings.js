@@ -8,7 +8,7 @@ export default function Settings() {
   const {theme} = useContext(ThemeContext)
 
   return (
-    <>
+    <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
@@ -28,6 +28,6 @@ export default function Settings() {
           <Text>Hide "+ Add Habit" Button</Text>
         </View>
       </ScrollView>
-    </>
+    </View>
   )
 }

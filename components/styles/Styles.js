@@ -51,6 +51,10 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // General
   //////////////////////////////
+  screenContainer: {
+    flex: 1,
+    marginBottom: 120,
+  },
   pageHeaderContainer: {
     flexDirection: 'row',
     marginTop: 10,
@@ -116,7 +120,7 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   safe_area_view: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 
   //////////////////////////////
@@ -710,11 +714,10 @@ const Styles = StyleSheet.create({
   },
   listViewContainer: {
     marginTop: 0,
-    marginBottom: 40,
+    marginBottom: 20,
   },
   calendarViewContainer: {
     marginTop: 0,
-    marginBottom: 0,
   },
   dateBoxLm: {
     marginLeft: 20,

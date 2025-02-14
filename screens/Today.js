@@ -137,7 +137,7 @@ export default function Today() {
   }, [])
 
   return (
-    <>
+    <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
@@ -265,6 +265,6 @@ export default function Today() {
           </ScrollView>
         </View>
       </Modal>
-    </>
+    </View>
   )
 }

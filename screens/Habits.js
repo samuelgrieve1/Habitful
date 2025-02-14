@@ -95,7 +95,7 @@ export default function Habits() {
   }, [])
 
   return (
-    <>  
+    <View style={Styles.screenContainer}> 
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
@@ -187,6 +187,6 @@ export default function Habits() {
           </ScrollView>
         </View>
       </Modal>
-    </>
+    </View>
   )
 }
