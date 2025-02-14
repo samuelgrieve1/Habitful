@@ -302,11 +302,12 @@ export default function History() {
         </ScrollView> */}
 
         {/* CALENDAR VIEW */}
-        {historyView == 'calendarview' &&
+        {historyView == 'calendarview' && earliestMonth > 0 &&
           <View style={Styles.calendarViewContainer}>
             <CalendarList
+              //current={currentDate}
               pastScrollRange={earliestMonth}
-              futureScrollRange={0}
+              futureScrollRange={1}
               key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
               theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
               onDayPress={day => {

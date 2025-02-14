@@ -42,7 +42,9 @@ export default function BottomTabNavigator() {
         //   fontSize: 36,
         // },
         tabBarStyle: {
-          height: 60,
+          height: 55,
+          paddingTop: 5,
+          paddingBottom: 5,
           borderTopWidth: 1,
           borderTopColor: theme == LightMode ? '#eee' : '#111',
         },
