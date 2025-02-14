@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, StatusBar } from 'react-native';
 
 import { Dimensions } from 'react-native';
 import { WeekCalendar } from 'react-native-calendars';
@@ -53,6 +53,7 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   pageHeaderContainer: {
     flexDirection: 'row',
+    marginTop: 10,
     marginBottom: 10,
     // paddingBottom: 20,
     // borderBottomWidth: 1,
@@ -106,8 +107,8 @@ const Styles = StyleSheet.create({
   },
   pageHeaderRight: {
     width: 50,
-    paddingTop: 20,
-    paddingRight: 20,
+    paddingTop: 10,
+    paddingRight: 10,
   },
 
   //////////////////////////////
@@ -115,6 +116,7 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   safe_area_view: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
 
   //////////////////////////////
@@ -294,39 +296,51 @@ const Styles = StyleSheet.create({
     borderCurve: 'circular',
     borderRadius: 5,
   },
+  btn_add_blue_container_lm: {
+    justifyContent: 'center',
+    alignItems: 'center' 
+  },
+  btn_add_blue_container_dm: {
+    justifyContent: 'center',
+    alignItems: 'center' 
+  },
   btn_add_blue_lm: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: 150,
+    height: 50,
     marginTop: 30,
+    borderWidth: 1,
+    borderColor: lightgray,
+    //borderColor: blue,
+    borderRadius: 10,
   },
   btn_add_blue_dm: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: 150,
+    height: 50,
     marginTop: 30,
-  },
-  txt_add_blue_lm: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: 'normal',
-    letterSpacing: 0.25,
-    color: blue,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: lightgray,
-    borderCurve: 'circular',
-    borderRadius: 5,
-  },
-  txt_add_blue_dm: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: 'normal',
-    letterSpacing: 0.25,
-    color: blue,
-    padding: 10,
     borderWidth: 1,
     borderColor: evendarkergray,
-    borderCurve: 'circular',
-    borderRadius: 5,
+    //borderColor: blue,
+    borderRadius: 10,
+  },
+  txt_add_blue_lm: {
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '600',
+    letterSpacing: 0.25,
+    color: blue,
+    padding: 10,
+  },
+  txt_add_blue_dm: {
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '600',
+    letterSpacing: 0.25,
+    color: blue,
+    padding: 10,
   },
   // btn_edit: {
   //   width: '100%',
@@ -579,10 +593,11 @@ const Styles = StyleSheet.create({
   btns_save_cancel: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginTop: 10,
   },
   btn_save: {
     width: '100%',
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
@@ -600,6 +615,7 @@ const Styles = StyleSheet.create({
   },
   btn_cancel: {
     width: '100%',
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,

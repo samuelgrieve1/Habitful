@@ -29,7 +29,7 @@ export default function History() {
   const [completions, setCompletions] = useState([])
   const [completionsSorted, setCompletionsSorted] = useState([])
   const [earliestMonth, setEarliestMonth] = useState(0)
-  const [historyView, setHistoryView] = useState('listview')
+  const [historyView, setHistoryView] = useState('calendarview')
   const [modalVisibleEditHistory, setModalVisibleEditHistory] = useState(false);
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   const [habits, setHabits] = useState(null)
@@ -305,7 +305,6 @@ export default function History() {
         {historyView == 'calendarview' &&
           <View style={Styles.calendarViewContainer}>
             <CalendarList
-              //disabledByDefault={true}
               pastScrollRange={earliestMonth}
               futureScrollRange={0}
               key={theme == LightMode ? 'calendarLm' : 'calendarDm'}

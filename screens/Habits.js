@@ -57,7 +57,7 @@ export default function Habits() {
   const addHabitBtn = () => {
     return(
     <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-      <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#757575' : '#757575'} /> Add Habit</Text>
+      <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
     </Pressable>
     )
   }
@@ -135,16 +135,18 @@ export default function Habits() {
 
         {/* PLACEHOLDER TEXT IF NO HABITS */}
         {habits == null &&
-          <View>
+          <View style={theme == LightMode ? Styles.no_habits_container_lm : Styles.no_habits_container_dm}>
             <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
               Add a habit
             </Text>
             <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
               to get started
             </Text>
-            <Pressable style={theme == LightMode ? Styles.btn_add_blue_lm : Styles.btn_add_blue_dm} onPress={() => setModalVisibleAdd(true)}>
-              <Text style={theme == LightMode ? Styles.txt_add_blue_lm : Styles.txt_add_blue_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#4185e7' : '#4185e7'} /> Add Habit</Text>
-            </Pressable>
+            <View style={theme == LightMode ? Styles.btn_add_blue_container_lm : Styles.btn_add_blue_container_dm}>
+              <Pressable style={theme == LightMode ? Styles.btn_add_blue_lm : Styles.btn_add_blue_dm} onPress={() => setModalVisibleAdd(true)}>
+                <Text style={theme == LightMode ? Styles.txt_add_blue_lm : Styles.txt_add_blue_dm}>Add Habit</Text>
+              </Pressable>
+            </View>
           </View>
         }
       </View>
