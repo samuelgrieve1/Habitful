@@ -2,9 +2,20 @@ import { ScrollView, View, Text } from "react-native"
 import { useContext } from 'react';
 import { Styles, LightMode, DarkMode } from "../components/styles/Styles"
 import { ThemeContext } from '../components/Contexts';
+import { CartesianChart } from "victory-native";
+import { Skia } from '@shopify/react-native-skia';
+
 
 export default function Progress() {
   const {theme} = useContext(ThemeContext)
+
+  const DATA = Array.from({ length: 31 }, (_, i) => ({
+    day: i,
+    highTmp: 40 + 30 * Math.random(),
+  }));
+
+  console.log(Skia);
+
 
   return (
     <View style={Styles.screenContainer}>
@@ -21,7 +32,9 @@ export default function Progress() {
         <View style={Styles.pageHeaderRight}></View>
       </View>
 
-      <Text>All Habits</Text>
+      {/* <CartesianChart data={DATA} xKey="day" yKeys={["highTmp"]} /> */}
+
+      {/* <Text>All Habits</Text>
       <Text>Total Completions (All Time)(Have a circular chart with all habits inside it and beneath it: All Habit, HAbit 1, Habit 2, Etc all color coated)</Text>
       <Text>Total Completions (This Month)</Text>
       <Text>Total Completions (This Week)</Text>
@@ -29,7 +42,7 @@ export default function Progress() {
       <Text>Total Completions (Last 7 Days)</Text>
       <Text>Longest Streak</Text>
       <Text></Text>
-      <Text></Text>
+      <Text></Text> */}
     </View>
   )
 }
