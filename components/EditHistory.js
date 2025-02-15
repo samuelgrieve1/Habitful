@@ -7,8 +7,18 @@ import { ThemeContext } from './Contexts';
 import { FlatList, TouchableOpacity } from 'react-native';
 import HabitsItemHistory from './HabitsItemHistory';
 
-export default function EditHistory({completions, getCompletions, closeModal, habits, checkedOrUnchecked, addCompletedHabit, setSelectedHabitId, selectedDate, doneBtn}) {
+export default function EditHistory({completions, completionsSorted, getCompletions, closeModal, habits, checkedOrUnchecked, addCompletedHabit, setSelectedHabitId, selectedDate, doneBtn}) {
   const { theme } = useContext(ThemeContext)
+  //const [selectedDateHabits, setSelectedDateHabits] = useState(null)
+
+  //setSelectedDateHabits(completionsSorted[selectedDate])
+
+  useEffect(() => {
+    // console.log('Habits:', habits)
+    // console.log('Completions Sorted:', completionsSorted)
+    // console.log(completionsSorted[selectedDate])
+    console.log(completionsSorted[selectedDate] == undefined)
+  }, [])
 
   return (
     <View style={{flexDirection: 'row'}}>
@@ -20,6 +30,7 @@ export default function EditHistory({completions, getCompletions, closeModal, ha
           <Feather name="x" size={24} color={theme == LightMode ? 'black' : 'white'} />
         </Pressable>
 
+        {/* NO COMPLETIONS - CALLING FROM HABITS */}
         <FlatList
           style={{width: '100%'}}
           data={habits.sort((a, b) => a.name.localeCompare(b.name))}
@@ -37,6 +48,25 @@ export default function EditHistory({completions, getCompletions, closeModal, ha
             )
           }}
           keyExtractor={item => item.id}
+        />
+
+        {/* HAS COMPLETIONS - CALLING FROM COMPLETIONS SORTED */}
+        <FlatList
+          style={{width: '100%'}}
+          data={completionsSorted[selectedDate]}
+          renderItem={({item}) => {
+            return(
+              <HabitsItemHistory
+                key={selectedDate}
+                habitName={item}
+                selectedDate={selectedDate}
+                isCompleted={checkedOrUnchecked(item)}
+                addCompletedHabit={addCompletedHabit}
+                setSelectedHabitId={setSelectedHabitId}
+              />
+            )
+          }}
+          //keyExtractor={item => item.id}
         />
 
         <View style={Styles.btns_save_cancel}>

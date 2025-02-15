@@ -65,6 +65,21 @@ const Styles = StyleSheet.create({
   },
   pageHeaderLeft: {
     width: 50,
+    paddingTop: 10,
+  },
+  pageHeaderLeftPressable: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  pageHeaderRight: {
+    width: 50,
+    paddingTop: 10,
+  },
+  pageHeaderRightPressable: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   pageHeaderCenter: {
     flex: 1,
@@ -108,11 +123,6 @@ const Styles = StyleSheet.create({
     textAlign: 'center',
     color: white,
     marginTop: 35,
-  },
-  pageHeaderRight: {
-    width: 50,
-    paddingTop: 10,
-    paddingRight: 10,
   },
 
   //////////////////////////////

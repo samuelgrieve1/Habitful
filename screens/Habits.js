@@ -97,7 +97,11 @@ export default function Habits() {
   return (
     <View style={Styles.screenContainer}> 
       <View style={Styles.pageHeaderContainer}>
-        <View style={Styles.pageHeaderLeft}></View>
+        <View style={Styles.pageHeaderLeft}>
+          <Pressable style={Styles.pageHeaderLeftPressable}>
+            <Feather name="refresh-cw" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+          </Pressable>
+        </View>
         <View style={Styles.pageHeaderCenter}>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
             Habits
@@ -107,7 +111,9 @@ export default function Habits() {
           </Text>
         </View>
         <View style={Styles.pageHeaderRight}>
-          <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+          <Pressable style={Styles.pageHeaderRightPressable}>
+            <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+          </Pressable>
         </View>
       </View>
 

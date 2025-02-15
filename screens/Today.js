@@ -139,7 +139,11 @@ export default function Today() {
   return (
     <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
-        <View style={Styles.pageHeaderLeft}></View>
+        <View style={Styles.pageHeaderLeft}>
+          <Pressable style={Styles.pageHeaderLeftPressable}>
+            <Feather name="refresh-cw" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+          </Pressable>
+        </View>
         <View style={Styles.pageHeaderCenter}>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
             Today

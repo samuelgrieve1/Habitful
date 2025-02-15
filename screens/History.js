@@ -64,7 +64,7 @@ export default function History() {
   }
 
   // ADD COMPLETED HABIT TO STORE, Update STYLING of CHECK MARK and NAME
-  const addCompletedHabit = async (habitId, habitName, isCompleted) => {
+  const addCompletedHabit = async (habitName, isCompleted) => {
     if(!isCompleted){ 
       await updateDoc(doc(db, "completions", "dates"), {
         [selectedDate]: arrayUnion(habitName)       
@@ -331,6 +331,7 @@ export default function History() {
           <EditHistory
             habits={habits}
             completions={completions}
+            completionsSorted={completionsSorted}
             getCompletions={getCompletions}
             addCompletedHabit={addCompletedHabit}
             closeModal={closeModalEditHistory}

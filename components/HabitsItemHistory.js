@@ -7,12 +7,12 @@ import { RectButton, PanGestureHandler, LongPressGestureHandler } from 'react-na
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-export default function HabitsItemHistory({habitId, habitName, isCompleted, addCompletedHabit, deleteHabit, setSelectedHabitId, setModalVisibleEdit}) {
+export default function HabitsItemHistory({habitName, isCompleted, addCompletedHabit, deleteHabit, setSelectedHabitId, setModalVisibleEdit}) {
   const {theme} = useContext(ThemeContext)
   const [isCompletedLocal, setIsCompletedLocal] = useState(isCompleted)
   const checkUncheck = () => {
     setIsCompletedLocal(prev => !prev)
-    addCompletedHabit(habitId, habitName, isCompletedLocal)
+    addCompletedHabit(habitName, isCompletedLocal)
   }
   
   return (
