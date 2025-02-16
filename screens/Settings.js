@@ -26,6 +26,7 @@ export default function Settings() {
         <View style={Styles.setting}>
           <DarkModeToggle />
           <Text>Hide "+ Add Habit" Button</Text>
+          <Text>Show deleted habits</Text>
         </View>
       </ScrollView>
     </View>

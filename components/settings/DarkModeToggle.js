@@ -20,7 +20,6 @@ export default function DarkModeToggle() {
 
   const saveDarkMode = async (value) => {
     try {
-      console.log('saved', value)
       const jsonValue = JSON.stringify(value)
       await AsyncStorage.setItem('darkmode', jsonValue)
     } catch (e) {

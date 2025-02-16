@@ -13,6 +13,7 @@ import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 import Modal from 'react-native-modal';
 import {Calendar, CalendarList, Agenda, WeekCalendar, CalendarProvider} from 'react-native-calendars';
 import { format } from 'date-fns';
+import DropdownMenu from '../components/utils/DropdownMenu';
 // import { getDoc } from 'firebase/firestore';
 
 export default function Habits() {
@@ -22,6 +23,7 @@ export default function Habits() {
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   const [selectedHabitId, setSelectedHabitId] = useState(null)
   const {theme} = useContext(ThemeContext)
+  const [selectedHabitType, setSelectedHabitType] = useState('all')
 
   // Close modal from child component
   const closeModalAdd = () => {
@@ -118,6 +120,25 @@ export default function Habits() {
       </View>
 
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
+        
+        <DropdownMenu
+          theme={theme}
+          defaultValue={'all'}
+          data={[
+            {label: 'All', value: 'all'},
+            {label: 'Active', value: 'active'},
+            {label: 'Deleted', value: 'deleted'},
+          ]}
+          setSelectedMenuItem={setSelectedHabitType}
+        />
+
+        {selectedHabitType == 'all' &&
+          <Text style={{color:'purple'}}>All</Text>
+        }
+        {selectedHabitType == 'active' &&
+          <Text style={{color:'purple'}}>Active</Text>
+        }
+
         {habits != null && habits != 'no habits' &&
           <FlatList
             style={Styles.habitsContainer}
