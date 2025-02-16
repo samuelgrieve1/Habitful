@@ -44,7 +44,7 @@ export default function Today() {
         }))
       )
     } else {
-      setHabits(null)
+      setHabits('no habits')
     }
   }
 
@@ -191,7 +191,7 @@ export default function Today() {
           />
         </CalendarProvider> */}
 
-        {habits != null &&
+        {habits != null && habits != 'no habits' &&
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
@@ -216,7 +216,7 @@ export default function Today() {
         }
 
         {/* PLACEHOLDER TEXT IF NO HABITS */}
-        {habits == null &&
+        {habits == 'no habits' &&
           <View style={theme == LightMode ? Styles.no_habits_container_lm : Styles.no_habits_container_dm}>
             <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
               Add a habit

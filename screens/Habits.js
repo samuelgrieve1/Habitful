@@ -43,7 +43,7 @@ export default function Habits() {
         }))
       )
     } else {
-      setHabits(null)
+      setHabits('no habits')
     }
   }
 
@@ -118,7 +118,7 @@ export default function Habits() {
       </View>
 
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
-        {habits != null &&
+        {habits != null && habits != 'no habits' &&
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
@@ -140,7 +140,7 @@ export default function Habits() {
         }
 
         {/* PLACEHOLDER TEXT IF NO HABITS */}
-        {habits == null &&
+        {habits == 'no habits' &&
           <View style={theme == LightMode ? Styles.no_habits_container_lm : Styles.no_habits_container_dm}>
             <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
               Add a habit

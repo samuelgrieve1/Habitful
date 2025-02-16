@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { Styles, LightMode, DarkMode } from "../components/styles/Styles"
 import { ThemeContext } from '../components/Contexts';
 import { CartesianChart } from "victory-native";
-import { Skia } from '@shopify/react-native-skia';
 
 
 export default function Progress() {
@@ -13,9 +12,6 @@ export default function Progress() {
     day: i,
     highTmp: 40 + 30 * Math.random(),
   }));
-
-  console.log(Skia);
-
 
   return (
     <View style={Styles.screenContainer}>
