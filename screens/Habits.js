@@ -38,6 +38,7 @@ export default function Habits() {
     const habitsSnapshot = await getDocs(collection(db, "habits"))
     // Check if any habits exist before updating state
     if(habitsSnapshot.docs.length > 0){
+      //console.log('poop', habitsSnapshot.docs[1].data()['isActive'])
       setHabits(
         habitsSnapshot.docs.map((doc)=>({
           ...doc.data(),
@@ -49,10 +50,18 @@ export default function Habits() {
     }
   }
 
-  // DELETE Habit
+  // DELETE habit by setting iaActive status to false
   const deleteHabit = async() => {
-    await deleteDoc(doc(db, "habits", (selectedHabitId)))
-    getHabits()
+    // await deleteDoc(doc(db, "habits", (selectedHabitId)))
+    // getHabits()
+    try {
+      const docRef = await updateDoc(doc(db, "habits", (selectedHabitId)), {
+        isActive: false
+      })
+      getHabits()
+    } catch (e) {
+      console.error("Error adding document: ", e)
+    }
   }
 
   // ADD HABIT BTN
@@ -132,28 +141,46 @@ export default function Habits() {
           setSelectedMenuItem={setSelectedHabitType}
         />
 
-        {selectedHabitType == 'all' &&
-          <Text style={{color:'purple'}}>All</Text>
-        }
-        {selectedHabitType == 'active' &&
-          <Text style={{color:'purple'}}>Active</Text>
-        }
-
-        {habits != null && habits != 'no habits' &&
+        {habits != null && habits != 'no habits' && selectedHabitType == 'active' &&
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={({item}) => {
-              return(
-                <ManageHabitsItem
-                  key={item.id}
-                  habitId={item.id}
-                  habitName={item.name}
-                  currentDate={currentDate}
-                  setSelectedHabitId={setSelectedHabitId}
-                  setModalVisibleEdit={setModalVisibleEdit}
-                />
-              )
+              if(item.isActive == true){
+                return(
+                  <ManageHabitsItem
+                    key={item.id}
+                    habitId={item.id}
+                    habitName={item.name}
+                    currentDate={currentDate}
+                    setSelectedHabitId={setSelectedHabitId}
+                    setModalVisibleEdit={setModalVisibleEdit}
+                  />
+                )
+              }
+            }}
+            keyExtractor={item => item.id}
+            ListFooterComponent={addHabitBtn}
+          />
+        }
+
+        {habits != null && habits != 'no habits' && selectedHabitType == 'deleted' &&
+          <FlatList
+            style={Styles.habitsContainer}
+            data={habits.sort((a, b) => a.name.localeCompare(b.name))}
+            renderItem={({item}) => {
+              if(item.isActive == false){
+                return(
+                  <ManageHabitsItem
+                    key={item.id}
+                    habitId={item.id}
+                    habitName={item.name}
+                    currentDate={currentDate}
+                    setSelectedHabitId={setSelectedHabitId}
+                    setModalVisibleEdit={setModalVisibleEdit}
+                  />
+                )
+              }
             }}
             keyExtractor={item => item.id}
             ListFooterComponent={addHabitBtn}

@@ -5,7 +5,7 @@
   import { Styles, LightMode } from '../../components/styles/Styles';
 
   export default function DropdownMenu ({theme, defaultValue, data, setSelectedMenuItem}) {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState(defaultValue);
     const [isFocus, setIsFocus] = useState(false);
 
     // const renderLabel = () => {
@@ -24,6 +24,10 @@
         {/* {renderLabel()} */}
         <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+          containerStyle={styles.containerStyle}
+          itemContainerStyle={styles.itemContainerStyle}
+          itemTextStyle={styles.itemTextStyle}
+          activeColor={'#111'}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           inputSearchStyle={styles.inputSearchStyle}
@@ -35,7 +39,7 @@
           valueField="value"
           placeholder={!isFocus ? 'Select item' : '...'}
           searchPlaceholder="Search..."
-          value={defaultValue}
+          value={value}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={item => {
@@ -58,6 +62,17 @@
 
   const styles = StyleSheet.create({
     container: {
+      backgroundColor: 'black',
+    },
+    containerStyle: {
+      backgroundColor: 'black',
+    },
+    itemContainerStyle: {
+      backgroundColor: 'black',
+      color: 'white',
+    },
+    itemTextStyle: {
+      color: 'white',
     },
     dropdown: {
       height: 50,
@@ -83,6 +98,7 @@
     },
     selectedTextStyle: {
       fontSize: 16,
+      color: 'white',
     },
     iconStyle: {
       width: 20,

@@ -16,6 +16,8 @@ export default function AddHabit({getHabits, closeModal}) {
   const [activeThu, setActiveThu] = useState(false)
   const [activeFri, setActiveFri] = useState(false)
   const [activeSat, setActiveSat] = useState(false)
+  const [isActive, setIsActive] = useState(true)
+  const [placeNumber, setPlaceNumber] = useState(0)
   const [selectAllToggle, setSelectAllToggle] = useState(true)
 
   const dateAsInteger = () => {
@@ -35,10 +37,10 @@ export default function AddHabit({getHabits, closeModal}) {
         thu: activeThu,
         fri: activeFri,
         sat: activeSat,
-        completed: [],
+        isActive: isActive,
+        placeNumber: placeNumber,
         date_added: dateAsInteger()
       })
-      console.log("Document written with ID: ", docRef.id)
       getHabits()
     } catch (e) {
       console.error("Error adding document: ", e)
