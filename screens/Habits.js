@@ -136,16 +136,40 @@ export default function Habits() {
           data={[
             {label: 'All', value: 'all'},
             {label: 'Active', value: 'active'},
-            {label: 'Deleted', value: 'deleted'},
+            {label: 'Archived', value: 'archived'},
           ]}
           setSelectedMenuItem={setSelectedHabitType}
         />
 
+        {/* ALL HABITS */}
+        {habits != null && habits != 'no habits' && selectedHabitType == 'all' &&
+          <FlatList
+            style={Styles.habitsContainer}
+            data={habits.sort((a, b) => a.name.localeCompare(b.name))}
+            renderItem={({item}) => {
+              return(
+                <ManageHabitsItem
+                  key={item.id}
+                  habitId={item.id}
+                  habitName={item.name}
+                  currentDate={currentDate}
+                  setSelectedHabitId={setSelectedHabitId}
+                  setModalVisibleEdit={setModalVisibleEdit}
+                />
+              )
+            }}
+            keyExtractor={item => item.id}
+            ListFooterComponent={addHabitBtn}
+          />
+        }
+        
+        {/* ACTIVE HABITS */}
         {habits != null && habits != 'no habits' && selectedHabitType == 'active' &&
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={({item}) => {
+              // CHECK IF HABIT IS ACTIVE
               if(item.isActive == true){
                 return(
                   <ManageHabitsItem
@@ -164,11 +188,13 @@ export default function Habits() {
           />
         }
 
-        {habits != null && habits != 'no habits' && selectedHabitType == 'deleted' &&
+        {/* ARCHIVED HABITS */}
+        {habits != null && habits != 'no habits' && selectedHabitType == 'archived' &&
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={({item}) => {
+              // CHECK IF HABIT IS ARCHIVED
               if(item.isActive == false){
                 return(
                   <ManageHabitsItem

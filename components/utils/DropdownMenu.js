@@ -75,7 +75,7 @@
       color: 'white',
     },
     dropdown: {
-      height: 50,
+      height: 40,
       borderColor: 'gray',
       borderWidth: 0.5,
       borderRadius: 8,

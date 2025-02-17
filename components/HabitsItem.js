@@ -32,7 +32,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
   }
   
   return (
-    <View style={Styles.habit_box}>
+    <View style={isCompleted == true ? Styles.habit_box_completed : Styles.habit_box}>
       {/* <GestureHandlerRootView>
         <Swipeable renderRightActions={renderRightActions}> */}
           <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>

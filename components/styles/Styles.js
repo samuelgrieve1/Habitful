@@ -451,6 +451,21 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   habit_box: {
     flex: 1,
+    backgroundColor: evendarkergray,
+    borderRadius: 10,
+    borderColor: darkergray,
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 10,
+  },
+  habit_box_completed: {
+    flex: 1,
+    backgroundColor: evendarkergray,
+    borderRadius: 10,
+    borderColor: darkergray,
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 10,
   },
   habit_separator_lm: {
     flexDirection: 'row',
@@ -611,7 +626,7 @@ const Styles = StyleSheet.create({
   },
   btn_save: {
     width: '100%',
-    height: 50,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
@@ -629,7 +644,7 @@ const Styles = StyleSheet.create({
   },
   btn_cancel: {
     width: '100%',
-    height: 50,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,

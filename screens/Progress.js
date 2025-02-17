@@ -1,5 +1,5 @@
-import { ScrollView, View, Text, Dimensions } from "react-native"
-import { useContext } from 'react';
+import { ScrollView, View, Text, Dimensions, Pressable } from "react-native"
+import { useContext, useState } from 'react';
 import { Styles, LightMode, DarkMode } from "../components/styles/Styles"
 import { ThemeContext } from '../components/Contexts';
 import {
@@ -13,6 +13,7 @@ import {
 
 export default function Progress() {
   const {theme} = useContext(ThemeContext)
+  const [progressView, setProgressView] = useState('listview')
   const screenWidth = Dimensions.get("window").width;
   const chartConfig = {
     backgroundGradientFrom: "black",
@@ -122,6 +123,41 @@ export default function Progress() {
         <View style={Styles.pageHeaderRight}></View>
       </View>
 
+      {/* TABS */}
+      <View style={Styles.historyViewBtnContainer}>
+        <Pressable
+          onPress={() => setProgressView('listview')}
+          style={
+            theme == LightMode && progressView == 'listview' && Styles.historyViewBtnSelectedLm  ||
+            theme == DarkMode && progressView == 'listview' && Styles.historyViewBtnSelectedDm  ||
+            Styles.historyViewBtn}>
+          <Text
+            style={
+              theme == LightMode && progressView == 'listview' && Styles.historyViewBtnTxtSelectedLm ||
+              theme == DarkMode && progressView == 'listview' && Styles.historyViewBtnTxtSelectedDm ||
+              theme == LightMode && Styles.historyViewBtnTxtLm ||
+              theme == DarkMode && Styles.historyViewBtnTxtDm}>
+              List
+          </Text>
+        </Pressable>
+        <Pressable
+          onPress={() => setProgressView('graphview')}
+          style={
+            theme == LightMode && progressView == 'graphview' && Styles.historyViewBtnSelectedLm  ||
+            theme == DarkMode && progressView == 'graphview' && Styles.historyViewBtnSelectedDm  ||
+            Styles.historyViewBtn}>
+          <Text
+            style={
+              theme == LightMode && progressView == 'graphview' && Styles.historyViewBtnTxtSelectedLm ||
+              theme == DarkMode && progressView == 'graphview' && Styles.historyViewBtnTxtSelectedDm ||
+              theme == LightMode && Styles.historyViewBtnTxtLm ||
+              theme == DarkMode && Styles.historyViewBtnTxtDm}>
+              Graph
+          </Text>
+        </Pressable>
+      </View>
+
+{progressView == 'graphview' &&
       <ScrollView>
 
 <LineChart
@@ -190,8 +226,11 @@ export default function Progress() {
 />
 
 </ScrollView>
+}
 
-      {/* <Text>All Habits</Text>
+{progressView == 'graphview' &&
+<View>
+      <Text>All Habits</Text>
       <Text>Total Completions (All Time)(Have a circular chart with all habits inside it and beneath it: All Habit, HAbit 1, Habit 2, Etc all color coated)</Text>
       <Text>Total Completions (This Month)</Text>
       <Text>Total Completions (This Week)</Text>
@@ -199,7 +238,9 @@ export default function Progress() {
       <Text>Total Completions (Last 7 Days)</Text>
       <Text>Longest Streak</Text>
       <Text></Text>
-      <Text></Text> */}
+      <Text></Text>
+      </View>
+}
     </View>
   )
 }
