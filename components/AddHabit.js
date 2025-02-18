@@ -99,7 +99,7 @@ export default function AddHabit({getHabits, closeModal}) {
         </Pressable>
       </View>
       <View style={Styles.btns_save_cancel}>
-        <Pressable title='Cancel' style={Styles.btn_cancel} onPress={() => closeModal()}>
+        <Pressable title='Cancel' style={theme == LightMode ? Styles.btn_cancel_lm : Styles.btn_cancel_dm} onPress={() => closeModal()}>
           <Text style={theme == LightMode ? Styles.txt_cancel_lm : Styles.txt_cancel_dm}>Cancel</Text>
         </Pressable>
       </View>

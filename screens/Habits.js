@@ -143,24 +143,52 @@ export default function Habits() {
 
         {/* ALL HABITS */}
         {habits != null && habits != 'no habits' && selectedHabitType == 'all' &&
+          <>
+          <Text>Active</Text>
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={({item}) => {
-              return(
-                <ManageHabitsItem
-                  key={item.id}
-                  habitId={item.id}
-                  habitName={item.name}
-                  currentDate={currentDate}
-                  setSelectedHabitId={setSelectedHabitId}
-                  setModalVisibleEdit={setModalVisibleEdit}
-                />
-              )
+              // CHECK IF HABIT IS ACTIVE
+              if(item.isActive == true){
+                return(
+                  <ManageHabitsItem
+                    key={item.id}
+                    habitId={item.id}
+                    habitName={item.name}
+                    currentDate={currentDate}
+                    setSelectedHabitId={setSelectedHabitId}
+                    setModalVisibleEdit={setModalVisibleEdit}
+                  />
+                )
+              }
             }}
             keyExtractor={item => item.id}
             ListFooterComponent={addHabitBtn}
           />
+          <Text>Archived</Text>
+          <FlatList
+            style={Styles.habitsContainer}
+            data={habits.sort((a, b) => a.name.localeCompare(b.name))}
+            renderItem={({item}) => {
+              // CHECK IF HABIT IS ARCHIVED
+              if(item.isActive == false){
+                return(
+                  <ManageHabitsItem
+                    key={item.id}
+                    habitId={item.id}
+                    habitName={item.name}
+                    currentDate={currentDate}
+                    setSelectedHabitId={setSelectedHabitId}
+                    setModalVisibleEdit={setModalVisibleEdit}
+                  />
+                )
+              }
+            }}
+            keyExtractor={item => item.id}
+            ListFooterComponent={addHabitBtn}
+          />
+          </>
         }
         
         {/* ACTIVE HABITS */}

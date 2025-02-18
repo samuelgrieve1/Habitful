@@ -110,14 +110,21 @@ export default function EditHabit({getHabits, closeModal, selectedHabitId, habit
         </Pressable>
       </View>
       <View style={Styles.btns_save_cancel}>
-        <Pressable title='Cancel' style={Styles.btn_cancel} onPress={() => closeModal()}>
+        <Pressable title='Cancel' style={theme == LightMode ? Styles.btn_cancel_lm : Styles.btn_cancel_dm} onPress={() => closeModal()}>
           <Text style={theme == LightMode ? Styles.txt_cancel_lm : Styles.txt_cancel_dm}>Cancel</Text>
         </Pressable>
       </View>
-      <View style={Styles.btns_save_cancel}>
-        <Pressable  style={Styles.btn_delete} onPress={() => {deleteHabit(); closeModal()}}>
-          <Text style={Styles.txt_delete}><Feather name="trash-2" size={16} color={Styles.red} /> Delete Habit</Text>
+      <View style={theme == LightMode ? Styles.btns_archive_delete_lm : Styles.btns_archive_delete_dm}>
+        <View>
+        <Pressable  style={theme == LightMode ? Styles.btn_archive_lm : Styles.btn_archive_dm} onPress={() => {archiveHabit(); closeModal()}}>
+          <Text style={Styles.txt_archive}><Feather name="archive" size={16} color={'#4185e7'} /> Archive Habit</Text>
         </Pressable>
+        </View>
+        <View>
+        <Pressable  style={theme == LightMode ? Styles.btn_delete_lm : Styles.btn_delete_dm} onPress={() => {deleteHabit(); closeModal()}}>
+          <Text style={Styles.txt_delete}><Feather name="trash" size={16} color={'#E23F44'} /> Delete Habit</Text>
+        </Pressable>
+        </View>
       </View>
       <Pressable title='Close' style={Styles.close_modal_x} onPress={() => closeModal()}>
         <Feather name="x" size={24} color={theme == LightMode ? 'black' : 'white'} />

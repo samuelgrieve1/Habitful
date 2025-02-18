@@ -54,14 +54,15 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
             </>
             :
             <>
-              <View style={Styles.habit_checkbox_box}>
-                <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
-              </View>
-              <View style={Styles.habit_name_box}>
+            <View style={Styles.habit_name_box}>
                 <Pressable  onPress={getHabitToEdit}>
                   <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
                 </Pressable>
               </View>
+              <View style={Styles.habit_checkbox_box}>
+                <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+              </View>
+              
               
             </>
             }
@@ -69,7 +70,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
           </View>
         {/* </Swipeable>
       </GestureHandlerRootView> */}
-      <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}></View>
+      {/* <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}></View> */}
     </View>
   )
 }

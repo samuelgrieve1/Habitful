@@ -33,7 +33,7 @@
           inputSearchStyle={styles.inputSearchStyle}
           iconStyle={styles.iconStyle}
           data={data}
-          search
+          //search
           maxHeight={300}
           labelField="label"
           valueField="value"
@@ -75,8 +75,10 @@
       color: 'white',
     },
     dropdown: {
+      width: '40%',
+      marginLeft: '30%',
       height: 40,
-      borderColor: 'gray',
+      borderColor: '#333',
       borderWidth: 0.5,
       borderRadius: 8,
       paddingHorizontal: 8,
@@ -97,6 +99,7 @@
       fontSize: 16,
     },
     selectedTextStyle: {
+      textAlign: 'center',
       fontSize: 16,
       color: 'white',
     },
