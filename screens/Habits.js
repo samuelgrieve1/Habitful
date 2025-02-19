@@ -109,9 +109,9 @@ export default function Habits() {
     <View style={Styles.screenContainer}> 
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}>
-          <Pressable style={Styles.pageHeaderLeftPressable}>
+          {/* <Pressable style={Styles.pageHeaderLeftPressable}>
             <Feather name="refresh-cw" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
-          </Pressable>
+          </Pressable> */}
         </View>
         <View style={Styles.pageHeaderCenter}>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
@@ -164,7 +164,7 @@ export default function Habits() {
               }
             }}
             keyExtractor={item => item.id}
-            ListFooterComponent={addHabitBtn}
+            // ListFooterComponent={addHabitBtn}
           />
           <Text>Archived</Text>
           <FlatList
@@ -186,13 +186,18 @@ export default function Habits() {
               }
             }}
             keyExtractor={item => item.id}
-            ListFooterComponent={addHabitBtn}
+            // ListFooterComponent={addHabitBtn}
           />
+          <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+            <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+          </Pressable>
           </>
         }
         
         {/* ACTIVE HABITS */}
         {habits != null && habits != 'no habits' && selectedHabitType == 'active' &&
+          <>
+          <Text>Active</Text>
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
@@ -212,12 +217,18 @@ export default function Habits() {
               }
             }}
             keyExtractor={item => item.id}
-            ListFooterComponent={addHabitBtn}
+            // ListFooterComponent={addHabitBtn}
           />
+          <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+            <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+          </Pressable>
+          </>
         }
 
         {/* ARCHIVED HABITS */}
         {habits != null && habits != 'no habits' && selectedHabitType == 'archived' &&
+          <>
+          <Text>Archived</Text>
           <FlatList
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
@@ -237,8 +248,12 @@ export default function Habits() {
               }
             }}
             keyExtractor={item => item.id}
-            ListFooterComponent={addHabitBtn}
+            // ListFooterComponent={addHabitBtn}
           />
+          <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+            <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+          </Pressable>
+          </>
         }
 
         {/* PLACEHOLDER TEXT IF NO HABITS */}

@@ -32,45 +32,49 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
   }
   
   return (
-    <View style={isCompleted == true ? Styles.habit_box_completed : Styles.habit_box}>
-      {/* <GestureHandlerRootView>
-        <Swipeable renderRightActions={renderRightActions}> */}
+    <>
+      {theme == LightMode
+      ?
+        <View style={isCompleted == true ? Styles.habit_box_completed_lm : Styles.habit_box_lm}>
+          {/* <GestureHandlerRootView>
+          <Swipeable renderRightActions={renderRightActions}> */}
           <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
             {/* <Pressable style={Styles.checkbox_pressable} onPress={() => checkUncheck()}> */}
             {/* </Pressable> */}
-            
-            {theme == LightMode
-            ?
-            <>
-              <View style={Styles.habit_checkbox_box}>
-                <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_lm : Styles.checkbox_unchecked_lm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
-              </View>
-              <View style={Styles.habit_name_box}>
-                <Pressable  onPress={getHabitToEdit}>
-                  <Text style={isCompletedLocal ? Styles.habit_name_completed_lm : Styles.habit_name_lm}>{habitName}</Text>
-                </Pressable>
-              </View>
-              
-            </>
-            :
-            <>
             <View style={Styles.habit_name_box}>
-                <Pressable  onPress={getHabitToEdit}>
-                  <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
-                </Pressable>
-              </View>
-              <View style={Styles.habit_checkbox_box}>
-                <Checkbox color={isCompletedLocal ? '#419947' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
-              </View>
-              
-              
-            </>
-            }
-            
+              <Pressable  onPress={getHabitToEdit}>
+                <Text style={isCompletedLocal ? Styles.habit_name_completed_lm : Styles.habit_name_lm}>{habitName}</Text>
+              </Pressable>
+            </View>
+            <View style={Styles.habit_checkbox_box}>
+              <Checkbox color={isCompletedLocal ? '#4185e7' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_lm : Styles.checkbox_unchecked_lm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+            </View>
           </View>
-        {/* </Swipeable>
-      </GestureHandlerRootView> */}
-      {/* <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}></View> */}
-    </View>
+          {/* </Swipeable>
+          </GestureHandlerRootView> */}
+          <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}></View>
+        </View>
+      :
+        <View style={isCompleted == true ? Styles.habit_box_completed_dm : Styles.habit_box_dm}>
+          {/* <GestureHandlerRootView>
+          <Swipeable renderRightActions={renderRightActions}> */}
+          <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
+            {/* <Pressable style={Styles.checkbox_pressable} onPress={() => checkUncheck()}> */}
+            {/* </Pressable> */}
+            <View style={Styles.habit_name_box}>
+              <Pressable  onPress={getHabitToEdit}>
+                <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
+              </Pressable>
+            </View>
+            <View style={Styles.habit_checkbox_box}>
+              <Checkbox color={isCompletedLocal ? '#4185e7' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
+            </View>
+          </View>
+          {/* </Swipeable>
+          </GestureHandlerRootView> */}
+          <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}></View>
+        </View>
+      }
+    </>
   )
 }

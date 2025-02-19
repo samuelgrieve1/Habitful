@@ -140,9 +140,9 @@ export default function Today() {
     <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}>
-          <Pressable style={Styles.pageHeaderLeftPressable}>
+          {/* <Pressable style={Styles.pageHeaderLeftPressable}>
             <Feather name="refresh-cw" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
-          </Pressable>
+          </Pressable> */}
         </View>
         <View style={Styles.pageHeaderCenter}>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
@@ -160,15 +160,11 @@ export default function Today() {
       </View>
 
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>  
-        {habits != null &&
+        {/* {habits != null &&
           <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
             <Text style={theme == LightMode ? Styles.habits_day_title_sin_lm : Styles.habits_day_title_sin_dm}>{format(currentDate, 'MMMM dd')}</Text>
           </View>
-          // <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-          //   <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>{format(currentDate, 'EEEE')}</Text>
-          //   <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{format(currentDate, 'MMMM dd')}</Text>
-          // </View>
-        }
+        } */}
 
         {/* <CalendarProvider
           //style={{backgroundColor:'red'}}
