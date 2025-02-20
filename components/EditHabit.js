@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import { Styles, LightMode } from './styles/Styles';
 import { ThemeContext } from './Contexts';
 
-export default function EditHabit({getHabits, closeModal, selectedHabitId, habits, deleteHabit}) {
+export default function EditHabit({getHabits, closeModal, selectedHabitId, habits, deleteHabit, archiveHabit}) {
   const { theme } = useContext(ThemeContext)
   const [habitName, setHabitName] = useState('')
   const [activeSun, setActiveSun] = useState(false)
@@ -148,9 +148,9 @@ export default function EditHabit({getHabits, closeModal, selectedHabitId, habit
           </Pressable>
         </View>
 
-        <Text style={{color: '#4185e7', textAlign: 'center', marginTop: 10, fontSize: 14}}>More options <Feather name="chevron-down" size={14} color="#4185e7" /></Text>
+        {/* <Text style={{color: '#4185e7', textAlign: 'center', marginTop: 10, fontSize: 14}}>More options <Feather name="chevron-down" size={14} color="#4185e7" /></Text> */}
 
-        {/* <View style={theme == LightMode ? Styles.btns_archive_delete_lm : Styles.btns_archive_delete_dm}>
+        <View style={theme == LightMode ? Styles.btns_archive_delete_lm : Styles.btns_archive_delete_dm}>
           <View style={Styles.btns_archive_delete_left}>
           <Pressable  style={theme == LightMode ? Styles.btn_archive_lm : Styles.btn_archive_dm} onPress={() => {archiveHabit(); closeModal()}}>
             <Text style={Styles.txt_archive}>Archive Habit</Text>
@@ -161,7 +161,7 @@ export default function EditHabit({getHabits, closeModal, selectedHabitId, habit
             <Text style={Styles.txt_delete}>Delete Habit</Text>
           </Pressable>
           </View>
-        </View> */}
+        </View>
 
         <Pressable title='Close' style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm} onPress={() => closeModal()}>
           <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />

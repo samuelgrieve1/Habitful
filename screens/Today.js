@@ -89,9 +89,31 @@ export default function Today() {
   }
 
   // DELETE Habit
+  // const deleteHabit = async() => {
+  //   await deleteDoc(doc(db, "habits", (selectedHabitId)))
+  //   getHabits()
+  // }
+
+  // ARCHIVE habit by setting iaActive status to false
+  const archiveHabit = async() => {
+    try {
+      await updateDoc(doc(db, "habits", (selectedHabitId)), {
+        isActive: false
+      })
+      getHabits()
+    } catch (e) {
+      console.error("Error adding document: ", e)
+    }
+  }
+  
+  // DELETE habit by setting iaActive status to false
   const deleteHabit = async() => {
-    await deleteDoc(doc(db, "habits", (selectedHabitId)))
-    getHabits()
+    try {
+      await deleteDoc(doc(db, "habits", (selectedHabitId)))
+      getHabits()
+    } catch (e) {
+      console.error("Error adding document: ", e)
+    }
   }
 
   // ADD HABIT BTN
@@ -260,6 +282,7 @@ export default function Today() {
               getHabits={getHabits}
               closeModal={closeModalEdit}
               habits={habits}
+              archiveHabit={archiveHabit}
               deleteHabit={deleteHabit}
             />
           </ScrollView>

@@ -61,7 +61,7 @@ export default function AddHabit({getHabits, closeModal}) {
   return (
     <View style={{flexDirection: 'row'}}>
       <View style={{width: '100%'}}>
-        <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>Add Habit</Text>
+        <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>New Habit</Text>
 
         <TextInput placeholder='Habit Name' placeholderTextColor='#999999' defaultValue={habitName} onChangeText={(text) => setHabitName(text)} style={theme == LightMode ? Styles.input_lm : Styles.input_dm}/>
 

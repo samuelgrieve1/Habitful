@@ -18,7 +18,7 @@ export default function ManageHabitsItem({habitId, habitName, setSelectedHabitId
   }
   
   return (
-    <View style={Styles.habit_box}>
+    <View style={theme == LightMode ? Styles.habit_box_lm : Styles.habit_box_dm}>
           <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
             
             {theme == LightMode
@@ -39,9 +39,9 @@ export default function ManageHabitsItem({habitId, habitName, setSelectedHabitId
                   </Pressable>
                 </View>
                 <View style={Styles.habit_name_box_icon}>
-                  <Pressable  onPress={getHabitToEdit}>
+                  {/* <Pressable  onPress={getHabitToEdit}>
                     <Feather name="more-horizontal" size={24} color="#fff" />
-                  </Pressable>
+                  </Pressable> */}
                 </View>
               {/* </View> */}
             </>

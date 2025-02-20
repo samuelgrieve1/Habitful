@@ -1,4 +1,4 @@
-import { Text, Pressable, View, ScrollView, StyleSheet, Dimensions, Image } from 'react-native';
+import { Text, Pressable, View, ScrollView, StyleSheet, Dimensions, Image, SectionList } from 'react-native';
 import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
@@ -50,14 +50,22 @@ export default function Habits() {
     }
   }
 
-  // DELETE habit by setting iaActive status to false
-  const deleteHabit = async() => {
-    // await deleteDoc(doc(db, "habits", (selectedHabitId)))
-    // getHabits()
+  // ARCHIVE habit by setting iaActive status to false
+  const archiveHabit = async() => {
     try {
-      const docRef = await updateDoc(doc(db, "habits", (selectedHabitId)), {
+      await updateDoc(doc(db, "habits", (selectedHabitId)), {
         isActive: false
       })
+      getHabits()
+    } catch (e) {
+      console.error("Error adding document: ", e)
+    }
+  }
+  
+  // DELETE habit by setting iaActive status to false
+  const deleteHabit = async() => {
+    try {
+      await deleteDoc(doc(db, "habits", (selectedHabitId)))
       getHabits()
     } catch (e) {
       console.error("Error adding document: ", e)
@@ -145,9 +153,9 @@ export default function Habits() {
         {habits != null && habits != 'no habits' && selectedHabitType == 'all' &&
           <>
           <Text>Active</Text>
-          <FlatList
+          {/* <SectionList
             style={Styles.habitsContainer}
-            data={habits.sort((a, b) => a.name.localeCompare(b.name))}
+            sections={habits.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={({item}) => {
               // CHECK IF HABIT IS ACTIVE
               if(item.isActive == true){
@@ -163,34 +171,17 @@ export default function Habits() {
                 )
               }
             }}
+            renderSectionHeader={({section: {item}}) => (
+              <Text style={{color:'white'}}>Active</Text>
+            )}
             keyExtractor={item => item.id}
             // ListFooterComponent={addHabitBtn}
-          />
-          <Text>Archived</Text>
-          <FlatList
-            style={Styles.habitsContainer}
-            data={habits.sort((a, b) => a.name.localeCompare(b.name))}
-            renderItem={({item}) => {
-              // CHECK IF HABIT IS ARCHIVED
-              if(item.isActive == false){
-                return(
-                  <ManageHabitsItem
-                    key={item.id}
-                    habitId={item.id}
-                    habitName={item.name}
-                    currentDate={currentDate}
-                    setSelectedHabitId={setSelectedHabitId}
-                    setModalVisibleEdit={setModalVisibleEdit}
-                  />
-                )
-              }
-            }}
-            keyExtractor={item => item.id}
-            // ListFooterComponent={addHabitBtn}
-          />
-          <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-            <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
-          </Pressable>
+          /> */}
+          <View style={Styles.btn_add_box}>
+            <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+              <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+            </Pressable>
+          </View>
           </>
         }
         
@@ -219,9 +210,11 @@ export default function Habits() {
             keyExtractor={item => item.id}
             // ListFooterComponent={addHabitBtn}
           />
-          <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-            <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
-          </Pressable>
+          <View style={Styles.btn_add_box}>
+            <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+              <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+            </Pressable>
+          </View>
           </>
         }
 
@@ -250,9 +243,11 @@ export default function Habits() {
             keyExtractor={item => item.id}
             // ListFooterComponent={addHabitBtn}
           />
-          <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-            <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
-          </Pressable>
+          <View style={Styles.btn_add_box}>
+            <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+              <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+            </Pressable>
+          </View>
           </>
         }
 
@@ -305,6 +300,7 @@ export default function Habits() {
               getHabits={getHabits}
               closeModal={closeModalEdit}
               habits={habits}
+              archiveHabit={archiveHabit}
               deleteHabit={deleteHabit}
             />
           </ScrollView>
