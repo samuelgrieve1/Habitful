@@ -9,14 +9,16 @@ import { ThemeContext } from './Contexts';
 export default function AddHabit({getHabits, closeModal}) {
   const { theme } = useContext(ThemeContext)
   const [habitName, setHabitName] = useState('')
-  const [frequencyType, setFrequencyType] = useState('')
-  const [daysPerWeek, setDaysPerWeek] = useState([])
-  const [timesPerWeek, setTimesPerWeek] = useState(0)
-  const [goalType, setGoalType] = useState('')
-  const [goalAmount, setGoalAmount] = useState(0)
-  const [goalTime, setGoalTime] = useState(0)
+  const [activeSun, setActiveSun] = useState(false)
+  const [activeMon, setActiveMon] = useState(false)
+  const [activeTue, setActiveTue] = useState(false)
+  const [activeWed, setActiveWed] = useState(false)
+  const [activeThu, setActiveThu] = useState(false)
+  const [activeFri, setActiveFri] = useState(false)
+  const [activeSat, setActiveSat] = useState(false)
   const [isActive, setIsActive] = useState(true)
   const [placeNumber, setPlaceNumber] = useState(0)
+  const [selectAllToggle, setSelectAllToggle] = useState(true)
 
   const dateAsInteger = () => {
     let newDate = new Date()
@@ -28,20 +30,32 @@ export default function AddHabit({getHabits, closeModal}) {
     try {
       const docRef = await addDoc(collection(db, "habits"), {
         name: habitName,
-        frequency_type: frequencyType,
-        days_per_week: daysPerWeek,
-        times_per_week: timesPerWeek,
-        goalType: goalType,
-        goal_amount: goalAmount,
-        goal_time: goalTime,
-        is_active: isActive,
+        sun: activeSun,
+        mon: activeMon,
+        tue: activeTue,
+        wed: activeWed,
+        thu: activeThu,
+        fri: activeFri,
+        sat: activeSat,
+        isActive: isActive,
         placeNumber: placeNumber,
-        dateAdded: dateAsInteger()
+        date_added: dateAsInteger()
       })
       getHabits()
     } catch (e) {
       console.error("Error adding document: ", e)
     }
+  }
+
+  const selectAllDays = async () => {
+    setActiveSun(selectAllToggle)
+    setActiveMon(selectAllToggle)
+    setActiveTue(selectAllToggle)
+    setActiveWed(selectAllToggle)
+    setActiveThu(selectAllToggle)
+    setActiveFri(selectAllToggle)
+    setActiveSat(selectAllToggle)
+    setSelectAllToggle(prev => !prev)
   }
 
   return (

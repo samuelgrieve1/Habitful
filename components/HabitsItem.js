@@ -1,13 +1,10 @@
 import { useState, useContext } from 'react';
-import { Text, Pressable, View, Animated } from 'react-native';
-import { Styles, LightMode, DarkMode, StylesLightMode, StylesDarkMode } from './styles/Styles';
-import Checkbox from 'expo-checkbox';
+import { Text, Pressable, View } from 'react-native';
+import { Styles, LightMode } from './styles/Styles';
 import { ThemeContext } from './Contexts';
-import { RectButton, PanGestureHandler, LongPressGestureHandler } from 'react-native-gesture-handler';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
-export default function HabitsItem({habitId, habitName, isCompleted, addCompletedHabit, deleteHabit, setSelectedHabitId, setModalVisibleEdit}) {
+export default function HabitsItem({habitId, habitName, isCompleted, addCompletedHabit, setSelectedHabitId, setModalVisibleEdit}) {
   const {theme} = useContext(ThemeContext)
   const [isCompletedLocal, setIsCompletedLocal] = useState(isCompleted)
   const checkUncheck = () => {
@@ -15,68 +12,63 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
     addCompletedHabit(habitId, habitName, isCompletedLocal)
   }
 
-  // renderRightActions = () => {
-  //   return (
-  //     <Pressable onPress={() => deleteHabit(habitId)}>
-  //     <View style={Styles.deleteBox}>
-  //       <Text style={Styles.deleteBoxTxt}>Delete</Text>
-  //     </View>
-  //     </Pressable>
-  //   );
-  // };
-
   const getHabitToEdit = () => {
     console.log(habitId)
     setSelectedHabitId(habitId)
     setModalVisibleEdit(true)
   }
+
+  const habitData = {
+    name: 'HabitOne',
+    frequency: {
+      Type: 'daily',
+      Days: ['sun', 'mon', 'tue'],
+    },
+    goal: 'amount',
+    amount: 5
+  }
+
+  const completionData = {
+    completion: {
+      '01-01-1990': {
+        'habitOne': 3
+      }
+    }
+  }
+
+  const [p, setP] = useState(25)
+
+  console.log(habitData.amount * completionData.completion['01-01-1990']['habitOne'])
   
   return (
     <>
-      {theme == LightMode
-      ?
-        <View style={isCompleted == true ? Styles.habit_box_completed_lm : Styles.habit_box_lm}>
-          {/* <GestureHandlerRootView>
-          <Swipeable renderRightActions={renderRightActions}> */}
+        <View style={theme == LightMode ? Styles.habit_box_lm : Styles.habit_box_dm}>
           <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
-            {/* <Pressable style={Styles.checkbox_pressable} onPress={() => checkUncheck()}> */}
-            {/* </Pressable> */}
-            <View style={Styles.habit_checkbox_box}>
-              <Checkbox color={isCompletedLocal ? '#4185e7' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_lm : Styles.checkbox_unchecked_lm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
-            </View>
             <View style={Styles.habit_name_box}>
-              <Pressable  onPress={getHabitToEdit}>
-                <Text style={isCompletedLocal ? Styles.habit_name_completed_lm : Styles.habit_name_lm}>{habitName}</Text>
-              </Pressable>
+              <Text style={theme == LightMode ? Styles.habit_name_lm : Styles.habit_name_dm}>{habitData.name}</Text>
+              <Text style={theme == LightMode ? Styles.habit_name_amount_lm : Styles.habit_name_amount_dm}>
+                {completionData.completion['01-01-1990']['habitOne']} / {habitData.amount}
+              </Text>
             </View>
-            
+            <AnimatedCircularProgress
+              rotation={0}
+              size={60}
+              width={5}
+              fill={(completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100}
+              tintColor="#4185e7"
+              onAnimationComplete={() => console.log('onAnimationComplete')}
+              backgroundColor="#000"
+            >
+              {
+                () => (
+                  <Text style={{color:'#4185e7'}}>
+                    { completionData.completion['01-01-1990']['habitOne'] }
+                  </Text>
+                )
+              }
+            </AnimatedCircularProgress>
           </View>
-          {/* </Swipeable>
-          </GestureHandlerRootView> */}
-          {/* <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}></View> */}
         </View>
-      :
-        <View style={isCompleted == true ? Styles.habit_box_completed_dm : Styles.habit_box_dm}>
-          {/* <GestureHandlerRootView>
-          <Swipeable renderRightActions={renderRightActions}> */}
-          <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
-            {/* <Pressable style={Styles.checkbox_pressable} onPress={() => checkUncheck()}> */}
-            {/* </Pressable> */}
-            <View style={Styles.habit_checkbox_box}>
-              <Checkbox color={isCompletedLocal ? '#4185e7' : undefined} style={isCompletedLocal ? Styles.checkbox_checked_dm : Styles.checkbox_unchecked_dm} value={isCompletedLocal ? true : false} onValueChange={() => checkUncheck()}/>
-            </View>
-            <View style={Styles.habit_name_box}>
-              <Pressable  onPress={getHabitToEdit}>
-                <Text style={isCompletedLocal ? Styles.habit_name_completed_dm : Styles.habit_name_dm}>{habitName}</Text>
-              </Pressable>
-            </View>
-            
-          </View>
-          {/* </Swipeable>
-          </GestureHandlerRootView> */}
-          {/* <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}></View> */}
-        </View>
-      }
     </>
   )
 }
