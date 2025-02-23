@@ -20,16 +20,16 @@
     // };
 
     return (
-      <View style={styles.container}>
+      <View style={theme == LightMode ? styles.containerLm : styles.containerDm}>
         {/* {renderLabel()} */}
         <Dropdown
-          style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-          containerStyle={styles.containerStyle}
-          itemContainerStyle={styles.itemContainerStyle}
-          itemTextStyle={styles.itemTextStyle}
-          activeColor={'#111'}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
+          style={[theme == LightMode ? styles.dropdownLm : styles.dropdownDm, isFocus && { borderColor: 'blue' }]}
+          containerStyle={theme == LightMode ? styles.containerStyleLm : styles.containerStyleDm}
+          itemContainerStyle={theme == LightMode ? styles.itemContainerStyleLm : styles.itemContainerStyleDm}
+          itemTextStyle={theme == LightMode ? styles.itemTextStyleLm : styles.itemTextStyleDm}
+          activeColor={theme == LightMode ? '#111' : '#999'}
+          placeholderStyle={theme == LightMode ? styles.placeholderStyleLm : styles.placeholderStyleDm}
+          selectedTextStyle={theme == LightMode ? styles.selectedTextStyleLm : styles.selectedTextStyleDm}
           inputSearchStyle={styles.inputSearchStyle}
           iconStyle={styles.iconStyle}
           data={data}
@@ -60,33 +60,35 @@
     );
   };
 
+  
   const styles = StyleSheet.create({
-    container: {
-      backgroundColor: 'black',
+    // LIGHTMODE
+    containerLm: {
+      flex: 1,
+      backgroundColor: 'white',
     },
-    containerStyle: {
-      backgroundColor: 'black',
+    containerStyleLm: {
+      backgroundColor: 'white',
+      borderColor: '#ddd',
     },
-    itemContainerStyle: {
-      backgroundColor: 'black',
-      color: 'white',
+    itemContainerStyleLm: {
+      backgroundColor: 'white',
+      color: 'black',
     },
-    itemTextStyle: {
-      color: 'white',
+    itemTextStyleLm: {
+      color: 'black',
     },
-    dropdown: {
-      width: '40%',
-      marginLeft: '30%',
+    dropdownLm: {
+      width: '100%',
+      marginLeft: '0%',
       height: 40,
-      borderColor: '#333',
-      borderWidth: 0.5,
+      backgroundColor: '#eee',
+      // borderColor: '#ddd',
+      // borderWidth: 0.5,
       borderRadius: 8,
       paddingHorizontal: 8,
     },
-    icon: {
-      marginRight: 5,
-    },
-    label: {
+    labelLm: {
       position: 'absolute',
       backgroundColor: 'white',
       left: 22,
@@ -95,13 +97,64 @@
       paddingHorizontal: 8,
       fontSize: 14,
     },
-    placeholderStyle: {
+    selectedTextStyleLm: {
+      textAlign: 'center',
       fontSize: 16,
+      color: 'black',
     },
-    selectedTextStyle: {
+    placeholderStyleLm: {
+      fontSize: 16,
+      color: 'black',
+    },
+
+    // DARKMODE
+    containerDm: {
+      flex: 1,
+      backgroundColor: 'black',
+    },
+    containerStyleDm: {
+      backgroundColor: 'black',
+      borderColor: '#222',
+    },
+    itemContainerStyleDm: {
+      backgroundColor: 'black',
+      color: 'white',
+    },
+    itemTextStyleDm: {
+      color: 'white',
+    },
+    dropdownDm: {
+      width: '100%',
+      marginLeft: '0%',
+      height: 40,
+      backgroundColor: '#111',
+      // borderColor: '#333',
+      // borderWidth: 0.5,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+    },
+    labelDm: {
+      position: 'absolute',
+      backgroundColor: 'white',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
+    },
+    selectedTextStyleDm: {
       textAlign: 'center',
       fontSize: 16,
       color: 'white',
+    },
+    placeholderStyleDm: {
+      fontSize: 16,
+      color: 'white',
+    },
+
+    // BOTH
+    icon: {
+      marginRight: 5,
     },
     iconStyle: {
       width: 20,

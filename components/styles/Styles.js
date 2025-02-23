@@ -612,9 +612,9 @@ const Styles = StyleSheet.create({
     fontSize: 16,
   },
   input_lm: {
-    backgroundColor: lightgray,
-    //borderWidth: 1,
-    //borderColor: gray,
+    backgroundColor: lightergray,
+    borderWidth: 1,
+    borderColor: lightgray,
     borderRadius: 5,
     height: 40,
     paddingLeft: 10,
@@ -624,9 +624,9 @@ const Styles = StyleSheet.create({
     fontSize: 16,
   },
   input_dm: {
-    backgroundColor: darkergray,
-    //borderWidth: 1,
-    //borderColor: darkergray,
+    backgroundColor: evendarkergray,
+    borderWidth: 1,
+    borderColor: darkergray,
     borderRadius: 5,
     height: 40,
     paddingLeft: 10,
@@ -657,11 +657,13 @@ const Styles = StyleSheet.create({
   },
   form_label_lm: {
     color: black,
-    lineHeight: 26,
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   form_label_dm: {
     color: white,
-    lineHeight: 26,
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   form_input_label_frequency_lm: {
     fontWeight: 'bold',

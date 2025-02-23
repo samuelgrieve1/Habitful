@@ -5,6 +5,7 @@ import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
 import { Feather } from '@expo/vector-icons';
 import { Styles, LightMode } from './styles/Styles';
 import { ThemeContext } from './Contexts';
+import DropdownMenu from './utils/DropdownMenu';
 
 export default function AddHabit({getHabits, closeModal}) {
   const { theme } = useContext(ThemeContext)
@@ -49,44 +50,24 @@ export default function AddHabit({getHabits, closeModal}) {
       <View style={{width: '100%'}}>
         <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>New Habit</Text>
 
+        <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Name</Text>
         <TextInput placeholder='Habit Name' placeholderTextColor='#999999' defaultValue={habitName} onChangeText={(text) => setHabitName(text)} style={theme == LightMode ? Styles.input_lm : Styles.input_dm}/>
-
+  
         <View style={Styles.form_label_row}>
-          <Text style={theme == LightMode ? Styles.form_input_label_frequency_lm : Styles.form_input_label_frequency_dm}>Frequency</Text>
-          <Pressable title='Select All' onPress={() => selectAllDays()}>
-            <Text style={Styles.form_txt_select_all}>Select All</Text>
-          </Pressable>
+          <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Frequency</Text>
         </View>
 
-        <View style={Styles.checkbox_row}>
-          <View style={Styles.checkbox_col}>
-            <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Sun</Text>
-            <Checkbox color={activeSun ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSun} onValueChange={setActiveSun} />
-          </View>
-          <View style={Styles.checkbox_col}>
-            <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Mon</Text>
-            <Checkbox color={activeMon ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeMon} onValueChange={setActiveMon} />
-          </View>
-          <View style={Styles.checkbox_col}>
-            <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Tue</Text>
-            <Checkbox color={activeTue ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeTue} onValueChange={setActiveTue} />
-          </View>
-          <View style={Styles.checkbox_col}>
-            <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Wed</Text>
-            <Checkbox color={activeWed ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeWed} onValueChange={setActiveWed} />
-          </View>
-          <View style={Styles.checkbox_col}>
-            <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Thu</Text>
-            <Checkbox color={activeThu ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeThu} onValueChange={setActiveThu} />
-          </View>
-          <View style={Styles.checkbox_col}>
-            <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Fri</Text>
-            <Checkbox color={activeFri ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeFri} onValueChange={setActiveFri} />
-          </View>
-          <View style={Styles.checkbox_col}>
-            <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Sat</Text>
-            <Checkbox color={activeSat ? '#4185e7' : undefined} style={theme == LightMode ? Styles.checkbox_lm : Styles.checkbox_dm} value={activeSat} onValueChange={setActiveSat} />
-          </View>
+        <View style={Styles.form_label_row}>
+          <DropdownMenu
+            theme={theme}
+            defaultValue={'Daily'}
+            data={[
+              {label: 'Daily', value: 'daily'},
+              {label: 'Weekly', value: 'weekly'},
+              {label: 'Monthly', value: 'monthly'},
+            ]}
+            //setSelectedMenuItem={setSelectedHabitType}
+          />
         </View>
 
         <View style={Styles.btns_save_cancel}>
