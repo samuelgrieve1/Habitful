@@ -52,7 +52,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
             </View>
             <AnimatedCircularProgress
               rotation={0}
-              size={60}
+              size={50}
               width={5}
               fill={(completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100}
               tintColor="#4185e7"
