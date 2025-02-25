@@ -37,7 +37,7 @@
           maxHeight={300}
           labelField="label"
           valueField="value"
-          placeholder={!isFocus ? 'Select item' : '...'}
+          placeholder={!isFocus ? value : '...'}
           searchPlaceholder="Search..."
           value={value}
           onFocus={() => setIsFocus(true)}
@@ -66,6 +66,7 @@
     containerLm: {
       flex: 1,
       backgroundColor: 'white',
+      marginBottom: 10,
     },
     containerStyleLm: {
       backgroundColor: 'white',
@@ -98,7 +99,7 @@
       fontSize: 14,
     },
     selectedTextStyleLm: {
-      textAlign: 'center',
+      textAlign: 'left',
       fontSize: 16,
       color: 'black',
     },
@@ -111,6 +112,7 @@
     containerDm: {
       flex: 1,
       backgroundColor: 'black',
+      marginBottom: 10,
     },
     containerStyleDm: {
       backgroundColor: 'black',
@@ -128,10 +130,10 @@
       marginLeft: '0%',
       height: 40,
       backgroundColor: '#111',
-      // borderColor: '#333',
-      // borderWidth: 0.5,
-      borderRadius: 8,
-      paddingHorizontal: 8,
+      borderColor: '#333',
+      borderWidth: 0.5,
+      borderRadius: 5,
+      paddingHorizontal: 10,
     },
     labelDm: {
       position: 'absolute',
@@ -143,7 +145,7 @@
       fontSize: 14,
     },
     selectedTextStyleDm: {
-      textAlign: 'center',
+      textAlign: 'left',
       fontSize: 16,
       color: 'white',
     },
