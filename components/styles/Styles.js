@@ -294,6 +294,8 @@ const Styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: evendarkergray,
     borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: darkergray,
   },
   txt_add_lm: {
     fontSize: 16,
@@ -520,35 +522,35 @@ const Styles = StyleSheet.create({
     flex: 1,
   },
   habit_name_lm: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: black,
   },
   habit_name_completed_lm: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: darkgray,
     textDecorationLine: 'line-through',
   },
   habit_name_dm: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: white,
   },
   habit_name_completed_dm: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: darkgray,
     textDecorationLine: 'line-through',
   },
   habit_name_amount_lm: {
-    fontSize: 18,
-    fontWeight: 'normal',
+    fontSize: 16,
+    fontWeight: 'bold',
     color: blue,
   },
   habit_name_amount_dm: {
-    fontSize: 18,
-    fontWeight: 'normal',
+    fontSize: 16,
+    fontWeight: 'bold',
     color: blue,
   },
   deleteBox: {

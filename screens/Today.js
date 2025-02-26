@@ -170,15 +170,18 @@ export default function Today() {
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
             Today
           </Text>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
-            {/* {format(currentDate, 'EEEE, MMMM dd')} */}
+          {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
             Track Your Habits
-          </Text>
+          </Text> */}
           {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterDateLm : Styles.pageHeaderCenterDateDm}>
             <Feather name="calendar" size={16} color="white" /> {format(currentDate, 'EEEE, MMMM dd')}
           </Text> */}
         </View>
-        <View style={Styles.pageHeaderRight}></View>
+        <View style={Styles.pageHeaderRight}>
+          <Pressable style={Styles.pageHeaderRightPressable}>
+            <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+          </Pressable>
+        </View>
       </View>
 
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>  
