@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Styles, MyTheme } from './components/styles';
 import BottomTabNav from './components/BottomTabNav';
-import AddHabit from './components/AddHabit';
+import AddHabit from './components/habits/AddHabit';
 
 import Progress from './components/Progress';
 import HabitHistory from './components/HabitHistory';

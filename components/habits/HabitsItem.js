@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Text, Pressable, View } from 'react-native';
-import { Styles, LightMode } from './styles/Styles';
-import { ThemeContext } from './Contexts';
+import { Styles, LightMode } from '../styles/Styles';
+import { ThemeContext } from '../Contexts';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Feather } from '@expo/vector-icons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';

@@ -1,7 +1,4 @@
-import { StyleSheet, Platform, StatusBar } from 'react-native';
-
-import { Dimensions } from 'react-native';
-import { WeekCalendar } from 'react-native-calendars';
+import { StyleSheet, Platform, StatusBar, Dimensions } from 'react-native';
 const { height: screenHeight } = Dimensions.get('window');
 
 //////////////////////////////
@@ -56,6 +53,7 @@ const Styles = StyleSheet.create({
     // marginBottom: 120,
   },
   pageHeaderContainer: {
+
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 10,
@@ -1132,4 +1130,4 @@ const Styles = StyleSheet.create({
   },
 });
 
-export {Styles, DarkMode, LightMode}
+export {Styles, LightMode, DarkMode}

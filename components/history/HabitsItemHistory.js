@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { Text, Pressable, View, Animated } from 'react-native';
-import { Styles, LightMode, DarkMode, StylesLightMode, StylesDarkMode } from './styles/Styles';
+import { Styles, LightMode, DarkMode, StylesLightMode, StylesDarkMode } from '../styles/Styles';
 import Checkbox from 'expo-checkbox';
-import { ThemeContext } from './Contexts';
+import { ThemeContext } from '../Contexts';
 import { RectButton, PanGestureHandler, LongPressGestureHandler } from 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';

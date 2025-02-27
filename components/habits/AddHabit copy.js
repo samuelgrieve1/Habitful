@@ -1,10 +1,10 @@
 import React , {useEffect, useState, useContext} from 'react';
 import { StyleSheet, Text, View , Button, TextInput, Pressable, useColorScheme } from 'react-native';
 import Checkbox from 'expo-checkbox';
-import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
+import { app, db, getFirestore, collection, addDoc } from '../../firebase/index';
 import { Feather } from '@expo/vector-icons';
-import { Styles, LightMode } from './styles/Styles';
-import { ThemeContext } from './Contexts';
+import { Styles, LightMode } from '../styles/Styles';
+import { ThemeContext } from '../Contexts';
 
 export default function AddHabit({getHabits, closeModal}) {
   const { theme } = useContext(ThemeContext)

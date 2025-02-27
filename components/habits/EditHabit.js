@@ -1,10 +1,10 @@
 import React , {useEffect, useState, useContext} from 'react';
 import { StyleSheet, Text, View , Button, TextInput, Pressable, useColorScheme } from 'react-native';
 import Checkbox from 'expo-checkbox';
-import { app, db, getFirestore, collection, doc, setDoc, updateDoc, deleteDoc } from '../firebase/index';
+import { app, db, getFirestore, collection, doc, setDoc, updateDoc, deleteDoc } from '../../firebase/index';
 import { Feather } from '@expo/vector-icons';
-import { Styles, LightMode } from './styles/Styles';
-import { ThemeContext } from './Contexts';
+import { Styles, LightMode } from '../styles/Styles';
+import { ThemeContext } from '../Contexts';
 
 export default function EditHabit({getHabits, closeModal, selectedHabitId, habits, deleteHabit, archiveHabit}) {
   const { theme } = useContext(ThemeContext)
@@ -70,6 +70,7 @@ export default function EditHabit({getHabits, closeModal, selectedHabitId, habit
   }, [])
 
   return (
+    
     <View style={{flexDirection: 'row'}}>
       <View style={{width: '100%'}}>
         <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>Edit Habit</Text>

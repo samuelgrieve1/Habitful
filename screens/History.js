@@ -10,10 +10,10 @@ import HistoryCalendar from './history/HistoryCalendar';
 import { parse, compareAsc, formatDistance, differenceInCalendarMonths, endOfYesterday } from 'date-fns';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { format, parseISO } from 'date-fns';
-import EditHistory from '../components/EditHistory';
+import EditHistory from '../components/history/EditHistory';
 import Modal from 'react-native-modal';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
-import EditHabit from '../components/EditHabit';
+import EditHabit from '../components/habits/EditHabit';
 import Collapsible from 'react-native-collapsible';
 
 // const Stack = createStackNavigator({
