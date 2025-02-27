@@ -2,7 +2,7 @@
   import { StyleSheet, Text, View } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
   import AntDesign from '@expo/vector-icons/AntDesign';
-  import { Styles, LightMode } from '../../components/styles/Styles';
+  import { Styles, LightMode } from './styles/Styles';
 
   export default function DropdownMenu ({theme, defaultValue, data, setSelectedMenuItem}) {
     const [value, setValue] = useState(defaultValue);

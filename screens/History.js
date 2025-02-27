@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HistoryList from './history/HistoryList';
 import HistoryCalendar from './history/HistoryCalendar';
 import { parse, compareAsc, formatDistance, differenceInCalendarMonths, endOfYesterday } from 'date-fns';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Calendar, CalendarList} from 'react-native-calendars';
 import { format, parseISO } from 'date-fns';
 import EditHistory from '../components/history/EditHistory';
 import Modal from 'react-native-modal';

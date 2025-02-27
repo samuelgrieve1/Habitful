@@ -13,7 +13,7 @@ import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 import Modal from 'react-native-modal';
 import {Calendar, CalendarList, Agenda, WeekCalendar, CalendarProvider} from 'react-native-calendars';
 import { format } from 'date-fns';
-import DropdownMenu from '../components/utils/DropdownMenu';
+import DropdownMenu from '../components/DropdownMenu';
 // import { getDoc } from 'firebase/firestore';
 
 export default function Habits() {

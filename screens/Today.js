@@ -11,8 +11,8 @@ import { Feather } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
 import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 import Modal from 'react-native-modal';
-import {Calendar, CalendarList, Agenda, WeekCalendar, CalendarProvider} from 'react-native-calendars';
 import { format } from 'date-fns';
+import DateRangeSelector from '../components/DateRangeSelector';
 // import { getDoc } from 'firebase/firestore';
 
 export default function Today() {
@@ -23,6 +23,33 @@ export default function Today() {
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   const [selectedHabitId, setSelectedHabitId] = useState(null)
   const {theme} = useContext(ThemeContext)
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  
+  // Define dates that have events
+  // The key is the date in 'YYYY-MM-DD' format, value is true
+  const eventDates = {
+    '2025-02-26': true,  // Today
+    '2025-02-28': true,  // Friday
+    '2025-03-01': true,  // Saturday
+  };
+  
+  // Optional: Define custom colors for specific event dates
+  const eventColors = {
+    '2025-02-26': '#4CAF50',  // Green
+    '2025-02-28': '#2196F3',  // Blue
+    '2025-03-01': '#9C27B0',  // Purple
+  };
+  
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+    
+    // Check if the selected date has an event
+    const dateString = date.toISOString().split('T')[0];
+    if (eventDates[dateString]) {
+      console.log(`Event exists for ${dateString}!`);
+      // You can add your event handling logic here
+    }
+  };
 
   // Close modal from child component
   const closeModalAdd = () => {
@@ -184,7 +211,26 @@ export default function Today() {
         </View>
       </View>
 
-      <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>  
+      <DateRangeSelector
+        onDateSelect={handleDateSelect}
+        eventDates={eventDates}
+        eventColors={eventColors}
+      />
+
+<View style={styles.selectedDateContainer}>
+        <Text style={styles.selectedDateText}>
+          Selected Date: {selectedDate.toDateString()}
+        </Text>
+        
+        {/* Check if selected date has an event */}
+        {eventDates[selectedDate.toISOString().split('T')[0]] && (
+          <Text style={styles.eventText}>
+            This date has an event!
+          </Text>
+        )}
+      </View>
+
+      <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
         {/* {habits != null &&
           <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
             <Text style={theme == LightMode ? Styles.habits_day_title_sin_lm : Styles.habits_day_title_sin_dm}>{format(currentDate, 'MMMM dd')}</Text>
@@ -294,3 +340,25 @@ export default function Today() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  selectedDateContainer: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+  },
+  selectedDateText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  eventText: {
+    marginTop: 10,
+    color: '#FF5722',
+    fontWeight: '500',
+  },
+});
