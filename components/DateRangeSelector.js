@@ -111,8 +111,11 @@ const DateRangeSelector = ({
   const [selectedDate, setSelectedDate] = useState(today);
   const [currentWeekIndex, setCurrentWeekIndex] = useState(100); // Reduced for better initial load
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(today.toLocaleString('default', { month: 'short' }));
+  const [currentMonth, setCurrentMonth] = useState(today.toLocaleString('default', { month: 'long' }));
   const [isCurrentWeekVisible, setIsCurrentWeekVisible] = useState(true);
+  
+  // Add this new state to track if the month display should be locked to the selected date
+  const [lockMonthToSelection, setLockMonthToSelection] = useState(false);
   
   // Generate weeks more efficiently
   const weeks = useRef([]);
@@ -150,7 +153,9 @@ const DateRangeSelector = ({
   const handleDateSelect = useCallback((date) => {
     setSelectedDate(date);
     setCurrentYear(date.getFullYear());
-    setCurrentMonth(date.toLocaleString('default', { month: 'short' }));
+    setCurrentMonth(date.toLocaleString('default', { month: 'long' }));
+    setLockMonthToSelection(true);
+    
     if (onDateSelect) {
       onDateSelect(date);
     }
@@ -168,45 +173,49 @@ const DateRangeSelector = ({
     }
   }, []);
   
-  // Auto-update year when current date changes
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      if (now.getFullYear() !== currentYear || 
-          now.toLocaleString('default', { month: 'short' }) !== currentMonth) {
-        setCurrentYear(now.getFullYear());
-        setCurrentMonth(now.toLocaleString('default', { month: 'short' }));
-      }
-    }, 1000 * 60); // Check every minute
-    
-    return () => clearInterval(interval);
-  }, [currentYear, currentMonth]);
-  
-  // Update the year and month when scrolling through weeks
+  // UPDATED: Handle scrolling with respect to manual selections
   const handleScroll = useCallback((event) => {
     const xOffset = event.nativeEvent.contentOffset.x;
     const index = Math.floor(xOffset / width);
     
     if (index >= 0 && index < weeks.current.length) {
-      // Use the middle day (Wednesday) of the visible week to determine the year and month
       const visibleWeek = weeks.current[index];
       const midWeekDay = visibleWeek.days[3]; // Wednesday (0-indexed)
-      setCurrentYear(midWeekDay.getFullYear());
-      setCurrentMonth(midWeekDay.toLocaleString('default', { month: 'short' }));
+      
+      // Only update the month/year display if not locked to a selection
+      if (!lockMonthToSelection) {
+        setCurrentYear(midWeekDay.getFullYear());
+        setCurrentMonth(midWeekDay.toLocaleString('default', { month: 'long' }));
+      }
+      
+      // Check if the selected date is visible in this week
+      const isSelectedDateVisible = visibleWeek.days.some(day => 
+        day.getDate() === selectedDate.getDate() &&
+        day.getMonth() === selectedDate.getMonth() &&
+        day.getFullYear() === selectedDate.getFullYear()
+      );
+      
+      // If the selected date is visible, we can unlock the month display
+      if (isSelectedDateVisible) {
+        setLockMonthToSelection(false);
+      }
       
       // Check if the current week (containing today) is visible
       setIsCurrentWeekVisible(weekContainsToday(visibleWeek));
     }
-  }, [weekContainsToday]);
+  }, [weekContainsToday, selectedDate, lockMonthToSelection]);
   
-  // Handler for "Today" button
+  // UPDATED: Handler for "Today" button
   const handleGoToToday = useCallback(() => {
     // Update selected date to today
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
+    
+    // Set all the state in one go
     setSelectedDate(currentDate);
     setCurrentYear(currentDate.getFullYear());
-    setCurrentMonth(currentDate.toLocaleString('default', { month: 'short' }));
+    setCurrentMonth(currentDate.toLocaleString('default', { month: 'long' }));
+    setLockMonthToSelection(false); // No need to lock for today's date
     
     // Scroll to the current week
     if (weekListRef.current) {
@@ -367,7 +376,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   container: {
-    height: 110,
+    height: 90,
     width: '100%',
   },
   weekContainer: {
@@ -388,11 +397,13 @@ const styles = StyleSheet.create({
   selectedDayLm: {
     backgroundColor: '#f5f5f5',
     borderWidth: 0.5,
-    borderColor: '#eee',
+    borderBottomWidth: 0,
+    borderColor: '#ddd',
   },
   selectedDayDm: {
     backgroundColor: '#111',
     borderWidth: 0.5,
+    borderBottomWidth: 0,
     borderColor: '#333',
   },
   todayContainer: {
@@ -403,7 +414,7 @@ const styles = StyleSheet.create({
   },
   dayNameLm: {
     fontSize: 12,
-    color: '#999',
+    color: '#666',
     marginBottom: 4,
   },
   dayNameDm: {

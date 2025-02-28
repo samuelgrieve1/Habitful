@@ -42,6 +42,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
     <>
       <View style={theme == LightMode ? Styles.habit_box_lm : Styles.habit_box_dm}>
         <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
+        <View style={{width:40, height:40, backgroundColor:'white', marginRight: 10, borderRadius: 20, borderWidth: 1, borderColor: '#999'}}></View>
           <View style={Styles.habit_name_box}>
             <Text style={theme == LightMode ? Styles.habit_name_lm : Styles.habit_name_dm}>{habitName}</Text>
             <Text style={theme == LightMode ? Styles.habit_name_amount_lm : Styles.habit_name_amount_dm}>

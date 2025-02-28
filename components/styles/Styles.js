@@ -409,7 +409,8 @@ const Styles = StyleSheet.create({
     marginBottom: 15,
     padding: 10,
     borderWidth: 0.5,
-    borderColor: lightgray,
+    borderBottomWidth: 0,
+    borderColor: gray,
   },
   habit_box_dm: {
     flex: 1,
@@ -418,6 +419,7 @@ const Styles = StyleSheet.create({
     marginBottom: 15,
     padding: 10,
     borderWidth: 0.5,
+    borderBottomWidth: 0,
     borderColor: darkergray,
   },
   habit_box_completed_lm: {

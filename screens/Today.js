@@ -198,9 +198,9 @@ export default function Today() {
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
             Today
           </Text>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+          {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
             Track Your Habits
-          </Text>
+          </Text> */}
           {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterDateLm : Styles.pageHeaderCenterDateDm}>
             <Feather name="calendar" size={16} color="white" /> {format(currentDate, 'EEEE, MMMM dd')}
           </Text> */}
