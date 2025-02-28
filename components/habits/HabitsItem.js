@@ -59,7 +59,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
           >
             {
               () => (
-                <FontAwesome6 name="plus" size={18} color="#4185e7" />
+                <FontAwesome6 name="plus" size={16} color="#4185e7" />
                 // <Text style={{color:'white'}}>
                 //   { (completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100 }%
                 // </Text>

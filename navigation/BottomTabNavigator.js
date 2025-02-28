@@ -83,13 +83,7 @@ export default function BottomTabNavigator() {
         component={Habits}
         options={{
           headerShown: false,
-          //headerShadowVisible: false,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
-          // headerLeft: () => (
-          //   <View style={Styles.header_left}>
-          //     <Feather name="menu" size={24} color={theme == LightMode ? '#757575' : '#757575'} />
-          //   </View>
-          // ),
           headerRight: () => (
             <View style={Styles.header_right}>
               <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
@@ -106,25 +100,15 @@ export default function BottomTabNavigator() {
           tabBarIcon: (tintcolor) => (<Feather name="bar-chart" size={24} color={tintcolor.color} />)
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="History"
         component={History}
         options={{
-          // tabBarActiveTintColor: '#4185e7',
+          tabBarActiveTintColor: '#4185e7',
           headerShown: false,
-          // headerRight: () => (
-          //   <View style={Styles.header_right}>
-          //     {/* <Feather name="filter" size={24} style={theme == LightMode ? Styles.filterHistoryIconLm : Styles.filterHistoryIconDm} /> */}
-          //     <Button
-          //       style={theme == LightMode ? Styles.historyCalendarBtnLm : Styles.historyCalendarBtnDm}
-          //       title="Calendar"
-          //       onPress={() => Alert.alert('Right button pressed')}
-          //     />
-          //   </View>
-          // ),
           tabBarIcon: (tintcolor) => (<Feather name="clock" size={24} color={tintcolor.color} />)
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Settings"
         component={Settings}

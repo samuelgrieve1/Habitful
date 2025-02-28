@@ -53,7 +53,7 @@ const Styles = StyleSheet.create({
     // marginBottom: 120,
   },
   pageHeaderContainer: {
-
+    paddingHorizontal: 20,
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 10,
@@ -64,20 +64,18 @@ const Styles = StyleSheet.create({
   pageHeaderLeft: {
     width: 50,
     paddingTop: 10,
+    alignItems: 'flex-start',
   },
   pageHeaderLeftPressable: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
   },
   pageHeaderRight: {
     width: 50,
     paddingTop: 10,
+    alignItems: 'flex-end',
   },
   pageHeaderRightPressable: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
   },
   pageHeaderCenter: {
     flex: 1,
@@ -193,11 +191,11 @@ const Styles = StyleSheet.create({
   },
   no_habits_container_lm: {
     justifyContent: 'center',
-    height: '100%',
+    //height: '50%',
   },
   no_habits_container_dm: {
-    justifyContent: 'center',
-    height: '100%',
+    //justifyContent: 'center',
+    //height: '50%',
   },
   no_habits_text_lm: {
     color: black,
@@ -304,52 +302,6 @@ const Styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: blue,
-  },
-  btn_add_blue_container_lm: {
-    justifyContent: 'center',
-    alignItems: 'center' 
-  },
-  btn_add_blue_container_dm: {
-    justifyContent: 'center',
-    alignItems: 'center' 
-  },
-  btn_add_blue_lm: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 150,
-    height: 50,
-    marginTop: 30,
-    borderWidth: 1,
-    borderColor: lightgray,
-    //borderColor: blue,
-    borderRadius: 10,
-  },
-  btn_add_blue_dm: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 150,
-    height: 50,
-    marginTop: 30,
-    borderWidth: 1,
-    borderColor: evendarkergray,
-    //borderColor: blue,
-    borderRadius: 10,
-  },
-  txt_add_blue_lm: {
-    fontSize: 18,
-    lineHeight: 24,
-    fontWeight: '600',
-    letterSpacing: 0.25,
-    color: blue,
-    padding: 10,
-  },
-  txt_add_blue_dm: {
-    fontSize: 18,
-    lineHeight: 24,
-    fontWeight: '600',
-    letterSpacing: 0.25,
-    color: blue,
-    padding: 10,
   },
   // btn_edit: {
   //   width: '100%',

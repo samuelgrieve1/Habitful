@@ -13,6 +13,7 @@ import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
 import Modal from 'react-native-modal';
 import { format } from 'date-fns';
 import DateRangeSelector from '../components/DateRangeSelector';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 // import { getDoc } from 'firebase/firestore';
 
 export default function Today() {
@@ -197,19 +198,21 @@ export default function Today() {
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
             Today
           </Text>
-          {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
             Track Your Habits
-          </Text> */}
+          </Text>
           {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterDateLm : Styles.pageHeaderCenterDateDm}>
             <Feather name="calendar" size={16} color="white" /> {format(currentDate, 'EEEE, MMMM dd')}
           </Text> */}
         </View>
         <View style={Styles.pageHeaderRight}>
           <Pressable style={Styles.pageHeaderRightPressable}>
-            <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+            <FontAwesome6 name="plus" size={22} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
           </Pressable>
         </View>
       </View>
+
+      <View style={{paddingVertical: 0, paddingHorizontal: 20, flex: 1}}>
 
       <DateRangeSelector
         onDateSelect={handleDateSelect}
@@ -217,20 +220,17 @@ export default function Today() {
         eventColors={eventColors}
       />
 
-<View style={styles.selectedDateContainer}>
+      {/* <View style={styles.selectedDateContainer}>
         <Text style={styles.selectedDateText}>
           Selected Date: {selectedDate.toDateString()}
         </Text>
-        
-        {/* Check if selected date has an event */}
         {eventDates[selectedDate.toISOString().split('T')[0]] && (
           <Text style={styles.eventText}>
             This date has an event!
           </Text>
         )}
-      </View>
+      </View> */}
 
-      <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
         {/* {habits != null &&
           <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
             <Text style={theme == LightMode ? Styles.habits_day_title_sin_lm : Styles.habits_day_title_sin_dm}>{format(currentDate, 'MMMM dd')}</Text>
@@ -291,21 +291,24 @@ export default function Today() {
             <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
               to get started
             </Text>
-            <View style={theme == LightMode ? Styles.btn_add_blue_container_lm : Styles.btn_add_blue_container_dm}>
-              <Pressable style={theme == LightMode ? Styles.btn_add_blue_lm : Styles.btn_add_blue_dm} onPress={() => setModalVisibleAdd(true)}>
-                <Text style={theme == LightMode ? Styles.txt_add_blue_lm : Styles.txt_add_blue_dm}>Add Habit</Text>
+            <View style={Styles.btn_add_box}>
+              <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+                <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
               </Pressable>
             </View>
           </View>
         }
+
       </View>
 
       {/* ADD HABIT FORM */}
       <Modal
         style={Styles.modal}
-        propagateSwipe={true}
+        // propagateSwipe={true}
         isVisible={modalVisibleAdd}
-        onBackdropPress={() => setModalVisibleAdd(false)}
+        //onBackdropPress={() => setModalVisibleAdd(false)}
+        onSwipeComplete={() => setModalVisibleAdd(false)}
+        swipeDirection="down"
       >
         <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
           <ScrollView>

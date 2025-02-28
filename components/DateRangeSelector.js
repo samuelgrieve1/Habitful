@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback, memo } from 'react';
+import { ThemeContext } from './Contexts';
+import { LightMode } from './styles/Styles';
+import React, { useState, useRef, useEffect, useCallback, memo, useContext } from 'react';
 import {
   View,
   Text,
@@ -8,7 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-const { width } = Dimensions.get('window');
+const width = Dimensions.get('window').width - 40;
 
 // Memoized day component for better performance
 const Day = memo(({ 
@@ -19,6 +21,7 @@ const Day = memo(({
   eventDates, // New prop for dates with events
   eventColors, // New prop for custom event indicator colors
 }) => {
+  const {theme} = useContext(ThemeContext)
   const isSelected = 
     date.getDate() === selectedDate.getDate() &&
     date.getMonth() === selectedDate.getMonth() &&
@@ -33,27 +36,27 @@ const Day = memo(({
   const dateString = date.toISOString().split('T')[0];
   const hasEvent = eventDates && eventDates[dateString];
   const eventColor = hasEvent && eventColors && eventColors[dateString] 
-    ? eventColors[dateString] 
-    : '#FF5722'; // Default orange color for events
+    ? '#4185e7'
+    // ? eventColors[dateString] 
+    : '#4185e7'; // Default orange color for events
   
   // Format functions
   const formatDate = date.getDate().toString();
-  const formatMonth = date.toLocaleString('default', { month: 'short' });
   const formatDayName = date.toLocaleString('default', { weekday: 'short' });
   
   return (
     <TouchableOpacity
       style={[
         styles.dayContainer,
-        isSelected && styles.selectedDay,
+        isSelected && (theme == LightMode ? styles.selectedDayLm : styles.selectedDayDm),
         isTodayDate && styles.todayContainer,
       ]}
       onPress={() => onSelectDate(date)}
       activeOpacity={0.7}
     >
-      <Text style={styles.dayName}>{formatDayName}</Text>
-      <View style={[styles.dateCircle, isSelected && styles.selectedDateCircle]}>
-        <Text style={[styles.dateText, isSelected && styles.selectedDateText]}>
+      <Text style={theme == LightMode ? styles.dayNameLm : styles.dayNameDm}>{formatDayName}</Text>
+      <View style={[theme == LightMode ? styles.dateCircleLm : styles.dateCircleDm, isSelected && styles.selectedDateCircle]}>
+        <Text style={theme == LightMode ? [styles.dateTextLm, isSelected && styles.selectedDateTextLm] : [styles.dateTextDm, isSelected && styles.selectedDateTextDm]}>
           {formatDate}
         </Text>
         
@@ -67,7 +70,6 @@ const Day = memo(({
           />
         )}
       </View>
-      <Text style={styles.monthText}>{formatMonth}</Text>
     </TouchableOpacity>
   );
 });
@@ -97,6 +99,7 @@ const DateRangeSelector = ({
   eventDates = {}, // Format: { '2025-02-26': true, '2025-02-28': true }
   eventColors = {}, // Format: { '2025-02-26': '#FF5722', '2025-02-28': '#4CAF50' }
 }) => {
+  const {theme} = useContext(ThemeContext)
   // Get current date
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -107,6 +110,9 @@ const DateRangeSelector = ({
   // State variables
   const [selectedDate, setSelectedDate] = useState(today);
   const [currentWeekIndex, setCurrentWeekIndex] = useState(100); // Reduced for better initial load
+  const [currentYear, setCurrentYear] = useState(today.getFullYear());
+  const [currentMonth, setCurrentMonth] = useState(today.toLocaleString('default', { month: 'short' }));
+  const [isCurrentWeekVisible, setIsCurrentWeekVisible] = useState(true);
   
   // Generate weeks more efficiently
   const weeks = useRef([]);
@@ -131,9 +137,20 @@ const DateRangeSelector = ({
     }
   }
   
+  // Function to check if a week contains today's date
+  const weekContainsToday = useCallback((week) => {
+    return week.days.some(date => 
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
+  }, [today]);
+  
   // Handle date selection with useCallback for memoization
   const handleDateSelect = useCallback((date) => {
     setSelectedDate(date);
+    setCurrentYear(date.getFullYear());
+    setCurrentMonth(date.toLocaleString('default', { month: 'short' }));
     if (onDateSelect) {
       onDateSelect(date);
     }
@@ -150,6 +167,63 @@ const DateRangeSelector = ({
       }, 100);
     }
   }, []);
+  
+  // Auto-update year when current date changes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      if (now.getFullYear() !== currentYear || 
+          now.toLocaleString('default', { month: 'short' }) !== currentMonth) {
+        setCurrentYear(now.getFullYear());
+        setCurrentMonth(now.toLocaleString('default', { month: 'short' }));
+      }
+    }, 1000 * 60); // Check every minute
+    
+    return () => clearInterval(interval);
+  }, [currentYear, currentMonth]);
+  
+  // Update the year and month when scrolling through weeks
+  const handleScroll = useCallback((event) => {
+    const xOffset = event.nativeEvent.contentOffset.x;
+    const index = Math.floor(xOffset / width);
+    
+    if (index >= 0 && index < weeks.current.length) {
+      // Use the middle day (Wednesday) of the visible week to determine the year and month
+      const visibleWeek = weeks.current[index];
+      const midWeekDay = visibleWeek.days[3]; // Wednesday (0-indexed)
+      setCurrentYear(midWeekDay.getFullYear());
+      setCurrentMonth(midWeekDay.toLocaleString('default', { month: 'short' }));
+      
+      // Check if the current week (containing today) is visible
+      setIsCurrentWeekVisible(weekContainsToday(visibleWeek));
+    }
+  }, [weekContainsToday]);
+  
+  // Handler for "Today" button
+  const handleGoToToday = useCallback(() => {
+    // Update selected date to today
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    setSelectedDate(currentDate);
+    setCurrentYear(currentDate.getFullYear());
+    setCurrentMonth(currentDate.toLocaleString('default', { month: 'short' }));
+    
+    // Scroll to the current week
+    if (weekListRef.current) {
+      weekListRef.current.scrollToIndex({
+        index: 100, // Same as currentWeekIndex initial value
+        animated: true,
+      });
+    }
+    
+    // Set current week to visible
+    setIsCurrentWeekVisible(true);
+    
+    // Call onDateSelect callback if provided
+    if (onDateSelect) {
+      onDateSelect(currentDate);
+    }
+  }, [onDateSelect]);
   
   // Handle changes to eventDates
   useEffect(() => {
@@ -190,27 +264,108 @@ const DateRangeSelector = ({
   const keyExtractor = useCallback((item) => item.id, []);
   
   return (
-    <View style={styles.container}>
-      <FlatList
-        ref={weekListRef}
-        data={weeks.current}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        renderItem={renderWeek}
-        keyExtractor={keyExtractor}
-        onScrollToIndexFailed={handleScrollToIndexFailed}
-        initialNumToRender={1}
-        maxToRenderPerBatch={2}
-        windowSize={3}
-        getItemLayout={getItemLayout}
-        removeClippedSubviews={true}
-      />
+    <View style={styles.containerWithHeader}>
+      {/* Year and Month header with conditional Today button */}
+      <View style={styles.yearHeader}>
+        <View style={styles.yearHeaderLeft}>
+          {/* Empty view for balance */}
+          {isCurrentWeekVisible && <View style={styles.placeholderWidth} />}
+        </View>
+        
+        <Text style={theme == LightMode ? styles.yearTextLm : styles.yearTextDm}>{currentMonth} {currentYear}</Text>
+        
+        <View style={styles.yearHeaderRight}>
+          {/* Today button - only visible when not on the current week */}
+          {!isCurrentWeekVisible && (
+            <TouchableOpacity 
+              style={styles.todayButton}
+              onPress={handleGoToToday}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.todayButtonText}>Today</Text>
+            </TouchableOpacity>
+          )}
+          {isCurrentWeekVisible && <View style={styles.placeholderWidth} />}
+        </View>
+      </View>
+      
+      <View style={styles.container}>
+        <FlatList
+          ref={weekListRef}
+          data={weeks.current}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          renderItem={renderWeek}
+          keyExtractor={keyExtractor}
+          onScrollToIndexFailed={handleScrollToIndexFailed}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
+          initialNumToRender={1}
+          maxToRenderPerBatch={2}
+          windowSize={3}
+          getItemLayout={getItemLayout}
+          removeClippedSubviews={true}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  containerWithHeader: {
+    width: '100%',
+  },
+  yearHeader: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#e0e0e0',
+    //backgroundColor: '#f8f8f8',
+  },
+  yearHeaderLeft: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  yearHeaderRight: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  placeholderWidth: {
+    width: 70, // Approximate width of the Today button
+  },
+  yearTextLm: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000',
+    textAlign: 'center',
+  },
+  yearTextDm: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  todayButton: {
+    //backgroundColor: '#3498db',
+    //paddingVertical: 3,
+    //paddingHorizontal: 12,
+    //borderRadius: 16,
+    //elevation: 2,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 1.5,
+  },
+  todayButtonText: {
+    color: '#4185e7',
+    fontSize: 14,
+    fontWeight: '600',
+  },
   container: {
     height: 110,
     width: '100%',
@@ -219,7 +374,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: width,
-    paddingHorizontal: 10,
+    paddingHorizontal: 0,
   },
   dayWrapper: {
     flex: 1,
@@ -227,44 +382,73 @@ const styles = StyleSheet.create({
   },
   dayContainer: {
     alignItems: 'center',
-    padding: 8,
+    padding: 5,
     borderRadius: 10,
   },
-  selectedDay: {
-    backgroundColor: '#f0f0f0',
+  selectedDayLm: {
+    backgroundColor: '#f5f5f5',
+    borderWidth: 0.5,
+    borderColor: '#eee',
+  },
+  selectedDayDm: {
+    backgroundColor: '#111',
+    borderWidth: 0.5,
+    borderColor: '#333',
   },
   todayContainer: {
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
     borderBottomWidth: 2,
-    borderBottomColor: '#3498db',
+    borderBottomColor: '#4185e7',
   },
-  dayName: {
+  dayNameLm: {
     fontSize: 12,
-    color: '#666',
+    color: '#999',
     marginBottom: 4,
   },
-  dateCircle: {
+  dayNameDm: {
+    fontSize: 12,
+    color: '#999',
+    marginBottom: 4,
+  },
+  dateCircleLm: {
     width: 36,
     height: 36,
     borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#efefef',
+    marginBottom: 4,
+    position: 'relative', // For positioning the event indicator
+  },
+  dateCircleDm: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#111',
     marginBottom: 4,
     position: 'relative', // For positioning the event indicator
   },
   selectedDateCircle: {
-    backgroundColor: '#3498db',
+    backgroundColor: '#4185e7',
   },
-  dateText: {
+  dateTextLm: {
     fontSize: 16,
     fontWeight: '600',
+    color: '#000',
   },
-  selectedDateText: {
-    color: 'white',
+  dateTextDm: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#fff',
   },
-  monthText: {
-    fontSize: 10,
-    color: '#666',
+  selectedDateTextLm: {
+    color: '#fff',
+  },
+  selectedDateTextDm: {
+    color: '#fff',
   },
   eventIndicator: {
     position: 'absolute',
@@ -272,7 +456,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#FF5722', // Default color (overridden by eventColors)
+    backgroundColor: '#4185e7', // Default color (overridden by eventColors)
   },
 });
 

@@ -138,16 +138,18 @@ export default function Habits() {
 
       <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
         
-        <DropdownMenu
-          theme={theme}
-          defaultValue={'all'}
-          data={[
-            {label: 'All', value: 'all'},
-            {label: 'Active', value: 'active'},
-            {label: 'Archived', value: 'archived'},
-          ]}
-          setSelectedMenuItem={setSelectedHabitType}
-        />
+        {habits != null && habits != 'no habits' &&
+          <DropdownMenu
+            theme={theme}
+            defaultValue={'all'}
+            data={[
+              {label: 'All', value: 'all'},
+              {label: 'Active', value: 'active'},
+              {label: 'Archived', value: 'archived'},
+            ]}
+            setSelectedMenuItem={setSelectedHabitType}
+          />
+        }
 
         {/* ALL HABITS */}
         {habits != null && habits != 'no habits' && selectedHabitType == 'all' &&
@@ -260,13 +262,14 @@ export default function Habits() {
             <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
               to get started
             </Text>
-            <View style={theme == LightMode ? Styles.btn_add_blue_container_lm : Styles.btn_add_blue_container_dm}>
-              <Pressable style={theme == LightMode ? Styles.btn_add_blue_lm : Styles.btn_add_blue_dm} onPress={() => setModalVisibleAdd(true)}>
-                <Text style={theme == LightMode ? Styles.txt_add_blue_lm : Styles.txt_add_blue_dm}>Add Habit</Text>
+            <View style={Styles.btn_add_box}>
+              <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
+                <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
               </Pressable>
             </View>
           </View>
         }
+
       </View>
 
       {/* ADD HABIT FORM */}
