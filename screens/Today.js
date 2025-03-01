@@ -14,6 +14,7 @@ import Modal from 'react-native-modal';
 import { format } from 'date-fns';
 import DateRangeSelector from '../components/DateRangeSelector';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { LinearGradient } from 'expo-linear-gradient';
 // import { getDoc } from 'firebase/firestore';
 
 export default function Today() {
@@ -212,13 +213,15 @@ export default function Today() {
         </View>
       </View>
 
-      <View style={{paddingVertical: 0, paddingHorizontal: 20, flex: 1}}>
+      <View style={{paddingVertical: 0, paddingHorizontal: 0, flex: 1}}>
 
+            <View style={{paddingHorizontal: 10}}>
       <DateRangeSelector
         onDateSelect={handleDateSelect}
         eventDates={eventDates}
         eventColors={eventColors}
       />
+      </View>
 
       {/* <View style={styles.selectedDateContainer}>
         <Text style={styles.selectedDateText}>

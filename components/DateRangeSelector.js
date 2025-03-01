@@ -180,7 +180,7 @@ const DateRangeSelector = ({
     
     if (index >= 0 && index < weeks.current.length) {
       const visibleWeek = weeks.current[index];
-      const midWeekDay = visibleWeek.days[3]; // Wednesday (0-indexed)
+      const midWeekDay = visibleWeek.days[0]; // Wednesday (0-indexed)
       
       // Only update the month/year display if not locked to a selection
       if (!lockMonthToSelection) {
@@ -396,21 +396,21 @@ const styles = StyleSheet.create({
   },
   selectedDayLm: {
     backgroundColor: '#f5f5f5',
-    borderWidth: 0.5,
-    borderBottomWidth: 0,
-    borderColor: '#ddd',
+    // borderWidth: 0.5,
+    // borderBottomWidth: 0,
+    // borderColor: '#ddd',
   },
   selectedDayDm: {
     backgroundColor: '#111',
-    borderWidth: 0.5,
-    borderBottomWidth: 0,
-    borderColor: '#333',
+    // borderWidth: 0.5,
+    // borderBottomWidth: 0,
+    // borderColor: '#333',
   },
   todayContainer: {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    borderBottomWidth: 2,
-    borderBottomColor: '#4185e7',
+    // borderBottomLeftRadius: 0,
+    // borderBottomRightRadius: 0,
+    //borderBottomWidth: 1,
+    //borderBottomColor: '#4185e7',
   },
   dayNameLm: {
     fontSize: 12,

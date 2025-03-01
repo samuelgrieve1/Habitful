@@ -22,7 +22,7 @@ export default function Settings() {
         <View style={Styles.pageHeaderRight}></View>
       </View>
 
-      <ScrollView style={{paddingVertical: 20, paddingHorizontal: 20}}>
+      <ScrollView style={{paddingVertical: 20, paddingHorizontal: 0}}>
         <View style={Styles.setting}>
           <DarkModeToggle />
           <Text>Hide "+ Add Habit" Button</Text>

@@ -136,7 +136,7 @@ export default function Habits() {
         </View>
       </View>
 
-      <View style={{paddingVertical: 20, paddingHorizontal: 20, flex: 1}}>
+      <View style={{paddingVertical: 20, paddingHorizontal: 0, flex: 1}}>
         
         {habits != null && habits != 'no habits' &&
           <DropdownMenu

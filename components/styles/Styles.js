@@ -51,6 +51,7 @@ const Styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     // marginBottom: 120,
+    paddingHorizontal: 10,
   },
   pageHeaderContainer: {
     paddingHorizontal: 20,
@@ -166,6 +167,7 @@ const Styles = StyleSheet.create({
   // Habits.js
   //////////////////////////////
   habitsContainer: {
+    //overflow: 'visible',
   },
   one_hundred_percent_box_lm: {
     backgroundColor: green,
@@ -404,23 +406,25 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   habit_box_lm: {
     flex: 1,
-    borderRadius: 10,
-    backgroundColor: lightergray,
-    marginBottom: 15,
-    padding: 10,
-    borderWidth: 0.5,
-    borderBottomWidth: 0,
-    borderColor: gray,
+    // borderRadius: 40,
+    //backgroundColor: lightergray,
+    // marginBottom: 5,
+    // padding: 10,
+    paddingHorizontal: 0,
+    paddingVertical: 15,
+    borderTopWidth: 0.5,
+    borderTopColor: lightgray,
   },
   habit_box_dm: {
     flex: 1,
-    borderRadius: 10,
-    backgroundColor: evendarkergray,
-    marginBottom: 15,
-    padding: 10,
-    borderWidth: 0.5,
-    borderBottomWidth: 0,
-    borderColor: darkergray,
+    // borderRadius: 40,
+    //backgroundColor: evendarkergray,
+    // marginBottom: 5,
+    // padding: 10,
+    paddingHorizontal: 0,
+    paddingVertical: 15,
+    borderTopWidth: 0.5,
+    borderTopColor: darkergray,
   },
   habit_box_completed_lm: {
     flex: 1,
@@ -457,6 +461,39 @@ const Styles = StyleSheet.create({
   },
   habit_dm: {
     flexDirection: 'row',
+  },
+  habit_icon_lm: {
+    width:40,
+    height:40,
+    backgroundColor: 'rgba(65, 133, 231, 0.2)',
+    marginRight: 10,
+    borderRadius: 20,
+    borderWidth: 0,
+    borderColor: lightgray,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: black,
+  },
+  habit_icon_dm: {
+    width:40,
+    height:40,
+    backgroundColor: 'rgba(65, 133, 231, 0.2)',
+    marginRight: 10,
+    borderRadius: 20,
+    borderWidth: 0,
+    borderColor: darkergray,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  habit_icon_txt_lm: {
+    color: 'rgba(65, 133, 231, 1)',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  habit_icon_txt_dm: {
+    color: 'rgba(65, 133, 231, 1)',
+    fontSize: 18,
+    fontWeight: '600',
   },
   habit_checkbox_box: {
     marginTop: 7,
@@ -498,12 +535,12 @@ const Styles = StyleSheet.create({
   habit_name_amount_lm: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: blue,
+    color: '#aaa',
   },
   habit_name_amount_dm: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: blue,
+    color: darkgray,
   },
   deleteBox: {
     height: 40,
