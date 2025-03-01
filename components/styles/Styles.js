@@ -465,7 +465,7 @@ const Styles = StyleSheet.create({
   habit_icon_lm: {
     width:40,
     height:40,
-    backgroundColor: 'rgba(65, 133, 231, 0.2)',
+    backgroundColor: 'rgba(65, 133, 231, 0.1)',
     marginRight: 10,
     borderRadius: 20,
     borderWidth: 0,
@@ -477,7 +477,7 @@ const Styles = StyleSheet.create({
   habit_icon_dm: {
     width:40,
     height:40,
-    backgroundColor: 'rgba(65, 133, 231, 0.2)',
+    backgroundColor: 'rgba(65, 133, 231, 0.1)',
     marginRight: 10,
     borderRadius: 20,
     borderWidth: 0,

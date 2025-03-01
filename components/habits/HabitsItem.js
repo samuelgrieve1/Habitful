@@ -33,7 +33,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
   const completionData = {
     completion: {
       '01-01-1990': {
-        'habitOne': 1
+        'habitOne': 0
       }
     }
   }
@@ -54,10 +54,9 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
           >
             {
               () => (
-                <Text>{habitName[0]}</Text>
-                // <Text style={{color:'white'}}>
-                //   { (completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100 }%
-                // </Text>
+                <Text style={{color: theme == LightMode ? 'black' : 'white', fontSize: 10, fontWeight: '600'}}>
+                  { (completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100 }%
+                </Text>
               )
             }
           </AnimatedCircularProgress>
