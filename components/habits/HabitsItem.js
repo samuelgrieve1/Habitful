@@ -33,48 +33,50 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
   const completionData = {
     completion: {
       '01-01-1990': {
-        'habitOne': 0
+        'habitOne': 2
       }
     }
   }
   
   return (
     <>
+      {/* <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm} /> */}
       <View style={theme == LightMode ? Styles.habit_box_lm : Styles.habit_box_dm}>
         <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
-        <View style={{marginRight: 10}}>
-        <AnimatedCircularProgress
-            rotation={0}
-            size={40}
-            width={5}
-            fill={(completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100}
-            tintColor="#4185e7"
-            onAnimationComplete={() => console.log('onAnimationComplete')}
-            backgroundColor={theme == LightMode ? '#eee' : '#222'}
-          >
-            {
-              () => (
-                <Text style={{color: theme == LightMode ? 'black' : 'white', fontSize: 10, fontWeight: '600'}}>
-                  { (completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100 }%
-                </Text>
-              )
-            }
-          </AnimatedCircularProgress>
-          </View>
+          <View style={{marginRight: 20}}>
+            <AnimatedCircularProgress
+                rotation={0}
+                size={50}
+                width={5}
+                fill={(completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100}
+                tintColor="#4185e7"
+                onAnimationComplete={() => console.log('onAnimationComplete')}
+                backgroundColor={theme == LightMode ? 'rgba(126, 126, 126, 0.1)' : 'rgba(126, 126, 126, 0.1)'}
+              >
+                {
+                  () => (
+                    <Text style={{color: theme == LightMode ? '#4185e7' : '#4185e7', fontSize: 10, fontWeight: '600'}}>
+                      { (completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100 }%
+                    </Text>
+                  )
+                }
+              </AnimatedCircularProgress>
+            </View>
           <View style={Styles.habit_name_box}>
-            <Text style={theme == LightMode ? Styles.habit_name_lm : Styles.habit_name_dm}>{habitName}</Text>
+            <Text style={theme == LightMode ? Styles.habit_name_lm : Styles.habit_name_dm}>
+              {habitName}
+            </Text>
             <Text style={theme == LightMode ? Styles.habit_name_amount_lm : Styles.habit_name_amount_dm}>
               {completionData.completion['01-01-1990']['habitOne']} / {habitData.amount}
             </Text>
           </View>
           <View style={theme == LightMode ? Styles.habit_icon_lm : Styles.habit_icon_dm}>
-          <Text style={theme == LightMode ? Styles.habit_icon_txt_lm : Styles.habit_icon_txt_dm}>
-          <FontAwesome6 name="plus" size={16} color="#4185e7" />
-          </Text>
-        </View>
+            <Text style={theme == LightMode ? Styles.habit_icon_txt_lm : Styles.habit_icon_txt_dm}>
+              <FontAwesome6 name="plus" size={16} color="#4185e7" />
+            </Text>
+          </View>
         </View>
       </View>
-      
     </>
   )
 }

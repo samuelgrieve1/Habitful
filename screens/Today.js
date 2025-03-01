@@ -191,17 +191,19 @@ export default function Today() {
     <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}>
-          {/* <Pressable style={Styles.pageHeaderLeftPressable}>
-            <Feather name="refresh-cw" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
-          </Pressable> */}
+          <Pressable style={Styles.pageHeaderLeftPressable}>
+            <Text style={theme == LightMode ? Styles.pageHeaderLeftTxtLm : Styles.pageHeaderLeftTxtDm}>
+              Edit
+            </Text>
+          </Pressable>
         </View>
         <View style={Styles.pageHeaderCenter}>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
             Today
           </Text>
-          {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
             Track Your Habits
-          </Text> */}
+          </Text>
           {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterDateLm : Styles.pageHeaderCenterDateDm}>
             <Feather name="calendar" size={16} color="white" /> {format(currentDate, 'EEEE, MMMM dd')}
           </Text> */}
@@ -263,6 +265,11 @@ export default function Today() {
 
         {habits != null && habits != 'no habits' &&
           <FlatList
+            ItemSeparatorComponent={
+                <View
+                  style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}
+                />
+            }
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={({item}) => {

@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { Image, Button, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { ThemeContext } from '../components/Contexts';
 
@@ -78,7 +79,7 @@ export default function BottomTabNavigator() {
           // ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Habits"
         component={Habits}
         options={{
@@ -90,7 +91,7 @@ export default function BottomTabNavigator() {
             </View>
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Progress"
         component={Progress}

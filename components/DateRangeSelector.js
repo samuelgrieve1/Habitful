@@ -54,7 +54,7 @@ const Day = memo(({
       onPress={() => onSelectDate(date)}
       activeOpacity={0.7}
     >
-      <Text style={theme == LightMode ? styles.dayNameLm : styles.dayNameDm}>{formatDayName}</Text>
+      <Text style={theme == LightMode ? [styles.dayNameLm, isSelected && styles.selectedDayNameLm] : [styles.dayNameDm, isSelected && styles.selectedDayNameDm]}>{formatDayName}</Text>
       <View style={[theme == LightMode ? styles.dateCircleLm : styles.dateCircleDm, isSelected && styles.selectedDateCircle]}>
         <Text style={theme == LightMode ? [styles.dateTextLm, isSelected && styles.selectedDateTextLm] : [styles.dateTextDm, isSelected && styles.selectedDateTextDm]}>
           {formatDate}
@@ -395,13 +395,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   selectedDayLm: {
-    backgroundColor: '#f5f5f5',
+    //backgroundColor: 'rgba(65, 133, 231, 0.1)',
+    backgroundColor: 'rgba(126, 126, 126, 0.1)',
     // borderWidth: 0.5,
     // borderBottomWidth: 0,
     // borderColor: '#ddd',
   },
   selectedDayDm: {
-    backgroundColor: '#111',
+    //backgroundColor: 'rgba(65, 133, 231, 0.1)',
+    backgroundColor: 'rgba(126, 126, 126, 0.1)',
     // borderWidth: 0.5,
     // borderBottomWidth: 0,
     // borderColor: '#333',
@@ -415,12 +417,20 @@ const styles = StyleSheet.create({
   dayNameLm: {
     fontSize: 12,
     color: '#666',
-    marginBottom: 4,
+    marginBottom: 0,
   },
   dayNameDm: {
     fontSize: 12,
     color: '#999',
-    marginBottom: 4,
+    marginBottom: 0,
+  },
+  selectedDayNameLm: {
+    //color: '#000',
+    color: 'rgba(65, 133, 231, 1)',
+  },
+  selectedDayNameDm: {
+    //color: '#fff',
+    color: 'rgba(65, 133, 231, 1)',
   },
   dateCircleLm: {
     width: 36,
@@ -428,7 +438,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#efefef',
+    //backgroundColor: '#efefef',
     marginBottom: 4,
     position: 'relative', // For positioning the event indicator
   },
@@ -438,28 +448,29 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#111',
+    //backgroundColor: '#111',
     marginBottom: 4,
     position: 'relative', // For positioning the event indicator
   },
   selectedDateCircle: {
-    backgroundColor: '#4185e7',
+    //backgroundColor: 'rgb(255, 255, 255)',
+    //backgroundColor: 'rgba(65, 133, 231, 0.1)',
   },
   dateTextLm: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
     color: '#000',
   },
   dateTextDm: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
     color: '#fff',
   },
   selectedDateTextLm: {
-    color: '#fff',
+    color: 'rgba(65, 133, 231, 1)',
   },
   selectedDateTextDm: {
-    color: '#fff',
+    color: 'rgba(65, 133, 231, 1)',
   },
   eventIndicator: {
     position: 'absolute',

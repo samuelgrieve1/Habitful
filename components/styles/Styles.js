@@ -67,6 +67,13 @@ const Styles = StyleSheet.create({
     paddingTop: 10,
     alignItems: 'flex-start',
   },
+  pageHeaderLeftTxtLm: {
+    color: blue,
+  },
+  pageHeaderLeftTxtDm: {
+    color: blue,
+    fontSize: 18,
+  },
   pageHeaderLeftPressable: {
     flex: 1,
   },
@@ -404,6 +411,12 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // HabitsItem.js
   //////////////////////////////
+  habitSeparator: {
+    //width: '83%',
+    marginLeft: '17%',
+    height: 1,
+    backgroundColor: '#222',
+  },
   habit_box_lm: {
     flex: 1,
     // borderRadius: 40,
@@ -412,7 +425,7 @@ const Styles = StyleSheet.create({
     // padding: 10,
     paddingHorizontal: 0,
     paddingVertical: 15,
-    borderTopWidth: 0.5,
+    //borderTopWidth: 0.5,
     borderTopColor: lightgray,
   },
   habit_box_dm: {
@@ -423,7 +436,7 @@ const Styles = StyleSheet.create({
     // padding: 10,
     paddingHorizontal: 0,
     paddingVertical: 15,
-    borderTopWidth: 0.5,
+    //borderTopWidth: 0.5,
     borderTopColor: darkergray,
   },
   habit_box_completed_lm: {
@@ -447,14 +460,14 @@ const Styles = StyleSheet.create({
     borderColor: darkergray,
   },
   habit_separator_lm: {
-    flexDirection: 'row',
-    height: 1,
-    backgroundColor: lightgray,
+    marginLeft: 70,
+    borderTopColor: '#ededed',
+    borderTopWidth: 1,
   },
   habit_separator_dm: {
-    flexDirection: 'row',
-    height: 1,
-    backgroundColor: evendarkergray,
+    marginLeft: 70,
+    borderTopColor: '#121212',
+    borderTopWidth: 1,
   },
   habit_lm: {
     flexDirection: 'row',
@@ -463,23 +476,24 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
   },
   habit_icon_lm: {
-    width:40,
-    height:40,
-    backgroundColor: 'rgba(65, 133, 231, 0.1)',
-    marginRight: 10,
-    borderRadius: 20,
+    width:50,
+    height:50,
+    //backgroundColor: 'rgba(65, 133, 231, 0.1)',
+    backgroundColor: 'rgba(126, 126, 126, 0.1)',
+    // marginRight: 10,
+    borderRadius: 25,
     borderWidth: 0,
     borderColor: lightgray,
     alignItems: 'center',
     justifyContent: 'center',
-    color: black,
   },
   habit_icon_dm: {
-    width:40,
-    height:40,
-    backgroundColor: 'rgba(65, 133, 231, 0.1)',
-    marginRight: 10,
-    borderRadius: 20,
+    width:50,
+    height:50,
+    //backgroundColor: 'rgba(65, 133, 231, 0.1)',
+    backgroundColor: 'rgba(126, 126, 126, 0.1)',
+    // marginRight: 10,
+    borderRadius: 25,
     borderWidth: 0,
     borderColor: darkergray,
     alignItems: 'center',
@@ -523,8 +537,8 @@ const Styles = StyleSheet.create({
   },
   habit_name_dm: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: white,
+    fontWeight: '600',
+    color: '#fff',
   },
   habit_name_completed_dm: {
     fontSize: 16,
@@ -534,13 +548,15 @@ const Styles = StyleSheet.create({
   },
   habit_name_amount_lm: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#aaa',
+    fontWeight: '300',
+    color: 'rgba(126, 126, 126, 1)',
+    //color: 'rgba(65, 133, 231, 1)',
   },
   habit_name_amount_dm: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: darkgray,
+    fontWeight: '300',
+    color: 'rgba(126, 126, 126, 1)',
+    //color: 'rgba(65, 133, 231, 1)',
   },
   deleteBox: {
     height: 40,
