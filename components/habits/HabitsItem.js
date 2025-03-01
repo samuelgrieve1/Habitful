@@ -5,6 +5,7 @@ import { ThemeContext } from '../Contexts';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Feather } from '@expo/vector-icons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function HabitsItem({habitId, habitName, isCompleted, addCompletedHabit, setSelectedHabitId, setModalVisibleEdit}) {
   const {theme} = useContext(ThemeContext)
@@ -33,7 +34,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
   const completionData = {
     completion: {
       '01-01-1990': {
-        'habitOne': 2
+        'habitOne': 3
       }
     }
   }
@@ -47,7 +48,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
             <AnimatedCircularProgress
                 rotation={0}
                 size={50}
-                width={5}
+                width={4}
                 fill={(completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100}
                 tintColor="#4185e7"
                 onAnimationComplete={() => console.log('onAnimationComplete')}
@@ -55,9 +56,10 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
               >
                 {
                   () => (
-                    <Text style={{color: theme == LightMode ? '#4185e7' : '#4185e7', fontSize: 10, fontWeight: '600'}}>
-                      { (completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100 }%
-                    </Text>
+                    <FontAwesome6 name="volleyball" size={16} color="#4185e7" />
+                    // <Text style={{color: theme == LightMode ? '#4185e7' : '#4185e7', fontSize: 10, fontWeight: '600'}}>
+                    //   { (completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100 }%
+                    // </Text>
                   )
                 }
               </AnimatedCircularProgress>

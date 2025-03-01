@@ -63,6 +63,7 @@ export default function BottomTabNavigator() {
         name="Today"
         component={Today}
         options={{
+          // tabBarActiveTintColor: '#4185e7',
           headerShown: false,
           //headerShadowVisible: false,
           tabBarIcon: (tintcolor) => (<Feather name="check" size={24} color={tintcolor.color} />),
@@ -101,15 +102,15 @@ export default function BottomTabNavigator() {
           tabBarIcon: (tintcolor) => (<Feather name="bar-chart" size={24} color={tintcolor.color} />)
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="History"
         component={History}
         options={{
-          tabBarActiveTintColor: '#4185e7',
+          // tabBarActiveTintColor: '#4185e7',
           headerShown: false,
           tabBarIcon: (tintcolor) => (<Feather name="clock" size={24} color={tintcolor.color} />)
         }}
-      /> */}
+      />
       <Tab.Screen
         name="Settings"
         component={Settings}

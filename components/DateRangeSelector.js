@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   container: {
-    height: 90,
+    height: 70,
     width: '100%',
   },
   weekContainer: {
@@ -434,22 +434,22 @@ const styles = StyleSheet.create({
   },
   dateCircleLm: {
     width: 36,
-    height: 36,
+    //height: 36,
     borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
     //backgroundColor: '#efefef',
-    marginBottom: 4,
+    //marginBottom: 4,
     position: 'relative', // For positioning the event indicator
   },
   dateCircleDm: {
     width: 36,
-    height: 36,
+    //height: 36,
     borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
     //backgroundColor: '#111',
-    marginBottom: 4,
+    //marginBottom: 4,
     position: 'relative', // For positioning the event indicator
   },
   selectedDateCircle: {
@@ -459,12 +459,12 @@ const styles = StyleSheet.create({
   dateTextLm: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#000',
+    color: '#666',
   },
   dateTextDm: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#fff',
+    color: '#999',
   },
   selectedDateTextLm: {
     color: 'rgba(65, 133, 231, 1)',
@@ -473,6 +473,7 @@ const styles = StyleSheet.create({
     color: 'rgba(65, 133, 231, 1)',
   },
   eventIndicator: {
+    display: 'none',
     position: 'absolute',
     bottom: 2,
     width: 6,

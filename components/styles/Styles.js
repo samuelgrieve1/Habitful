@@ -69,10 +69,13 @@ const Styles = StyleSheet.create({
   },
   pageHeaderLeftTxtLm: {
     color: blue,
+    fontSize: 18,
+    fontWeight: '600',
   },
   pageHeaderLeftTxtDm: {
     color: blue,
     fontSize: 18,
+    fontWeight: '600',
   },
   pageHeaderLeftPressable: {
     flex: 1,
@@ -547,13 +550,13 @@ const Styles = StyleSheet.create({
     textDecorationLine: 'line-through',
   },
   habit_name_amount_lm: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '300',
     color: 'rgba(126, 126, 126, 1)',
     //color: 'rgba(65, 133, 231, 1)',
   },
   habit_name_amount_dm: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '300',
     color: 'rgba(126, 126, 126, 1)',
     //color: 'rgba(65, 133, 231, 1)',
