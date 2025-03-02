@@ -209,7 +209,7 @@ export default function Today() {
           </Text> */}
         </View>
         <View style={Styles.pageHeaderRight}>
-          <Pressable style={Styles.pageHeaderRightPressable}>
+          <Pressable style={Styles.pageHeaderRightPressable} onPress={() => setModalVisibleAdd(true)}>
             <FontAwesome6 name="plus" size={22} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
           </Pressable>
         </View>
@@ -217,7 +217,7 @@ export default function Today() {
 
       <View style={{paddingVertical: 0, paddingHorizontal: 0, flex: 1}}>
 
-            <View style={{paddingHorizontal: 10}}>
+            <View style={{paddingHorizontal: 0}}>
       <DateRangeSelector
         onDateSelect={handleDateSelect}
         eventDates={eventDates}
@@ -314,28 +314,29 @@ export default function Today() {
       {/* ADD HABIT FORM */}
       <Modal
         style={Styles.modal}
-        // propagateSwipe={true}
         isVisible={modalVisibleAdd}
-        //onBackdropPress={() => setModalVisibleAdd(false)}
-        onSwipeComplete={() => setModalVisibleAdd(false)}
-        swipeDirection="down"
+        propagateSwipe={true}
+        // onBackdropPress={() => setModalVisibleAdd(false)}
+        // onSwipeComplete={() => setModalVisibleAdd(false)}
+        // swipeDirection="down"
       >
         <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
-          <ScrollView>
+          {/* <ScrollView> */}
             <AddHabit
               getHabits={getHabits}
               closeModal={closeModalAdd}
             />
-          </ScrollView>
+          {/* </ScrollView> */}
         </View>
       </Modal>
 
       {/* EDIT HABIT FORM */}
       <Modal
         style={Styles.modal}
-        propagateSwipe={true}
         isVisible={modalVisibleEdit}
-        onBackdropPress={() => setModalVisibleEdit(false)}
+        onBackdropPress={() => setModalVisibleAdd(false)}
+        onSwipeComplete={() => setModalVisibleAdd(false)}
+        swipeDirection="down"
       >
         <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
           <ScrollView>

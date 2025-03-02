@@ -267,22 +267,27 @@ const Styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.8)',
   },
   modalView_lm: {
+    flexDirection: 'row',
+    width: '100%',
     height: screenHeight - 50,
     marginTop: 50,
     backgroundColor: white,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
-    alignItems: 'center',
+    //alignItems: 'center',
   },
   modalView_dm: {
+    flexDirection: 'row',
+    width: '100%',
     height: screenHeight - 50,
     marginTop: 50,
     backgroundColor: black,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
-    alignItems: 'center',
+    //paddingBottom:140,
+    //alignItems: 'center',
   },
   btn_add_box: {
     display: 'flex',
@@ -331,7 +336,8 @@ const Styles = StyleSheet.create({
   // },
   modal: {
     width: '100%',
-    marginLeft: 0,
+    margin: 0,
+    padding: 0,
   },
   menuIconLm: {
     // color: black,
@@ -647,28 +653,34 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
+  form_row_no_flex: {
+    marginBottom: 30,
+  },
   form_row: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginBottom: 40,
+    marginBottom: 30,
+  },
+  form_row_label: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginBottom: 0,
   },
   form_row_vert: {
     flexDirection: 'column',
-    //justifyContent: 'flex-start',
+    justifyContent: 'flex-start',
     marginBottom: 40,
   },
   form_label_lm: {
-    flex: 1,
     color: black,
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 10,
   },
   form_label_dm: {
-    flex: 1,
     color: white,
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 10,
   },
   form_input_label_frequency_lm: {
@@ -686,6 +698,38 @@ const Styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
   },
+  form_amount_box: {
+    flex: 1,
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  form_amount_minus: {
+    width: 80,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#111',
+  },
+  form_amount_value: {
+    flex: 1,
+    marginHorizontal: 10,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#111',
+  },
+  form_amount_value_txt: {
+    color: '#fff',
+    fontSize: 18,
+  },
+  form_amount_plus: {
+    width: 80,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#111',
+  },
   checkbox_row: {
     flexDirection: 'row',
     marginBottom: 20,
@@ -694,10 +738,18 @@ const Styles = StyleSheet.create({
   checkbox_col: {
     flex: 1,
   },
+  btnsBottomFixed: {
+    backgroundColor: black,
+    position: 'absolute',
+    width: '100%',
+    paddingTop: 20,
+    marginHorizontal: 20,
+    bottom: 20,
+  },
   btns_save_cancel: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
     marginBottom: 10,
   },
   btn_save: {
@@ -864,7 +916,7 @@ const Styles = StyleSheet.create({
   round_day_box: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: blue,
+    backgroundColor: '#111',
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -876,6 +928,12 @@ const Styles = StyleSheet.create({
     color: white,
     fontSize: 16,
     fontWeight: '600',
+  },
+  round_day_box_selected: {
+    backgroundColor: blue,
+  },
+  round_day_text_selected: {
+    color: white,
   },
 
   //////////////////////////////

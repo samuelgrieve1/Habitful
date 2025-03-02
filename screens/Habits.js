@@ -275,9 +275,10 @@ export default function Habits() {
       {/* ADD HABIT FORM */}
       <Modal
         style={Styles.modal}
-        propagateSwipe={true}
         isVisible={modalVisibleAdd}
         onBackdropPress={() => setModalVisibleAdd(false)}
+        onSwipeComplete={() => setModalVisibleAdd(false)}
+        swipeDirection="down"
       >
         <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
           <ScrollView>
@@ -292,9 +293,10 @@ export default function Habits() {
       {/* EDIT HABIT FORM */}
       <Modal
         style={Styles.modal}
-        propagateSwipe={true}
         isVisible={modalVisibleEdit}
-        onBackdropPress={() => setModalVisibleEdit(false)}
+        onBackdropPress={() => setModalVisibleAdd(false)}
+        onSwipeComplete={() => setModalVisibleAdd(false)}
+        swipeDirection="down"
       >
         <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
           <ScrollView>

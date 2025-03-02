@@ -10,7 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-const width = Dimensions.get('window').width - 40;
+const width = Dimensions.get('window').width - 20;
 
 // Memoized day component for better performance
 const Day = memo(({ 
@@ -413,6 +413,9 @@ const styles = StyleSheet.create({
     // borderBottomRightRadius: 0,
     //borderBottomWidth: 1,
     //borderBottomColor: '#4185e7',
+  },
+  todayTxt: {
+    color: '#fff',
   },
   dayNameLm: {
     fontSize: 12,
