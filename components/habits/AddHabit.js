@@ -9,8 +9,9 @@ import DropdownMenu from '../DropdownMenu';
 import { format } from 'date-fns';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import DaySelect from './DaySelect';
-import ColorPicker from '../ColorSelector';
-import ColorSelector from '../ColorSelector';
+import ColorPicker from '../ColorPicker';
+import IconPicker from '../IconPicker';
+import Modal from 'react-native-modal';
 
 export default function AddHabit({getHabits, closeModal}) {
   const { theme } = useContext(ThemeContext)
@@ -24,6 +25,42 @@ export default function AddHabit({getHabits, closeModal}) {
   const [goalTime, setGoalTime] = useState(0)
   const [isActive, setIsActive] = useState(true)
   const [placeNumber, setPlaceNumber] = useState(0)
+  const [modalVisibleColorPicker, setModalVisibleColorPicker] = useState(false)
+  const [habitColor, setHabitColor] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
+  const [availableColors, setAvailableColors] = useState([
+    '#ff80ed',
+    '#065535',
+    '#ffc0cb',
+    '#008080',
+    '#ff0000',
+    '#ffd700',
+    '#0000ff',
+    '#ffa500',
+    '#c6e2ff',
+    '#b0e0e6',
+    '#40e0d0',
+    '#d3ffce',
+    '#ff7373',
+    '#003366',
+    '#00ff00',
+    '#8a2be2',
+  ])
+  const [habitIcon, setHabitIcon] = useState('')
+  const [selectedIcon, setSelectedIcon] = useState('')
+  const [availableIcons, setAvailableIcons] = useState([
+    'dice-three',
+    'calendar-days',
+    'volleyball',
+    'atom',
+    'soap',
+    'fingerprint',
+    'hand-point-right',
+    'smile-beam',
+    'flag-checkered',
+    'football',
+    'beer-mug-empty',
+  ])
 
   const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
@@ -70,7 +107,9 @@ export default function AddHabit({getHabits, closeModal}) {
     <>
     <View style={{flexDirection: 'row'}}>
       <View style={{width: '100%'}}>
-        <Text style={theme == LightMode ? Styles.page_title_add_habit_lm : Styles.page_title_add_habit_dm}>New Habit</Text>
+        <View style={Styles.form_row}>
+          <Text style={theme == LightMode ? Styles.form_title_lm : Styles.form_title_dm}>New Habit</Text>
+        </View>
 
         <View style={{flex: 1, paddingBottom: 120}}>
         <ScrollView>
@@ -108,17 +147,19 @@ export default function AddHabit({getHabits, closeModal}) {
 
         {/* Days per week */}
         {frequencyType == 'daily' &&
-        <View style={Styles.form_row}>
-          {daysOfWeek.map((day, i) => {
-            return (
-              <DaySelect
-                key={i}
-                dayOfWeek={day}
-                addToDaysPerWeek={addToDaysPerWeek}
-                removeFromDaysPerWeek={removeFromDaysPerWeek}
-              />
-            )
-          })}
+        <View style={Styles.form_row_no_flex}>
+          <View style={Styles.daySelectBox}>
+            {daysOfWeek.map((day, i) => {
+              return (
+                <DaySelect
+                  key={i}
+                  dayOfWeek={day}
+                  addToDaysPerWeek={addToDaysPerWeek}
+                  removeFromDaysPerWeek={removeFromDaysPerWeek}
+                />
+              )
+            })}
+          </View>
         </View>
         }
 
@@ -227,17 +268,60 @@ export default function AddHabit({getHabits, closeModal}) {
           </View>
         }
 
-        {/* Color & Icon */}
+        {/* Color Picker */}
         <View style={Styles.form_row_label}>
-          <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+          <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color</Text>
         </View>
 
-        {/* Color Picker */}
-        <View style={Styles.form_row_no_flex}>
-          <ColorSelector />
-        </View>
+        <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleColorPicker(true)}>
+                <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Pcik</Text>
+              </Pressable>
+
+        <Modal
+          style={Styles.modal}
+          isVisible={modalVisibleColorPicker}
+          propagateSwipe={true}
+        >
+          <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
+            <View style={Styles.form_row_no_flex}>
+              <View style={Styles.color_picker_box}>
+                {availableColors.map((color, i) => {
+                  return (
+                    <ColorPicker
+                      key={i}
+                      color={color}
+                      setHabitColor={setHabitColor}
+                      setSelectedColor={setSelectedColor}
+                      selectedColor={selectedColor}
+                    />
+                  )
+                })}
+              </View>
+            </View>
+          </View>
+        </Modal>
 
         {/* Icon Picker */}
+        <View style={Styles.form_row_label}>
+          <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Icon</Text>
+        </View>
+
+        <View style={Styles.form_row_no_flex}>
+          <View style={Styles.icon_picker_box}>
+            {availableIcons.map((icon, i) => {
+              return (
+                <IconPicker
+                  key={i}
+                  icon={icon}
+                  setHabitIcon={setHabitIcon}
+                  setSelectedIcon={setSelectedIcon}
+                  selectedIcon={selectedIcon}
+                  selectedColor={selectedColor}
+                />
+              )
+            })}
+          </View>
+        </View>
 
         </ScrollView>
         </View>
@@ -246,13 +330,15 @@ export default function AddHabit({getHabits, closeModal}) {
       </View>
     </View>
 
-    <Pressable title='Close' style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm} onPress={() => closeModal()}>
-      <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
-    </Pressable>
+    <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
+      <Pressable title='Close' onPress={() => closeModal()}>
+        <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
+      </Pressable>
+    </View>
 
     <View style={Styles.btnsBottomFixed}>
       <View style={Styles.btns_save_cancel}>
-        <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>
+        <Pressable  style={[Styles.btn_save, {backgroundColor: selectedColor}]} onPress={() => {addHabitBtn(); closeModal()}}>
           <Text style={Styles.txt_save}>Add Habit</Text>
         </Pressable>
       </View>

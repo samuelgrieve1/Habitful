@@ -274,7 +274,7 @@ const Styles = StyleSheet.create({
     backgroundColor: white,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    padding: 20,
+    padding: 10,
     //alignItems: 'center',
   },
   modalView_dm: {
@@ -285,7 +285,7 @@ const Styles = StyleSheet.create({
     backgroundColor: black,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    padding: 20,
+    padding: 10,
     //paddingBottom:140,
     //alignItems: 'center',
   },
@@ -597,6 +597,20 @@ const Styles = StyleSheet.create({
     color: white,
     marginBottom: 30,
   },
+  form_title_lm: {
+    flex: 1,
+    fontSize: 24,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: black,
+  },
+  form_title_dm: {
+    flex: 1,
+    fontSize: 24,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: white,
+  },
   input_label_lm: {
     marginTop: 15,
     marginBottom: 15,
@@ -664,7 +678,7 @@ const Styles = StyleSheet.create({
   form_row_label: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginBottom: 0,
+    marginBottom: 10,
   },
   form_row_vert: {
     flexDirection: 'column',
@@ -743,8 +757,8 @@ const Styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     paddingTop: 20,
-    marginHorizontal: 20,
-    bottom: 20,
+    marginHorizontal: 10,
+    bottom: 40,
   },
   btns_save_cancel: {
     flex: 1,
@@ -884,16 +898,16 @@ const Styles = StyleSheet.create({
   },
   close_modal_x_lm: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    top: 10,
+    left: 10,
     padding: 2,
     backgroundColor: lightergray,
     borderRadius: 5,
   },
   close_modal_x_dm: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    top: 10,
+    left: 10,
     padding: 2,
     backgroundColor: evendarkergray,
     borderRadius: 5,
@@ -913,6 +927,10 @@ const Styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  daySelectBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   round_day_box: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -920,13 +938,14 @@ const Styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    marginRight: 10,
+    //borderWidth: 1,
+    //borderColor: 'rgba(126, 126, 126, 0.1)',
   },
   round_day_text: {
     flex: 1,
     textAlign: 'center',
     color: white,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
   },
   round_day_box_selected: {
@@ -934,6 +953,44 @@ const Styles = StyleSheet.create({
   },
   round_day_text_selected: {
     color: white,
+  },
+  color_picker_box: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+  },
+  color_picker_color_lm: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+    marginBottom: 10,
+    borderRadius: 20,
+  },
+  color_picker_color_dm: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+    marginBottom: 10,
+    borderRadius: 20,
+  },
+  icon_picker_box: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+  },
+  icon_picker_icon_lm: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+    marginBottom: 10,
+    borderRadius: 20,
+  },
+  icon_picker_icon_dm: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+    marginBottom: 10,
+    borderRadius: 20,
   },
 
   //////////////////////////////

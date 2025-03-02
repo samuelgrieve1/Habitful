@@ -334,9 +334,10 @@ export default function Today() {
       <Modal
         style={Styles.modal}
         isVisible={modalVisibleEdit}
-        onBackdropPress={() => setModalVisibleAdd(false)}
-        onSwipeComplete={() => setModalVisibleAdd(false)}
-        swipeDirection="down"
+        propagateSwipe={true}
+        // onBackdropPress={() => setModalVisibleAdd(false)}
+        // onSwipeComplete={() => setModalVisibleAdd(false)}
+        // swipeDirection="down"
       >
         <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
           <ScrollView>
