@@ -27,7 +27,7 @@ export default function AddHabit({getHabits, closeModal}) {
   const [placeNumber, setPlaceNumber] = useState(0)
   const [modalVisibleColorPicker, setModalVisibleColorPicker] = useState(false)
   const [habitColor, setHabitColor] = useState('')
-  const [selectedColor, setSelectedColor] = useState('')
+  const [selectedColor, setSelectedColor] = useState('#4185e7')
   const [availableColors, setAvailableColors] = useState([
     '#ff80ed',
     '#065535',
@@ -46,9 +46,11 @@ export default function AddHabit({getHabits, closeModal}) {
     '#00ff00',
     '#8a2be2',
   ])
+  const [modalVisibleIconPicker, setModalVisibleIconPicker] = useState(false)
   const [habitIcon, setHabitIcon] = useState('')
-  const [selectedIcon, setSelectedIcon] = useState('')
+  const [selectedIcon, setSelectedIcon] = useState('percent')
   const [availableIcons, setAvailableIcons] = useState([
+    'percentage',
     'dice-three',
     'calendar-days',
     'volleyball',
@@ -112,221 +114,274 @@ export default function AddHabit({getHabits, closeModal}) {
         </View>
 
         <View style={{flex: 1, paddingBottom: 120}}>
-        <ScrollView>
-        <View style={Styles.form_row_label}>
-          <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Name</Text>
-        </View>
-
-        <View style={Styles.form_row}>
-          <TextInput
-            //placeholder='Habit Name'
-            //placeholderTextColor='#999999'
-            //defaultValue={habitName}
-            onChangeText={(text) => setHabitName(text)}
-            style={theme == LightMode ? Styles.input_lm : Styles.input_dm}
-          />
-        </View>
-  
-        <View style={Styles.form_row_label}>
-          <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Frequency</Text>
-        </View>
-
-        {/* Frequency Type */}
-        <View style={Styles.form_row_label}>
-          <DropdownMenu
-            theme={theme}
-            defaultValue={'Days per week'}
-            data={[
-              {label: 'Days per week', value: 'daily'},
-              {label: 'Times per week', value: 'weekly'},
-              {label: 'Times per month', value: 'monthly'},
-            ]}
-            setSelectedMenuItem={setFrequencyType}
-          />
-        </View>
-
-        {/* Days per week */}
-        {frequencyType == 'daily' &&
-        <View style={Styles.form_row_no_flex}>
-          <View style={Styles.daySelectBox}>
-            {daysOfWeek.map((day, i) => {
-              return (
-                <DaySelect
-                  key={i}
-                  dayOfWeek={day}
-                  addToDaysPerWeek={addToDaysPerWeek}
-                  removeFromDaysPerWeek={removeFromDaysPerWeek}
-                />
-              )
-            })}
-          </View>
-        </View>
-        }
-
-        {/* Times per week */}
-        {frequencyType == 'weekly' &&
-          <View style={Styles.form_row}>
-            <View style={Styles.form_amount_box}>
-              <View style={Styles.form_amount_minus}>
-                <Pressable onPress={() => {setTimesPerWeek(timesPerWeek > 0 ? timesPerWeek - 1 : 0)}}>
-                  <FontAwesome6 name="minus" size={18} color="#4185e7" />
-                </Pressable>
-              </View>
-              <View style={Styles.form_amount_value}>
-                <Text style={Styles.form_amount_value_txt}>
-                  {timesPerWeek}
-                </Text>
-              </View>
-              <View style={Styles.form_amount_plus}>
-                <Pressable onPress={() => {setTimesPerWeek(timesPerWeek + 1)}}>
-                  <FontAwesome6 name="plus" size={18} color="#4185e7" />
-                </Pressable>
-              </View>
+          <ScrollView>
+            <View style={Styles.form_row_label}>
+              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Name</Text>
             </View>
-          </View>
-        }
 
-        {/* Times per month */}
-        {frequencyType == 'monthly' &&
-          <View style={Styles.form_row}>
-            <View style={Styles.form_amount_box}>
-              <View style={Styles.form_amount_minus}>
-                <Pressable onPress={() => {setTimesPerMonth(timesPerMonth > 0 ? timesPerMonth - 1 : 0)}}>
-                  <FontAwesome6 name="minus" size={18} color="#4185e7" />
-                </Pressable>
-              </View>
-              <View style={Styles.form_amount_value}>
-                <Text style={Styles.form_amount_value_txt}>
-                  {timesPerMonth}
-                </Text>
-              </View>
-              <View style={Styles.form_amount_plus}>
-                <Pressable onPress={() => {setTimesPerMonth(timesPerMonth + 1)}}>
-                  <FontAwesome6 name="plus" size={18} color="#4185e7" />
-                </Pressable>
-              </View>
+            <View style={Styles.form_row}>
+              <TextInput
+                //placeholder='Habit Name'
+                //placeholderTextColor='#999999'
+                //defaultValue={habitName}
+                onChangeText={(text) => setHabitName(text)}
+                style={theme == LightMode ? Styles.input_lm : Styles.input_dm}
+              />
             </View>
-          </View>
-        }
-
-        {/* Daily Goal */}
-        <View style={Styles.form_row_label}>
-          <DropdownMenu
-            theme={theme}
-            defaultValue={'Times per day'}
-            data={[
-              {label: 'Times per day', value: 'times'},
-              {label: 'Amount of time', value: 'time'},
-            ]}
-            setSelectedMenuItem={setGoalType}
-          />
-        </View>
-
-        {/* Goal Number */}
-        {goalType == 'times' &&
-          <View style={Styles.form_row}>
-            <View style={Styles.form_amount_box}>
-              <View style={Styles.form_amount_minus}>
-                <Pressable onPress={() => {setGoalTimes(goalTimes > 0 ? goalTimes - 1 : 0)}}>
-                  <FontAwesome6 name="minus" size={18} color="#4185e7" />
-                </Pressable>
-              </View>
-              <View style={Styles.form_amount_value}>
-                <Text style={Styles.form_amount_value_txt}>
-                  {goalTimes}
-                </Text>
-              </View>
-              <View style={Styles.form_amount_plus}>
-                <Pressable onPress={() => {setGoalTimes(goalTimes + 1)}}>
-                  <FontAwesome6 name="plus" size={18} color="#4185e7" />
-                </Pressable>
-              </View>
+      
+            <View style={Styles.form_row_label}>
+              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Frequency</Text>
             </View>
-          </View>
-        }
 
-        {/* Goal Time */}
-        {goalType == 'time' &&
-          <View style={Styles.form_row}>
-            <View style={Styles.form_amount_box}>
-              <View style={Styles.form_amount_minus}>
-                <Pressable onPress={() => {setGoalTime(goalTime > 0 ? goalTime - 1 : 0)}}>
-                  <FontAwesome6 name="minus" size={18} color="#4185e7" />
-                </Pressable>
-              </View>
-              <View style={Styles.form_amount_value}>
-                <Text style={Styles.form_amount_value_txt}>
-                  {goalTime} mins
-                </Text>
-              </View>
-              <View style={Styles.form_amount_plus}>
-                <Pressable onPress={() => {setGoalTime(goalTime + 1)}}>
-                  <FontAwesome6 name="plus" size={18} color="#4185e7" />
-                </Pressable>
-              </View>
+            {/* Frequency Type */}
+            <View style={Styles.form_row_label}>
+              <DropdownMenu
+                theme={theme}
+                defaultValue={'Days per week'}
+                data={[
+                  {label: 'Days per week', value: 'daily'},
+                  {label: 'Times per week', value: 'weekly'},
+                  {label: 'Times per month', value: 'monthly'},
+                ]}
+                setSelectedMenuItem={setFrequencyType}
+              />
             </View>
-          </View>
-        }
 
-        {/* Color Picker */}
-        <View style={Styles.form_row_label}>
-          <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color</Text>
-        </View>
-
-        <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleColorPicker(true)}>
-                <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Pcik</Text>
-              </Pressable>
-
-        <Modal
-          style={Styles.modal}
-          isVisible={modalVisibleColorPicker}
-          propagateSwipe={true}
-        >
-          <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
+            {/* Days per week */}
+            {frequencyType == 'daily' &&
             <View style={Styles.form_row_no_flex}>
-              <View style={Styles.color_picker_box}>
-                {availableColors.map((color, i) => {
+              <View style={Styles.daySelectBox}>
+                {daysOfWeek.map((day, i) => {
                   return (
-                    <ColorPicker
+                    <DaySelect
                       key={i}
-                      color={color}
-                      setHabitColor={setHabitColor}
-                      setSelectedColor={setSelectedColor}
-                      selectedColor={selectedColor}
+                      dayOfWeek={day}
+                      addToDaysPerWeek={addToDaysPerWeek}
+                      removeFromDaysPerWeek={removeFromDaysPerWeek}
                     />
                   )
                 })}
               </View>
             </View>
-          </View>
-        </Modal>
+            }
 
-        {/* Icon Picker */}
-        <View style={Styles.form_row_label}>
-          <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Icon</Text>
+            {/* Times per week */}
+            {frequencyType == 'weekly' &&
+              <View style={Styles.form_row}>
+                <View style={Styles.form_amount_box}>
+                  <View style={Styles.form_amount_minus}>
+                    <Pressable onPress={() => {setTimesPerWeek(timesPerWeek > 0 ? timesPerWeek - 1 : 0)}}>
+                      <FontAwesome6 name="minus" size={18} color="#4185e7" />
+                    </Pressable>
+                  </View>
+                  <View style={Styles.form_amount_value}>
+                    <Text style={Styles.form_amount_value_txt}>
+                      {timesPerWeek}
+                    </Text>
+                  </View>
+                  <View style={Styles.form_amount_plus}>
+                    <Pressable onPress={() => {setTimesPerWeek(timesPerWeek + 1)}}>
+                      <FontAwesome6 name="plus" size={18} color="#4185e7" />
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+            }
+
+            {/* Times per month */}
+            {frequencyType == 'monthly' &&
+              <View style={Styles.form_row}>
+                <View style={Styles.form_amount_box}>
+                  <View style={Styles.form_amount_minus}>
+                    <Pressable onPress={() => {setTimesPerMonth(timesPerMonth > 0 ? timesPerMonth - 1 : 0)}}>
+                      <FontAwesome6 name="minus" size={18} color="#4185e7" />
+                    </Pressable>
+                  </View>
+                  <View style={Styles.form_amount_value}>
+                    <Text style={Styles.form_amount_value_txt}>
+                      {timesPerMonth}
+                    </Text>
+                  </View>
+                  <View style={Styles.form_amount_plus}>
+                    <Pressable onPress={() => {setTimesPerMonth(timesPerMonth + 1)}}>
+                      <FontAwesome6 name="plus" size={18} color="#4185e7" />
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+            }
+
+            {/* Daily Goal */}
+            <View style={Styles.form_row_label}>
+              <DropdownMenu
+                theme={theme}
+                defaultValue={'Times per day'}
+                data={[
+                  {label: 'Times per day', value: 'times'},
+                  {label: 'Amount of time', value: 'time'},
+                ]}
+                setSelectedMenuItem={setGoalType}
+              />
+            </View>
+
+            {/* Goal Number */}
+            {goalType == 'times' &&
+              <View style={Styles.form_row}>
+                <View style={Styles.form_amount_box}>
+                  <View style={Styles.form_amount_minus}>
+                    <Pressable onPress={() => {setGoalTimes(goalTimes > 0 ? goalTimes - 1 : 0)}}>
+                      <FontAwesome6 name="minus" size={18} color="#4185e7" />
+                    </Pressable>
+                  </View>
+                  <View style={Styles.form_amount_value}>
+                    <Text style={Styles.form_amount_value_txt}>
+                      {goalTimes}
+                    </Text>
+                  </View>
+                  <View style={Styles.form_amount_plus}>
+                    <Pressable onPress={() => {setGoalTimes(goalTimes + 1)}}>
+                      <FontAwesome6 name="plus" size={18} color="#4185e7" />
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+            }
+
+            {/* Goal Time */}
+            {goalType == 'time' &&
+              <View style={Styles.form_row}>
+                <View style={Styles.form_amount_box}>
+                  <View style={Styles.form_amount_minus}>
+                    <Pressable onPress={() => {setGoalTime(goalTime > 0 ? goalTime - 1 : 0)}}>
+                      <FontAwesome6 name="minus" size={18} color="#4185e7" />
+                    </Pressable>
+                  </View>
+                  <View style={Styles.form_amount_value}>
+                    <Text style={Styles.form_amount_value_txt}>
+                      {goalTime} mins
+                    </Text>
+                  </View>
+                  <View style={Styles.form_amount_plus}>
+                    <Pressable onPress={() => {setGoalTime(goalTime + 1)}}>
+                      <FontAwesome6 name="plus" size={18} color="#4185e7" />
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+            }
+
+            {/* Styling */}
+            <View style={Styles.form_row_label}>
+              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            </View>
+
+            <View style={Styles.styling_box}>
+              {/* Color Picker Btn */}
+              <View style={[Styles.btn_color_icon_picker, {marginRight: 5, backgroundColor: selectedColor}]}>
+                <Pressable onPress={() => setModalVisibleColorPicker(true)}>
+                  <Text style={[Styles.txt_color_icon_picker, {color: '#ffffff'}]}>Color</Text>
+                </Pressable>
+              </View>
+
+              {/* Icon Picker Btn */}
+              <View style={[Styles.btn_color_icon_picker, {marginLeft: 5, borderWidth: 1, borderColor: selectedColor}]}>
+                <Pressable onPress={() => setModalVisibleIconPicker(true)}>
+                  <FontAwesome6 name={selectedIcon} size={18} color={selectedColor} />
+                  {/* <Text style={[Styles.txt_color_icon_picker, {color: selectedColor}]}>{selectedIcon}</Text> */}
+                </Pressable>
+              </View>
+            </View>
+
+            {/* Color Picker Modal */}
+            <Modal
+              style={Styles.modal}
+              isVisible={modalVisibleColorPicker}
+              propagateSwipe={true}
+            >
+              <View
+                style={[
+                  Styles.modal_color_icon_picker,
+                  theme == LightMode ? {backgroundColor: '#eeeeee'} : {backgroundColor: '#111111'}
+                ]}>
+                <View style={Styles.styling_modal_title_box}>
+                  <Text style={[Styles.styling_modal_title_txt, theme == LightMode ? {color: '#000000'} : {color: '#ffffff'}]}>Color</Text>
+                </View>
+                <View style={Styles.form_row}>
+                  <View style={Styles.color_picker_box}>
+                    {availableColors.map((color, i) => {
+                      return (
+                        <ColorPicker
+                          key={i}
+                          color={color}
+                          setHabitColor={setHabitColor}
+                          setSelectedColor={setSelectedColor}
+                          selectedColor={selectedColor}
+                        />
+                      )
+                    })}
+                  </View>
+                </View>
+                <View style={[Styles.btn_color_icon_picker_done, {backgroundColor: selectedColor}]}>
+                  <Pressable title='Done' onPress={() => setModalVisibleColorPicker(false)}>
+                    <Text style={Styles.txt_color_icon_picker_done}>
+                      Done
+                    </Text>
+                  </Pressable>
+                </View>
+                <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
+                  <Pressable title='Close' onPress={() => setModalVisibleColorPicker(false)}>
+                    <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
+
+            {/* Icon Picker Modal */}
+            <Modal
+              style={Styles.modal}
+              isVisible={modalVisibleIconPicker}
+              propagateSwipe={true}
+            >
+              <View
+                style={[
+                  Styles.modal_color_icon_picker,
+                  theme == LightMode ? {backgroundColor: '#eeeeee'} : {backgroundColor: '#111111'}
+                ]}>
+                <View style={Styles.styling_modal_title_box}>
+                  <Text style={[Styles.styling_modal_title_txt, theme == LightMode ? {color: '#000000'} : {color: '#ffffff'}]}>Icon</Text>
+                </View>
+                <View style={Styles.form_row_no_flex}>
+                  <View style={Styles.icon_picker_box}>
+                    {availableIcons.map((icon, i) => {
+                      return (
+                        <IconPicker
+                          key={i}
+                          icon={icon}
+                          setHabitIcon={setHabitIcon}
+                          setSelectedIcon={setSelectedIcon}
+                          selectedIcon={selectedIcon}
+                          selectedColor={selectedColor}
+                        />
+                      )
+                    })}
+                  </View>
+                </View>
+                <View style={[Styles.btn_color_icon_picker_done, {backgroundColor: selectedColor}]}>
+                  <Pressable title='Done' onPress={() => setModalVisibleIconPicker(false)}>
+                    <Text style={Styles.txt_color_icon_picker_done}>
+                      Done
+                    </Text>
+                  </Pressable>
+                </View>
+                <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
+                  <Pressable title='Close' onPress={() => setModalVisibleIconPicker(false)}>
+                    <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
+          </ScrollView>
         </View>
-
-        <View style={Styles.form_row_no_flex}>
-          <View style={Styles.icon_picker_box}>
-            {availableIcons.map((icon, i) => {
-              return (
-                <IconPicker
-                  key={i}
-                  icon={icon}
-                  setHabitIcon={setHabitIcon}
-                  setSelectedIcon={setSelectedIcon}
-                  selectedIcon={selectedIcon}
-                  selectedColor={selectedColor}
-                />
-              )
-            })}
-          </View>
-        </View>
-
-        </ScrollView>
-        </View>
-
-
       </View>
     </View>
 
@@ -338,7 +393,7 @@ export default function AddHabit({getHabits, closeModal}) {
 
     <View style={Styles.btnsBottomFixed}>
       <View style={Styles.btns_save_cancel}>
-        <Pressable  style={[Styles.btn_save, {backgroundColor: selectedColor}]} onPress={() => {addHabitBtn(); closeModal()}}>
+        <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>
           <Text style={Styles.txt_save}>Add Habit</Text>
         </Pressable>
       </View>

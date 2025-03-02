@@ -416,6 +416,53 @@ const Styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 0,
   },
+  styling_box: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  btn_color_icon_picker: {
+    flex: 1,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+  },
+  txt_color_icon_picker: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: blue,
+  },
+  btn_color_icon_picker_done: {
+    width: '100%',
+    height: 40,
+    borderRadius: 10,
+    justifyContent: 'center',
+  },
+  txt_color_icon_picker_done: {
+    color: '#ffffff',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  modal_color_icon_picker: {
+    flex: 0,
+    // width: '80%',
+    // height: 100,
+    // margin: '10%',
+    borderRadius: 20,
+    borderWidth: 1,
+    padding: 10,
+  },
+  styling_modal_title_box: {
+    //flex: 1,
+    marginBottom: 20,
+  },
+  styling_modal_title_txt: {
+    textAlign: 'center',
+    textAlignVertical: 'top',
+    fontSize: 24,
+    fontWeight: '600',
+    // lineHeight: 24,
+  },
 
   //////////////////////////////
   // HabitsItem.js

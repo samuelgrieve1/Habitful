@@ -34,7 +34,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
   const completionData = {
     completion: {
       '01-01-1990': {
-        'habitOne': 3
+        'habitOne': 2
       }
     }
   }
@@ -48,7 +48,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
             <AnimatedCircularProgress
                 rotation={0}
                 size={50}
-                width={4}
+                width={2}
                 fill={(completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100}
                 tintColor="#4185e7"
                 onAnimationComplete={() => console.log('onAnimationComplete')}
@@ -56,7 +56,7 @@ export default function HabitsItem({habitId, habitName, isCompleted, addComplete
               >
                 {
                   () => (
-                    <FontAwesome6 name="volleyball" size={16} color="#4185e7" />
+                    <FontAwesome6 name="volleyball" size={24} color="#4185e7" />
                     // <Text style={{color: theme == LightMode ? '#4185e7' : '#4185e7', fontSize: 10, fontWeight: '600'}}>
                     //   { (completionData.completion['01-01-1990']['habitOne'] / habitData.amount) * 100 }%
                     // </Text>
