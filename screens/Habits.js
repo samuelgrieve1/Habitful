@@ -154,7 +154,28 @@ export default function Habits() {
         {/* ALL HABITS */}
         {habits != null && habits != 'no habits' && selectedHabitType == 'all' &&
           <>
-          <Text>Active</Text>
+          <Text>All</Text>
+          <FlatList
+            style={Styles.habitsContainer}
+            data={habits.sort((a, b) => a.name.localeCompare(b.name))}
+            renderItem={({item}) => {
+              // CHECK IF HABIT IS ACTIVE
+              if(item.isActive == true){
+                return(
+                  <ManageHabitsItem
+                    key={item.id}
+                    habitId={item.id}
+                    habitName={item.name}
+                    currentDate={currentDate}
+                    setSelectedHabitId={setSelectedHabitId}
+                    setModalVisibleEdit={setModalVisibleEdit}
+                  />
+                )
+              }
+            }}
+            keyExtractor={item => item.id}
+            // ListFooterComponent={addHabitBtn}
+          />
           {/* <SectionList
             style={Styles.habitsContainer}
             sections={habits.sort((a, b) => a.name.localeCompare(b.name))}

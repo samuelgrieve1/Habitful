@@ -107,6 +107,7 @@ export default function AddHabit({getHabits, closeModal}) {
 
   return (
     <>
+    <ScrollView>
     <View style={{flexDirection: 'row'}}>
       <View style={{width: '100%'}}>
         <View style={Styles.form_row}>
@@ -114,7 +115,7 @@ export default function AddHabit({getHabits, closeModal}) {
         </View>
 
         <View style={{flex: 1, paddingBottom: 120}}>
-          <ScrollView>
+          {/* <ScrollView> */}
             <View style={Styles.form_row_label}>
               <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Name</Text>
             </View>
@@ -306,28 +307,26 @@ export default function AddHabit({getHabits, closeModal}) {
                 <View style={Styles.styling_modal_title_box}>
                   <Text style={[Styles.styling_modal_title_txt, theme == LightMode ? {color: '#000000'} : {color: '#ffffff'}]}>Color</Text>
                 </View>
-                <View style={Styles.form_row}>
-                  <View style={Styles.color_picker_box}>
-                    {availableColors.map((color, i) => {
-                      return (
-                        <ColorPicker
-                          key={i}
-                          color={color}
-                          setHabitColor={setHabitColor}
-                          setSelectedColor={setSelectedColor}
-                          selectedColor={selectedColor}
-                        />
-                      )
-                    })}
-                  </View>
+                <View style={Styles.color_picker_box}>
+                  {availableColors.map((color, i) => {
+                    return (
+                      <ColorPicker
+                        key={i}
+                        color={color}
+                        setHabitColor={setHabitColor}
+                        setSelectedColor={setSelectedColor}
+                        selectedColor={selectedColor}
+                      />
+                    )
+                  })}
                 </View>
-                <View style={[Styles.btn_color_icon_picker_done, {backgroundColor: selectedColor}]}>
+                {/* <View style={[Styles.btn_color_icon_picker_done, {backgroundColor: selectedColor}]}>
                   <Pressable title='Done' onPress={() => setModalVisibleColorPicker(false)}>
                     <Text style={Styles.txt_color_icon_picker_done}>
                       Done
                     </Text>
                   </Pressable>
-                </View>
+                </View> */}
                 <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
                   <Pressable title='Close' onPress={() => setModalVisibleColorPicker(false)}>
                     <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
@@ -350,29 +349,27 @@ export default function AddHabit({getHabits, closeModal}) {
                 <View style={Styles.styling_modal_title_box}>
                   <Text style={[Styles.styling_modal_title_txt, theme == LightMode ? {color: '#000000'} : {color: '#ffffff'}]}>Icon</Text>
                 </View>
-                <View style={Styles.form_row_no_flex}>
-                  <View style={Styles.icon_picker_box}>
-                    {availableIcons.map((icon, i) => {
-                      return (
-                        <IconPicker
-                          key={i}
-                          icon={icon}
-                          setHabitIcon={setHabitIcon}
-                          setSelectedIcon={setSelectedIcon}
-                          selectedIcon={selectedIcon}
-                          selectedColor={selectedColor}
-                        />
-                      )
-                    })}
-                  </View>
+                <View style={Styles.icon_picker_box}>
+                  {availableIcons.map((icon, i) => {
+                    return (
+                      <IconPicker
+                        key={i}
+                        icon={icon}
+                        setHabitIcon={setHabitIcon}
+                        setSelectedIcon={setSelectedIcon}
+                        selectedIcon={selectedIcon}
+                        selectedColor={selectedColor}
+                      />
+                    )
+                  })}
                 </View>
-                <View style={[Styles.btn_color_icon_picker_done, {backgroundColor: selectedColor}]}>
+                {/* <View style={[Styles.btn_color_icon_picker_done, {backgroundColor: selectedColor}]}>
                   <Pressable title='Done' onPress={() => setModalVisibleIconPicker(false)}>
                     <Text style={Styles.txt_color_icon_picker_done}>
                       Done
                     </Text>
                   </Pressable>
-                </View>
+                </View> */}
                 <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
                   <Pressable title='Close' onPress={() => setModalVisibleIconPicker(false)}>
                     <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
@@ -380,10 +377,11 @@ export default function AddHabit({getHabits, closeModal}) {
                 </View>
               </View>
             </Modal>
-          </ScrollView>
+          {/* </ScrollView> */}
         </View>
       </View>
     </View>
+    </ScrollView>
 
     <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
       <Pressable title='Close' onPress={() => closeModal()}>

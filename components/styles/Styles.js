@@ -444,17 +444,17 @@ const Styles = StyleSheet.create({
     textAlign: 'center',
   },
   modal_color_icon_picker: {
-    flex: 0,
+    // flex: 1,
     // width: '80%',
     // height: 100,
     // margin: '10%',
     borderRadius: 20,
     borderWidth: 1,
-    padding: 10,
+    padding: 15,
   },
   styling_modal_title_box: {
     //flex: 1,
-    marginBottom: 20,
+    marginBottom: 25,
   },
   styling_modal_title_txt: {
     textAlign: 'center',
@@ -802,10 +802,13 @@ const Styles = StyleSheet.create({
   btnsBottomFixed: {
     backgroundColor: black,
     position: 'absolute',
-    width: '100%',
+    //width: '100%',
     paddingTop: 20,
-    marginHorizontal: 10,
+    // paddingLeft: 10,
+    // paddingRight: 10,
     bottom: 40,
+    left: 10,
+    right: 10,
   },
   btns_save_cancel: {
     flex: 1,

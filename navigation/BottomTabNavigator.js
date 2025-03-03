@@ -80,7 +80,7 @@ export default function BottomTabNavigator() {
           // ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Habits"
         component={Habits}
         options={{
@@ -92,7 +92,7 @@ export default function BottomTabNavigator() {
             </View>
           ),
         }}
-      /> */}
+      />
       <Tab.Screen
         name="Progress"
         component={Progress}
