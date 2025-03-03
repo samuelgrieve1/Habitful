@@ -293,6 +293,35 @@ export default function AddHabit({getHabits, closeModal}) {
               </View>
             </View>
 
+            <ScrollView style={{}} horizontal={true}>
+              {availableColors.map((color, i) => {
+                return (
+                  <ColorPicker
+                    key={i}
+                    color={color}
+                    setHabitColor={setHabitColor}
+                    setSelectedColor={setSelectedColor}
+                    selectedColor={selectedColor}
+                  />
+                )
+              })}
+            </ScrollView>
+
+            <ScrollView style={{}} horizontal={true}>
+              {availableIcons.map((icon, i) => {
+                return (
+                  <IconPicker
+                    key={i}
+                    icon={icon}
+                    setHabitIcon={setHabitIcon}
+                    setSelectedIcon={setSelectedIcon}
+                    selectedIcon={selectedIcon}
+                    selectedColor={selectedColor}
+                  />
+                )
+              })}
+            </ScrollView>
+
             {/* Color Picker Modal */}
             <Modal
               style={Styles.modal}
