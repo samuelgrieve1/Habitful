@@ -278,49 +278,16 @@ export default function AddHabit({getHabits, closeModal}) {
 
             <View style={Styles.styling_box}>
               {/* Color Picker Btn */}
-              <View style={[Styles.btn_color_icon_picker, {marginRight: 5, backgroundColor: selectedColor}]}>
-                <Pressable onPress={() => setModalVisibleColorPicker(true)}>
-                  <Text style={[Styles.txt_color_icon_picker, {color: '#ffffff'}]}>Color</Text>
-                </Pressable>
-              </View>
-
+              <Pressable style={[Styles.btn_color_icon_picker, {marginRight: 5, backgroundColor: selectedColor}]} onPress={() => setModalVisibleColorPicker(true)}>
+                <Text style={[Styles.txt_color_icon_picker, {color: '#ffffff'}]}>Color</Text>
+              </Pressable>
+             
               {/* Icon Picker Btn */}
-              <View style={[Styles.btn_color_icon_picker, {marginLeft: 5, borderWidth: 1, borderColor: selectedColor}]}>
-                <Pressable onPress={() => setModalVisibleIconPicker(true)}>
-                  <FontAwesome6 name={selectedIcon} size={18} color={selectedColor} />
-                  {/* <Text style={[Styles.txt_color_icon_picker, {color: selectedColor}]}>{selectedIcon}</Text> */}
-                </Pressable>
-              </View>
+              <Pressable style={[Styles.btn_color_icon_picker, {marginLeft: 5, borderWidth: 1, borderColor: selectedColor}]} onPress={() => setModalVisibleIconPicker(true)}>
+                <FontAwesome6 name={selectedIcon} size={18} color={selectedColor} />
+                {/* <Text style={[Styles.txt_color_icon_picker, {color: selectedColor}]}>{selectedIcon}</Text> */}
+              </Pressable>
             </View>
-
-            <ScrollView style={{}} horizontal={true}>
-              {availableColors.map((color, i) => {
-                return (
-                  <ColorPicker
-                    key={i}
-                    color={color}
-                    setHabitColor={setHabitColor}
-                    setSelectedColor={setSelectedColor}
-                    selectedColor={selectedColor}
-                  />
-                )
-              })}
-            </ScrollView>
-
-            <ScrollView style={{}} horizontal={true}>
-              {availableIcons.map((icon, i) => {
-                return (
-                  <IconPicker
-                    key={i}
-                    icon={icon}
-                    setHabitIcon={setHabitIcon}
-                    setSelectedIcon={setSelectedIcon}
-                    selectedIcon={selectedIcon}
-                    selectedColor={selectedColor}
-                  />
-                )
-              })}
-            </ScrollView>
 
             {/* Color Picker Modal */}
             <Modal

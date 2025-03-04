@@ -22,10 +22,9 @@ export default function ColorPicker({setHabitColor, color, setSelectedColor, sel
         style={[
           theme == LightMode ? Styles.color_picker_color_lm : Styles.color_picker_color_dm,
           {backgroundColor: color},
-          selectedColor == color && {borderColor: color}
+          selectedColor == color && Styles.color_picker_color_selected,
         ]}
       >
-        {selectedColor == color && <Entypo name="check" size={24} color={theme == LightMode ? 'black' : 'white'} />}
       </View>
     </Pressable>
   )

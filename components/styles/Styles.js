@@ -1019,9 +1019,12 @@ const Styles = StyleSheet.create({
   color_picker_color_dm: {
     width: 40,
     height: 40,
-    marginRight: 10,
-    marginBottom: 10,
+    margin: 10,
     borderRadius: 20,
+  },
+  color_picker_color_selected: {
+    borderWidth: 5,
+    borderColor: '#fff',
   },
   icon_picker_box: {
     flexDirection: 'row',

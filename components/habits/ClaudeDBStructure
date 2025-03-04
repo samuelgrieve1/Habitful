@@ -1,0 +1,66 @@
+{
+  "users": {
+    "$userId": {
+      "profile": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "createdAt": 1709459782,
+        "lastLogin": 1709545382
+      },
+      "habits": {
+        "$habitId": {
+          "title": "Morning Run",
+          "description": "30 minute jog around the neighborhood",
+          "category": "fitness",
+          "trackingType": "time", // "time" or "count"
+          "goal": {
+            "value": 30, // 30 minutes or 30 times
+            "period": "day" // "day", "week", or "month"
+          },
+          "color": "#4285F4",
+          "icon": "running",
+          "reminderTime": "07:00",
+          "reminderDays": [1, 2, 3, 4, 5], // Monday through Friday
+          "createdAt": 1709459782,
+          "isArchived": false
+        }
+      },
+      "completions": {
+        "$habitId": {
+          "$dateId": { // Format: YYYYMMDD
+            "value": 25, // 25 minutes or 25 times
+            "timestamp": 1709459782,
+            "notes": "Felt energized today"
+          }
+        }
+      },
+      "streaks": {
+        "$habitId": {
+          "current": 5,
+          "longest": 12,
+          "lastCompletedDate": "20250302" // YYYYMMDD format
+        }
+      },
+      "settings": {
+        "theme": "light",
+        "notifications": true,
+        "weekStartsOn": 1 // 0 for Sunday, 1 for Monday
+      }
+    }
+  },
+  "categories": {
+    "fitness": {
+      "name": "Fitness",
+      "icon": "dumbbell"
+    },
+    "mindfulness": {
+      "name": "Mindfulness",
+      "icon": "brain"
+    },
+    "productivity": {
+      "name": "Productivity",
+      "icon": "briefcase"
+    }
+    // More predefined categories
+  }
+}

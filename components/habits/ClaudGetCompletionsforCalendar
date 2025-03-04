@@ -1,0 +1,170 @@
+// Firebase query function to get habit completions by date range
+import { ref, query, orderByChild, startAt, endAt, get } from "firebase/database";
+import { db } from "./firebaseConfig";
+
+// Function to fetch completions for a specific user within a date range
+export const fetchCompletionsForCalendar = async (userId, startDate, endDate) => {
+  const completionsRef = ref(db, `users/${userId}/completions`);
+  
+  // Convert date objects to YYYYMMDD format for Firebase queries
+  const startDateId = formatDateToId(startDate);
+  const endDateId = formatDateToId(endDate);
+  
+  // Create an array to store promises for each habit's completions
+  const habitQueries = [];
+  
+  // First, get all habit IDs for the user
+  const habitsRef = ref(db, `users/${userId}/habits`);
+  const habitsSnapshot = await get(habitsRef);
+  
+  if (habitsSnapshot.exists()) {
+    // For each habit, create a query for its completions in the date range
+    habitsSnapshot.forEach((habitSnapshot) => {
+      const habitId = habitSnapshot.key;
+      const habitData = habitSnapshot.val();
+      
+      // Query completions for this habit within date range
+      const habitCompletionsRef = ref(db, `users/${userId}/completions/${habitId}`);
+      const dateQuery = query(
+        habitCompletionsRef,
+        orderByChild("dateId"),
+        startAt(startDateId),
+        endAt(endDateId)
+      );
+      
+      // Add this query to our array of promises
+      habitQueries.push(
+        get(dateQuery).then(snapshot => {
+          const completions = [];
+          if (snapshot.exists()) {
+            snapshot.forEach(dateSnapshot => {
+              completions.push({
+                habitId,
+                habitTitle: habitData.title,
+                dateId: dateSnapshot.key,
+                ...dateSnapshot.val()
+              });
+            });
+          }
+          return completions;
+        })
+      );
+    });
+    
+    // Wait for all queries to complete and merge results
+    const allCompletions = await Promise.all(habitQueries);
+    
+    // Flatten the array of arrays into a single array
+    return allCompletions.flat();
+  }
+  
+  return [];
+};
+
+// Helper function to format Date object to YYYYMMDD format
+const formatDateToId = (date) => {
+  return date.toISOString().slice(0, 10).replace(/-/g, "");
+};
+
+// Function to transform completions data for calendar display
+export const transformCompletionsForCalendar = (completions) => {
+  const calendarData = {};
+  
+  completions.forEach(completion => {
+    // Convert dateId (YYYYMMDD) to YYYY-MM-DD for calendar libraries
+    const year = completion.dateId.substring(0, 4);
+    const month = completion.dateId.substring(4, 6);
+    const day = completion.dateId.substring(6, 8);
+    const formattedDate = `${year}-${month}-${day}`;
+    
+    // Initialize this date in the calendar data if it doesn't exist
+    if (!calendarData[formattedDate]) {
+      calendarData[formattedDate] = {
+        dots: [],
+        completions: []
+      };
+    }
+    
+    // Add a dot for this habit (for visual calendar marking)
+    calendarData[formattedDate].dots.push({
+      key: completion.habitId,
+      color: completion.color || '#4285F4',
+      selectedDotColor: '#ffffff'
+    });
+    
+    // Also store the full completion data for detailed view
+    calendarData[formattedDate].completions.push(completion);
+  });
+  
+  return calendarData;
+};
+
+// Example usage in a React Native component with react-native-calendars
+import React, { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+import { fetchCompletionsForCalendar, transformCompletionsForCalendar } from './calendarUtils';
+
+const HabitCalendar = ({ userId }) => {
+  const [markedDates, setMarkedDates] = useState({});
+  const [completionsData, setCompletionsData] = useState({});
+  const [selectedDate, setSelectedDate] = useState(null);
+  
+  useEffect(() => {
+    const loadCalendarData = async () => {
+      // Get first and last day of current month
+      const today = new Date();
+      const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+      const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      
+      // Fetch completions for current month
+      const completions = await fetchCompletionsForCalendar(userId, firstDay, lastDay);
+      
+      // Transform data for calendar display
+      const calendarData = transformCompletionsForCalendar(completions);
+      
+      // Prepare marked dates for the calendar component
+      const marked = {};
+      Object.keys(calendarData).forEach(date => {
+        marked[date] = {
+          marked: true,
+          dots: calendarData[date].dots
+        };
+      });
+      
+      setMarkedDates(marked);
+      setCompletionsData(calendarData);
+    };
+    
+    loadCalendarData();
+  }, [userId]);
+  
+  const handleDayPress = (day) => {
+    setSelectedDate(day.dateString);
+  };
+  
+  return (
+    <View>
+      <Calendar
+        markingType={'multi-dot'}
+        markedDates={markedDates}
+        onDayPress={handleDayPress}
+        // Additional calendar props...
+      />
+      
+      {selectedDate && completionsData[selectedDate] && (
+        <View>
+          <Text>Completions for {selectedDate}:</Text>
+          {completionsData[selectedDate].completions.map((completion, index) => (
+            <View key={index}>
+              <Text>{completion.habitTitle}: {completion.value} {completion.trackingType === 'time' ? 'minutes' : 'times'}</Text>
+              {completion.notes && <Text>Note: {completion.notes}</Text>}
+            </View>
+          ))}
+        </View>
+      )}
+    </View>
+  );
+};
+
+export default HabitCalendar;
