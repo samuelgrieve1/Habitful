@@ -300,9 +300,9 @@ export default function AddHabit({getHabits, closeModal}) {
                   Styles.modal_color_icon_picker,
                   theme == LightMode ? {backgroundColor: '#eeeeee'} : {backgroundColor: '#111111'}
                 ]}>
-                <View style={Styles.styling_modal_title_box}>
+                {/* <View style={Styles.styling_modal_title_box}>
                   <Text style={[Styles.styling_modal_title_txt, theme == LightMode ? {color: '#000000'} : {color: '#ffffff'}]}>Color</Text>
-                </View>
+                </View> */}
                 <View style={Styles.color_picker_box}>
                   {availableColors.map((color, i) => {
                     return (
@@ -323,11 +323,11 @@ export default function AddHabit({getHabits, closeModal}) {
                     </Text>
                   </Pressable>
                 </View> */}
-                <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
+                {/* <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
                   <Pressable title='Close' onPress={() => setModalVisibleColorPicker(false)}>
                     <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
                   </Pressable>
-                </View>
+                </View> */}
               </View>
             </Modal>
 

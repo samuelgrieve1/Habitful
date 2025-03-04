@@ -450,11 +450,13 @@ const Styles = StyleSheet.create({
     // margin: '10%',
     borderRadius: 20,
     borderWidth: 1,
-    padding: 15,
+    paddingLeft: 5,
+    paddingBottom: 5,
   },
   styling_modal_title_box: {
     //flex: 1,
-    marginBottom: 25,
+    marginTop: 10,
+    marginBottom: 5,
   },
   styling_modal_title_txt: {
     textAlign: 'center',
@@ -1023,8 +1025,12 @@ const Styles = StyleSheet.create({
     borderRadius: 20,
   },
   color_picker_color_selected: {
+    width: 50,
+    height: 50,
+    margin: 5,
+    borderRadius: 25,
     borderWidth: 5,
-    borderColor: '#fff',
+    borderColor: 'rgba(126, 126, 126, 0.6)',
   },
   icon_picker_box: {
     flexDirection: 'row',
