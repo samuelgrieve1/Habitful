@@ -12,7 +12,7 @@ export default function Settings() {
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
+          <Text style={[theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm, {color: test1}]}>
             Settings
           </Text>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>

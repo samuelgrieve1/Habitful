@@ -1,4 +1,4 @@
-import { Text, Pressable, View, ScrollView, StyleSheet, Dimensions, Image } from 'react-native';
+import { Text, Pressable, View, ScrollView, StyleSheet, Dimensions, Image, SafeAreaView } from 'react-native';
 import Container from '../components/Container';
 import { Styles, LightMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
@@ -313,14 +313,18 @@ export default function Today() {
 
       {/* ADD HABIT FORM */}
       <Modal
-        style={Styles.modal}
+        style={[Styles.modal, {justifyContent: 'flex-end'}]}
         isVisible={modalVisibleAdd}
         propagateSwipe={true}
+        onBackdropPress={() => setModalVisibleColorPicker(false)}
+        animationIn={'slideInUp'}
+        animationOut={'slideOutDown'}
+        backdropOpacity={0.8}
         // onBackdropPress={() => setModalVisibleAdd(false)}
         // onSwipeComplete={() => setModalVisibleAdd(false)}
         // swipeDirection="down"
       >
-        <View style={theme == LightMode ? Styles.modalView_lm : Styles.modalView_dm}>
+        <View style={[Styles.modalView, theme == LightMode ? {backgroundColor: '#ffffff'} : {backgroundColor: '#000000'}]}>
           {/* <ScrollView> */}
             <AddHabit
               getHabits={getHabits}

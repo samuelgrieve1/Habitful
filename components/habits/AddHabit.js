@@ -1,5 +1,5 @@
 import React , {useEffect, useState, useContext} from 'react';
-import { StyleSheet, Text, View , Button, TextInput, Pressable, useColorScheme, ScrollView } from 'react-native';
+import { StyleSheet, Text, View , Button, TextInput, Pressable, useColorScheme, ScrollView, SafeAreaView } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { app, db, getFirestore, collection, addDoc } from '../../firebase/index';
 import { Feather } from '@expo/vector-icons';
@@ -12,6 +12,7 @@ import DaySelect from './DaySelect';
 import ColorPicker from '../ColorPicker';
 import IconPicker from '../IconPicker';
 import Modal from 'react-native-modal';
+import { SlideInUp } from 'react-native-reanimated';
 
 export default function AddHabit({getHabits, closeModal}) {
   const { theme } = useContext(ThemeContext)
@@ -109,8 +110,8 @@ export default function AddHabit({getHabits, closeModal}) {
 
   return (
     <>
-    <View style={theme == LightMode ? Styles.form_header_fixed_lm : Styles.form_header_fixed_dm}>
-      <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
+    <View style={[Styles.form_header_fixed, theme == LightMode ? {backgroundColor: 'rgba(255, 255, 255, 0.9)'} : {backgroundColor: 'rgba(0, 0, 0, 0.9)'}]}>
+      <View style={[Styles.close_modal_x, theme == LightMode ? {backgroundColor: '#eeeeee'} : {backgroundColor: '#111111'}]}>
         <Pressable title='Close' onPress={() => closeModal()}>
           <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
         </Pressable>
@@ -134,7 +135,7 @@ export default function AddHabit({getHabits, closeModal}) {
             <View style={Styles.form_row}>
               <TextInput
                 placeholder='Habit Name'
-                placeholderTextColor={theme == LightMode ? '#ddd' : '#333'}
+                placeholderTextColor={theme == LightMode ? '#ccc' : '#444'}
                 defaultValue={habitName}
                 onChangeText={(text) => setHabitName(text)}
                 style={theme == LightMode ? Styles.input_lm : Styles.input_dm}
@@ -286,6 +287,26 @@ export default function AddHabit({getHabits, closeModal}) {
             <View style={Styles.form_row_label}>
               <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
             </View>
+            {/* Styling */}
+            <View style={Styles.form_row_label}>
+              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            </View>
+            {/* Styling */}
+            <View style={Styles.form_row_label}>
+              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            </View>
+            {/* Styling */}
+            <View style={Styles.form_row_label}>
+              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            </View>
+            {/* Styling */}
+            <View style={Styles.form_row_label}>
+              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            </View>
+            {/* Styling */}
+            <View style={Styles.form_row_label}>
+              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            </View>
 
             <View style={Styles.styling_box}>
               {/* Color Picker Btn */}
@@ -305,6 +326,10 @@ export default function AddHabit({getHabits, closeModal}) {
               style={Styles.modal}
               isVisible={modalVisibleColorPicker}
               propagateSwipe={true}
+              onBackdropPress={() => setModalVisibleColorPicker(false)}
+              animationIn={'zoomIn'}
+              animationOut={'zoomOut'}
+              backdropOpacity={0.8}
             >
               <View
                 style={[
@@ -348,6 +373,10 @@ export default function AddHabit({getHabits, closeModal}) {
               style={Styles.modal}
               isVisible={modalVisibleIconPicker}
               propagateSwipe={true}
+              onBackdropPress={() => setModalVisibleIconPicker(false)}
+              animationIn={'zoomIn'}
+              animationOut={'zoomOut'}
+              backdropOpacity={0.8}
             >
               <View
                 style={[
@@ -392,7 +421,7 @@ export default function AddHabit({getHabits, closeModal}) {
     </View>
     </ScrollView>
 
-    <View style={Styles.btnsBottomFixed}>
+    <View style={[Styles.btnsBottomFixed, theme == LightMode ? {backgroundColor: '#ffffff'} : {backgroundColor: '#000000'}]}>
       <View style={Styles.btns_save_cancel}>
         <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>
           <Text style={Styles.txt_save}>Add Habit</Text>
