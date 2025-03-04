@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Styles } from "../styles/Styles"
 
 export default function DaySelect({dayOfWeek, addToDaysPerWeek, removeFromDaysPerWeek}) {
-  const [isSelected, setIsSelected] = useState(false)
+  const [isSelected, setIsSelected] = useState(true)
   const clicky = () => {
     if(!isSelected){
       setIsSelected(true)

@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   container: {
-    height: 70,
+    height: 60,
     width: '100%',
   },
   weekContainer: {

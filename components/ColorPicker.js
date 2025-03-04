@@ -4,16 +4,12 @@ import { LightMode, Styles } from "./styles/Styles";
 import { ThemeContext } from "./Contexts";
 import Entypo from '@expo/vector-icons/Entypo';
 
-export default function ColorPicker({setHabitColor, color, setSelectedColor, selectedColor}) {
+export default function ColorPicker({setHabitColor, color, setSelectedColor, selectedColor, setModalVisibleColorPicker}) {
   const { theme } = useContext(ThemeContext)
   const handleClick = () => {
-    if(selectedColor != color){
-      setHabitColor(color)
-      setSelectedColor(color)
-    } else {
-      setHabitColor('')
-      setSelectedColor('')
-    }
+    setHabitColor(color)
+    setSelectedColor(color)
+    setModalVisibleColorPicker(false)
   }
 
   return (

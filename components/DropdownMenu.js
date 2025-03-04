@@ -82,7 +82,7 @@
     dropdownLm: {
       width: '100%',
       marginLeft: '0%',
-      height: 40,
+      height: 50,
       backgroundColor: '#eee',
       // borderColor: '#ddd',
       // borderWidth: 0.5,
@@ -128,12 +128,12 @@
     dropdownDm: {
       width: '100%',
       marginLeft: '0%',
-      height: 40,
+      height: 50,
       backgroundColor: '#111',
       //borderColor: '#333',
       //borderWidth: 0.5,
       borderRadius: 5,
-      paddingHorizontal: 10,
+      paddingHorizontal: 15,
     },
     labelDm: {
       position: 'absolute',
@@ -159,11 +159,11 @@
       marginRight: 5,
     },
     iconStyle: {
-      width: 20,
-      height: 20,
+      width: 30,
+      height: 30,
     },
     inputSearchStyle: {
-      height: 40,
+      height: 50,
       fontSize: 16,
     },
   });
