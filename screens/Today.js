@@ -6,7 +6,8 @@ import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, delet
 import HabitsItem from '../components/habits/HabitsItem';
 import AddHabit from '../components/habits/AddHabit';
 import EditHabit from '../components/habits/EditHabit';
-import { ThemeContext } from '../components/Contexts';
+import { ThemeContext, CustomColorContext } from '../components/Contexts';
+
 import { Feather } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
 import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
@@ -15,6 +16,7 @@ import { format } from 'date-fns';
 import DateRangeSelector from '../components/DateRangeSelector';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // import { getDoc } from 'firebase/firestore';
 
 export default function Today() {
@@ -25,7 +27,11 @@ export default function Today() {
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   const [selectedHabitId, setSelectedHabitId] = useState(null)
   const {theme} = useContext(ThemeContext)
+  const {customColor} = useContext(CustomColorContext)
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const insets = useSafeAreaInsets();
+  console.log(insets)
   
   // Define dates that have events
   // The key is the date in 'YYYY-MM-DD' format, value is true
@@ -192,7 +198,12 @@ export default function Today() {
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}>
           <Pressable style={Styles.pageHeaderLeftPressable}>
-            <Text style={theme == LightMode ? Styles.pageHeaderLeftTxtLm : Styles.pageHeaderLeftTxtDm}>
+            <Text
+              style={[
+                theme == LightMode ? Styles.pageHeaderLeftTxtLm : Styles.pageHeaderLeftTxtDm,
+                customColor && {color: customColor}
+              ]}
+            >
               Edit
             </Text>
           </Pressable>
@@ -210,31 +221,38 @@ export default function Today() {
         </View>
         <View style={Styles.pageHeaderRight}>
           <Pressable style={Styles.pageHeaderRightPressable} onPress={() => setModalVisibleAdd(true)}>
-            <FontAwesome6 name="plus" size={22} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+            <FontAwesome6
+              name="plus"
+              size={22}
+              style={[
+                theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm,
+                customColor && {color: customColor}
+              ]}
+            />
           </Pressable>
         </View>
       </View>
 
       <View style={{paddingVertical: 0, paddingHorizontal: 0, flex: 1}}>
 
-            <View style={{paddingHorizontal: 0}}>
-      <DateRangeSelector
-        onDateSelect={handleDateSelect}
-        eventDates={eventDates}
-        eventColors={eventColors}
-      />
-      </View>
+        <View style={{paddingHorizontal: 0}}>
+          <DateRangeSelector
+            onDateSelect={handleDateSelect}
+            eventDates={eventDates}
+            eventColors={eventColors}
+          />
+        </View>
 
-      {/* <View style={styles.selectedDateContainer}>
-        <Text style={styles.selectedDateText}>
-          Selected Date: {selectedDate.toDateString()}
-        </Text>
-        {eventDates[selectedDate.toISOString().split('T')[0]] && (
-          <Text style={styles.eventText}>
-            This date has an event!
+        {/* <View style={styles.selectedDateContainer}>
+          <Text style={styles.selectedDateText}>
+            Selected Date: {selectedDate.toDateString()}
           </Text>
-        )}
-      </View> */}
+          {eventDates[selectedDate.toISOString().split('T')[0]] && (
+            <Text style={styles.eventText}>
+              This date has an event!
+            </Text>
+          )}
+        </View> */}
 
         {/* {habits != null &&
           <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
@@ -324,7 +342,15 @@ export default function Today() {
         // onSwipeComplete={() => setModalVisibleAdd(false)}
         // swipeDirection="down"
       >
-        <View style={[Styles.modalView, theme == LightMode ? {backgroundColor: '#ffffff'} : {backgroundColor: '#000000'}]}>
+        <View
+          style={[
+            Styles.modalView,
+            {marginTop: insets.top},
+            theme == LightMode
+            ?{backgroundColor: '#ffffff', borderColor: '#ddd'}
+            :{backgroundColor: '#000000', borderColor: '#222'}
+          ]}
+        >
           {/* <ScrollView> */}
             <AddHabit
               getHabits={getHabits}

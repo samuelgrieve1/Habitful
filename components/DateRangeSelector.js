@@ -1,4 +1,4 @@
-import { ThemeContext } from './Contexts';
+import { ThemeContext, CustomColorContext } from './Contexts';
 import { LightMode } from './styles/Styles';
 import React, { useState, useRef, useEffect, useCallback, memo, useContext } from 'react';
 import {
@@ -22,6 +22,7 @@ const Day = memo(({
   eventColors, // New prop for custom event indicator colors
 }) => {
   const {theme} = useContext(ThemeContext)
+  const {customColor} = useContext(CustomColorContext)
   const isSelected = 
     date.getDate() === selectedDate.getDate() &&
     date.getMonth() === selectedDate.getMonth() &&
@@ -54,9 +55,9 @@ const Day = memo(({
       onPress={() => onSelectDate(date)}
       activeOpacity={0.7}
     >
-      <Text style={theme == LightMode ? [styles.dayNameLm, isSelected && styles.selectedDayNameLm] : [styles.dayNameDm, isSelected && styles.selectedDayNameDm]}>{formatDayName}</Text>
+      <Text style={theme == LightMode ? [styles.dayNameLm, isSelected && styles.selectedDayNameLm, isSelected && customColor && {color: customColor}] : [styles.dayNameDm, isSelected && styles.selectedDayNameDm, isSelected && customColor && {color: customColor}]}>{formatDayName}</Text>
       <View style={[theme == LightMode ? styles.dateCircleLm : styles.dateCircleDm, isSelected && styles.selectedDateCircle]}>
-        <Text style={theme == LightMode ? [styles.dateTextLm, isSelected && styles.selectedDateTextLm] : [styles.dateTextDm, isSelected && styles.selectedDateTextDm]}>
+        <Text style={theme == LightMode ? [styles.dateTextLm, isSelected && styles.selectedDateTextLm, isSelected && customColor && {color: customColor}] : [styles.dateTextDm, isSelected && styles.selectedDateTextDm, isSelected && customColor && {color: customColor}]}>
           {formatDate}
         </Text>
         
@@ -271,6 +272,8 @@ const DateRangeSelector = ({
   
   // Key extractor for FlatList optimization
   const keyExtractor = useCallback((item) => item.id, []);
+
+  const {customColor} = useContext(CustomColorContext)
   
   return (
     <View style={styles.containerWithHeader}>
@@ -291,7 +294,7 @@ const DateRangeSelector = ({
               onPress={handleGoToToday}
               activeOpacity={0.7}
             >
-              <Text style={styles.todayButtonText}>Today</Text>
+              <Text style={[styles.todayButtonText, customColor && {color: customColor}]}>Today</Text>
             </TouchableOpacity>
           )}
           {isCurrentWeekVisible && <View style={styles.placeholderWidth} />}
