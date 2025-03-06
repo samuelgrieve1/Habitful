@@ -17,6 +17,7 @@ import DateRangeSelector from '../components/DateRangeSelector';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 // import { getDoc } from 'firebase/firestore';
 
 export default function Today() {
@@ -197,7 +198,24 @@ export default function Today() {
     <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}>
-          <Pressable style={Styles.pageHeaderLeftPressable}>
+        <AnimatedCircularProgress
+            rotation={0}
+            size={50}
+            width={2}
+            fill={50}
+            tintColor={customColor ? customColor : "#4185e7"}
+            onAnimationComplete={() => console.log('onAnimationComplete')}
+            backgroundColor={theme == LightMode ? 'rgba(126, 126, 126, 0.1)' : 'rgba(126, 126, 126, 0.1)'}
+          >
+            {
+              () => (
+                <Text style={{color: customColor ? customColor : "#4185e7", fontSize: 14, fontWeight: '600'}}>
+                  50%
+                </Text>
+              )
+            }
+          </AnimatedCircularProgress>
+          {/* <Pressable style={Styles.pageHeaderLeftPressable}>
             <Text
               style={[
                 theme == LightMode ? Styles.pageHeaderLeftTxtLm : Styles.pageHeaderLeftTxtDm,
@@ -206,7 +224,7 @@ export default function Today() {
             >
               Edit
             </Text>
-          </Pressable>
+          </Pressable> */}
         </View>
         <View style={Styles.pageHeaderCenter}>
           <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>

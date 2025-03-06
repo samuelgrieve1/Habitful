@@ -54,7 +54,7 @@ const Styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   pageHeaderContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 0,
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 10,
@@ -64,7 +64,7 @@ const Styles = StyleSheet.create({
   },
   pageHeaderLeft: {
     width: 50,
-    paddingTop: 10,
+    paddingTop: 0,
     alignItems: 'flex-start',
   },
   pageHeaderLeftTxtLm: {
@@ -82,10 +82,12 @@ const Styles = StyleSheet.create({
   },
   pageHeaderRight: {
     width: 50,
-    paddingTop: 10,
-    alignItems: 'flex-end',
+    height: 50,
+    paddingTop: 0,
   },
   pageHeaderRightPressable: {
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
   },
   pageHeaderCenter: {
