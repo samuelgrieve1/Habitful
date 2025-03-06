@@ -3,6 +3,7 @@ import { useState, useContext } from "react"
 import { LightMode, Styles } from "./styles/Styles";
 import { ThemeContext } from "./Contexts";
 import Entypo from '@expo/vector-icons/Entypo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function ColorPicker({setHabitColor, color, setSelectedColor, selectedColor, setModalVisibleColorPicker, setCustomColor}) {
   const { theme } = useContext(ThemeContext)

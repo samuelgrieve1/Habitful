@@ -13,7 +13,7 @@ import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-cont
 
 export default function App() {
   const [theme, setTheme] = useState(LightMode)
-  const [customColor, setCustomColor] = useState('')
+  const [customColor, setCustomColor] = useState(customColor)
 
   const getDarkMode = async () => {
     try {

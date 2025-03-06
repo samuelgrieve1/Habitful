@@ -1,5 +1,5 @@
 import { ScrollView, View, Text } from "react-native"
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import DarkModeToggle from "../components/settings/DarkModeToggle"
 import { Styles, LightMode, DarkMode } from "../components/styles/Styles"
 import { ThemeContext, CustomColorContext } from '../components/Contexts';
@@ -7,9 +7,10 @@ import CustomColorPicker from "../components/settings/CustomColorPicker";
 
 export default function Settings() {
   const {theme} = useContext(ThemeContext)
-  const {customColor} = useContext(CustomColorContext)
+  const {customColor, setCustomColor} = useContext(CustomColorContext)
+  const [selectedColor, setSelectedColor] = useState(customColor)
 
-  console.log(customColor)
+  //console.log(customColor)
   return (
     <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
@@ -27,11 +28,20 @@ export default function Settings() {
 
       <ScrollView style={{paddingVertical: 20, paddingHorizontal: 0}}>
         <View style={Styles.setting}>
-          <DarkModeToggle />
+          <DarkModeToggle
+            customColor={customColor}
+            setCustomColor={setCustomColor}
+            setSelectedColor={setSelectedColor}
+          />
           <Text>Hide "+ Add Habit" Button</Text>
           <Text>Show deleted habits</Text>
         </View>
-        <CustomColorPicker />
+        <CustomColorPicker
+          customColor={customColor}
+          setCustomColor={setCustomColor}
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+        />
       </ScrollView>
     </View>
   )

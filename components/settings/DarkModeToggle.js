@@ -1,21 +1,31 @@
 import { useState, useContext, useEffect } from 'react';
 import { Switch, View, Text } from 'react-native';
 import { Styles, LightMode, DarkMode } from '../styles/Styles';
-import { ThemeContext } from '../Contexts';
+import { ThemeContext, CustomColorContext } from '../Contexts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function DarkModeToggle() {
-  const { theme, setTheme } = useContext(ThemeContext)
+export default function DarkModeToggle({customColor, setCustomColor, setSelectedColor}) {
+  const {theme, setTheme} = useContext(ThemeContext)
   const [darkMode, setDarkMode] = useState(false);
   
   const toggleDarkMode = async () => {
     setDarkMode(prev => !prev)
+    if (darkMode && customColor == '#ffffff'){
+      setTheme(LightMode)
+      setCustomColor('#000000')
+      setSelectedColor('#000000')
+    }
+    if (!darkMode && customColor == '#000000'){
+      setTheme(DarkMode)
+      setCustomColor('#ffffff')
+      setSelectedColor('#ffffff')
+    }
+    else {
+      setTheme(darkMode ? LightMode : DarkMode)
+    }
     
-    // getDarkMode()
-    setTheme(darkMode ? LightMode : DarkMode)
-    //console.log(theme.colors)
-    // console.log(Styles)
-    //console.log(theme == LightMode)
+    // customColor == '#ffffff' && setCustomColor('#000000')
+    // customColor == '#000000' && setCustomColor('#ffffff')
   }
 
   const saveDarkMode = async (value) => {
@@ -36,6 +46,14 @@ export default function DarkModeToggle() {
         console.log(e)
     }
   }
+  const saveCustomColor = async (value) => {
+    try {
+      //const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('customcolor', value)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   useEffect(() => {
     getDarkMode()
@@ -43,6 +61,7 @@ export default function DarkModeToggle() {
 
   useEffect(() => {
     saveDarkMode(darkMode)
+    saveCustomColor(customColor)
   },[toggleDarkMode])
   
   return (

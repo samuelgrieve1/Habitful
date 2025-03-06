@@ -4,30 +4,12 @@ import { Styles, LightMode, DarkMode } from '../styles/Styles';
 import { ThemeContext, CustomColorContext } from '../Contexts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ColorPicker from '../ColorPicker';
+import { Colors } from '../Colors';
 
-export default function CustomColorPicker() {
-  const {customColor, setCustomColor} = useContext(CustomColorContext)
-  const [selectedColor, setSelectedColor] = useState('#4185e7')
-  const [availableColors, setAvailableColors] = useState([
-    '#4185e7',
-    '#ff80ed',
-    '#065535',
-    '#ffc0cb',
-    '#008080',
-    '#ff0000',
-    '#ffd700',
-    '#0000ff',
-    '#ffa500',
-    '#c6e2ff',
-    '#b0e0e6',
-    '#40e0d0',
-    '#d3ffce',
-    '#ff7373',
-    '#003366',
-    '#00ff00',
-    '#8a2be2',
-    '#8a2be2',
-  ])
+export default function CustomColorPicker({customColor, setCustomColor, selectedColor, setSelectedColor}) {
+  const {theme} = useContext(ThemeContext)
+  // const [selectedColor, setSelectedColor] = useState(customColor)
+  //const [availableColors, setAvailableColors] = useState(Colors)
 
   const saveCustomColor = async (value) => {
     try {
@@ -60,7 +42,13 @@ export default function CustomColorPicker() {
   return (
     <View style={Styles.row}>
       <View style={Styles.color_picker_box}>
-        {availableColors.map((color, i) => {
+        <ColorPicker
+          color={theme == LightMode ? '#000000' : '#ffffff'}
+          setSelectedColor={setSelectedColor}
+          selectedColor={selectedColor}
+          setCustomColor={setCustomColor}
+        />
+        {Colors.map((color, i) => {
           return (
             <ColorPicker
               key={i}
