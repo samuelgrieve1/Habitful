@@ -1,12 +1,12 @@
 import { Text, Pressable, View, ScrollView, StyleSheet, Dimensions, Image, SectionList } from 'react-native';
 import Container from '../components/Container';
-import { Styles, LightMode } from '../components/styles/Styles';
+import { Styles, LightMode, DarkMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
 import ManageHabitsItem from '../components/habits/ManageHabitsItem';
 import AddHabit from '../components/habits/AddHabit';
 import EditHabit from '../components/habits/EditHabit';
-import { ThemeContext } from '../components/Contexts';
+import { ThemeContext, CustomColorContext } from '../components/Contexts';
 import { Feather } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
 import DragList, {DragListRenderItemInfo} from 'react-native-draglist';
@@ -23,6 +23,7 @@ export default function Habits() {
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   const [selectedHabitId, setSelectedHabitId] = useState(null)
   const {theme} = useContext(ThemeContext)
+  const {customColor} = useContext(CustomColorContext)
   const [selectedHabitType, setSelectedHabitType] = useState('all')
 
   // Close modal from child component
@@ -75,8 +76,8 @@ export default function Habits() {
   // ADD HABIT BTN
   const addHabitBtn = () => {
     return(
-    <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-      <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+    <Pressable style={[Styles.btnAdd, theme == DarkMode && Styles.btnAddDm]} onPress={() => setModalVisibleAdd(true)}>
+      <Text style={[Styles.txtAdd, customColor && {color: customColor}]}>Add Habit</Text>
     </Pressable>
     )
   }
@@ -118,20 +119,30 @@ export default function Habits() {
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}>
           {/* <Pressable style={Styles.pageHeaderLeftPressable}>
-            <Feather name="refresh-cw" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+            <Feather name="refresh-cw" size={24} style={[Styles.menuIcon, customColor && {color: customColor}]} />
           </Pressable> */}
         </View>
         <View style={Styles.pageHeaderCenter}>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterTitle,
+              theme == DarkMode && Styles.pageHeaderCenterTitleDm
+            ]}
+          >
             Habits
           </Text>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterSubTitle,
+              theme == DarkMode && Styles.pageHeaderCenterSubTitleDm
+            ]}
+          >
             Manage Your Habits
           </Text>
         </View>
         <View style={Styles.pageHeaderRight}>
           <Pressable style={Styles.pageHeaderRightPressable}>
-            <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+            <Feather name="plus" size={24} style={[Styles.menuIcon, customColor && {color: customColor}]} />
           </Pressable>
         </View>
       </View>
@@ -200,9 +211,9 @@ export default function Habits() {
             keyExtractor={item => item.id}
             // ListFooterComponent={addHabitBtn}
           /> */}
-          <View style={Styles.btn_add_box}>
-            <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-              <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+          <View style={Styles.btnAddBox}>
+            <Pressable style={[Styles.btnAdd, theme == DarkMode && Styles.btnAddDm]} onPress={() => setModalVisibleAdd(true)}>
+              <Text style={[Styles.txtAdd, customColor && {color: customColor}]}>Add Habit</Text>
             </Pressable>
           </View>
           </>
@@ -233,9 +244,9 @@ export default function Habits() {
             keyExtractor={item => item.id}
             // ListFooterComponent={addHabitBtn}
           />
-          <View style={Styles.btn_add_box}>
-            <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-              <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+          <View style={Styles.btnAddBox}>
+            <Pressable style={[Styles.btnAdd, theme == Styles.btnAddDm]} onPress={() => setModalVisibleAdd(true)}>
+              <Text style={[Styles.txtAdd, customColor && {color: customColor}]}>Add Habit</Text>
             </Pressable>
           </View>
           </>
@@ -266,9 +277,9 @@ export default function Habits() {
             keyExtractor={item => item.id}
             // ListFooterComponent={addHabitBtn}
           />
-          <View style={Styles.btn_add_box}>
-            <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-              <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+          <View style={Styles.btnAddBox}>
+            <Pressable style={[Styles.btnAdd, theme == DarkMode && Styles.btnAddDm]} onPress={() => setModalVisibleAdd(true)}>
+              <Text style={[Styles.txtAdd, customColor && {color: customColor}]}>Add Habit</Text>
             </Pressable>
           </View>
           </>
@@ -276,16 +287,16 @@ export default function Habits() {
 
         {/* PLACEHOLDER TEXT IF NO HABITS */}
         {habits == 'no habits' &&
-          <View style={theme == LightMode ? Styles.no_habits_container_lm : Styles.no_habits_container_dm}>
-            <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+          <View style={Styles.noHabitsContainer}>
+            <Text style={[Styles.noHabitsText, theme == DarkMode && Styles.noHabitsTextDm]}>
               Add a habit
             </Text>
-            <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+            <Text style={[Styles.noHabitsText, theme == DarkMode && Styles.noHabitsTextDm]}>
               to get started
             </Text>
-            <View style={Styles.btn_add_box}>
-              <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-                <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+            <View style={Styles.btnAddBox}>
+              <Pressable style={[Styles.btnAdd, theme == DarkMode && Styles.btnAddDm]} onPress={() => setModalVisibleAdd(true)}>
+                <Text style={[Styles.txtAdd, customColor && {color: customColor}]}>Add Habit</Text>
               </Pressable>
             </View>
           </View>

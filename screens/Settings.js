@@ -4,6 +4,7 @@ import DarkModeToggle from "../components/settings/DarkModeToggle"
 import { Styles, LightMode, DarkMode } from "../components/styles/Styles"
 import { ThemeContext, CustomColorContext } from '../components/Contexts';
 import CustomColorPicker from "../components/settings/CustomColorPicker";
+import ScrollableCalendar from "./history/ScrollableCalendar";
 
 export default function Settings() {
   const {theme} = useContext(ThemeContext)
@@ -16,10 +17,20 @@ export default function Settings() {
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
-          <Text style={[theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm, {color: customColor}]}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterTitle,
+              theme == DarkMode && Styles.pageHeaderCenterTitleDm
+            ]}
+          >
             Settings
           </Text>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterSubTitle,
+              theme == DarkMode && Styles.pageHeaderCenterSubTitleDm
+            ]}
+          >
             Customize Your Experience
           </Text>
         </View>

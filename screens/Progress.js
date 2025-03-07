@@ -113,10 +113,20 @@ export default function Progress() {
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterTitle,
+              theme == Styles.pageHeaderCenterTitleDm
+            ]}
+          >
             Progress
           </Text>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterSubTitle,
+              theme == DarkMode && Styles.pageHeaderCenterSubTitleDm
+            ]}
+          >
             Measure Your Success
           </Text>
         </View>

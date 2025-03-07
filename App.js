@@ -49,7 +49,7 @@ export default function App() {
       <ThemeContext.Provider value={{theme, setTheme}}>
       <CustomColorContext.Provider value={{customColor, setCustomColor}}>
         <SafeAreaProvider>
-          <SafeAreaView style={Styles.safe_area_view}>
+          <SafeAreaView style={Styles.safeAreaView}>
             <StatusBar style={theme == LightMode ? 'dark' : 'light'}/>
             <NavigationContainer theme={theme}>
               <BottomTabNavigator />

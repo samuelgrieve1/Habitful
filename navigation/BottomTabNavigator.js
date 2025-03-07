@@ -68,14 +68,21 @@ export default function BottomTabNavigator() {
           //headerShadowVisible: false,
           tabBarIcon: (tintcolor) => (<Feather name="check" size={24} color={tintcolor.color} />),
           // headerLeft: () => (
-          //   <View style={Styles.header_right}>
-          //     <Feather name="arrow-left" size={24} style={theme == LightMode ? Styles.headerIconLeftLm : Styles.headerIconLeftDm} />
+          //   <View style={Styles.headerRight}>
+              // <Feather
+              //   name="arrow-left"
+              //   size={24}
+              //   style={[
+              //     Styles.headerIconLeft,
+              //     theme == DarkMode && Styles.headerIconLeftDm
+              //   ]}
+              // />
           //   </View>
           // ),
           // headerRight: () => (
-          //   <View style={Styles.header_right}>
+          //   <View style={Styles.headerRight}>
           //     <Feather name="arrow-right" size={24} style={theme == LightMode ? Styles.headerIconRightLm : Styles.headerIconRightDm} />
-          //     {/* <Feather name="arrow-right" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} /> */}
+          //     {/* <Feather name="arrow-right" size={24} style={[Styles.menuIcon, customColor && {color: customColor}]} /> */}
           //   </View>
           // ),
         }}
@@ -87,8 +94,8 @@ export default function BottomTabNavigator() {
           headerShown: false,
           tabBarIcon: (tintcolor) => (<Feather name="list" size={24} color={tintcolor.color} />),
           headerRight: () => (
-            <View style={Styles.header_right}>
-              <Feather name="plus" size={24} style={theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm} />
+            <View style={Styles.headerRight}>
+              <Feather name="plus" size={24} style={[Styles.menuIcon, customColor && {color: customColor}]} />
             </View>
           ),
         }}

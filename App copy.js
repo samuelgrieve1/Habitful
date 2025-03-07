@@ -24,7 +24,7 @@ const DrawerNav = () => {
 
 export default function App() {
   return (
-    <SafeAreaView style={Styles.safe_area_view}>
+    <SafeAreaView style={Styles.safeAreaView}>
       <NavigationContainer theme={MyTheme}>
         <RootStack.Navigator screenOptions={{ headerShown: false }}>
           <RootStack.Group>

@@ -1,6 +1,6 @@
 import { Text, Pressable, View, ScrollView, StyleSheet, Dimensions, Image, SafeAreaView } from 'react-native';
 import Container from '../components/Container';
-import { Styles, LightMode } from '../components/styles/Styles';
+import { Styles, LightMode, DarkMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
 import HabitsItem from '../components/habits/HabitsItem';
@@ -155,8 +155,8 @@ export default function Today() {
   // ADD HABIT BTN
   const addHabitBtn = () => {
     return(
-    <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-      <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}><Feather name="plus" size={16} color={theme == LightMode ? '#757575' : '#757575'} /> Add Habit</Text>
+    <Pressable style={[Styles.btnAdd, theme == DarkMode && Styles.btnAddDm]} onPress={() => setModalVisibleAdd(true)}>
+      <Text style={[Styles.txtAdd, customColor && {color: customColor}]}><Feather name="plus" size={16} color={theme == LightMode ? '#757575' : '#757575'} /> Add Habit</Text>
     </Pressable>
     )
   }
@@ -218,7 +218,7 @@ export default function Today() {
           {/* <Pressable style={Styles.pageHeaderLeftPressable}>
             <Text
               style={[
-                theme == LightMode ? Styles.pageHeaderLeftTxtLm : Styles.pageHeaderLeftTxtDm,
+                Styles.pageHeaderLeftTxt,
                 customColor && {color: customColor}
               ]}
             >
@@ -227,15 +227,22 @@ export default function Today() {
           </Pressable> */}
         </View>
         <View style={Styles.pageHeaderCenter}>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterTitle,
+              theme == DarkMode && Styles.pageHeaderCenterTitleDm
+            ]}
+          >
             Today
           </Text>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterSubTitle,
+              theme == DarkMode && Styles.pageHeaderCenterSubTitleDm
+            ]}
+          >
             Track Your Habits
           </Text>
-          {/* <Text style={theme == LightMode ? Styles.pageHeaderCenterDateLm : Styles.pageHeaderCenterDateDm}>
-            <Feather name="calendar" size={16} color="white" /> {format(currentDate, 'EEEE, MMMM dd')}
-          </Text> */}
         </View>
         <View style={Styles.pageHeaderRight}>
           <Pressable style={Styles.pageHeaderRightPressable} onPress={() => setModalVisibleAdd(true)}>
@@ -243,7 +250,7 @@ export default function Today() {
               name="plus"
               size={22}
               style={[
-                theme == LightMode ? Styles.menuIconLm : Styles.menuIconDm,
+                Styles.menuIcon,
                 customColor && {color: customColor}
               ]}
             />
@@ -330,16 +337,16 @@ export default function Today() {
 
         {/* PLACEHOLDER TEXT IF NO HABITS */}
         {habits == 'no habits' &&
-          <View style={theme == LightMode ? Styles.no_habits_container_lm : Styles.no_habits_container_dm}>
-            <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+          <View style={Styles.noHabitsContainer}>
+            <Text style={[Styles.noHabitsText, theme == DarkMode && Styles.noHabitsTextDm]}>
               Add a habit
             </Text>
-            <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+            <Text style={[Styles.noHabitsText, theme == DarkMode && Styles.noHabitsTextDm]}>
               to get started
             </Text>
-            <View style={Styles.btn_add_box}>
-              <Pressable style={theme == LightMode ? Styles.btn_add_lm : Styles.btn_add_dm} onPress={() => setModalVisibleAdd(true)}>
-                <Text style={theme == LightMode ? Styles.txt_add_lm : Styles.txt_add_dm}>Add Habit</Text>
+            <View style={Styles.btnAddBox}>
+              <Pressable style={[Styles.btnAdd, theme == DarkMode && Styles.btnAddDm]} onPress={() => setModalVisibleAdd(true)}>
+                <Text style={[Styles.txtAdd, customColor && {color: customColor}]}>Add Habit</Text>
               </Pressable>
             </View>
           </View>

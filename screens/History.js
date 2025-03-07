@@ -2,19 +2,20 @@ import { View, Text, Button, ScrollView, Pressable } from 'react-native';
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import { Styles, LightMode, DarkMode } from '../components/styles/Styles';
-import { ThemeContext } from '../components/Contexts';
+import { ThemeContext, CustomColorContext } from '../components/Contexts';
 import { Feather } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import HistoryList from './history/HistoryList';
-import HistoryCalendar from './history/HistoryCalendar';
+import HistoryCalendar from './history/ScrollableCalendar';
 import { parse, compareAsc, formatDistance, differenceInCalendarMonths, endOfYesterday } from 'date-fns';
-import {Calendar, CalendarList} from 'react-native-calendars';
+import {Calendar, CalendarList, CalendarProvider, WeekCalendar} from 'react-native-calendars';
 import { format, parseISO } from 'date-fns';
 import EditHistory from '../components/history/EditHistory';
 import Modal from 'react-native-modal';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
 import EditHabit from '../components/habits/EditHabit';
 import Collapsible from 'react-native-collapsible';
+import ScrollableCalendar from './history/ScrollableCalendar';
 
 // const Stack = createStackNavigator({
 //   screens: {
@@ -26,6 +27,7 @@ import Collapsible from 'react-native-collapsible';
 export default function History() {
   const [refreshing, setRefreshing] = useState(false);
   const {theme} = useContext(ThemeContext)
+  const {customColor} = useContext(CustomColorContext)
   const [completions, setCompletions] = useState([])
   const [completionsSorted, setCompletionsSorted] = useState([])
   const [earliestMonth, setEarliestMonth] = useState(0)
@@ -146,11 +148,11 @@ export default function History() {
     //setEarliestMonth()
   }, [completions])
 
-  const calendarThemeLm = {
+  const calendarTheme = {
     agendaKnobColor: '#000',
     calendarBackground: '#fff',
-    todayTextColor: '#4185e7',
-    indicatorColor: '#4185e7',
+    todayTextColor: customColor ? customColor : '#4185e7',
+    indicatorColor: customColor ? customColor : '#4185e7',
     dayTextColor: '#000',
     //selectedDayTextColor: 'pink',
     //selectedDayBackgroundColor: 'pink',
@@ -164,8 +166,8 @@ export default function History() {
   const calendarThemeDm = {
     agendaKnobColor: '#fff',
     calendarBackground: '#000',
-    todayTextColor: '#4185e7',
-    indicatorColor: '#4185e7',
+    todayTextColor: customColor ? customColor : '#4185e7',
+    indicatorColor: customColor ? customColor : '#4185e7',
     dayTextColor: '#fff',
     //selectedDayTextColor: 'pink',
     //selectedDayBackgroundColor: 'pink',
@@ -183,7 +185,7 @@ export default function History() {
       markedDay[format(date, 'yyyy-MM-dd')] = {
         selected: true,
         marked: true,
-        selectedColor: '#4185e7',
+        selectedColor: customColor ? customColor : '#4185e7',
       };
     })
   }
@@ -196,10 +198,20 @@ export default function History() {
       <View style={Styles.pageHeaderContainer}>
         <View style={Styles.pageHeaderLeft}></View>
         <View style={Styles.pageHeaderCenter}>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterTitleLm : Styles.pageHeaderCenterTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterTitle,
+              theme == DarkMode && Styles.pageHeaderCenterTitleDm
+            ]}
+          >
             History
           </Text>
-          <Text style={theme == LightMode ? Styles.pageHeaderCenterSubTitleLm : Styles.pageHeaderCenterSubTitleDm}>
+          <Text
+            style={[
+              Styles.pageHeaderCenterSubTitle,
+              theme == DarkMode && Styles.pageHeaderCenterSubTitleDm
+            ]}
+          >
             Review and Make Changes
           </Text>
         </View>
@@ -304,18 +316,19 @@ export default function History() {
         {/* CALENDAR VIEW */}
         {historyView == 'calendarview' && earliestMonth > 0 &&
           <View style={Styles.calendarViewContainer}>
-            <CalendarList
+            {/* <CalendarList
               //current={currentDate}
               pastScrollRange={earliestMonth}
               futureScrollRange={1}
-              key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
-              theme={theme == LightMode ? calendarThemeLm : calendarThemeDm}
+              // key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
+              theme={theme == DarkMode ? calendarThemeDm : calendarTheme}
               onDayPress={day => {
                 setModalVisibleEditHistory(true); setSelectedDate(format(parseISO(day['dateString']), 'EEE MMM dd yyyy'));
               }}
               markedDates={markedDay}
               maxDate={format(endOfYesterday(), 'EEE MMM dd yyyy')}
-            />
+            /> */}
+            <ScrollableCalendar />
           </View>
         }
       </View>

@@ -67,12 +67,7 @@ const Styles = StyleSheet.create({
     paddingTop: 0,
     alignItems: 'flex-start',
   },
-  pageHeaderLeftTxtLm: {
-    color: blue,
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  pageHeaderLeftTxtDm: {
+  pageHeaderLeftTxt: {
     color: blue,
     fontSize: 18,
     fontWeight: '600',
@@ -93,19 +88,16 @@ const Styles = StyleSheet.create({
   pageHeaderCenter: {
     flex: 1,
   },
-  pageHeaderCenterTitleLm: {
+  pageHeaderCenterTitle: {
     fontSize: 36,
     fontWeight: '600',
     textAlign: 'center',
     color: black,
   },
   pageHeaderCenterTitleDm: {
-    fontSize: 36,
-    fontWeight: '600',
-    textAlign: 'center',
     color: white,
   },
-  pageHeaderCenterSubTitleLm: {
+  pageHeaderCenterSubTitle: {
     fontSize: 14,
     fontWeight: '300',
     textAlign: 'center',
@@ -113,31 +105,13 @@ const Styles = StyleSheet.create({
     marginTop: 5,
   },
   pageHeaderCenterSubTitleDm: {
-    fontSize: 14,
-    fontWeight: '300',
-    textAlign: 'center',
     color: gray9,
-    marginTop: 5,
-  },
-  pageHeaderCenterDateLm: {
-    fontSize: 14,
-    fontWeight: '300',
-    textAlign: 'center',
-    color: white,
-    marginTop: 5,
-  },
-  pageHeaderCenterDateDm: {
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
-    color: white,
-    marginTop: 35,
   },
 
   //////////////////////////////
   // App.js
   //////////////////////////////
-  safe_area_view: {
+  safeAreaView: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
@@ -157,22 +131,21 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // BottomTabNavigator.js
   //////////////////////////////
-  header_left: {
+  headerLeft: {
     marginLeft: 20,
   },
-  header_right: {
+  headerRight: {
     marginRight: 20,
   },
-  btn_edit_habits: {
+  btnEditHabits: {
     backgroundColor: white,
   },
-  headerIconLeftDm: {
-    color: white,
+  headerIconLeft: {
+    color: black,
     marginLeft: 40,
   },
   headerIconRightDm: {
     color: white,
-    marginRight: 20,
   },
 
   //////////////////////////////
@@ -181,84 +154,65 @@ const Styles = StyleSheet.create({
   habitsContainer: {
     //overflow: 'visible',
   },
-  one_hundred_percent_box_lm: {
+  oneHundredPercentBox: {
     backgroundColor: green,
     padding: 10,
     borderRadius: 3,
     marginBottom: 10,
   },
-  one_hundred_percent_box_dm: {
+  oneHundredPercentBoxDm: {
     backgroundColor: green,
-    padding: 10,
-    borderRadius: 3,
-    marginBottom: 10,
   },
-  one_hundred_percent_txt_lm: {
+  oneHundredPercentTxt: {
     color: white,
     textAlign: 'center',
     fontSize: 18,
   },
-  one_hundred_percent_txt_dm: {
+  oneHundredPercentTxtDm: {
     color: white,
-    textAlign: 'center',
-    fontSize: 18,
   },
-  no_habits_container_lm: {
+  noHabitsContainer: {
     justifyContent: 'center',
     //height: '50%',
   },
-  no_habits_container_dm: {
-    //justifyContent: 'center',
-    //height: '50%',
-  },
-  no_habits_text_lm: {
+  noHabitsText: {
     color: black,
     textAlign: 'center',
     fontSize: 36,
   },
-  no_habits_text_dm: {
+  noHabitsTextDm: {
     color: white,
-    textAlign: 'center',
-    fontSize: 36,
   },
-  habits_day_lm: {
+  habitsDay: {
     marginBottom: 30,
     color: black,
   },
-  habits_day_dm: {
-    marginBottom: 30,
+  habitsDayDm: {
     color: white,
   },
-  habits_day_title_sin_lm: {
+  habitsDayTitleSin: {
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
     color: black,
   },
-  habits_day_title_sin_dm: {
-    fontSize: 18,
-    fontWeight: '600',
-    textAlign: 'center',
+  habitsDayTitleSinDm: {
     color: white,
   },
-  habits_day_title_lm: {
+  habitsDayTitle: {
     fontSize: 24,
     textAlign: 'center',
     color: black,
   },
-  habits_day_title_dm: {
-    fontSize: 24,
-    textAlign: 'center',
+  habitsDayTitleDm: {
     color: white,
   },
-  habits_day_title_sub_lm: {
+  habitsDayTitleSub: {
     fontSize: 12,
     textAlign: 'center',
     color: black,
   },
-  habits_day_title_sub_dm: {
-    fontSize: 12,
-    textAlign: 'center',
+  habitsDayTitleSubDm: {
     color: white,
   },
   centeredView: {
@@ -280,33 +234,27 @@ const Styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10,
   },
-  btn_add_box: {
+  btnAddBox: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  btn_add_lm: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-  },
-  btn_add_dm: {
+  btnAdd: {
     width: 100,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
-    backgroundColor: evendarkergray,
+    backgroundColor: lightergray,
     borderRadius: 10,
     borderWidth: 0.5,
+    borderColor: lightgray,
+  },
+  btnAddDm: {
+    backgroundColor: evendarkergray,
     borderColor: darkergray,
   },
-  txt_add_lm: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: blue,
-  },
-  txt_add_dm: {
+  txtAdd: {
     fontSize: 16,
     fontWeight: '600',
     color: blue,
@@ -330,12 +278,7 @@ const Styles = StyleSheet.create({
     margin: 0,
     padding: 0,
   },
-  menuIconLm: {
-    // color: black,
-    color: blue,
-  },
-  menuIconDm: {
-    // color: white,
+  menuIcon: {
     color: blue,
   },
   weekCalendarLm: {

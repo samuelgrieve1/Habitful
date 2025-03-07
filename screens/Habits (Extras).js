@@ -1,6 +1,6 @@
 import { Text, Pressable, View, ScrollView, Modal, StyleSheet } from 'react-native';
 import Container from '../components/Container';
-import { Styles, LightMode } from '../components/styles/Styles';
+import { Styles, LightMode, DarkMode } from '../components/styles/Styles';
 import { useState, useEffect, useContext } from 'react';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc } from '../firebase/index';
 import HabitsItem from '../components/habits/HabitsItem';
@@ -133,13 +133,13 @@ export default function Habits() {
 
   return (
     <View style={{paddingVertical: 20, paddingHorizontal: 20}}>
-        <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-          <Text style={theme == LightMode ? Styles.habits_day_title_lm : Styles.habits_day_title_dm}>Today</Text>
-          <Text style={theme == LightMode ? Styles.habits_day_title_sub_lm : Styles.habits_day_title_sub_dm}>{currentDate}</Text>
+        <View style={[Styles.habitsDay, theme == DarkMode && Styles.habitsDayDm]}>
+          <Text style={[Styles.habitsDayTitle, theme == DarkMode && Styles.habitsDayTitleDm]}>Today</Text>
+          <Text style={[Styles.habitsDayTitleSub, theme == DarkMode && Styles.habitsDayTitleSubDm]}>{currentDate}</Text>
         </View>
         {oneHundredPercent &&
-          <View style={theme == LightMode ? Styles.one_hundred_percent_box_lm : Styles.one_hundred_percent_box_dm}>
-            <Text style={theme == LightMode ? Styles.one_hundred_percent_txt_lm : Styles.one_hundred_percent_txt_dm}>DAAAYUM! 100% completion today!</Text>
+          <View style={[Styles.oneHundredPercentBox, theme == DarkMode && Styles.oneHundredPercentBoxDm]}>
+            <Text style={[Styles.oneHundredPercentTxt, theme == DarkMode && Styles.oneHundredPercentTxtDm]}>DAAAYUM! 100% completion today!</Text>
           </View>
         }
 
@@ -174,7 +174,7 @@ export default function Habits() {
         } */}
 
         {habits == null &&
-          <Text style={theme == LightMode ? Styles.no_habits_text_lm : Styles.no_habits_text_dm}>
+          <Text style={[Styles.noHabitsText, theme == DarkMode && Styles.noHabitsTextDm]}>
             Add a habit to get started
           </Text>
         }
@@ -197,8 +197,8 @@ export default function Habits() {
             </View>
           </Modal>
         </View>
-        <Pressable style={Styles.btn_add} onPress={() => setModalVisible(true)}>
-          <Text style={Styles.txt_add}>Add Habit</Text>
+        <Pressable style={Styles.btnAdd} onPress={() => setModalVisible(true)}>
+          <Text style={Styles.txtAdd}>Add Habit</Text>
         </Pressable>
         {/* <Pressable style={Styles.btn_edit} onPress={() => setModalVisible(true)}>
           <Text style={Styles.txt_edit}>Edit Habits</Text>
