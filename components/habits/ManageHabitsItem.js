@@ -18,37 +18,15 @@ export default function ManageHabitsItem({habitId, habitName, setSelectedHabitId
   }
   
   return (
-    <View style={theme == LightMode ? Styles.habit_box_lm : Styles.habit_box_dm}>
-          <View style={theme == LightMode ? Styles.habit_lm : Styles.habit_dm}>
-            
-            {theme == LightMode
-            ?
-            <>
-              <View style={Styles.habit_name_box}>
-                <Pressable  onPress={getHabitToEdit}>
-                  <Text style={Styles.habit_name_lm}>{habitName}</Text>
-                </Pressable>
-              </View>
-            </>
-            :
-            <>
-              {/* <View style={Styles.habit_name_box}> */}
-                <View style={Styles.habit_name_box_text}>
-                  <Pressable  onPress={getHabitToEdit}>
-                    <Text style={Styles.habit_name_dm}>{habitName}</Text>
-                  </Pressable>
-                </View>
-                <View style={Styles.habit_name_box_icon}>
-                  {/* <Pressable  onPress={getHabitToEdit}>
-                    <Feather name="more-horizontal" size={24} color="#fff" />
-                  </Pressable> */}
-                </View>
-              {/* </View> */}
-            </>
-            }
-            
-          </View>
-      <View style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}></View>
+    <View style={[Styles.habitBox, theme == DarkMode && Styles.habitBoxDm]}>
+      <View style={[Styles.habit, theme == DarkMode && Styles.habitDm]}>
+        <View style={Styles.habitNameBox}>
+          <Pressable  onPress={getHabitToEdit}>
+            <Text style={[Styles.habitName, theme == DarkMode && Styles.habitNameDm]}>{habitName}</Text>
+          </Pressable>
+        </View>
+      </View>
+      <View style={[Styles.habitSeparator, theme == DarkMode && Styles.habitSeparatorDm]} />
     </View>
   )
 }

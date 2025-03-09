@@ -42,10 +42,10 @@ export default function App() {
   },[])
 
   return (
-    <View style={{
-      flex:1,
-      backgroundColor: theme == LightMode ? '#fff' : '#000',
-    }}>
+    <View style={[
+      {flex:1},
+      theme == DarkMode ? Styles.blackBg : Styles.whiteBg
+    ]}>
       <ThemeContext.Provider value={{theme, setTheme}}>
       <CustomColorContext.Provider value={{customColor, setCustomColor}}>
         <SafeAreaProvider>

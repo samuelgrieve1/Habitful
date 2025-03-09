@@ -215,32 +215,12 @@ export default function Today() {
               )
             }
           </AnimatedCircularProgress>
-          {/* <Pressable style={Styles.pageHeaderLeftPressable}>
-            <Text
-              style={[
-                Styles.pageHeaderLeftTxt,
-                customColor && {color: customColor}
-              ]}
-            >
-              Edit
-            </Text>
-          </Pressable> */}
         </View>
         <View style={Styles.pageHeaderCenter}>
-          <Text
-            style={[
-              Styles.pageHeaderCenterTitle,
-              theme == DarkMode && Styles.pageHeaderCenterTitleDm
-            ]}
-          >
+          <Text style={[Styles.pageHeaderCenterTitle, theme == DarkMode && Styles.pageHeaderCenterTitleDm]}>
             Today
           </Text>
-          <Text
-            style={[
-              Styles.pageHeaderCenterSubTitle,
-              theme == DarkMode && Styles.pageHeaderCenterSubTitleDm
-            ]}
-          >
+          <Text style={[Styles.pageHeaderCenterSubTitle, theme == DarkMode && Styles.pageHeaderCenterSubTitleDm]}>
             Track Your Habits
           </Text>
         </View>
@@ -268,50 +248,10 @@ export default function Today() {
           />
         </View>
 
-        {/* <View style={styles.selectedDateContainer}>
-          <Text style={styles.selectedDateText}>
-            Selected Date: {selectedDate.toDateString()}
-          </Text>
-          {eventDates[selectedDate.toISOString().split('T')[0]] && (
-            <Text style={styles.eventText}>
-              This date has an event!
-            </Text>
-          )}
-        </View> */}
-
-        {/* {habits != null &&
-          <View style={theme == LightMode ? Styles.habits_day_lm : Styles.habits_day_dm}>
-            <Text style={theme == LightMode ? Styles.habits_day_title_sin_lm : Styles.habits_day_title_sin_dm}>{format(currentDate, 'MMMM dd')}</Text>
-          </View>
-        } */}
-
-        {/* <CalendarProvider
-          //style={{backgroundColor:'red'}}
-          key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
-          date="2022-01-07"
-        >
-          <WeekCalendar
-            
-            theme={theme == LightMode ? weekCalendarThemeLm : weekCalendarThemeDm}
-            hideDayNames firstDay={1}
-              //pastScrollRange={earliestMonth}
-              //futureScrollRange={0}
-              // key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
-              
-              //onDayPress={day => {
-              //   setModalVisiblerEditHistory(true); setSelectedDate(format(parseISO(day['dateString']), 'EEE MMM dd yyyy'));
-              // }}
-              //markedDates={markedDay}
-              //maxDate={format(endOfYesterday(), 'EEE MMM dd yyyy')}
-          />
-        </CalendarProvider> */}
-
         {habits != null && habits != 'no habits' &&
           <FlatList
             ItemSeparatorComponent={
-                <View
-                  style={theme == LightMode ? Styles.habit_separator_lm : Styles.habit_separator_dm}
-                />
+              <View style={[Styles.habitSeparator, theme == DarkMode && Styles.habitSeparatorDm]} />
             }
             style={Styles.habitsContainer}
             data={habits.sort((a, b) => a.name.localeCompare(b.name))}

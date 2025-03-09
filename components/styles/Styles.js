@@ -48,6 +48,20 @@ const Styles = StyleSheet.create({
   //////////////////////////////
   // General
   //////////////////////////////
+  white: white,
+  black: black,
+  blackBg: {
+    backgroundColor: black,
+  },
+  blackTxt: {
+    color: black,
+  },
+  whiteBg: {
+    backgroundColor: white,
+  },
+  whiteTxt: {
+    color: white,
+  },
   screenContainer: {
     flex: 1,
     // marginBottom: 120,
@@ -281,98 +295,34 @@ const Styles = StyleSheet.create({
   menuIcon: {
     color: blue,
   },
-  weekCalendarLm: {
-    backgroundColor: white,
-  },
-  weekCalendarDm: {
-    backgroundColor: black,
-  },
 
   //////////////////////////////
   // AddHabit.js
   // HabitsItem.js
   //////////////////////////////
-  checkbox_lm: {
-    borderCurve: 'circular',
-    width: 26,
-    height: 26,
-    // marginRight: 10,
-    backgroundColor: lightgray,
-    borderColor: lightgray,
-    borderRadius: 5,
-  },
-  checkbox_dm: {
-    borderCurve: 'circular',
-    width: 26,
-    height: 26,
-    // marginRight: 10,
-    backgroundColor: darkergray,
-    borderColor: darkergray,
-    borderRadius: 5,
-  },
-  checkbox_unchecked_lm: {
-    borderCurve: 'circular',
-    width: 26,
-    height: 26,
-    // marginRight: 10,
-    backgroundColor: gray,
-    borderColor: gray,
-    borderRadius: 5,
-    borderWidth: 0,
-  },
-  checkbox_checked_lm: {
-    borderCurve: 'circular',
-    width: 26,
-    height: 26,
-    // marginRight: 10,
-    backgroundColor: blue,
-    borderColor: blue,
-    borderRadius: 5,
-    borderWidth: 0,
-  },
-  checkbox_unchecked_dm: {
-    borderCurve: 'circular',
-    width: 26,
-    height: 26,
-    // marginRight: 10,
-    backgroundColor: black,
-    borderColor: darkergray,
-    borderRadius: 5,
-    borderWidth: 0,
-  },
-  checkbox_checked_dm: {
-    borderCurve: 'circular',
-    width: 26,
-    height: 26,
-    // marginRight: 10,
-    backgroundColor: blue,
-    borderColor: blue,
-    borderRadius: 5,
-    borderWidth: 0,
-  },
-  styling_box: {
+  stylingBox: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  btn_color_icon_picker: {
+  btnColorIconPicker: {
     flex: 1,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
   },
-  txt_color_icon_picker: {
+  txtColorIconPicker: {
     fontSize: 18,
     fontWeight: '600',
     color: blue,
   },
-  btn_color_icon_picker_done: {
+  btnColorIconPickerDone: {
     width: '100%',
     height: 50,
     borderRadius: 10,
     justifyContent: 'center',
   },
-  txt_color_icon_picker_done: {
+  txtColorIconPickerDone: {
     color: '#ffffff',
     fontSize: 18,
     textAlign: 'center',
@@ -382,70 +332,33 @@ const Styles = StyleSheet.create({
   // HabitsItem.js
   //////////////////////////////
   habitSeparator: {
-    //width: '83%',
     marginLeft: '17%',
     height: 1,
     backgroundColor: '#222',
   },
-  habit_box_lm: {
+  habitBox: {
     flex: 1,
-    // borderRadius: 40,
-    //backgroundColor: lightergray,
-    // marginBottom: 5,
-    // padding: 10,
     paddingHorizontal: 0,
     paddingVertical: 15,
-    //borderTopWidth: 0.5,
     borderTopColor: lightgray,
   },
-  habit_box_dm: {
-    flex: 1,
-    // borderRadius: 40,
-    //backgroundColor: evendarkergray,
-    // marginBottom: 5,
-    // padding: 10,
-    paddingHorizontal: 0,
-    paddingVertical: 15,
-    //borderTopWidth: 0.5,
+  habitBoxDm: {
     borderTopColor: darkergray,
   },
-  habit_box_completed_lm: {
-    flex: 1,
-    borderRadius: 10,
-    backgroundColor: white,
-    marginBottom: 15,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderWidth: 0.5,
-    borderColor: lightgray,
-  },
-  habit_box_completed_dm: {
-    flex: 1,
-    borderRadius: 10,
-    backgroundColor: evendarkergray,
-    marginBottom: 15,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderWidth: 0.5,
-    borderColor: darkergray,
-  },
-  habit_separator_lm: {
+  habitSeparator: {
     marginLeft: 70,
     borderTopColor: '#ededed',
     borderTopWidth: 1,
   },
-  habit_separator_dm: {
+  habitSeparatorDm: {
     marginLeft: 70,
     borderTopColor: '#121212',
     borderTopWidth: 1,
   },
-  habit_lm: {
+  habit: {
     flexDirection: 'row',
   },
-  habit_dm: {
-    flexDirection: 'row',
-  },
-  habit_icon_lm: {
+  habitIcon: {
     width:50,
     height:50,
     //backgroundColor: 'rgba(65, 133, 231, 0.1)',
@@ -457,72 +370,37 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  habit_icon_dm: {
-    width:50,
-    height:50,
-    //backgroundColor: 'rgba(65, 133, 231, 0.1)',
-    backgroundColor: 'rgba(126, 126, 126, 0.1)',
-    // marginRight: 10,
-    borderRadius: 25,
-    borderWidth: 0,
-    borderColor: darkergray,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  habit_icon_txt_lm: {
+  habitIconTxt: {
     color: 'rgba(65, 133, 231, 1)',
     fontSize: 18,
     fontWeight: '600',
   },
-  habit_icon_txt_dm: {
-    color: 'rgba(65, 133, 231, 1)',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  habit_checkbox_box: {
-    marginTop: 7,
-    // width: 40,
-  },
-  habit_name_box: {
+  habitNameBox: {
     flex: 1,
     justifyContent: 'center',
   },
-  habit_name_box_icon: {
+  habitNameBoxIcon: {
     width: 24,
     paddingTop: 8,
   },
-  habit_name_box_text: {
+  habitNameBoxText: {
     flex: 1,
   },
-  habit_name_lm: {
+  habitName: {
     fontSize: 16,
     fontWeight: 'bold',
     color: black,
   },
-  habit_name_completed_lm: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: darkgray,
-    textDecorationLine: 'line-through',
-  },
-  habit_name_dm: {
-    fontSize: 16,
-    fontWeight: '600',
+  habitNameDm: {
     color: '#fff',
   },
-  habit_name_completed_dm: {
+  habitNameCompleted: {
     fontSize: 16,
     fontWeight: 'bold',
     color: darkgray,
     textDecorationLine: 'line-through',
   },
-  habit_name_amount_lm: {
-    fontSize: 14,
-    fontWeight: '300',
-    color: 'rgba(126, 126, 126, 1)',
-    //color: 'rgba(65, 133, 231, 1)',
-  },
-  habit_name_amount_dm: {
+  habitNameAmount: {
     fontSize: 14,
     fontWeight: '300',
     color: 'rgba(126, 126, 126, 1)',
@@ -544,7 +422,7 @@ const Styles = StyleSheet.create({
   // AddHabit.js
   // EditHabit.js
   //////////////////////////////
-  form_header_fixed: {
+  formHeaderFixed: {
     position: 'absolute',
     top: 0,
     right: 0,
@@ -553,57 +431,47 @@ const Styles = StyleSheet.create({
     height: 60,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
-  form_header_fixed_title: {
+  formHeaderFixedDm: {
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+  },
+  formHeaderFixedTitle: {
     top: 20,
   },
-  page_title_add_habit_lm: {
+  pageTitleAddHabit: {
     fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
     color: black,
     marginBottom: 30,
   },
-  page_title_add_habit_dm: {
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
+  pageTitleAddHabitDm: {
     color: white,
-    marginBottom: 30,
   },
-  form_title_lm: {
+  formTitle: {
     // flex: 1,
     fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
     color: black,
   },
-  form_title_dm: {
-    // flex: 1,
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
+  formTitleDm: {
     color: white,
   },
-  input_label_lm: {
+  inputLabel: {
     marginTop: 15,
     marginBottom: 15,
     fontWeight: 'bold',
     color: black,
     fontSize: 16,
   },
-  input_label_dm: {
-    marginTop: 15,
-    marginBottom: 15,
-    fontWeight: 'bold',
+  inputLabelDm: {
     color: white,
-    fontSize: 16,
   },
-  input_lm: {
+  input: {
     flex: 1,
     backgroundColor: lightergray,
-    // borderWidth: 0.5,
-    // borderColor: lightgray,
     borderRadius: 5,
     height: 50,
     paddingLeft: 15,
@@ -611,95 +479,55 @@ const Styles = StyleSheet.create({
     color: black,
     fontSize: 16,
   },
-  input_dm: {
-    flex: 1,
+  inputDm: {
     backgroundColor: evendarkergray,
-    // borderWidth: 0.5,
-    // borderColor: darkergray,
-    borderRadius: 5,
-    height: 50,
-    paddingLeft: 15,
-    paddingRight: 15,
     color: white,
-    fontSize: 16,
   },
-  form_separator_lm: {
-    flexDirection: 'row',
-    height: 1,
-    backgroundColor: lightergray,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  form_separator_dm: {
-    flexDirection: 'row',
-    height: 1,
-    backgroundColor: evendarkergray,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  form_label_row: {
+  formLabelRow: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
-  form_row_no_flex: {
+  formLabelRowNoFlex: {
     marginBottom: 30,
   },
-  form_row: {
+  formRow: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginBottom: 30,
   },
-  form_row_label: {
+  formRowLabel: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginBottom: 10,
   },
-  form_row_vert: {
+  formRowVert: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     marginBottom: 40,
   },
-  form_label_lm: {
+  formLabel: {
     color: black,
     fontWeight: 'bold',
     fontSize: 18,
     marginBottom: 10,
   },
-  form_label_dm: {
+  formLabelDm: {
     color: white,
-    fontWeight: 'bold',
-    fontSize: 18,
-    marginBottom: 10,
   },
-  form_input_label_frequency_lm: {
-    fontWeight: 'bold',
-    color: black,
-    fontSize: 16,
-  },
-  form_input_label_frequency_dm: {
-    fontWeight: 'bold',
-    color: white,
-    fontSize: 16,
-  },
-  form_txt_select_all: {
-    color: blue,
-    marginLeft: 10,
-    fontSize: 16,
-  },
-  form_amount_box: {
+  formAmountBox: {
     flex: 1,
     height: 50,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  form_amount_minus: {
+  formAmountMinus: {
     width: 80,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#111',
   },
-  form_amount_value: {
+  formAmountValue: {
     flex: 1,
     marginHorizontal: 10,
     borderRadius: 10,
@@ -707,44 +535,33 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#111',
   },
-  form_amount_value_txt: {
+  formAmountValueTxt: {
     color: '#fff',
     fontSize: 18,
   },
-  form_amount_plus: {
+  formAmountPlus: {
     width: 80,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#111',
   },
-  checkbox_row: {
-    flexDirection: 'row',
-    marginBottom: 20,
-    color: white,
-  },
-  checkbox_col: {
-    flex: 1,
-  },
   btnsBottomFixed: {
     backgroundColor: black,
     position: 'absolute',
-    //width: '100%',
     paddingTop: 20,
     paddingBottom: 10,
-    // paddingLeft: 10,
-    // paddingRight: 10,
     bottom: 0,
     left: 10,
     right: 10,
   },
-  btns_save_cancel: {
+  btnsSaveCancel: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
   },
-  btn_save: {
+  btnSave: {
     width: '100%',
     height: 50,
     alignItems: 'center',
@@ -752,17 +569,16 @@ const Styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 32,
     borderRadius: 5,
-    // elevation: 3,
     backgroundColor: blue,
   },
-  txt_save: {
+  txtSave: {
     fontSize: 16,
     lineHeight: 21,
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: white,
   },
-  btn_cancel_lm: {
+  btnCancel: {
     width: '100%',
     height: 50,
     alignItems: 'center',
@@ -774,33 +590,20 @@ const Styles = StyleSheet.create({
     borderColor: lightgray,
     borderWidth: 1,
   },
-  btn_cancel_dm: {
-    width: '100%',
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 32,
-    borderRadius: 5,
-    //backgroundColor: darkergray,
+  btnCancelDm: {
     borderColor: darkergray,
-    borderWidth: 1,
   },
-  txt_cancel_lm: {
+  txtCancel: {
     fontSize: 16,
     lineHeight: 21,
     fontWeight: '600',
     letterSpacing: 0.25,
     color: black,
   },
-  txt_cancel_dm: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: '600',
-    letterSpacing: 0.25,
+  txtCancelDm: {
     color: white,
   },
-  btns_archive_delete_lm: {
+  btnsArchiveDelete: {
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 10,
@@ -808,91 +611,65 @@ const Styles = StyleSheet.create({
     borderTopColor: lightgray,
     borderTopWidth: 1,
   },
-  btns_archive_delete_dm: {
-    flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 10,
-    paddingTop: 20,
+  btnsArchiveDeleteDm: {
     borderTopColor: evendarkergray,
-    borderTopWidth: 1,
   },
-  btns_archive_delete_left: {
+  btnsArchiveDeleteLeft: {
     flex: 1,
     marginRight: 10,
   },
-  btns_archive_delete_right: {
+  btnsArchiveDeleteRight: {
     flex: 1,
     marginLeft: 10,
   },
-  btn_archive_lm: {
+  btnArchive: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
     borderRadius: 5,
     borderWidth: 0,
     borderColor: blue,
-    // backgroundColor: '#f0f5fd',
   },
-  btn_archive_dm: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 8,
-    borderRadius: 5,
-    borderWidth: 0,
-    borderColor: blue,
-    // backgroundColor: '#050a12',
-  },
-  txt_archive: {
+  txtArchive: {
     fontSize: 16,
     lineHeight: 21,
     fontWeight: 'regular',
     letterSpacing: 0.25,
     color: blue,
   },
-  btn_delete_lm: {
+  btnDelete: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
     borderRadius: 5,
     borderWidth: 0,
     borderColor: red,
-    // backgroundColor: '#fdf0f0',
   },
-  btn_delete_dm: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 8,
-    borderRadius: 5,
-    borderWidth: 0,
-    borderColor: red,
-    // backgroundColor: '#120505',
-  },
-  txt_delete: {
+  txtDelete: {
     fontSize: 16,
     lineHeight: 21,
     fontWeight: 'regular',
     letterSpacing: 0.25,
     color: red,
   },
-  close_modal_x: {
+  closeModalX: {
     position: 'absolute',
     top: 20,
     left: 10,
     padding: 2,
     borderRadius: 5,
     zIndex: 2,
+    backgroundColor: '#eeeeee'
   },
-  close_modal_save: {
+  closeModalXDm: {
+    backgroundColor: '#111111'
+  },
+  closeModalSave: {
     position: 'absolute',
     top: 2,
     right: 0,
   },
-  save_text: {
-    color: blue,
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  cancel_text: {
+  saveText: {
     color: blue,
     fontSize: 16,
     fontWeight: '600',
@@ -901,68 +678,58 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  round_day_box: {
+  roundDayBox: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#111',
     width: 40,
     height: 40,
     borderRadius: 20,
-    //borderWidth: 1,
-    //borderColor: 'rgba(126, 126, 126, 0.1)',
   },
-  round_day_text: {
+  roundDayText: {
     flex: 1,
     textAlign: 'center',
     color: white,
     fontSize: 14,
     fontWeight: '600',
   },
-  round_day_box_selected: {
+  roundDayBoxSelected: {
     backgroundColor: blue,
   },
-  round_day_text_selected: {
+  roundDayTextSelected: {
     color: white,
   },
-  modal_color_icon_picker: {
-    // flex: 1,
-    // width: '80%',
-    // height: 100,
-    // margin: '10%',
+  modalColorIconPicker: {
     borderRadius: 20,
     borderWidth: 1,
     padding: 5,
+    backgroundColor: '#eeeeee',
   },
-  styling_modal_title_box: {
-    //flex: 1,
+  modalColorIconPickerDm: {
+    backgroundColor: '#111111',
+  },
+  stylingModalTitleBox: {
     marginTop: 10,
     marginBottom: 5,
   },
-  styling_modal_title_txt: {
+  stylingModalTitleTxt: {
     textAlign: 'center',
     textAlignVertical: 'top',
     fontSize: 24,
     fontWeight: '600',
-    // lineHeight: 24,
   },
-  color_picker_box: {
+  colorPickerBox: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center'
   },
-  color_picker_color_lm: {
+  colorPickerColor: {
     width: 40,
     height: 40,
     margin: 10,
     borderRadius: 20,
   },
-  color_picker_color_dm: {
-    width: 40,
-    height: 40,
-    margin: 10,
-    borderRadius: 20,
-  },
-  color_picker_color_selected: {
+  colorPickerColorSelected: {
     width: 50,
     height: 50,
     margin: 5,
@@ -970,44 +737,21 @@ const Styles = StyleSheet.create({
     borderWidth: 5,
     borderColor: 'rgba(126, 126, 126, 0.6)',
   },
-  icon_picker_box: {
+  iconPickerBox: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
-  icon_picker_icon_lm: {
+  iconPickerIcon: {
     width: 40,
     height: 40,
     margin: 10,
     borderRadius: 5,
-  },
-  icon_picker_icon_dm: {
-    width: 40,
-    height: 40,
-    margin: 10,
-    borderRadius: 5,
-  },
-  icon_picker_icon_selected: {
-    // backgroundColor: 'rgba(126, 126, 126, 0.6)',
   },
 
   //////////////////////////////
   // Settings.js
   //////////////////////////////
-  setting_lm: {
-    flexDirection: 'row',
-    marginBottom: 10,
-    paddingBottom: 10,
-    borderBottomColor: lightgray,
-    borderBottomWidth: 1,
-  },
-  setting_dm: {
-    flexDirection: 'row',
-    marginBottom: 10,
-    paddingBottom: 10,
-    borderBottomColor: evendarkergray,
-    borderBottomWidth: 1,
-  },
 
   //////////////////////////////
   // DarkModeToggle.js
@@ -1016,17 +760,16 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
-  dark_mode_txt_box: {
+  darkModeTxtBox: {
     width: '50%',
+  },
+  darkModeTxt: {
     color: black,
   },
-  dark_mode_txt_lm: {
-    color: black,
-  },
-  dark_mode_txt_dm: {
+  darkModeTxtDm: {
     color: white,
   },
-  dark_mode_switch_box: {
+  darkModeSwitchBox: {
     width: '50%',
     alignItems: 'flex-end'
   },
@@ -1035,26 +778,17 @@ const Styles = StyleSheet.create({
   // History.js
   //////////////////////////////
   historyContainer: {
-    paddingTop: 20,
-    paddingBottom: 27,
+    flex: 1,
+    //paddingTop: 20,
+    //paddingBottom: 0,
   },
-  listViewContainer: {
-    marginTop: 0,
-    marginBottom: 20,
-  },
-  calendarViewContainer: {
-    marginTop: 0,
-  },
-  dateBoxLm: {
+  dateBox: {
     marginLeft: 20,
     marginRight: 20,
     borderTopWidth: 1,
     borderColor: lightgray,
   },
   dateBoxDm: {
-    marginLeft: 20,
-    marginRight: 20,
-    borderTopWidth: 1,
     borderColor: evendarkergray,
   },
   dateBoxHeader: {
@@ -1064,7 +798,7 @@ const Styles = StyleSheet.create({
   historyCompletionsBox: {
     marginBottom: 20,
   },
-  dateTitleLm: {
+  dateTitle: {
     color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
@@ -1072,21 +806,16 @@ const Styles = StyleSheet.create({
   },
   dateTitleDm: {
     color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 10,
   },
-  historyHabitNameLm: {
+  historyHabitName: {
     color: 'black',
     fontSize: 16,
     lineHeight: 32,
   },
   historyHabitNameDm: {
     color: 'white',
-    fontSize: 16,
-    lineHeight: 32,
   },
-  downHistoryIconLm: {
+  downHistoryIcon: {
     color: black,
     position: 'absolute',
     top: 15,
@@ -1097,14 +826,8 @@ const Styles = StyleSheet.create({
   },
   downHistoryIconDm: {
     color: white,
-    position: 'absolute',
-    top: 15,
-    right: 0,
-    width: 18,
-    height: 18,
-    zIndex: 1,
   },
-  editHistoryBtnContainerLm: {
+  editHistoryBtnContainer: {
     position: 'absolute',
     top: 5,
     right: 5,
@@ -1114,35 +837,15 @@ const Styles = StyleSheet.create({
     backgroundColor: lightergray,
   },
   editHistoryBtnContainerDm: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-    width: 60,
-    height: 24,
-    borderRadius: 10,
     backgroundColor: evendarkergray,
   },
-  editHistoryBtnLm: {
+  editHistoryBtn: {
     color: blue,
     fontSize: 14,
     lineHeight: 24,
     textAlign: 'center',
     width: 60,
     height: 24,
-  },
-  editHistoryBtnDm: {
-    color: blue,
-    fontSize: 14,
-    lineHeight: 24,
-    textAlign: 'center',
-    width: 60,
-    height: 24,
-  },
-  filterHistoryIconLm: {
-    color: black,
-  },
-  filterHistoryIconDm: {
-    color: white,
   },
   historyViewBtnContainer: {
     flexDirection: 'row',
@@ -1154,19 +857,16 @@ const Styles = StyleSheet.create({
     width: '50%',
     height: 40,
   },
-  historyViewBtnSelectedLm: {
+  historyViewBtnSelected: {
     width: '50%',
     height: 40,
     borderRadius: 10,
     backgroundColor: lightergray,
   },
   historyViewBtnSelectedDm: {
-    width: '50%',
-    height: 40,
-    borderRadius: 10,
     backgroundColor: evendarkergray,
   },
-  historyViewBtnTxtSelectedLm: {
+  historyViewBtnTxtSelected: {
     textAlign: 'center',
     lineHeight: 40,
     fontSize: 18,
@@ -1175,14 +875,9 @@ const Styles = StyleSheet.create({
     height: 40,
   },
   historyViewBtnTxtSelectedDm: {
-    textAlign: 'center',
-    lineHeight: 40,
-    fontSize: 18,
     color: white,
-    width: '100%',
-    height: 40,
   },
-  historyViewBtnTxtLm: {
+  historyViewBtnTxt: {
     textAlign: 'center',
     lineHeight: 40,
     fontSize: 18,
@@ -1191,37 +886,29 @@ const Styles = StyleSheet.create({
     height: 40,
   },
   historyViewBtnTxtDm: {
-    textAlign: 'center',
-    lineHeight: 40,
-    fontSize: 18,
     color: darkgray,
-    width: '100%',
-    height: 40,
   },
-  historyCalendarLm: {
+  historyCalendar: {
     backgroundColor: blue,
   },
   historyCalendarDm: {
     backgroundColor: white,
     color: 'pink',
   },
-  editDayTitleLm: {
+  editDayTitle: {
     fontSize: 36,
     color: black,
   },
   editDayTitleDm: {
-    fontSize: 36,
     color: white,
   },
-  editDayDateLm: {
+  editDayDate: {
     fontSize: 18,
     color: black,
     marginBottom: 20,
   },
   editDayDateDm: {
-    fontSize: 18,
     color: white,
-    marginBottom: 20,
   },
   calendarLm: {
     agendaKnobColor: '#000',

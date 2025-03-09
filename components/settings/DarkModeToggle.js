@@ -23,9 +23,6 @@ export default function DarkModeToggle({customColor, setCustomColor, setSelected
     else {
       setTheme(darkMode ? LightMode : DarkMode)
     }
-    
-    // customColor == '#ffffff' && setCustomColor('#000000')
-    // customColor == '#000000' && setCustomColor('#ffffff')
   }
 
   const saveDarkMode = async (value) => {
@@ -66,10 +63,10 @@ export default function DarkModeToggle({customColor, setCustomColor, setSelected
   
   return (
     <View style={Styles.row}>
-      <View style={Styles.dark_mode_txt_box}>
-        <Text style={theme == LightMode ? Styles.dark_mode_txt_lm : Styles.dark_mode_txt_dm}>Dark Mode</Text>
+      <View style={Styles.darkModeTxtBox}>
+        <Text style={[Styles.darkModeTxt, theme == DarkMode && Styles.darkModeTxtDm]}>Dark Mode</Text>
       </View>
-      <View style={Styles.dark_mode_switch_box}>
+      <View style={Styles.darkModeSwitchBox}>
         <Switch onValueChange={toggleDarkMode} value={darkMode} />
       </View>
     </View>

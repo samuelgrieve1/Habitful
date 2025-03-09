@@ -3,7 +3,7 @@ import { StyleSheet, Text, View , Button, TextInput, Pressable, useColorScheme, 
 import Checkbox from 'expo-checkbox';
 import { app, db, getFirestore, collection, addDoc } from '../../firebase/index';
 import { Feather } from '@expo/vector-icons';
-import { Styles, LightMode } from '../styles/Styles';
+import { Styles, LightMode, DarkMode } from '../styles/Styles';
 import { ThemeContext } from '../Contexts';
 import DropdownMenu from '../DropdownMenu';
 import { format } from 'date-fns';
@@ -110,44 +110,44 @@ export default function AddHabit({getHabits, closeModal}) {
 
   return (
     <>
-    <View style={[Styles.form_header_fixed, theme == LightMode ? {backgroundColor: 'rgba(255, 255, 255, 0.9)'} : {backgroundColor: 'rgba(0, 0, 0, 0.9)'}]}>
-      <View style={[Styles.close_modal_x, theme == LightMode ? {backgroundColor: '#eeeeee'} : {backgroundColor: '#111111'}]}>
+    <View style={[Styles.formHeaderFixed, theme == DarkMode && Styles.formHeaderFixedDm]}>
+      <View style={[Styles.closeModalX, theme == DarkMode && Styles.closeModalXDm]}>
         <Pressable title='Close' onPress={() => closeModal()}>
-          <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
+          <Feather name="x" size={24} style={theme == DarkMode ? Styles.whiteTxt : Styles.blackTxt} />
         </Pressable>
       </View>
-      <View style={Styles.form_header_fixed_title}>
-        <Text style={theme == LightMode ? Styles.form_title_lm : Styles.form_title_dm}>New Habit</Text>
+      <View style={Styles.formHeaderFixedTitle}>
+        <Text style={[Styles.formTitle, theme == DarkMode && Styles.formTitleDm]}>New Habit</Text>
       </View>
     </View>
     <ScrollView>
     <View style={{flexDirection: 'row'}}>
       <View style={{width: '100%'}}>
-        {/* <View style={Styles.form_row}>
-          <Text style={theme == LightMode ? Styles.form_title_lm : Styles.form_title_dm}>New Habit</Text>
+        {/* <View style={Styles.formRow}>
+          <Text style={[Styles.formTitle, theme == DarkMode && Styles.formTitleDm]}>New Habit</Text>
         </View> */}
         <View style={{flex: 1, paddingTop: 50, paddingBottom: 160}}>
           {/* <ScrollView> */}
-            {/* <View style={Styles.form_row_label}>
-              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Name</Text>
+            {/* <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Name</Text>
             </View> */}
 
-            <View style={Styles.form_row}>
+            <View style={Styles.formRow}>
               <TextInput
                 placeholder='Habit Name'
-                placeholderTextColor={theme == LightMode ? '#ccc' : '#444'}
+                placeholderTextColor={theme == DarkMode ? '#444' : '#ccc'}
                 defaultValue={habitName}
                 onChangeText={(text) => setHabitName(text)}
-                style={theme == LightMode ? Styles.input_lm : Styles.input_dm}
+                style={[Styles.input, theme == DarkMode && Styles.inputDm]}
               />
             </View>
       
-            <View style={Styles.form_row_label}>
-              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Frequency</Text>
+            <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Frequency</Text>
             </View>
 
             {/* Frequency Type */}
-            <View style={Styles.form_row_label}>
+            <View style={Styles.formRowLabel}>
               <DropdownMenu
                 theme={theme}
                 defaultValue={'Days per week'}
@@ -162,7 +162,7 @@ export default function AddHabit({getHabits, closeModal}) {
 
             {/* Days per week */}
             {frequencyType == 'daily' &&
-            <View style={Styles.form_row_no_flex}>
+            <View style={Styles.formLabelRowNoFlex}>
               <View style={Styles.daySelectBox}>
                 {daysOfWeek.map((day, i) => {
                   return (
@@ -180,19 +180,19 @@ export default function AddHabit({getHabits, closeModal}) {
 
             {/* Times per week */}
             {frequencyType == 'weekly' &&
-              <View style={Styles.form_row}>
-                <View style={Styles.form_amount_box}>
-                  <View style={Styles.form_amount_minus}>
+              <View style={Styles.formRow}>
+                <View style={Styles.formAmountBox}>
+                  <View style={Styles.formAmountMinus}>
                     <Pressable onPress={() => {setTimesPerWeek(timesPerWeek > 0 ? timesPerWeek - 1 : 0)}}>
                       <FontAwesome6 name="minus" size={18} color="#4185e7" />
                     </Pressable>
                   </View>
-                  <View style={Styles.form_amount_value}>
-                    <Text style={Styles.form_amount_value_txt}>
+                  <View style={Styles.formAmountValue}>
+                    <Text style={Styles.formAmountValueTxt}>
                       {timesPerWeek}
                     </Text>
                   </View>
-                  <View style={Styles.form_amount_plus}>
+                  <View style={Styles.formAmountPlus}>
                     <Pressable onPress={() => {setTimesPerWeek(timesPerWeek + 1)}}>
                       <FontAwesome6 name="plus" size={18} color="#4185e7" />
                     </Pressable>
@@ -203,19 +203,19 @@ export default function AddHabit({getHabits, closeModal}) {
 
             {/* Times per month */}
             {frequencyType == 'monthly' &&
-              <View style={Styles.form_row}>
-                <View style={Styles.form_amount_box}>
-                  <View style={Styles.form_amount_minus}>
+              <View style={Styles.formRow}>
+                <View style={Styles.formAmountBox}>
+                  <View style={Styles.formAmountMinus}>
                     <Pressable onPress={() => {setTimesPerMonth(timesPerMonth > 0 ? timesPerMonth - 1 : 0)}}>
                       <FontAwesome6 name="minus" size={18} color="#4185e7" />
                     </Pressable>
                   </View>
-                  <View style={Styles.form_amount_value}>
-                    <Text style={Styles.form_amount_value_txt}>
+                  <View style={Styles.formAmountValue}>
+                    <Text style={Styles.formAmountValueTxt}>
                       {timesPerMonth}
                     </Text>
                   </View>
-                  <View style={Styles.form_amount_plus}>
+                  <View style={Styles.formAmountPlus}>
                     <Pressable onPress={() => {setTimesPerMonth(timesPerMonth + 1)}}>
                       <FontAwesome6 name="plus" size={18} color="#4185e7" />
                     </Pressable>
@@ -225,7 +225,7 @@ export default function AddHabit({getHabits, closeModal}) {
             }
 
             {/* Daily Goal */}
-            <View style={Styles.form_row_label}>
+            <View style={Styles.formRowLabel}>
               <DropdownMenu
                 theme={theme}
                 defaultValue={'Times per day'}
@@ -239,19 +239,19 @@ export default function AddHabit({getHabits, closeModal}) {
 
             {/* Goal Number */}
             {goalType == 'times' &&
-              <View style={Styles.form_row}>
-                <View style={Styles.form_amount_box}>
-                  <View style={Styles.form_amount_minus}>
+              <View style={Styles.formRow}>
+                <View style={Styles.formAmountBox}>
+                  <View style={Styles.formAmountMinus}>
                     <Pressable onPress={() => {setGoalTimes(goalTimes > 0 ? goalTimes - 1 : 0)}}>
                       <FontAwesome6 name="minus" size={18} color="#4185e7" />
                     </Pressable>
                   </View>
-                  <View style={Styles.form_amount_value}>
-                    <Text style={Styles.form_amount_value_txt}>
+                  <View style={Styles.formAmountValue}>
+                    <Text style={Styles.formAmountValueTxt}>
                       {goalTimes}
                     </Text>
                   </View>
-                  <View style={Styles.form_amount_plus}>
+                  <View style={Styles.formAmountPlus}>
                     <Pressable onPress={() => {setGoalTimes(goalTimes + 1)}}>
                       <FontAwesome6 name="plus" size={18} color="#4185e7" />
                     </Pressable>
@@ -262,19 +262,19 @@ export default function AddHabit({getHabits, closeModal}) {
 
             {/* Goal Time */}
             {goalType == 'time' &&
-              <View style={Styles.form_row}>
-                <View style={Styles.form_amount_box}>
-                  <View style={Styles.form_amount_minus}>
+              <View style={Styles.formRow}>
+                <View style={Styles.formAmountBox}>
+                  <View style={Styles.formAmountMinus}>
                     <Pressable onPress={() => {setGoalTime(goalTime > 0 ? goalTime - 1 : 0)}}>
                       <FontAwesome6 name="minus" size={18} color="#4185e7" />
                     </Pressable>
                   </View>
-                  <View style={Styles.form_amount_value}>
-                    <Text style={Styles.form_amount_value_txt}>
+                  <View style={Styles.formAmountValue}>
+                    <Text style={Styles.formAmountValueTxt}>
                       {goalTime} mins
                     </Text>
                   </View>
-                  <View style={Styles.form_amount_plus}>
+                  <View style={Styles.formAmountPlus}>
                     <Pressable onPress={() => {setGoalTime(goalTime + 1)}}>
                       <FontAwesome6 name="plus" size={18} color="#4185e7" />
                     </Pressable>
@@ -284,40 +284,40 @@ export default function AddHabit({getHabits, closeModal}) {
             }
 
             {/* Styling */}
-            <View style={Styles.form_row_label}>
-              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Color & Icon</Text>
             </View>
             {/* Styling */}
-            <View style={Styles.form_row_label}>
-              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Color & Icon</Text>
             </View>
             {/* Styling */}
-            <View style={Styles.form_row_label}>
-              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Color & Icon</Text>
             </View>
             {/* Styling */}
-            <View style={Styles.form_row_label}>
-              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Color & Icon</Text>
             </View>
             {/* Styling */}
-            <View style={Styles.form_row_label}>
-              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Color & Icon</Text>
             </View>
             {/* Styling */}
-            <View style={Styles.form_row_label}>
-              <Text style={theme == LightMode ? Styles.form_label_lm : Styles.form_label_dm}>Color & Icon</Text>
+            <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Color & Icon</Text>
             </View>
 
-            <View style={Styles.styling_box}>
+            <View style={Styles.stylingBox}>
               {/* Color Picker Btn */}
-              <Pressable style={[Styles.btn_color_icon_picker, {marginRight: 5, backgroundColor: selectedColor}]} onPress={() => setModalVisibleColorPicker(true)}>
-                <Text style={[Styles.txt_color_icon_picker, {color: '#ffffff'}]}>Color</Text>
+              <Pressable style={[Styles.btnColorIconPicker, {marginRight: 5, backgroundColor: selectedColor}]} onPress={() => setModalVisibleColorPicker(true)}>
+                <Text style={[Styles.txtColorIconPicker, {color: '#ffffff'}]}>Color</Text>
               </Pressable>
              
               {/* Icon Picker Btn */}
-              <Pressable style={[Styles.btn_color_icon_picker, {marginLeft: 5, borderWidth: 1, borderColor: selectedColor}]} onPress={() => setModalVisibleIconPicker(true)}>
+              <Pressable style={[Styles.btnColorIconPicker, {marginLeft: 5, borderWidth: 1, borderColor: selectedColor}]} onPress={() => setModalVisibleIconPicker(true)}>
                 <FontAwesome6 name={selectedIcon} size={40} color={selectedColor} />
-                {/* <Text style={[Styles.txt_color_icon_picker, {color: selectedColor}]}>{selectedIcon}</Text> */}
+                {/* <Text style={[Styles.txtColorIconPicker, {color: selectedColor}]}>{selectedIcon}</Text> */}
               </Pressable>
             </View>
 
@@ -333,13 +333,13 @@ export default function AddHabit({getHabits, closeModal}) {
             >
               <View
                 style={[
-                  Styles.modal_color_icon_picker,
-                  theme == LightMode ? {backgroundColor: '#eeeeee'} : {backgroundColor: '#111111'}
+                  Styles.modalColorIconPicker,
+                  theme == DarkMode && Styles.modalColorIconPickerDm
                 ]}>
-                {/* <View style={Styles.styling_modal_title_box}>
-                  <Text style={[Styles.styling_modal_title_txt, theme == LightMode ? {color: '#000000'} : {color: '#ffffff'}]}>Color</Text>
+                {/* <View style={Styles.stylingModalTitleBox}>
+                  <Text style={[Styles.stylingModalTitleTxt, theme == DarkMode ? Styles.whiteTxt : Styles.blackTxt]}>Color</Text>
                 </View> */}
-                <View style={Styles.color_picker_box}>
+                <View style={Styles.colorPickerBox}>
                   {availableColors.map((color, i) => {
                     return (
                       <ColorPicker
@@ -353,16 +353,16 @@ export default function AddHabit({getHabits, closeModal}) {
                     )
                   })}
                 </View>
-                {/* <View style={[Styles.btn_color_icon_picker_done, {backgroundColor: selectedColor}]}>
+                {/* <View style={[Styles.btnColorIconPickerDone, {backgroundColor: selectedColor}]}>
                   <Pressable title='Done' onPress={() => setModalVisibleColorPicker(false)}>
-                    <Text style={Styles.txt_color_icon_picker_done}>
+                    <Text style={Styles.txtColorIconPickerDone}>
                       Done
                     </Text>
                   </Pressable>
                 </View> */}
-                {/* <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
+                {/* <View style={[Styles.closeModalX, theme == DarkMode && Styles.closeModalXDm]}>
                   <Pressable title='Close' onPress={() => setModalVisibleColorPicker(false)}>
-                    <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
+                    <Feather name="x" size={24} style={theme == DarkMode ? Styles.whiteTxt : Styles.blackTxt} />
                   </Pressable>
                 </View> */}
               </View>
@@ -380,13 +380,13 @@ export default function AddHabit({getHabits, closeModal}) {
             >
               <View
                 style={[
-                  Styles.modal_color_icon_picker,
-                  theme == LightMode ? {backgroundColor: '#eeeeee'} : {backgroundColor: '#111111'}
+                  Styles.modalColorIconPicker,
+                  theme == DarkMode && Styles.modalColorIconPickerDm
                 ]}>
-                {/* <View style={Styles.styling_modal_title_box}>
-                  <Text style={[Styles.styling_modal_title_txt, theme == LightMode ? {color: '#000000'} : {color: '#ffffff'}]}>Icon</Text>
+                {/* <View style={Styles.stylingModalTitleBox}>
+                  <Text style={[Styles.stylingModalTitleTxt, theme == DarkMode ? Styles.whiteTxt : Styles.blackTxt]}>Icon</Text>
                 </View> */}
-                <View style={Styles.icon_picker_box}>
+                <View style={Styles.iconPickerBox}>
                   {availableIcons.map((icon, i) => {
                     return (
                       <IconPicker
@@ -401,16 +401,16 @@ export default function AddHabit({getHabits, closeModal}) {
                     )
                   })}
                 </View>
-                {/* <View style={[Styles.btn_color_icon_picker_done, {backgroundColor: selectedColor}]}>
+                {/* <View style={[Styles.btnColorIconPickerDone, {backgroundColor: selectedColor}]}>
                   <Pressable title='Done' onPress={() => setModalVisibleIconPicker(false)}>
-                    <Text style={Styles.txt_color_icon_picker_done}>
+                    <Text style={Styles.txtColorIconPickerDone}>
                       Done
                     </Text>
                   </Pressable>
                 </View> */}
-                {/* <View style={theme == LightMode ? Styles.close_modal_x_lm : Styles.close_modal_x_dm}>
+                {/* <View style={[Styles.closeModalX, theme == DarkMode && Styles.closeModalXDm]}>
                   <Pressable title='Close' onPress={() => setModalVisibleIconPicker(false)}>
-                    <Feather name="x" size={24} color={theme == LightMode ? '#000' : '#fff'} />
+                    <Feather name="x" size={24} style={theme == DarkMode ? Styles.whiteTxt : Styles.blackTxt} />
                   </Pressable>
                 </View> */}
               </View>
@@ -421,15 +421,15 @@ export default function AddHabit({getHabits, closeModal}) {
     </View>
     </ScrollView>
 
-    <View style={[Styles.btnsBottomFixed, theme == LightMode ? {backgroundColor: '#ffffff'} : {backgroundColor: '#000000'}]}>
-      <View style={Styles.btns_save_cancel}>
-        <Pressable  style={Styles.btn_save} onPress={() => {addHabitBtn(); closeModal()}}>
-          <Text style={Styles.txt_save}>Add Habit</Text>
+    <View style={[Styles.btnsBottomFixed, theme == DarkMode ? Styles.blackBg : Styles.whiteBg]}>
+      <View style={Styles.btnsSaveCancel}>
+        <Pressable  style={Styles.btnSave} onPress={() => {addHabitBtn(); closeModal()}}>
+          <Text style={Styles.txtSave}>Add Habit</Text>
         </Pressable>
       </View>
-      <View style={Styles.btns_save_cancel}>
-        <Pressable title='Cancel' style={theme == LightMode ? Styles.btn_cancel_lm : Styles.btn_cancel_dm} onPress={() => closeModal()}>
-          <Text style={theme == LightMode ? Styles.txt_cancel_lm : Styles.txt_cancel_dm}>Cancel</Text>
+      <View style={Styles.btnsSaveCancel}>
+        <Pressable title='Cancel' style={[Styles.btnCancel, theme == DarkMode && Styles.btnCancelDm]} onPress={() => closeModal()}>
+          <Text style={[Styles.txtCancel, theme == DarkMode && Styles.txtCancelDm]}>Cancel</Text>
         </Pressable>
       </View>
     </View>

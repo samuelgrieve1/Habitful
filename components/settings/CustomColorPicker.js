@@ -41,9 +41,9 @@ export default function CustomColorPicker({customColor, setCustomColor, selected
   
   return (
     <View style={Styles.row}>
-      <View style={Styles.color_picker_box}>
+      <View style={Styles.colorPickerBox}>
         <ColorPicker
-          color={theme == LightMode ? '#000000' : '#ffffff'}
+          color={theme == DarkMode ? Styles.white : '#000000'}
           setSelectedColor={setSelectedColor}
           selectedColor={selectedColor}
           setCustomColor={setCustomColor}

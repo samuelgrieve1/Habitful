@@ -69,9 +69,9 @@ export default function EditHistory({completions, completionsSorted, getCompleti
           //keyExtractor={item => item.id}
         />
 
-        <View style={Styles.btns_save_cancel}>
-          <Pressable  style={Styles.btn_save} onPress={() => {closeModal()}}>
-            <Text style={Styles.txt_save}>Done</Text>
+        <View style={Styles.btnsSaveCancel}>
+          <Pressable  style={Styles.btnSave} onPress={() => {closeModal()}}>
+            <Text style={Styles.txtSave}>Done</Text>
           </Pressable>
         </View>
       </View>

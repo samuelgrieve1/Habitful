@@ -16,8 +16,8 @@ export default function DaySelect({dayOfWeek, addToDaysPerWeek, removeFromDaysPe
 
   return (
     <Pressable onPress={() => {clicky()}}>
-      <View style={[Styles.round_day_box, isSelected && Styles.round_day_box_selected]}>
-        <Text style={[Styles.round_day_text, isSelected && Styles.round_day_text_selected]}>{dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.substring(1, 3)}</Text>
+      <View style={[Styles.roundDayBox, isSelected && Styles.roundDayBoxSelected]}>
+        <Text style={[Styles.roundDayText, isSelected && Styles.roundDayTextSelected]}>{dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.substring(1, 3)}</Text>
       </View>
     </Pressable>
   )

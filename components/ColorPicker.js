@@ -18,9 +18,9 @@ export default function ColorPicker({setHabitColor, color, setSelectedColor, sel
     <Pressable onPress={() => handleClick()}>
       <View
         style={[
-          theme == LightMode ? Styles.color_picker_color_lm : Styles.color_picker_color_dm,
+          Styles.colorPickerColor,
           {backgroundColor: color},
-          selectedColor == color && Styles.color_picker_color_selected,
+          selectedColor == color && Styles.colorPickerColorSelected,
         ]}
       >
       </View>

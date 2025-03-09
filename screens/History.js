@@ -1,28 +1,14 @@
 import { View, Text, Button, ScrollView, Pressable } from 'react-native';
 import { useState, useEffect, useContext, useCallback } from 'react';
-import { StyleSheet } from 'react-native';
 import { Styles, LightMode, DarkMode } from '../components/styles/Styles';
 import { ThemeContext, CustomColorContext } from '../components/Contexts';
-import { Feather } from '@expo/vector-icons';
-import { createStackNavigator } from '@react-navigation/stack';
 import HistoryList from './history/HistoryList';
-import HistoryCalendar from './history/ScrollableCalendar';
 import { parse, compareAsc, formatDistance, differenceInCalendarMonths, endOfYesterday } from 'date-fns';
-import {Calendar, CalendarList, CalendarProvider, WeekCalendar} from 'react-native-calendars';
 import { format, parseISO } from 'date-fns';
 import EditHistory from '../components/history/EditHistory';
 import Modal from 'react-native-modal';
 import { db, doc, collection, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, getDoc, setDoc, addDoc, listCollections, query } from '../firebase/index';
-import EditHabit from '../components/habits/EditHabit';
-import Collapsible from 'react-native-collapsible';
 import ScrollableCalendar from './history/ScrollableCalendar';
-
-// const Stack = createStackNavigator({
-//   screens: {
-//     List: HistoryList,
-//     Calendar: HistoryCalendar,
-//   },
-// });
 
 export default function History() {
   const [refreshing, setRefreshing] = useState(false);
@@ -31,7 +17,7 @@ export default function History() {
   const [completions, setCompletions] = useState([])
   const [completionsSorted, setCompletionsSorted] = useState([])
   const [earliestMonth, setEarliestMonth] = useState(0)
-  const [historyView, setHistoryView] = useState('calendarview')
+  const [historyView, setHistoryView] = useState('listview')
   const [modalVisibleEditHistory, setModalVisibleEditHistory] = useState(false);
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   const [habits, setHabits] = useState(null)
@@ -146,6 +132,7 @@ export default function History() {
     setCompletionsSorted(sortedStateDes)
     earliestMonthCompleted()
     //setEarliestMonth()
+    console.log(Object.keys(completions))
   }, [completions])
 
   const calendarTheme = {
@@ -190,9 +177,6 @@ export default function History() {
     })
   }
 
-
-  // [day]: { selected: true, marked: true, selectedColor: "blue" }
-
   return (
     <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
@@ -223,55 +207,37 @@ export default function History() {
 
         <Pressable
           onPress={() => setHistoryView('listview')}
-          style={
-            theme == LightMode && historyView == 'listview' && Styles.historyViewBtnSelectedLm  ||
-            theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm  ||
-            Styles.historyViewBtn}>
+          style={[
+            Styles.historyViewBtn,
+            historyView == 'listview' && Styles.historyViewBtnSelected,
+            theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm
+          ]}>
           <Text
-            style={
-              theme == LightMode && historyView == 'listview' && Styles.historyViewBtnTxtSelectedLm ||
-              theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnTxtSelectedDm ||
-              theme == LightMode && Styles.historyViewBtnTxtLm ||
-              theme == DarkMode && Styles.historyViewBtnTxtDm}>
+            style={[
+              Styles.historyViewBtnTxt,
+              historyView == 'listview' && Styles.historyViewBtnTxtSelected,
+              theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnTxtDm && Styles.historyViewBtnTxtSelectedDm
+            ]}>
               List
           </Text>
         </Pressable>
 
         <Pressable
           onPress={() => setHistoryView('calendarview')}
-          style={
-            theme == LightMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedLm  ||
-            theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm  ||
-            Styles.historyViewBtn}>
+          style={[
+            Styles.historyViewBtn,
+            historyView == 'calendarview' && Styles.historyViewBtnSelected,
+            theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm
+          ]}>
           <Text
-            style={
-              theme == LightMode && historyView == 'calendarview' && Styles.historyViewBtnTxtSelectedLm ||
-              theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnTxtSelectedDm ||
-              theme == LightMode && Styles.historyViewBtnTxtLm ||
-              theme == DarkMode && Styles.historyViewBtnTxtDm}>
+            style={[
+              Styles.historyViewBtnTxt,
+              historyView == 'calendarview' && Styles.historyViewBtnTxtSelected,
+              theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnTxtDm && Styles.historyViewBtnTxtSelectedDm
+            ]}>
               Calendar
           </Text>
         </Pressable>
-        
-        {/* <View style={theme == LightMode ? Styles.historyViewBtnLm : Styles.historyViewBtnDm}>
-        <Pressable
-          onPress={() => setHistoryView('listview')}
-          style={
-            theme == LightMode && historyView == 'listview' && Styles.historyViewBtnSelectedLm ||
-            theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm}>
-          <Text style={theme == LightMode ? Styles.historyViewBtnTxtLm : Styles.historyViewBtnTxtDm}>List</Text>
-        </Pressable>
-        </View>
-
-        <View style={theme == LightMode ? Styles.historyViewBtnLm : Styles.historyViewBtnDm}>
-        <Pressable
-          onPress={() => setHistoryView('calendarview')}
-          style={
-            theme == LightMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedLm ||
-            theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm}>
-          <Text style={theme == LightMode ? Styles.historyViewBtnTxtLm : Styles.historyViewBtnTxtDm}>Calendar</Text>
-        </Pressable>
-        </View> */}
 
       </View>
 
@@ -286,50 +252,13 @@ export default function History() {
           completionsSorted={completionsSorted}
           setModalVisibleEditHistory={setModalVisibleEditHistory}
           setSelectedDate={setSelectedDate}
-          // markingType={'multi-dot'}
         />
-        
-        {/*
-        <ScrollView
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-        >
-          {historyView == 'listview' &&
-            <View style={Styles.listViewContainer}>
-              {completionsSorted && Object.keys(completionsSorted).map((date, i) => (
-                <View key={i} style={theme == LightMode ? Styles.dateBoxLm : Styles.dateBoxDm}>
-                  <Pressable onPress={() => {setModalVisibleEditHistory(true); setSelectedDate(date);}} style={theme == LightMode ? Styles.editHistoryIconContainerLm : Styles.editHistoryIconContainerDm}>
-                    {/* <Feather name="edit-2" size={18} color='white' style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm} /> */}
-                    {/* <Text style={theme == LightMode ? Styles.editHistoryIconLm : Styles.editHistoryIconDm}>Edit</Text>
-                  </Pressable>
-                  <Text style={theme == LightMode ? Styles.dateTitleLm : Styles.dateTitleDm}>{format(date, 'EEEE, MMM dd, yyyy')}</Text>
-                  <Collapsible collapsed={true}>
-                  {completionsSorted[date].map((habit, i) => (
-                    <Text style={theme == LightMode ? Styles.historyHabitNameLm : Styles.historyHabitNameDm} key={i}><Feather name="check" size={14} color="green" /> {habit}</Text>
-                  ))}
-                  </Collapsible>
-                </View>
-              ))}
-            </View>
-          }
-        </ScrollView> */}
 
         {/* CALENDAR VIEW */}
         {historyView == 'calendarview' && earliestMonth > 0 &&
-          <View style={Styles.calendarViewContainer}>
-            {/* <CalendarList
-              //current={currentDate}
-              pastScrollRange={earliestMonth}
-              futureScrollRange={1}
-              // key={theme == LightMode ? 'calendarLm' : 'calendarDm'}
-              theme={theme == DarkMode ? calendarThemeDm : calendarTheme}
-              onDayPress={day => {
-                setModalVisibleEditHistory(true); setSelectedDate(format(parseISO(day['dateString']), 'EEE MMM dd yyyy'));
-              }}
-              markedDates={markedDay}
-              maxDate={format(endOfYesterday(), 'EEE MMM dd yyyy')}
-            /> */}
-            <ScrollableCalendar />
-          </View>
+          <ScrollableCalendar
+            eventDates={Object.keys(completions)}
+          />
         }
       </View>
 

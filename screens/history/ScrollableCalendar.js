@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useContext } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Dimensions,
   Platform
 } from 'react-native';
+import { ThemeContext, CustomColorContext } from '../../components/Contexts';
 
 const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS = [
@@ -17,6 +18,9 @@ const MONTHS = [
 
 // Pure component for day cell to minimize render operations
 const DayCell = React.memo(({ day, date, isSelected, hasEvent, onPress, eventIndicatorColor }) => {
+  const {theme} = useContext(ThemeContext)
+  const {customColor} = useContext(CustomColorContext)
+
   if (!day) {
     return <View style={styles.dayCell} />;
   }
@@ -25,7 +29,7 @@ const DayCell = React.memo(({ day, date, isSelected, hasEvent, onPress, eventInd
     <TouchableOpacity
       style={[
         styles.dayCell,
-        isSelected && styles.selectedDay,
+        isSelected && styles.selectedDay && {backgroundColor: customColor}
       ]}
       onPress={() => onPress(date)}
       activeOpacity={0.7}
@@ -247,6 +251,7 @@ const cellSize = width / 7 - 6;
 
 const styles = StyleSheet.create({
   monthContainer: {
+    flex: 1,
     marginBottom: 16,
     paddingHorizontal: 6,
   },
@@ -275,6 +280,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   dayCell: {
+    color: '#fff',
     width: cellSize,
     height: cellSize,
     justifyContent: 'center',
@@ -282,9 +288,10 @@ const styles = StyleSheet.create({
     borderRadius: cellSize / 2,
   },
   selectedDay: {
-    backgroundColor: '#1a73e8',
+    backgroundColor: '#4185e7',
   },
   dayText: {
+    color: '#fff',
     fontSize: 16,
   },
   selectedDayText: {
