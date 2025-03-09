@@ -27,7 +27,7 @@ export default function AddHabit({getHabits, closeModal}) {
   const [daysPerWeek, setDaysPerWeek] = useState(['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'])
   const [timesPerDayWeekMonth, setTimesPerDayWeekMonth] = useState(1)
   const [isTimed, setIsTimed] = useState(false)
-  const [amountOfTime, setAmountOfTime] = useState([])
+  const [amountOfTime, setAmountOfTime] = useState([0, 0, 0])
   const [isActive, setIsActive] = useState(true)
   const [placeNumber, setPlaceNumber] = useState(0)
   const [modalVisibleColorPicker, setModalVisibleColorPicker] = useState(false)
@@ -249,25 +249,21 @@ export default function AddHabit({getHabits, closeModal}) {
 
             {/* Amount of Time */}
             {isTimed == true &&
+              <Pressable onPress={() => {setModalVisibleTimePicker(true)}}>
               <View style={Styles.formRow}>
                 <View style={Styles.formAmountBox}>
-                  <View style={[Styles.formAmountValue, theme == DarkMode && Styles.formAmountValueDm]}>
+                  <View style={[Styles.formAmountValueNoMar, theme == DarkMode && Styles.formAmountValueDm]}>
                     <Text style={[Styles.formAmountValueTxt, theme == DarkMode && Styles.formAmountValueTxtDm]}>
-                      {amountOfTime}
+                      {amountOfTime[0]}hr
                       {' '}
-                      min
+                      {amountOfTime[1]}min
+                      {' '}
+                      {amountOfTime[2]}sec
                     </Text>
-                  </View>
-                  <View style={[Styles.formAmountPlus, theme == DarkMode && Styles.formAmountPlusDm]}>
-                    {/* <Pressable onPress={() => {setAmountOfTime(amountOfTime + 1)}}>
-                      <FontAwesome6 name="plus" size={18} style={{color: selectedColor}} />
-                    </Pressable> */}
-                    <Pressable onPress={() => {setModalVisibleTimePicker(true)}}>
-                      <FontAwesome6 name="plus" size={18} style={{color: selectedColor}} />
-                    </Pressable>
                   </View>
                 </View>
               </View>
+              </Pressable>
             }
 
             <Modal
@@ -280,7 +276,8 @@ export default function AddHabit({getHabits, closeModal}) {
               backdropOpacity={0.8}
             >
               <TimePicker
-                onTimeSelected={setAmountOfTime}
+                amountOfTime={amountOfTime}
+                setAmountOfTime={setAmountOfTime}
                 selectedColor={selectedColor}
                 setModalVisibleTimePicker={setModalVisibleTimePicker}
               />

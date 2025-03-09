@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { ThemeContext } from './Contexts';
+import { DarkMode } from './styles/Styles';
 
-const TimePicker = ({ initialTime = { hour: 0, minute: 0, second: 0 }, onSave, onCancel, selectedColor }) => {
+const TimePicker = ({ setModalVisibleTimePicker, selectedColor, amountOfTime, setAmountOfTime }) => {
   // Initialize state with provided initial values or defaults
-  const [hour, setHour] = useState(initialTime.hour);
-  const [minute, setMinute] = useState(initialTime.minute);
-  const [second, setSecond] = useState(initialTime.second);
+  const [hour, setHour] = useState(amountOfTime[0]);
+  const [minute, setMinute] = useState(amountOfTime[1]);
+  const [second, setSecond] = useState(amountOfTime[2]);
+  const { theme } = useContext(ThemeContext)
 
   // Generate numbers for picker items
   const generateNumbers = (max) => {
@@ -23,17 +26,18 @@ const TimePicker = ({ initialTime = { hour: 0, minute: 0, second: 0 }, onSave, o
 
   // Handle save button press
   const handleSave = () => {
-    onSave && onSave({ hour, minute, second });
+    setAmountOfTime && setAmountOfTime([hour, minute, second]);
+    setModalVisibleTimePicker && setModalVisibleTimePicker(false);
   };
 
   // Handle cancel button press
   const handleCancel = () => {
-    onCancel && onCancel();
+    setModalVisibleTimePicker && setModalVisibleTimePicker(false);
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Select Time</Text>
+    <View style={[styles.container, theme == DarkMode && styles.containerDm]}>
+      {/* <Text style={[styles.title, theme == DarkMode && styles.titleDm]}>Select Time</Text> */}
       <View style={styles.pickerContainer}>
         {/* Hour picker */}
         <View style={styles.pickerWrapper}>
@@ -44,7 +48,7 @@ const TimePicker = ({ initialTime = { hour: 0, minute: 0, second: 0 }, onSave, o
               onValueChange={(value) => setHour(parseInt(value, 10))}
             >
               {hours.map((item) => (
-                <Picker.Item key={`hour-${item}`} label={item} value={item} />
+                <Picker.Item key={`hour-${item}`} label={item} value={item} color={theme == DarkMode ? '#fff' : '#000'} />
               ))}
             </Picker>
             <Text style={styles.unitText}>hr</Text>
@@ -58,9 +62,10 @@ const TimePicker = ({ initialTime = { hour: 0, minute: 0, second: 0 }, onSave, o
               style={styles.picker}
               selectedValue={minute.toString().padStart(2, '0')}
               onValueChange={(value) => setMinute(parseInt(value, 10))}
+              itemStyle={{backgroundColor: 'transparent'}}
             >
               {minutesSeconds.map((item) => (
-                <Picker.Item key={`minute-${item}`} label={item} value={item} />
+                <Picker.Item key={`minute-${item}`} label={item} value={item} color={theme == DarkMode ? '#fff' : '#000'} />
               ))}
             </Picker>
             <Text style={styles.unitText}>min</Text>
@@ -76,7 +81,7 @@ const TimePicker = ({ initialTime = { hour: 0, minute: 0, second: 0 }, onSave, o
               onValueChange={(value) => setSecond(parseInt(value, 10))}
             >
               {minutesSeconds.map((item) => (
-                <Picker.Item key={`second-${item}`} label={item} value={item} />
+                <Picker.Item key={`second-${item}`} label={item} value={item} color={theme == DarkMode ? '#fff' : '#000'} />
               ))}
             </Picker>
             <Text style={styles.unitText}>sec</Text>
@@ -106,14 +111,24 @@ const TimePicker = ({ initialTime = { hour: 0, minute: 0, second: 0 }, onSave, o
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#fff',
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ddd'
+  },
+  containerDm: {
+    backgroundColor: '#000',
+    borderColor: '#222'
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 15,
     textAlign: 'center',
+    color: '#000',
+  },
+  titleDm: {
+    color: '#fff',
   },
   pickerContainer: {
     flexDirection: 'row',
@@ -129,13 +144,17 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   picker: {
-    width: '80%',
-    height: 150,
+    marginTop: -20,
+    width: '100%',
+    height: 200,
+  },
+  pickerItem: {
+    color: '#fff',
   },
   unitText: {
     fontSize: 16,
-    marginTop: 70,
-    marginLeft: -20,
+    // marginTop: 0,
+    marginLeft: -44,
     color: '#666',
   },
   buttonContainer: {

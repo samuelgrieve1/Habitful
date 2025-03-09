@@ -542,6 +542,13 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#eee',
   },
+  formAmountValueNoMar: {
+    flex: 1,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#eee',
+  },
   formAmountValueDm: {
     backgroundColor: '#111',
   },
