@@ -42,23 +42,20 @@ export default function App() {
   },[])
 
   return (
-    <View style={[
-      {flex:1},
-      theme == DarkMode ? Styles.blackBg : Styles.whiteBg
-    ]}>
+    <View style={[{flex:1}, theme == DarkMode ? Styles.blackBg : Styles.whiteBg]}>
       <ThemeContext.Provider value={{theme, setTheme}}>
-      <CustomColorContext.Provider value={{customColor, setCustomColor}}>
-        <SafeAreaProvider>
-          <SafeAreaView style={Styles.safeAreaView}>
-            <StatusBar style={theme == LightMode ? 'dark' : 'light'}/>
-            <NavigationContainer theme={theme}>
-              <BottomTabNavigator />
-              {/* <DrawerNavigator /> */}
-              {/* <StackNavigator /> */}
-            </NavigationContainer>
-          </SafeAreaView>
-        </SafeAreaProvider>
-      </CustomColorContext.Provider>
+        <CustomColorContext.Provider value={{customColor, setCustomColor}}>
+          <SafeAreaProvider>
+            <SafeAreaView style={Styles.safeAreaView}>
+              <StatusBar style={theme == LightMode ? 'dark' : 'light'}/>
+              <NavigationContainer theme={theme}>
+                <BottomTabNavigator />
+                {/* <DrawerNavigator /> */}
+                {/* <StackNavigator /> */}
+              </NavigationContainer>
+            </SafeAreaView>
+          </SafeAreaProvider>
+        </CustomColorContext.Provider>
       </ThemeContext.Provider>
     </View>
   ); 

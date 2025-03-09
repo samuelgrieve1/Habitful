@@ -471,7 +471,7 @@ const Styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: lightergray,
+    backgroundColor: lightgray,
     borderRadius: 5,
     height: 50,
     paddingLeft: 15,
@@ -488,7 +488,7 @@ const Styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   formLabelRowNoFlex: {
-    marginBottom: 30,
+    marginBottom: 10,
   },
   formRow: {
     flexDirection: 'row',
@@ -499,6 +499,10 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginBottom: 10,
+  },
+  formDropdownMenu: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   formRowVert: {
     flexDirection: 'column',
@@ -525,6 +529,9 @@ const Styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#eee',
+  },
+  formAmountMinusDm: {
     backgroundColor: '#111',
   },
   formAmountValue: {
@@ -533,24 +540,32 @@ const Styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#eee',
+  },
+  formAmountValueDm: {
     backgroundColor: '#111',
   },
   formAmountValueTxt: {
-    color: '#fff',
+    color: '#000',
     fontSize: 18,
+  },
+  formAmountValueTxtDm: {
+    color: '#fff',
   },
   formAmountPlus: {
     width: 80,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#eee',
+  },
+  formAmountPlusDm: {
     backgroundColor: '#111',
   },
   btnsBottomFixed: {
     backgroundColor: black,
     position: 'absolute',
     paddingTop: 20,
-    paddingBottom: 10,
     bottom: 0,
     left: 10,
     right: 10,
@@ -566,7 +581,6 @@ const Styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 8,
     paddingHorizontal: 32,
     borderRadius: 5,
     backgroundColor: blue,
@@ -583,15 +597,13 @@ const Styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 8,
     paddingHorizontal: 32,
     borderRadius: 5,
-    //backgroundColor: lightgray,
     borderColor: lightgray,
     borderWidth: 1,
   },
   btnCancelDm: {
-    borderColor: darkergray,
+    borderColor: evendarkergray,
   },
   txtCancel: {
     fontSize: 16,

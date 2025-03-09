@@ -2,9 +2,9 @@
   import { StyleSheet, Text, View } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
   import AntDesign from '@expo/vector-icons/AntDesign';
-  import { Styles, LightMode } from './styles/Styles';
+  import { Styles, LightMode, DarkMode } from './styles/Styles';
 
-  export default function DropdownMenu ({theme, defaultValue, data, setSelectedMenuItem}) {
+  export default function DropdownMenu ({theme, selectedColor, defaultValue, data, setSelectedMenuItem, menuIcon}) {
     const [value, setValue] = useState(defaultValue);
     const [isFocus, setIsFocus] = useState(false);
 
@@ -27,11 +27,12 @@
           containerStyle={theme == LightMode ? styles.containerStyleLm : styles.containerStyleDm}
           itemContainerStyle={theme == LightMode ? styles.itemContainerStyleLm : styles.itemContainerStyleDm}
           itemTextStyle={theme == LightMode ? styles.itemTextStyleLm : styles.itemTextStyleDm}
-          activeColor={theme == LightMode ? '#111' : '#999'}
+          activeColor={theme == LightMode ? '#eee' : '#111'}
           placeholderStyle={theme == LightMode ? styles.placeholderStyleLm : styles.placeholderStyleDm}
           selectedTextStyle={theme == LightMode ? styles.selectedTextStyleLm : styles.selectedTextStyleDm}
           inputSearchStyle={styles.inputSearchStyle}
           iconStyle={styles.iconStyle}
+          iconColor={theme == DarkMode ? '#fff' : '#000'}
           data={data}
           //search
           maxHeight={300}
@@ -47,14 +48,9 @@
             setSelectedMenuItem(item.value)
             setIsFocus(false);
           }}
-          // renderLeftIcon={() => (
-          //   <AntDesign
-          //     style={styles.icon}
-          //     color={isFocus ? 'blue' : 'black'}
-          //     name="Safety"
-          //     size={20}
-          //   />
-          // )}
+          renderLeftIcon={() => (
+            menuIcon && menuIcon
+          )}
         />
       </View>
     );
@@ -71,10 +67,12 @@
     containerStyleLm: {
       backgroundColor: 'white',
       borderColor: '#ddd',
+      borderRadius: 5,
     },
     itemContainerStyleLm: {
       backgroundColor: 'white',
       color: 'black',
+      borderRadius: 5,
     },
     itemTextStyleLm: {
       color: 'black',
@@ -102,10 +100,12 @@
       textAlign: 'left',
       fontSize: 16,
       color: 'black',
+      fontWeight: '600'
     },
     placeholderStyleLm: {
       fontSize: 16,
       color: 'black',
+      fontWeight: '600'
     },
 
     // DARKMODE
@@ -117,10 +117,12 @@
     containerStyleDm: {
       backgroundColor: 'black',
       borderColor: '#222',
+      borderRadius: 5,
     },
     itemContainerStyleDm: {
       backgroundColor: 'black',
       color: 'white',
+      borderRadius: 5,
     },
     itemTextStyleDm: {
       color: 'white',

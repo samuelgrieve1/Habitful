@@ -32,7 +32,7 @@ export default function Today() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const insets = useSafeAreaInsets();
-  console.log(insets)
+  // console.log(insets)
   
   // Define dates that have events
   // The key is the date in 'YYYY-MM-DD' format, value is true

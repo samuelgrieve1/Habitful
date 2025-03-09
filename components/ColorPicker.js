@@ -10,8 +10,8 @@ export default function ColorPicker({setHabitColor, color, setSelectedColor, sel
   const handleClick = () => {
     setHabitColor && setHabitColor(color)
     setSelectedColor && setSelectedColor(color)
-    setModalVisibleColorPicker && setModalVisibleColorPicker(false)
     setCustomColor && setCustomColor(selectedColor)
+    setModalVisibleColorPicker && setModalVisibleColorPicker(false)
   }
 
   return (
