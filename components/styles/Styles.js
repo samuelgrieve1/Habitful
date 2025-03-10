@@ -498,7 +498,7 @@ const Styles = StyleSheet.create({
   formRowLabel: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginBottom: 10,
+    marginBottom: 0,
   },
   formDropdownMenu: {
     flexDirection: 'row',
@@ -676,7 +676,7 @@ const Styles = StyleSheet.create({
     top: 20,
     left: 10,
     padding: 2,
-    borderRadius: 5,
+    borderRadius: 20,
     zIndex: 2,
     backgroundColor: '#eeeeee'
   },

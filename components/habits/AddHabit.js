@@ -224,6 +224,10 @@ export default function AddHabit({getHabits, closeModal}) {
               </View>
             </View>
 
+            <View style={Styles.formRowLabel}>
+              <Text style={[Styles.formLabel, theme == DarkMode && Styles.formLabelDm]}>Timer</Text>
+            </View>
+
             {/* Timed? */}
             <View style={[
               Styles.formDropdownMenu,

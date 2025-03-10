@@ -51,7 +51,7 @@ const TimePicker = ({ setModalVisibleTimePicker, selectedColor, amountOfTime, se
                 <Picker.Item key={`hour-${item}`} label={item} value={item} color={theme == DarkMode ? '#fff' : '#000'} />
               ))}
             </Picker>
-            <Text style={styles.unitText}>hr</Text>
+            <Text style={[styles.unitText, theme == DarkMode && styles.unitTextDm]}>hr</Text>
           </View>
         </View>
 
@@ -68,7 +68,7 @@ const TimePicker = ({ setModalVisibleTimePicker, selectedColor, amountOfTime, se
                 <Picker.Item key={`minute-${item}`} label={item} value={item} color={theme == DarkMode ? '#fff' : '#000'} />
               ))}
             </Picker>
-            <Text style={styles.unitText}>min</Text>
+            <Text style={[styles.unitText, theme == DarkMode && styles.unitTextDm]}>min</Text>
           </View>
         </View>
 
@@ -84,7 +84,7 @@ const TimePicker = ({ setModalVisibleTimePicker, selectedColor, amountOfTime, se
                 <Picker.Item key={`second-${item}`} label={item} value={item} color={theme == DarkMode ? '#fff' : '#000'} />
               ))}
             </Picker>
-            <Text style={styles.unitText}>sec</Text>
+            <Text style={[styles.unitText, theme == DarkMode && styles.unitTextDm]}>sec</Text>
           </View>
         </View>
       </View>
@@ -152,10 +152,13 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   unitText: {
-    fontSize: 16,
-    // marginTop: 0,
-    marginLeft: -44,
-    color: '#666',
+    fontSize: 18,
+    marginTop: -2,
+    marginLeft: -42,
+    color: '#000',
+  },
+  unitTextDm: {
+    color: '#fff',
   },
   buttonContainer: {
     flexDirection: 'row',
