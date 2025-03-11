@@ -307,7 +307,11 @@ export default function AddHabit({getHabits, closeModal}) {
 
             {/* Color Picker Modal */}
             <Modal
-              style={Styles.modal}
+              style={[
+                Styles.modal,
+                {marginTop: insets.top},
+                {marginBottom: insets.bottom},
+              ]}
               isVisible={modalVisibleColorPicker}
               propagateSwipe={true}
               onBackdropPress={() => setModalVisibleColorPicker(false)}
@@ -323,20 +327,22 @@ export default function AddHabit({getHabits, closeModal}) {
                 {/* <View style={Styles.stylingModalTitleBox}>
                   <Text style={[Styles.stylingModalTitleTxt, theme == DarkMode ? Styles.whiteTxt : Styles.blackTxt]}>Color</Text>
                 </View> */}
-                <View style={Styles.colorPickerBox}>
-                  {availableColors.map((color, i) => {
-                    return (
-                      <ColorPicker
-                        key={i}
-                        color={color}
-                        setHabitColor={setHabitColor}
-                        setSelectedColor={setSelectedColor}
-                        selectedColor={selectedColor}
-                        setModalVisibleColorPicker={setModalVisibleColorPicker}
-                      />
-                    )
-                  })}
-                </View>
+                <ScrollView>
+                  <View style={Styles.colorPickerBox}>
+                    {availableColors.map((color, i) => {
+                      return (
+                        <ColorPicker
+                          key={i}
+                          color={color}
+                          setHabitColor={setHabitColor}
+                          setSelectedColor={setSelectedColor}
+                          selectedColor={selectedColor}
+                          setModalVisibleColorPicker={setModalVisibleColorPicker}
+                        />
+                      )
+                    })}
+                  </View>
+                </ScrollView>
                 {/* <View style={[Styles.btnColorIconPickerDone, {backgroundColor: selectedColor}]}>
                   <Pressable title='Done' onPress={() => setModalVisibleColorPicker(false)}>
                     <Text style={Styles.txtColorIconPickerDone}>
