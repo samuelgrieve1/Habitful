@@ -30,6 +30,7 @@ export default function Today() {
   const {theme} = useContext(ThemeContext)
   const {customColor} = useContext(CustomColorContext)
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [onehundredModal, setOnehundredModal] = useState(false);
 
   const insets = useSafeAreaInsets();
   // console.log(insets)
@@ -194,6 +195,12 @@ export default function Today() {
     getHabits()
   }, [])
 
+  useEffect (() => {
+    setTimeout(() => {
+      setOnehundredModal(false)
+    },6000)
+  }, [onehundredModal])
+
   return (
     <View style={Styles.screenContainer}>
       <View style={Styles.pageHeaderContainer}>
@@ -209,9 +216,11 @@ export default function Today() {
           >
             {
               () => (
+                <Pressable onPress={() => {setOnehundredModal(true)}}>
                 <Text style={{color: customColor ? customColor : "#4185e7", fontSize: 14, fontWeight: '600'}}>
                   50%
                 </Text>
+                </Pressable>
               )
             }
           </AnimatedCircularProgress>
@@ -347,6 +356,19 @@ export default function Today() {
           </ScrollView>
         </View>
       </Modal>
+
+      <Modal
+        animationIn={'tada'}
+        animationOut={'zoomOut'}
+        //animationInTiming={1000}
+        style={{position: 'absolute', top:0,left:0,right:0,bottom:0, padding:0, margin:0}}
+        isVisible={onehundredModal}
+        propagateSwipe={true}
+        backdropColor='#000'
+      >
+            <Image style={{width: '100%', height: '100%'}} source={require('../assets/100percent.png')}></Image>
+      </Modal>
+
     </View>
   )
 }
