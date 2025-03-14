@@ -210,7 +210,7 @@ export default function History() {
           style={[
             Styles.historyViewBtn,
             historyView == 'listview' && Styles.historyViewBtnSelected,
-            theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm
+            theme == DarkMode && historyView == 'listview' && Styles.historyViewBtnSelectedDm && {backgroundColor: customColor}
           ]}>
           <Text
             style={[
@@ -227,7 +227,7 @@ export default function History() {
           style={[
             Styles.historyViewBtn,
             historyView == 'calendarview' && Styles.historyViewBtnSelected,
-            theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm
+            theme == DarkMode && historyView == 'calendarview' && Styles.historyViewBtnSelectedDm && {backgroundColor: customColor}
           ]}>
           <Text
             style={[
